@@ -1,0 +1,1 @@
+a:5:{s:7:"errcode";i:0;s:6:"errmsg";s:2:"ok";s:6:"ticket";s:86:"kgt8ON7yVITDhtdwci0qefJWwVwQYcHZILBjbo7NMAzNM0YoaDjuOoSz3XbwufIpXiGXny--xtzZKZDmglAksw";s:10:"expires_in";i:7200;s:4:"time";i:1497184699;}
