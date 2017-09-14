@@ -3,7 +3,7 @@ var waveTime = null;
 var waveMcId = null;
 
 var localAnswerIDArray = new Array();
-
+var totalTime = 0;
 //播放语音
 var playing = false;
 var wxplaying = false;
@@ -117,7 +117,6 @@ function judgeEndPlayUI() {
         };
     }
     if ($('#voice_state_id').length > -1) {
-        // alert(2);
         var otherText = $('#voice_state_id>em').text();
         if (otherText == "1元阅读" || otherText == "免费阅读" || otherText == "100问房币阅读") {
             $('#voice_state_id>em').text("免费阅读");
@@ -195,7 +194,6 @@ function initAllPlayVoiceState(){
 //播放qa
 function playAudioQaClickFunction(id, type, listenType, objId, allowPauseBool) {
     //记录每一次播放的记录
-    // listenAudio(id);
     g_all_contentType = 2;
     playAudioClickFunctionEx(id, type, listenType, objId, allowPauseBool, 0);
 }
@@ -220,30 +218,30 @@ function playExpertIntroduceVoice(url,obj){
 	initAllPlayVoiceState();
 	var $audio = $("#audio-mc");
 	var currentAudio = $("#audio-mc").get(0);
-	
+
 	if($audio.attr("src") != url){
 		$(obj).removeClass('on');
 	}
-	
+
 	if($(obj).hasClass("on")){
 		currentAudio.pause();
 		$(obj).removeClass('on');
 		return false;
-	}else{	
+	}else{
 		$(obj).addClass('on');
 	}
-	
+
 	if($audio.attr("src") == url){
 		currentAudio.play();
 		return false;
 	}
-	
-	
+
+
 	// 加载出错时
 	$audio.on("error", function () {
 		dataLoadedError("读取语音失败,请重试");
 	});
-	
+
 	$audio.attr("src", url);
 	currentAudio.play();
 
@@ -351,8 +349,8 @@ function playQAHotVoice(id, obj){
                 });
                 // 播放中执行
                 $audio.on("timeupdate", function () {
-                    if(!currentAudio.duration) return false;
-                    var curPalyRatio = Math.round((Math.ceil(currentAudio.currentTime) / Math.ceil(currentAudio.duration))*360);
+                    if(!totalTime) return false;
+                    var curPalyRatio = Math.round((Math.ceil(currentAudio.currentTime) / Math.ceil(totalTime))*360);
                     if(curPalyRatio >= 360){
                         curPalyRatio=0;
                         $(element).find('.circle').removeClass('clip-auto');
@@ -508,13 +506,12 @@ function playAudioClickFunctionEx(id, type, listenType, objId, allowPauseBool, s
                     } else {
                         arr = result.data.voice.urls.split(",");
                         urlType = result.data.voice.urlType;
-                        alert(4);
                     }
+
                     for (var i = 0; i < arr.length; i++) {
                         answerIDArray[i] = hostConf + arr[i];
                         urlType = "mp3";
                     }
-
                     audioPlay(answerIDArray, voiceCount, objId, id);//播放语音
                 } else if (result.result == "toPayIosMoney") {
                     alert(7);
@@ -634,6 +631,7 @@ function audioPlay(voiceArray, time, objId, id) {
             '<span class="appui_qanda-voice-time fc-greyd fs20">';
 
         if(thisObj.hasClass("free")){
+            //yanli 获取语音的长度
             ctrlbarStr += '<i class="appui_qanda-voice-alltime">' + formattingTime(totalTime) + '</i>';
         }else{
             ctrlbarStr += '<i class="appui_qanda-voice-alltime  restrict-state">' + formattingTime(totalTime) + '</i>';
@@ -661,7 +659,6 @@ function audioPlay(voiceArray, time, objId, id) {
             controlPoint: '',
             controlPointline: ''
         },
-
         start: function (event) {
             event ? event.stopPropagation() : event.cancelBubble = true;
             event.cancelBubble = true;
@@ -693,7 +690,7 @@ function audioPlay(voiceArray, time, objId, id) {
             }
             if (slide.parameter.endPos > 1) {
                 slide.parameter.endPos = 1;
-            }
+            };
             slide.parameter.controlPoint.css("left", slide.parameter.endPos * 100 + '%');
             slide.parameter.controlPointline.css("width", slide.parameter.endPos * 100 + '%');
             setPlayTime(slide.parameter.endPos);
@@ -744,6 +741,7 @@ function audioPlay(voiceArray, time, objId, id) {
      * @param total_Time 获取的总时间
      */
     function audioProgressBar(left, currentTime, total_Time) {
+        //进度条yanli
         if (left > 1) {
             left = "100%";
         } else if (left < 0) {
@@ -811,11 +809,14 @@ function audioPlay(voiceArray, time, objId, id) {
     // 播放中执行
     $audio.on("timeupdate", function () {
         var play_Time = Math.round(currentAudio.currentTime);
-        if (!!currentAudio.duration) {
-            totalTime = Math.round(currentAudio.duration);
+        if (!!totalTime) {
+            //获取当前音频的播放时长
+            // totalTime = Math.round(totalTime);
+            //获得录音的时间，直接从数据库中得到
         }
         if (playingState && play_Time && totalTime) {
-            audioProgressBar(currentAudio.currentTime / currentAudio.duration, play_Time, totalTime - play_Time);
+            console.log();
+            audioProgressBar(currentAudio.currentTime / totalTime, play_Time, totalTime - play_Time);
             switchoverAudion(true);
         }
     });

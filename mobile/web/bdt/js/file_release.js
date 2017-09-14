@@ -1623,7 +1623,6 @@ function issueContent(){
             cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "SelectAppFilePlugin", "UploadFiles", app.Audio);
         }
     }else if(h5_Voice.recordPercent > 0 || h5_Voice.currentVoiceIndex > 0){
-        alert(3);
         //非iOS录音
         //先将数据放到发帖的数据表中
         var content = $.trim($("#edit-mark").val());
@@ -1764,6 +1763,7 @@ function postVoiceMessage(wxRecordId,curCount, id, type) {
             "id": id,
             "url": wxRecordId,
             "type":'fatie',
+            "voice_time":curCount,
             'from':request('from'),
             'publishtype':request('publishtype'),
             'circle_id':request('circle_id'),

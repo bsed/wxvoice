@@ -239,7 +239,7 @@ function configDynamicList(result,index){
             detailType = '<div class="voice-layout mt10"><div class="appui-qanda-answer">' +
                 '<div class="appui-qanda-answerstyle voice free" id="a_play_0_'+result.data.list[i].id+'" onclick="playAudioQaClickFunction('+result.data.list[i].id+',2,1,\'a_play_0_'+result.data.list[i].id+'\');"><i></i>' +
                 '<span class="appui_qanda-voice-wave"><em class="wave1"></em><em class="wave2"></em><em class="wave3"></em></span><em class="tips">免费收听</em>' +
-                '<span class="appui_qanda-voice-wait" style="display:none;"></span></div><em class="appui-qanda-answer-time">3"</em></div></div>';
+                '<span class="appui_qanda-voice-wait" style="display:none;"></span></div><em class="appui-qanda-answer-time">'+result.data.list[i].voice_time+'"</em></div></div>';
         }else if(result.data.list[i].videos != "0"){
             detailType = result.data.list[i].summary;
         }
@@ -276,9 +276,9 @@ function configDynamicList(result,index){
         }
         // onclick="gotoUser_pageHtml('+result.data.list[i].user.id+');"
         list +='<div class="f-f-module mb10 bg-white"><div class="find-container"><div class="find-header"><div class="f-h-left">' +
-            '<a onclick="gotoUser_pageHtml('+result.data.list[i].user.id+');"><img src="'+result.file+result.data.list[i].user.photo+'"><i>' +
+            '<a onclick=""><img src="'+result.file+result.data.list[i].user.photo+'"><i>' +
             '<img src="../bdt/images/v2.png"></i></a><div class="f-h-middle">' +
-            '<span class="fs30 fc-blue operate" onclick="gotoUser_pageHtml('+result.data.list[i].user.id+');">'+result.data.list[i].user.nickname+'<em class="fc-greyabc"></em></span>' +
+            '<span class="fs30 fc-blue operate" onclick="">'+result.data.list[i].user.nickname+'<em class="fc-greyabc"></em></span>' +
             '</div></div><div class="f-h-right"></div></div>'+contents+'<div class="time-statistic fs22" id="bottom_1_'+result.data.list[i].id+'">' +
             '<span class="fc-greyabc mr10"><i>'+getDateDiff(result.data.list[i].created)+'</i></span>' +
             '<span class="fc-greyabc"><i>'+result.data.list[i].counts+'</i>阅读</span>' +

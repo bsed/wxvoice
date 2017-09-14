@@ -43,6 +43,7 @@ class RecordController extends BaseController
         if($_POST){
                 $type = $_POST['type'];
                 $id = $_POST['id'];
+                $voice_time = $_POST['voice_time'];
                 $member_id = Yii::$app->session['member_id'];
                 $serverId = $_POST['url'];
                 $access_token = $this->accessToken();
@@ -63,7 +64,7 @@ class RecordController extends BaseController
                         $info = $this->upchange($filename,$mediaIds[$i]);
 
                 }
-                  $msg = $this->upcombine($serverId,$path,$directory,$id,$type);
+                  $msg = $this->upcombine($serverId,$path,$directory,$id,$type,$voice_time);
                 die(json_encode(['result'=>'success']));
 
 
@@ -98,7 +99,7 @@ class RecordController extends BaseController
                 $info = $this->upchange($filename,$mediaIds[$i]);
 
             }
-            $msg = $this->upcombine($serverId,$path,$directory,0,'default');
+            $msg = $this->upcombine($serverId,$path,$directory,0,'default',$voice_time);
             die(json_encode(['result'=>'success']));
 
 
@@ -148,7 +149,7 @@ class RecordController extends BaseController
     /*
      * 多个音频进行合并
      */
-    private function upcombine($serverId,$path,$directory,$vid,$type){
+    private function upcombine($serverId,$path,$directory,$vid,$type,$voice_time){
 
         $accessKey = Yii::$app->params['qiniu']['accessKey'];
         $secretKey = Yii::$app->params['qiniu']['secretKey'];
@@ -213,11 +214,11 @@ class RecordController extends BaseController
                     $info = $this->writeName($directory,$userVoice);
             }else{
                 if($type == 'fatie'){
-                    $info = $this->updateNameFatie($directory,$userVoice,$vid);
+                    $info = $this->updateNameFatie($directory,$userVoice,$vid,$voice_time);
                 }elseif($type == 'answer'){
-                    $info = $this->updateNameQuestion($directory,$userVoice,$vid);
+                    $info = $this->updateNameQuestion($directory,$userVoice,$vid,$voice_time);
                 }elseif($type == 'fayan'){
-                    $info = $this->creatNameTopicqanda($directory,$userVoice,$vid);
+                    $info = $this->creatNameTopicqanda($directory,$userVoice,$vid,$voice_time);
                 }
 
             }
@@ -239,6 +240,7 @@ class RecordController extends BaseController
         $model = new Comments();
         $model -> member_id = $member_id;
         $model->to_member_id = 1;
+        $model->voice_time = $voice_time;
         $model->content = $directory.$userVoice.'.mp3';
         $model->created = time();
         $model->save();
@@ -250,31 +252,32 @@ class RecordController extends BaseController
     /*
      * 更新发帖到数据库中
      */
-     function updateNameFatie($directory,$userVoice,$vid){
+     function updateNameFatie($directory,$userVoice,$vid,$voice_time){
          $voices = $directory.$userVoice.'.mp3';
          $model = new Articles();
-         $model->updateAll(['voices' => $voices], 'id ='.$vid);
+         $model->updateAll(['voices' => $voices,'voice_time'=>$voice_time], 'id ='.$vid);
          return true;
     }
     /*
      * 更新问答到数据库中
      */
-     function updateNameQuestion($directory,$userVoice,$vid){
+     function updateNameQuestion($directory,$userVoice,$vid,$voice_time){
 
          $voices = $directory.$userVoice.'.mp3';
          $model = new Questions();
-         $model->updateAll(['voice' => $voices,'status'=>2], 'id ='.$vid);
+         $model->updateAll(['voice' => $voices,'status'=>2,'voice_time'=>$voice_time], 'id ='.$vid);
          return true;
     }
     /*
      * 新建发言到数据库中
      */
-     function creatNameTopicqanda($directory,$userVoice,$vid){
+     function creatNameTopicqanda($directory,$userVoice,$vid,$voice_time){
          $voices = $directory.$userVoice.'.mp3';
          $member_id = Yii::$app->session['member_id'];
          $model = new Comments();
          $model->member_id = $member_id;
          $model->to_member_id = 0;
+         $model->voice_time = $voice_time;
          $model->article_id = $_POST['topicId'];
          $model->content = $_POST['content'];
          $model->voice = $voices;
