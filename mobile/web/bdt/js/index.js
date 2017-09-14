@@ -208,6 +208,7 @@ function configDynamicList(result,index){
             }else if(publishtype == 'redpack'){
                 type +='#红包#';
             }
+            // '<a class="fc-blue">'+type+'</a>'+detailType+'</p>' +
         }
         //判断是否点赞了, 如果点赞中的member_id = mid,则证明一点赞
         onFcRed = "";
@@ -270,7 +271,7 @@ function configDynamicList(result,index){
         }else if(result.data.list[i].redid == 0){
             var articles = '<h4 class="f-l-height fs30 find-text fwb mb5">'+result.data.list[i].title+'</h4>' +
                 '<p class="text-style fs28 fc-black face_tag mb10">' +
-                '<a class="fc-blue">'+type+'</a>'+detailType+'</p>' +
+                '<a class="fc-blue"></a>'+detailType+'</p>' +
                 '<div class="pic-layout message-pic-1-style mb5"><i>'+pics+'</i></div>';
             var contents = '<div class="module-content mt10" onclick=gotoArticDetailHtml('+result.data.list[i].id+',\''+from+'\',\''+publishtype+'\');>'+articles+'</div>';
         }

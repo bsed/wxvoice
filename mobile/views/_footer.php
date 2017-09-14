@@ -17,7 +17,7 @@
         </a>
         <a href="/articles/square.html" class="<?php if($c == 'articles'):?>tabbtn-on<?endif;?>">
             <i class="dynamic"></i>
-            <span class="<?php if($c == 'articles'):?>fc-blue<?php else:?>fc-greyabc<?endif;?>">发现</span>
+            <span class="<?php if($c == 'articles'):?>fc-blue<?php else:?>fc-greyabc<?endif;?>">论坛</span>
         </a>
         <a href="/members/index.html" class="<?php if($c == 'members'):?>tabbtn-on<?endif;?>">
             <i class="mine"></i>

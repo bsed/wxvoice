@@ -79,6 +79,14 @@
             <!--占位空间-->
             <div class="bottom-space4"></div>
         </div>
+
+        <!-- footer -->
+        <div class="page__fd bg-white fs22 bc-grey scrollfdt" >
+            <div class="tab-con">
+                <?=$this->render('/_footer')?>
+            </div>
+        </div>
+        <!-- footer -->
     </div>
 </div>
 

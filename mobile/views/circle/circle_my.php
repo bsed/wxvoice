@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                <!-- 我的圈子列表形式-->
-               <div class="circle-list" id="circleList0" style="top: 0px;display:block">
+               <div class="circle-list" id="circleList0" style="top: 0px;display:none">
              <?php foreach($myCircle as $k=>$v):?>
                 <div class="circle-item-x bg-white fc-black mt10" onclick="gotoHtml(1,<?=$v['circle']['id']?>)">
                         <a class="circle-headpic">
