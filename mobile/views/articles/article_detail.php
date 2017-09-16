@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             </span>
                                             <em class="tips">免费收听</em>
                                             <span class="appui_qanda-voice-wait" style="display:none;"></span></div>
-                                        <em class="appui-qanda-answer-time">3"</em>
+                                        <em class="appui-qanda-answer-time"><?=$info['voice_time']?>"</em>
                                     </div>
                                 </div>
                             </div>

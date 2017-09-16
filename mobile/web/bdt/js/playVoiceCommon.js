@@ -409,17 +409,6 @@ function playAudioClickFunctionEx(id, type, listenType, objId, allowPauseBool, s
     var voiceFree = 0;
     var csrf = $('input[name="csrf"]').val();
     var dataParam = {"qaId": id, "type": type, "listenType": 1, "srId": shareId, "srPId": srParentId,'_csrf':csrf};
-    // if (isIosMoneyToPay && isIosMoneyToPay == "iosMoneyToPay") {
-    //     url = toListenPayByIosMoneyUrl;
-    // } else if (g_all_contentType == 2) {
-    //     url = toListen;
-    // } else if (pathname == "/topicqanda.html" || pathname == "/topic_answer_detail.html" ) {
-    //     url = toListenTopic;
-    // } else if (pathname == "/loupan_page.html" || pathname == "/square.html" || pathname == "/square_detail.html" || pathname == "/user_page.html" || pathname == "/circle_page.html" || pathname == "/house_circle.html" || pathname == "/index.htm" || pathname == "/index.html" || pathname == "/") {
-    //     url = playMessageVoice;
-    //     dataParam = {"id": id};
-    //     voiceFree = 1;
-    // }
 
     if (preVoiceObj != objId) {
         $.ajax({
@@ -550,26 +539,6 @@ function playAudioClickFunctionEx(id, type, listenType, objId, allowPauseBool, s
                         var redirectUrl = window.location.protocol+"//"+window.location.hostname+"/qanda_detail.html?id="+id+"&needToChkPResult=1";
                         window.location.href = result.data.toPayInfo.params.mwebUrl+"&redirect_url="+encodeURIComponent(redirectUrl);
                     }else{
-                        initAllPlayVoiceState();
-                        payParam = result.data.toPayInfo.params;
-                        tradeId = result.data.toPayInfo.tradeId;
-                        if (appType != isApp) {
-                            if (typeof WeixinJSBridge == "undefined") {
-                                dataLoadedError("现在网络有点小故障，正在重试...");
-                                if (document.addEventListener) {
-                                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                                } else if (document.attachEvent) {
-                                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-                                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-                                }
-                            } else {
-                                onBridgeReady();
-                            }
-                        } else {
-                            dataLoading("支付等待中");
-                            cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "MyPlugin", "wxpay", [1, payParam.partnerid, payParam.prepayid, payParam.nonceStr, payParam.timeStamp, payParam.sign, payParam.appid, payParam.packageValue]);
-                            // cordova.exec(callAppsSuccessFunction,callAppsFailFunction, "MyPlugin", "wxpay", [1,payParam.partnerid,payParam.prepayid,payParam.nonceStr,payParam.timeStamp,payParam.sign,payParam.appid]);
-                        }
                     }
                 } else {
                     dataLoadedError(result.message);
@@ -583,10 +552,8 @@ function playAudioClickFunctionEx(id, type, listenType, objId, allowPauseBool, s
         //当前点击的还是自己本身
         // alert(isWX);
         if (isWX == 0) {
-            alert(8);
             audioPlay(answerIDArray, voiceCount, objId, id);//播放语音
         } else {
-            alert(9);
             customDownloadVoice(answerIDArray, voiceCount, objId);
         }
     }
@@ -920,43 +887,10 @@ function stopVoiceFunction() {
         localId: currentVoiceId, // 需要停止的音频的本地ID，由stopRecord接口获得
         success: function (res) {
             currentVoiceId = "";
-            // alert("停止语音成功");
             wxplaying = false;
         }
     });
 
     clearInterval(waveTime);
 }
-// 充值分币弹窗
-function popupPay(arg, type) {
-    var dialogStr = '<div class="js_dialog toastDialogSure" id="iosDialog1">' +
-        '<div class="appui-mask"></div>' +
-        '<div class="appui-dialog">' +
-        '<div class="appui-dialog__hd fs34 fc-333 b-b-greyf1">' + (arg.title || '确认充值充值') + '</div>' +
-        '<div class="appui-dialog__bd fs30 fc-black456" style="text-align: center;">' +
-        '<p class="fs28 fc-grey666 mt20">' + arg.useSum + '</p>' +
-        '<p class="fs28 fc-grey999 mt5 mb10">当前问房币余额: ' + arg.surplus + ' 问房币</p>' +
-        '</div>' +
-        '<div class="appui-dialog__ft fs30">' +
-        '<a href="javascript:;" id="tipsCancleID" class="appui-dialog__btn appui-dialog__btn_default fc-greyabc">取消</a>' +
-        '<a href="javascript:;" id="tipsSaveID" class="appui-dialog__btn appui-dialog__btn_primary fc-red">' + (type == 1 ? "支付" : "去充值") + '</a>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
-    $("body").append(dialogStr);
 
-    function removeiosDialog() {
-        $(".toastDialogSure").fadeOut(100, $(".toastDialogSure").remove());
-    }
-
-    $("#tipsCancleID").off('click');
-    $("#tipsSaveID").off('click');
-    // 事件绑定
-    $("#tipsCancleID").on('click', function () {
-        removeiosDialog();
-        arg.closePay && arg.closePay();
-    });
-    $("#tipsSaveID").on('click', function () {
-        arg.affirmPay ? arg.affirmPay(removeiosDialog) : removeiosDialog();
-    });
-}

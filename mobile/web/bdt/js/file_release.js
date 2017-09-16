@@ -2,8 +2,7 @@
  * Created by PVer on 2017/6/7.
  */
 var userAgentInfo = navigator.userAgent;
-var isAndroid = userAgentInfo.indexOf('Android') > -1 || userAgentInfo.indexOf('Adr') > -1;//android终端
-var isiOS = !!userAgentInfo.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+1000/1000/
 var appuiOpenPublish = 0;
 var updateId = 0;
 // app方法集合
@@ -667,6 +666,7 @@ var h5 = {
         });
         //停止录音
         $('.record-stop').click(function(e) {
+            // alert('stop');
             h5_Voice.stopRecord1();
         });
 
@@ -729,7 +729,7 @@ function wxuploadImgFunction(index){
     }
     wx.uploadImage({
         localId: h5.wximgCurrStr[index], // 需要上传的图片的本地ID，由chooseImage接口获得
-        isShowProgressTips: 1, // 默认为1，显示进度提示
+        isShowProgressTips: 0, // 默认为1，显示进度提示
         success: function (res) {
             var serverId = res.serverId; // 返回图片的服务器端ID
             if(h5.wxImg == ""){
@@ -798,9 +798,17 @@ var h5_Voice = {
     },
     //停止录音
     stopRecord1: function(){
+        // alert('stopRecord1');
         wx.stopRecord({
             success: function(res) {
                 h5_Voice.voiceState = false;
+                //自动录音结束，没有 localId,导致不能自动停止播放
+                // alert(res.localId);
+                if(!res.localId){
+                    dataLoadedError("请重录本段录音,合理安排结尾");
+                    setTimeout("window.location.reload()",1500);
+                }
+
                 h5_Voice.recordIdArray.splice(h5_Voice.currentVoiceIndex, 0, res.localId);
                 h5_Voice.stopRecordButton();
             },
@@ -810,7 +818,29 @@ var h5_Voice = {
                 $('#answer-log-item'+h5_Voice.currentVoiceIndex+' em').css('width',0);
                 $('#answer-log-item'+h5_Voice.currentVoiceIndex+' span').text(0+'s').removeClass('fc-orange').addClass('fc-greyabc');
                 dataLoadedError("sorry，系统未能识别本段语音，请重录本段录音！");
-                // window.location.reload();
+                window.location.reload();
+            }
+        });
+    },
+    //自动停止录音
+    autostopRecord: function(){
+        // alert(333);
+        wx.onVoiceRecordEnd({
+            // 录音时间超过一分钟没有停止的时候会执行 complete 回调
+            success: function(res) {
+                // alert(444);
+                h5_Voice.voiceState = false;
+                //自动录音结束，没有 localId,导致不能自动停止播放
+                // alert(res.localId);
+                h5_Voice.recordIdArray.splice(h5_Voice.currentVoiceIndex, 0, res.localId);
+                h5_Voice.stopRecordButton();
+            },
+            complete: function (res) {
+                alert(res);
+                var localId = res.localId;
+                h5_Voice.voiceState = false;
+                h5_Voice.recordIdArray.splice(h5_Voice.currentVoiceIndex, 0, res.localId);
+                h5_Voice.stopRecordButton();
             }
         });
     },
@@ -845,7 +875,7 @@ var h5_Voice = {
 
         wx.uploadVoice({
             localId: h5_Voice.recordIdArray[index], // 需要上传的音频的本地ID，由stopRecord接口获得
-            isShowProgressTips: 1, // 默认为1，显示进度提示
+            isShowProgressTips: 0, // 默认为1，显示进度提示
             success: function (res) {
                 var serverId = res.serverId;
                 h5_Voice.wxRecordId += serverId+',';
@@ -906,7 +936,13 @@ var h5_Voice = {
             h5_Voice.playPercent = 0 ;
             $('.left-play-percent').stop().css({"-webkit-transform":"rotate("+h5_Voice.playPercent+"deg)"},1000);
         }
-        h5_Voice.playing = setInterval("h5_Voice.playPercentFun()",1000/6);
+        if(isiOS){
+            h5_Voice.playing = setInterval("h5_Voice.playPercentFun()",1000/6.75);
+        }else{
+            h5_Voice.playing = setInterval("h5_Voice.playPercentFun()",1000/6);
+        }
+
+        // h5_Voice.playing = setTimeout("h5_Voice.playPercentFun()",1000*60);
     },
     startRecordUI: function (){
         h5_Voice.isRecordingBool = 1;
@@ -916,15 +952,24 @@ var h5_Voice = {
         h5_Voice.recordPercent = 0;
         $('.record-percent-circle').removeClass('clip-auto');
         $('.right-record-percent').addClass('wth0');
-        $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+h5_Voice.recordPercent+"deg)"},1000/6);
+        if(isiOS) {
+            $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + h5_Voice.recordPercent + "deg)"}, 1000/6.75);
+        }else{
+            $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + h5_Voice.recordPercent + "deg)"}, 1000/6);
+        }
         clearInterval(h5_Voice.recording);//暂停录音----清除录音定时器
         //初始化录音进程容器
         $('.record-percent-circle').stop().css('opacity','1');//将录音进度跳改变透明度1
         $('.play-percent-circle').hide();//隐藏----播放录音进度条
         //$('.time-show').show();//显示----录音时长
-        $('.record-tips').stop().text('录制完毕点击停止');//提示----信息更改
+        $('.record-tips').stop().text('合理安排，保证语音的连续性');//提示----信息更改
         //开启录音计时
-        h5_Voice.recording = setInterval("h5_Voice.recordPercentFun()",1000/6);
+        if(isiOS) {
+            h5_Voice.recording = setInterval("h5_Voice.recordPercentFun()", 1000/6.75);
+        }else{
+            h5_Voice.recording = setInterval("h5_Voice.recordPercentFun()", 1000/6);
+        }
+        // h5_Voice.playing = setTimeout("h5_Voice.playPercentFun()",1000*60);
         $('.record-stop').show();//显示----暂停录音按钮
     },
     pauseVoiceUI: function (){
@@ -960,10 +1005,15 @@ var h5_Voice = {
         h5_Voice.recordPercent = 0;
         $('.record-percent-circle').removeClass('clip-auto');
         $('.right-record-percent').addClass('wth0');
-        $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+h5_Voice.recordPercent+"deg)"},1000/6);
+        if(isiOS) {
+            $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + h5_Voice.recordPercent + "deg)"}, 1000/6.75);
+        }else{
+            $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + h5_Voice.recordPercent + "deg)"}, 1000/6);
+        }
         clearInterval(h5_Voice.recording);
     },
     stopRecordButton: function(){
+        // alert('stopRecordButton');
         h5_Voice.isRecordingBool = 0;
         clearInterval(h5_Voice.recording);//暂停录音----清除录音定时器
         $('.record-stop').hide();//隐藏----暂停录音按钮
@@ -986,22 +1036,28 @@ var h5_Voice = {
         $('#answer-log-item'+h5_Voice.currentVoiceIndex+' i').css('left',leftAndWidth);
         $('#answer-log-item'+h5_Voice.currentVoiceIndex+' em').css('width',leftAndWidth);
         $('#answer-log-item'+h5_Voice.currentVoiceIndex+' span').text(h5_Voice.addRecordTime+'s').removeClass('fc-greyabc').addClass('fc-orange');
+        //限制加录的时长
         if (h5_Voice.recordPercentArray.length==5) {
             $('#addlu-btn').fadeOut();
         }
     },
     //录音计时
     recordPercentFun: function(){
-        //每次录音满60s时停止录音
+        //每次录音满60s时停止录音 yanli
         if(h5_Voice.recordPercent==360){
-            // h5_Voice.stopRecordButton();
-            h5_Voice.stopRecordButton();
-        }
-        else if(h5_Voice.recordPercent>180){
+
+            h5_Voice.stopRecord1();
+
+        }else if(h5_Voice.recordPercent>180){
             $('.record-percent-circle').addClass('clip-auto');
             $('.right-record-percent').removeClass('wth0');
         }
-        $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+h5_Voice.recordPercent+"deg)"},1000/6);
+        if(isiOS) {
+            $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + h5_Voice.recordPercent + "deg)"}, 1000/6.75);
+        }else{
+            $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + h5_Voice.recordPercent + "deg)"}, 1000/6);
+        }
+        //显示录音时间
         h5_Voice.recordPercent = h5_Voice.recordPercent + 1 ;
         $('.time-show').html(Math.floor(h5_Voice.recordPercent/6) + 's');
     },
@@ -1074,7 +1130,11 @@ function recordButton(index){
                 $('.record-percent-circle').removeClass('clip-auto');
                 $('.right-record-percent').addClass('wth0');
             }
-            $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+h5_Voice.recordPercent+"deg)"},1000/6);
+            if(isiOS) {
+                $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + h5_Voice.recordPercent + "deg)"}, 1000/6.75);
+            }else{
+                $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + h5_Voice.recordPercent + "deg)"}, 1000/6);
+            }
             $('.time-show').html(Math.floor(h5_Voice.recordPercent/6) + 's');
             $('#chonglu-btn').fadeIn();//显示----重录按钮
             if (h5_Voice.recordPercentArray.length==5) {
@@ -1655,18 +1715,18 @@ function issueContent(){
             });
         })();
     }else if(typeof appCurRecordSeconds != 'undefined' && appCurRecordSeconds > 0){
-        alert(4);
+        // alert(4);
         app.recordTime = appCurRecordSeconds;
         // app录音
         cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "SpeechOFFSynthesize", "update", [0]);
         cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "stop", [0]);
         cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "upload", [0]);
     }else if(app.allFileData.length > 0){
-        alert(5);
+        // alert(5);
         // app上传文件
         cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "SelectAppFilePlugin", "UploadFiles", app.allFileData);
     }else if(webUploadFile.fileList.length > 0){
-        alert(6);
+        // alert(6);
         // h5上传文件
         (function(){
             var data = new FormData();
@@ -1697,7 +1757,7 @@ function issueContent(){
             });
         })();
     }else{
-        alert(7);
+        // alert(7);
         // 没有任何附件
         issueSubmit();
     }
@@ -1833,10 +1893,12 @@ function FileReleaseRequestQzShow(qzId){
 //yanli
 function submitssayData(){
     if(isWeiXinBorrower() && h5_Voice.voiceState){
+        // alert('submitssayData');
         h5_Voice.stopRecord1();
         return false;
     }
     if(initOs.getOs() != "h5"){
+        // alert('h5');
         cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "SpeechOFFSynthesize", "stop", [0]);
         cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "pause", [0]);
     }

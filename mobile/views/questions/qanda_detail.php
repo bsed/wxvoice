@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <em class="tips">免费收听</em>
                                     <span class="appui_qanda-voice-wait" style="display:none;"></span>
                                 </div>
-                                <em class="appui-qanda-answer-time" >147"</em>
+                                <em class="appui-qanda-answer-time" ><?=$question['voice_time'];?>"</em>
                             </div>
                             <?php endif;?>
                             <?php if($question['article']):?>

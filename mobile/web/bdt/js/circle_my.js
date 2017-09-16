@@ -25,14 +25,14 @@ $(document).ready(function() {
 			switchStyle = 1 ;
 			switchBool = 1 ;
 			switchIconStyle = 0;
-			$('#switchId').find('img').attr('src','../bdt/images/nav_icon_switch1.png');
+			$('#switchId').find('img').attr('src','../bdt/images/nav_icon_switch0.png');
 			$('#circleList0').css('display','none');
             $('#circleListwenzi').css('display','block');
 		}else{
 			switchStyle = 0 ;
 			switchBool = 0 ;
 			switchIconStyle = 1;
-			$('#switchId').find('img').attr('src','../bdt/images/nav_icon_switch0.png');
+			$('#switchId').find('img').attr('src','../bdt/images/nav_icon_switch1.png');
             $('#circleList0').css('display','block');
             $('#circleListwenzi').css('display','none');
 
@@ -44,14 +44,14 @@ $(document).ready(function() {
 			switchStyle = 1 ;
 			switchBool = 1 ;
 			switchIconStyle = 0;
-			$('#switchId1').find('img').attr('src','../bdt/images/nav_icon_switch1.png');
+			$('#switchId1').find('img').attr('src','../bdt/images/nav_icon_switch0.png');
             $('#circleListtuijian').css('display','none');
             $('#circleListtuijianlist').css('display','block');
 		}else{
 			switchStyle = 0 ;
 			switchBool = 0 ;
 			switchIconStyle = 1;
-			$('#switchId1').find('img').attr('src','../bdt/images/nav_icon_switch0.png');
+			$('#switchId1').find('img').attr('src','../bdt/images/nav_icon_switch1.png');
             $('#circleListtuijian').css('display','block');
             $('#circleListtuijianlist').css('display','none');
 		}
@@ -209,21 +209,5 @@ function gotoHtml(joinStatus,id, obj){
 
 
 
-
-function saveStatusBeforeJump(){
-	var pageUrl = window.location.href;
-	var pageBodyHtml = $("body").html();
-
-	var pageGlobalData = new Object();
-	pageGlobalData["currentIndex"] = currentIndex;
-	pageGlobalData['switchStyle'] = switchStyle;
-	pageGlobalData['switchBool'] = switchBool;
-	pageGlobalData['totalPage'] = totalPage;
-	pageGlobalData['currentPage'] = currentPage;
-	pageGlobalData['totalPage'] = totalPage;
-	pageGlobalData['flag'] = flag;
-	pageGlobalData['position'] = $('.page__bd').scrollTop();
-
-}
 
 

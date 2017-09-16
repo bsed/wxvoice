@@ -30,13 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a class="fc-blue" id="myCircleList">我的圈子</a>
                     <a class="fc-white bg-blue" id="recommendCircleList">推荐圈子</a>
                 </div>
-                <a class="nav-act right-act" id="switchId1" style="display:block"><img src="../bdt/images/nav_icon_switch0.png"></a>
                 <a class="nav-act right-act" id="switchId" style="display:block"><img src="../bdt/images/nav_icon_switch1.png"></a>
+                <a class="nav-act right-act" id="switchId1" ><img src=""></a>
             </div>
         </div>
 
         <!--页面主体-->
-        <div class="page__bd scrollbd" id="page__bd">
+        <div class="page__bd scrollbd scrollBottom" id="page__bd" >
             <div class="top-space1" style="display:none;"></div>
             <div class="top-space4"></div>
             <div class="circle">
@@ -134,6 +134,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a class="creat-circle-btn fc-white bg-blue fs30" onclick="creatCircle()">创建圈子</a>
                 </div>
             </div>
+            <style>
+                .scrollBottom{
+                    padding-bottom:5.5rem;
+                }
+            </style>
+            <?php else:?>
+            <style>
+                .scrollBottom{
+                    padding-bottom:3rem;
+                }
+            </style>
         <?php endif;?>
     <?php else:?>
         <div class="page__fd scrollfd" id="showCreateCircle" style="display:block">
@@ -141,6 +152,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <a class="creat-circle-btn fc-white bg-blue fs30" onclick="creatCircle()">创建圈子</a>
             </div>
         </div>
+        <style>
+            .scrollBottom{
+                padding-bottom:5.5rem;
+            }
+        </style>
     <?php endif;?>
 
         <div class="page__fd bg-white fs22 bc-grey scrollfdt" id="footer_tabbar">

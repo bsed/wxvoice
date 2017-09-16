@@ -133,11 +133,11 @@ function ajaxLabelCon(currentIndex){
                      '<div class="appui-expert-info">'+
                      '<a class="appui-expert-askbtn fs24 fc-white " href="/questions/wen_questions.html?id='+result.list[i].user.id+'&from=found&publishtype=ask" ' +
                      'style="display:block">'+result.list[i].price+'元提问</a>'+
-                     '<h3 class="appui-expert-name fs30 fc-black" onclick="gotoUser_pageHtml('+result.list[i].user.id+');">'+result.list[i].user.nickname+'</h3>'+
+                     '<h3 class="appui-expert-name fs30 fc-black" onclick="">'+result.list[i].user.nickname+'</h3>'+
                      '<p class="appui-expert-introduce fs24 fc-grey666 mt5">'+result.list[i].honor+'</p>'+
                      '<div class="appui-expert-tags fs18 mt5 fc-greyabc">'+
                      '<p class="appui-expert-tags-industry">'+tags+'</p>'+
-                     '<span style="display:block" onclick="gotoUser_pageHtml('+result.list[i].user.id+');">进入主页</span>'+
+                     '<span style="display:block" onclick="">进入主页</span>'+
                      '</div>'+
                      '</div>'+
                      '</div>';
