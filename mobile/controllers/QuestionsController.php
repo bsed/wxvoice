@@ -222,8 +222,9 @@ class QuestionsController extends BaseController
                 }
             }
             $imgs = json_encode($img);
-            $model->updateAll(['status' => 1,'article'=>$content,'answerimgs'=>$imgs], 'id ='.$_POST['id']);
-            die([json_encode(['result'=>'success'])]);
+            //0 支付为成功； 1支付成功；2回答成功
+            $model->updateAll(['status' => 2,'article'=>$content,'answerimgs'=>$imgs], 'id ='.$_POST['id']);
+            die(json_encode(['result'=>'success']));
         }
     }
 
@@ -258,10 +259,10 @@ class QuestionsController extends BaseController
       $data = $model->
               find()->
               asarray()->
-              where(['typeid'=>$_POST['typeid'],'status'=>1])->
+              where(['typeid'=>$_POST['typeid'],'status'=>2])->
               with('expert','dianzan','comment')->offset($_POST['start'])->orderBy('created DESC')->limit($pernum)->all();
 
-      $total = $model->find()->asarray()->where(['typeid'=>$_POST['typeid'],'status'=>1])->count();
+      $total = $model->find()->asarray()->where(['typeid'=>$_POST['typeid'],'status'=>2])->count();
       $pages = ceil($total/$pernum);
       die(json_encode([
           'result'=>'success',

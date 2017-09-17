@@ -47,29 +47,21 @@ use common\tools\htmls;
                         <i><img src="../bdt/images/go.png"></i>
                     </a>
                 </h3>
-                <div class="search-resault-list fs28 fc-black456 bg-grey professList" id="searchExpert">
+                <div class="search-resault-list fs28 fc-black456 bg-grey professList">
                 <?php foreach($expert as $k=>$v):?>
                     <div class="appui-expert bg-white">
                             <div class="appui-expert-headpic-level">
                                 <img class="appui-expert-headpic" src="<?=Yii::$app->params['public'].'/attachment'.$v['photo']?>"><i>
                                     <img src="../bdt/images/v2.png"></i>
                             </div>
-                            <div class="appui-expert-info">
-                                <a class="appui-expert-askbtn fs24 fc-white "  onclick="askExpert(<?=$v['id']?>)">
-                                    <?php if($v['expert']['price'] == '0.00'):?>
-                                    免费提问
-                                   <?php else:?>
-                                        <?=$v['expert']['price']?>元提问
-                                     <?php endif;?>
+                            <div class="appui-expert-info" onclick="askExpert(<?=$v['id']?>)">
+                                <a class="appui-expert-askbtn fs24 fc-white " >
+                                    <?php if($v['expert']['price'] == '0.00'):?>免费提问<?php else:?><?=$v['expert']['price']?>元提问<?php endif;?>
                                 </a>
                                 <h3 class="appui-expert-name fs30 fc-black"><?=$v['nickname']?></h3>
                                 <p class="appui-expert-introduce fs24 fc-grey666 mt5"><?=$v['slogan']?></p>
                                 <div class="appui-expert-tags fs18 mt5 fc-greyabc">
-                                    <p class="appui-expert-tags-industry">
-                                        <span>投资</span>
-                                        <span>政策</span>
-                                        <span>学区</span></p>
-                                        <!--<span style="display:block">530个动态</span>-->
+                                        <span style="display:block">530个动态</span>
                                 </div>
                             </div>
                     </div>
@@ -124,7 +116,7 @@ use common\tools\htmls;
                 </h3>
                 <div class="search-resault-list bg-grey fs28 fc-black456 qandaList">
                     <?php foreach($ask as $k=>$v):?>
-                    <div class="appui-qanda-module mb10" onclick="gotoQADetailHtml1(<?=$v['id']?>,0,'undefined', this)">
+                    <div class="appui-qanda-module mb10" onclick="goQADetailHtml(<?=$v['id']?>)">
                         <div class="appui-qanda-question"><?=$v['question']?></div>
                         <div class="appui-qanda-answer"><div class="appui-qanda-expertphoto" onclick="gotoUser_pageHtml(1)">
                                 <img src="<?=Yii::$app->params['public'].'/attachment'.$v['expert']['photo']?>">
@@ -137,7 +129,7 @@ use common\tools\htmls;
 						<em class="wave3"></em></span>
                                 <em class="tips">免费收听</em>
                                 <span class="appui_qanda-voice-wait" style="display:none;"></span></div>
-                            <em class="appui-qanda-answer-time">180"</em></div>
+                            <em class="appui-qanda-answer-time"><?=$v['voice_time']?>"</em></div>
                         <div class="appui-qanda-expertinfo"><div class="appui-qanda-expertinfo">
                                 <div class="time-statistic fs22" id="bottom_1_80">
                                     <span class="fc-greyabc mr10 "><i><?=htmls::formatTime($v['created']);?></i></span>
@@ -155,6 +147,9 @@ use common\tools\htmls;
             <script>
                 function seeMoreExpert(){
                     window.location.href = "/expert/found_expert.html";
+                }
+                function goQADetailHtml(id){
+                    window.location.href = "/questions/qanda_detail.html?id="+id;
                 }
                 function seeMoreLoupan(){
                     window.location.href = "/loupan/loupan_list.html";

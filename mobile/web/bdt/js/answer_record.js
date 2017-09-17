@@ -1,4 +1,9 @@
-// answer.js
+var userAgentInfo = navigator.userAgent;
+var isAndroid = userAgentInfo.indexOf('Android') > -1 || userAgentInfo.indexOf('Adr') > -1;//android终端
+var isiOS = !!userAgentInfo.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+var appuiOpenPublish = 0;
+var updateId = 0;
+
 var maxAudioLength = null;
 var wxShareUrl = window.location.href;
 var maxAudioTips = "";
@@ -433,67 +438,7 @@ function wxRequest1(){
     //     }
     // });
 }
-function wxShare1() {
-    // $.ajax({
-    //     type: "post",
-    //     url: getWxShareDataUrl,
-    //     dataType: "json",
-    //     async: true,
-    //     data: {
-    //         "url": wxShareUrl
-    //     },
-    //     success: function(result) {
-    //         if (result.result == "success") {
-    //             wx.config({
-    //                 debug: false,
-    //                 appId: result.data.appId,
-    //                 timestamp: result.data.timestamp,
-    //                 nonceStr: result.data.nonceStr,
-    //                 signature: result.data.signature,
-    //                 jsApiList: ['checkJsApi', 'startRecord', 'stopRecord', 'onVoiceRecordEnd', 'playVoice', 'onVoicePlayEnd', 'pauseVoice', 'stopVoice', 'uploadVoice', 'downloadVoice'],
-    //             });
-    //             wx.ready(function() {
-    //                 clearToastDialog();
-    //                 var voice = {
-    //                     localId: '',
-    //                     serverId: ''
-    //                 };
-    //                 wx.checkJsApi({
-    //                     jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'],
-    //                     // 需要检测的JS接口列表，所有JS接口列表见附录2,
-    //                     success: function(res) {}
-    //                 });
-    //                 // 4.4 监听录音自动停止
-    //                 wx.onVoiceRecordEnd({
-    //                     complete: function(res) {
-    //                         recordIdArray.splice(currentVoiceIndex, 0, res.localId);
-    //                         // alert(res);
-    //                         // clearInterval(recording);//暂停录音----清除录音定时器
-    //                         // if(recordPercent!=360){
-    //                         //     stopRecordButton();
-    //                         // }
-    //                     }
-    //                 });
-    //                 wx.onVoicePlayEnd({
-    //                     complete: function(res) {
-    //                         sectionPlay++;
-    //                         if (sectionPlay<localAnswerIDArray.length) {
-    //                             playVoice(localAnswerIDArray[sectionPlay],preVoiceObj);
-    //                         }else{
-    //                             currentVoiceId = "";
-    //                             playErrorUI(currPayObjId);
-    //                             wxplaying = false;
-    //                         }
-    //
-    //                     }
-    //                 });
-    //                 wx.stopRecord();
-    //             });
-    //         } else {
-    //         }
-    //     }
-    // });
-}
+
 
 //开启录音
 function startRecord1(){
@@ -514,25 +459,33 @@ function startRecord1(){
         }
     });
 }
-//停止录音
+//停止录音 yanli
 function stopRecord1(){
     wx.stopRecord({
         success: function(res) {
+            voiceState = false;
+            //自动录音结束，没有 localId,导致不能自动停止播放
+            // alert(res.localId);
+            if(!res.localId){
+                dataLoadedError("请重录本段录音,合理安排结尾");
+                setTimeout("window.location.reload()",1500);
+            }
+
             recordIdArray.splice(currentVoiceIndex, 0, res.localId);
             stopRecordButton();
         },
         fail: function(res) {
-            // dataLoadedError(JSON.stringify(res));
             intRecordPlayFun();
             $('#answer-log-item'+currentVoiceIndex+' i').css('left',0);
             $('#answer-log-item'+currentVoiceIndex+' em').css('width',0);
             $('#answer-log-item'+currentVoiceIndex+' span').text(0+'s').removeClass('fc-orange').addClass('fc-greyabc');
             dataLoadedError("sorry，系统未能识别本段语音，请重录本段录音！");
-            // window.location.reload();
+            window.location.reload();
         }
     });
 
 }
+
 //暂停播放
 function pauseVoice1(voiceId){
     wx.pauseVoice({
@@ -616,7 +569,11 @@ function startPlayVoiceUI1(){
         playPercent = 0 ;
         $('.left-play-percent').stop().css({"-webkit-transform":"rotate("+playPercent+"deg)"},1000);
     }
-    playing = setInterval("playPercentFun()",1000/6);
+    if(isiOS) {
+        playing = setInterval("playPercentFun()", 1000 / 6.75);
+    }else{
+        playing = setInterval("playPercentFun()", 1000 / 6);
+    }
 }
 function startRecordUI(){
     isRecordingBool = 1;
@@ -626,7 +583,11 @@ function startRecordUI(){
     recordPercent = 0;
     $('.record-percent-circle').removeClass('clip-auto');
     $('.right-record-percent').addClass('wth0');
-    $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+recordPercent+"deg)"},1000/6);
+    if(isiOS) {
+        $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + recordPercent + "deg)"}, 1000 / 6.75);
+    }else{
+        $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + recordPercent + "deg)"}, 1000 / 6);
+    }
     clearInterval(recording);//暂停录音----清除录音定时器
     //初始化录音进程容器
     $('.record-percent-circle').stop().css('opacity','1');//将录音进度跳改变透明度1
@@ -634,7 +595,11 @@ function startRecordUI(){
     //$('.time-show').show();//显示----录音时长
     $('.record-tips').stop().text('录制完毕点击停止');//提示----信息更改
     //开启录音计时
-    recording = setInterval("recordPercentFun()",1000/6);
+    if(isiOS) {
+        recording = setInterval("recordPercentFun()", 1000 / 6.75);
+    }else{
+        recording = setInterval("recordPercentFun()", 1000 / 6);
+    }
     $('.record-stop').show();//显示----暂停录音按钮
 }
 function pauseVoiceUI(){
@@ -760,20 +725,20 @@ function postAnswerOfQuestionRequest(wxRecordId,curCount) {
         type = 'answer';
         url = '/record/voicetype.html';
     }
-    // dataLoading("数据加载中...");
+    dataLoading("正在回答，请勿操作...");
     var csrf = $('input[name="csrf"]').val();
     $.ajax({
         type: "post",
         url: url,
         dataType: "json",
         async: true,
-        // data:{"topicId":"","deviceType":"1-weixin,2-text","url":"weixin时，输入微信音频上传返回的serverId","answerLen":"","content":"","pics":""}
         data:{
             "topicId":topicId,
             "deviceType":isVoiceAns,
             "url":wxRecordId,
             "answerLen":curCount,
             "content":content,
+            "voice_time":curCount,
             "pics":pics,
             "id":id,
             "type":type,
@@ -869,7 +834,11 @@ function intRecordPlayFun()
     recordPercent = 0;
     $('.record-percent-circle').removeClass('clip-auto');
     $('.right-record-percent').addClass('wth0');
-    $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+recordPercent+"deg)"},1000/6);
+    if(isiOS) {
+        $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + recordPercent + "deg)"}, 1000 / 6.75);
+    }else{
+        $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + recordPercent + "deg)"}, 1000 / 6);
+    }
     clearInterval(recording);
 }
 
@@ -878,13 +847,17 @@ function recordPercentFun()
 {
     //每次录音满60s时停止录音
     if(recordPercent==360){
-        stopRecordButton();
+        stopRecord1();
     }
     else if(recordPercent>180){
         $('.record-percent-circle').addClass('clip-auto');
         $('.right-record-percent').removeClass('wth0');
     }
-    $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+recordPercent+"deg)"},1000/6);
+    if(isiOS) {
+        $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + recordPercent + "deg)"}, 1000 / 6.75);
+    }else{
+        $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + recordPercent + "deg)"}, 1000 / 6);
+    }
     recordPercent = recordPercent + 1 ;
     $('.time-show').html(Math.floor(recordPercent/6) + 's');
 }
@@ -953,7 +926,11 @@ function recordButton(index){
                 $('.record-percent-circle').removeClass('clip-auto');
                 $('.right-record-percent').addClass('wth0');
             }
-            $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+recordPercent+"deg)"},1000/6);
+            if(isiOS) {
+                $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + recordPercent + "deg)"}, 1000 / 6.75);
+            }else{
+                $('.left-record-percent').stop().css({"-webkit-transform": "rotate(" + recordPercent + "deg)"}, 1000 / 6);
+            }
             $('.time-show').html(Math.floor(recordPercent/6) + 's');
             $('#chonglu-btn').fadeIn();//显示----重录按钮
             if (recordPercentArray.length==5) {

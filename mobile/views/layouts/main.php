@@ -30,11 +30,10 @@ $c = Yii::$app->controller->action->id;
     <?php else:?>
         <link type="text/css" rel="stylesheet" href="../bdt/css/newappui.min.css">
     <?php endif;?>
-
-
+    <script type="text/javascript" src="../bdt/js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <link type="text/css" rel="stylesheet" href="../bdt/css/layout.css">
     <link type="text/css" rel="stylesheet" href="../bdt/css/swiper-3.4.0.min.css">
-    <script type="text/javascript" src="../bdt/js/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="../bdt/js/util.js"></script>
     <script type="text/javascript" src="../bdt/js/config.js"></script>
     <script type="text/javascript" src="../bdt/js/common.js"></script>
@@ -43,7 +42,6 @@ $c = Yii::$app->controller->action->id;
     <script type="text/javascript" src="../bdt/js/swiper-3.4.0.min.js"></script>
     <script type="text/javascript" src="../bdt/js/stopWechatBlackBg.js"></script>
     <script type="text/javascript" src="../bdt/js/detailComment.js"></script>
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript" src="../bdt/js/comment.js"></script>
     <script type="text/javascript" src="../bdt/js/exif.js"></script>
     <script type="text/javascript" src="../bdt/js/cropper.js"></script>
@@ -55,12 +53,7 @@ $c = Yii::$app->controller->action->id;
 
 </head>
 <?= $content ?>
-
 <?=$this->render('_shareAll')?>
-
-
-<!--common footer-->
-
 <input type="hidden" name="csrf" value="<?= Yii::$app->request->csrfToken ?>" >
 </html>
 <?php $this->endPage() ?>

@@ -1,8 +1,6 @@
-/**
- * Created by PVer on 2017/6/7.
- */
 var userAgentInfo = navigator.userAgent;
-1000/1000/
+var isAndroid = userAgentInfo.indexOf('Android') > -1 || userAgentInfo.indexOf('Adr') > -1;//android终端
+var isiOS = !!userAgentInfo.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 var appuiOpenPublish = 0;
 var updateId = 0;
 // app方法集合

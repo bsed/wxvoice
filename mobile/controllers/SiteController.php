@@ -61,7 +61,7 @@ class SiteController extends BaseController
         $circle = $circleModel->find()->asarray()->where(['like','name',$keys])->with('user','incircle')->all();
         //问答 ask
         $questionModel = new Questions();
-        $ask = $questionModel->find()->asarray()->where(['like','question',$keys])->andwhere(['status'=>1])->with('expert','dianzan','comment')->all();
+        $ask = $questionModel->find()->asarray()->where(['like','question',$keys])->andwhere(['status'=>2])->with('expert','dianzan','comment')->all();
         return $this->render('search',[
             "expert"=>$expert,
             "circle"=>$circle,

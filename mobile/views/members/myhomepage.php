@@ -38,16 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="my-qanda-item bg-white mb10" onclick="gotoQanda_recordHtml(<?=$v['id']?>,1,0,2)">
                             <div class="my-qanda-item-hd"><a><i>
                                         <img src="<?=Yii::$app->params['public'].'/attachment'.$v['user']['photo']?>"><i>
-                                            <img src="../bdt/images/v1.png"></i></i>
+                                            <?php if($v['user']['vip'] == 1):?>
+                                                <i><img src="../bdt/images/v2.png"></i>
+                                            <?php endif;?>
+                                        </i></i>
                                     <span class="fc-navy fs30 ml5"><?=$v['user']['nickname']?></span></a>
                                 <span class="fc-blue fs30 ml5">
-                                    <?php if($v['status'] == 1):?>
-                                        已回答
-                                        <?php elseif($v['status'] == 0):?>
-                                        待回答
-                                        <?php elseif($v['status'] == 1):?>
-                                        已失效
-                                    <?php endif;?>
+                                    <?php if($v['status'] == 2):?>已回答<?php elseif($v['status'] == 1):?>待回答<?php elseif($v['status'] == 3):?>已失效<?php endif;?>
                                 </span>
                                 <div><i class="bg-orange"></i>
                                     <?php if($v['askprice'] == "0.00"):?>
@@ -66,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?=$v['question']?></p>
                             <div class="my-qanda-item-fd">
                                 <i class="fs28 fc-greyabc"><?=htmls::formatTime($v['created'])?></i>
-                                <span class="fs28 fc-greyabc"><i>1</i><?=$v['views']?>查看</span>
+                                <span class="fs28 fc-greyabc"><i><?=$v['views']?></i>查看</span>
                             </div>
                         </div>
                         <?php endforeach;?>
@@ -84,16 +81,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         <!--我提问的问题列表-->
                         <?php foreach($ask as $k=>$v):?>
                             <div class="my-qanda-item bg-white mb10" onclick="gotoArticDetailHtml(<?=$v['id']?>,'<?=$v['from']?>','<?=$v['publishtype']?>');">
-                                <div class="my-qanda-item-hd"><a><i>
+                                <div class="my-qanda-item-hd"><a>
+                                        <i>
                                             <img src="<?=Yii::$app->params['public'].'/attachment'.$v['user']['photo']?>">
-                                            <i>
-                                                <img src="../bdt/images/v1.png">
-                                            </i></i>
+                                            <?php if($v['user']['vip'] == 1):?>
+                                            <i><img src="../bdt/images/v2.png"></i>
+                                            <?php endif;?>
+
+                                        </i>
                                         <span class="fc-navy fs30 ml5"><?=$v['user']['nickname']?></span></a>
-                                    <span class="fc-blue fs30 ml5">待回答</span>
-                                    <em class="fc-black fs30 ml5">优惠券</em>
+                                    <span class="fc-blue fs30 ml5"><?php if($v['status'] == 2):?>已回答<?php elseif($v['status'] == 1):?>待回答<?php elseif($v['status'] == 0):?>已失效<?php endif;?></span>
                                     <div><i class="bg-orange"></i>
-                                        <span class="fc-orange fs30">￥<?=$v['askprice']?></span></div></div>
+                                        <?php if($v['askprice'] == "0.00"):?>
+                                            <span class="fc-orange fs30">免费</span>
+                                        <?php else:?>
+                                            <span class="fc-orange fs30">￥<?=$v['askprice']?></span>
+                                        <?php endif;?>
+                                    </div></div>
                                 <p class="my-qanda-item-bd fs30 fc-black mt5 face_tag">
                                     <?php if($v['imgs'] != '[]'):?>
                                         <i class="appui-qanda-question-imgtag">
@@ -104,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <?=$v['question']?></p>
                                 <div class="my-qanda-item-fd">
                                     <i class="fs28 fc-greyabc"><?=htmls::formatTime($v['created'])?></i>
-                                    <span class="fs28 fc-greyabc"><i>1</i><?=$v['views']?>查看</span>
+                                    <span class="fs28 fc-greyabc"><i><?=$v['views']?></i>查看</span>
                                 </div>
                             </div>
                         <?php endforeach;?>

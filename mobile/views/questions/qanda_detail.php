@@ -26,10 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <a class="fs32 fc-black back-btn" id="back_index" href="index.html" style="display: none;">首页</a>
                 <h2 class="fs34" id="title_id"><?=$user['nickname']?>的提问</h2>
             </div>
-<!--            <div class="page__hd-tips bg-greyf1"  id="coupon_count_div" style="display: none;">-->
-<!--                <p class="fs24 fc-grey999">您有<span class="fc-black fs28" id="coupon_count_id">1</span>张围观券，本次收听免费！</p>-->
-<!--                <a class="bg-white" id="coupon_count_close"><img src="../bdt/images/nav_icon_close1.png"></a>-->
-<!--            </div>-->
         </div>
         <div class="page__bd bg-greyfa scrollbd">
             <!--无优惠券-->
@@ -97,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     </div>
 
-                <?php if($question['status'] == 1):?>
+                <?php if($question['status'] == 2):?>
                     <!--回答-气泡-语音模式-->
                     <div class="answer-common bg-white" style="" id="answer_main_id_1">
                         <div class="answer-common-bg bg-greyfa">
@@ -137,12 +133,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         </div>
                     </div>
-                    <script>
-                        $('#answer_wave_mod_id').click(function() {
-                            alert(2);
-                        }
-
-                    </script>
                     <!--回答-气泡-语音模式 END-->
                     <?php endif;?>
 

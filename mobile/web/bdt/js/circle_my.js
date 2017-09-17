@@ -194,7 +194,6 @@ function downloadMoreData() {
 //进入圈子主页-分别进入圈子主页（免费圈子）或圈子资料页（收费圈子）
 function gotoHtml(joinStatus,id, obj){
 	//首先将当前页面的数据和状态保存下来，方便跳转回来保持状态
-	saveStatusBeforeJump();
 
     if(typeof obj != 'undefined'){
         setElementClickStyle(obj);

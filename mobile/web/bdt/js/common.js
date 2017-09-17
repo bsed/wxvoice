@@ -214,24 +214,76 @@ function getDateDiff(time){
     var dayC =diffValue/day;
     var hourC =diffValue/hour;
     var minC =diffValue/minute;
-    if(monthC>=1){
-        result="" + parseInt(monthC) + "月前";
+    //超过三天就直接显示日期
+    if(parseInt(dayC) <= 3){
+        if(dayC>=1){
+            result=""+ parseInt(dayC) +"天前";
+        }else if(hourC>=1){
+            result=""+ parseInt(hourC) +"小时前";
+        }else if(minC>=1){
+            result=""+ parseInt(minC) +"分钟前";
+        }else{
+            result="刚刚";
+        }
+    }else{
+        result= formatDateTime(time);
     }
-    else if(weekC>=1){
-        result="" + parseInt(weekC) + "周前";
-    }
-    else if(dayC>=1){
-        result=""+ parseInt(dayC) +"天前";
-    }
-    else if(hourC>=1){
-        result=""+ parseInt(hourC) +"小时前";
-    }
-    else if(minC>=1){
-        result=""+ parseInt(minC) +"分钟前";
-    }else
-        result="刚刚";
+
     return result;
 }
+//将时间戳转换成可读性的日期
+function formatDateTime(timeStamp) {
+    var date = new Date();
+    date.setTime(timeStamp * 1000);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    second = second < 10 ? ('0' + second) : second;
+    return y + '-' + m + '-' + d;
+    // return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+};
+
+// function getDateDiff(time){
+//     //将PHP的时间戳转成js的时间戳
+//     dateTimeStamp = new Date(parseInt(time) * 1000);
+//     var minute = 1000 * 60;
+//     var hour = minute * 60;
+//     var day = hour * 24;
+//     var halfamonth = day * 15;
+//     var month = day * 30;
+//     var now = new Date().getTime();
+//     var diffValue = now - dateTimeStamp;
+//     if(diffValue < 0){return;}
+//     var monthC =diffValue/month;
+//     var weekC =diffValue/(7*day);
+//     var dayC =diffValue/day;
+//     var hourC =diffValue/hour;
+//     var minC =diffValue/minute;
+//     if(dayC>=1){
+//         result=""+ parseInt(dayC) +"天前";
+//     }
+//     else if(hourC>=1){
+//         result=""+ parseInt(hourC) +"小时前";
+//     }
+//     else if(minC>=1){
+//         result=""+ parseInt(minC) +"分钟前";
+//     }else if(monthC>=1){
+//         result="" + parseInt(monthC) + "月前";
+//     }
+//     else if(weekC>=1){
+//         result="" + parseInt(weekC) + "周前";
+//     }
+//     else else
+//     result="刚刚";
+//     return result;
+// }
 //END
 
 // });

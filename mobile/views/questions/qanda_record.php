@@ -4,7 +4,7 @@
 <script type="text/javascript" src="../bdt/js/photoswipe.min.js"></script>
 <script type="text/javascript" src="../bdt/js/photoswipe-ui-default.js"></script>
 <script type="text/javascript" src="../bdt/js/picPop.js"></script>
-
+<script type="text/javascript" src="../bdt/js/answer_record.js"></script>
 <body class=" bg-greyfa">
 <div id="container" class="container">
     <div id="page">
@@ -188,8 +188,6 @@
 </div>
 <audio id="audio-mc" style="display:none;" preload="preload" src=""></audio>
 <div class="appui-gallery-swiper" id="js-gallery-swiper" style="display: none;">
-    <!--图片预览轮播-->
-    <!-- swiper-slide-visible swiper-slide-active -->
     <div class="swiper" style="cursor: -webkit-grab;">
         <div class="swiper-wrapper" id="swiper-wrapper">
         </div>
@@ -215,11 +213,11 @@
         <a id="configRefuse" type="button" class="refuse-sure fs28 fc-white bg-grey mt20">确定拒绝</a>
         <p id="refuseTips" class="refuse-reason fc-red mt5 fs28" style="display:none"></p>
         <!-- <p id="phone-emailError" class="refuse-reason fc-orange fs28" style="display:none;"></p> -->
-        <a id="closeID" class="refuse_dialog_close bg-white"><img src="../bdt/images/nav_icon_close1.png?v=20170209160748"></a>
+        <a id="closeID" class="refuse_dialog_close bg-white"><img src="../bdt/images/nav_icon_close1.png"></a>
     </div>
 </div>
 
-<script type="text/javascript" src="../bdt/js/answer_record.js"></script>
+
 <script>
     var mySwiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination', //索引class

@@ -65,7 +65,7 @@ $(document).ready(function() {
                 }else{
                     var postWhere = "";
                     var isReAns = 0;
-                    
+
                     var isAllowForward=0;
         			if($("#appuiOpenPublish")!=null && $("#appuiOpenPublish").length>0 && $("#appuiOpenPublish").is(".on")==true){
         				isAllowForward=1;
@@ -132,12 +132,7 @@ $(document).ready(function() {
     dataLoading("页面加载中...");
     }
     qaId = request("id");
-    userTest = getSessionUser();
     //判断是否自己是否是答主
-    if (userTest==null) {
-      $('.qanda-record').hide();
-      window.location.replace("qanda_detail.html?id="+qaId+"&typeId=4&from=1");
-    }
         $.each($("#chooseAnsWay div"), function(index, val) {
             $(this).on('click', function(event) {
                 event.preventDefault();
@@ -189,7 +184,7 @@ $(document).ready(function() {
     //    }
     // });
 
-    $('#textField').bind('propertychange input', function () {  
+    $('#textField').bind('propertychange input', function () {
        if($.trim($("#textField").val())==""){
             $('.send-answer').removeClass('bg-orange').addClass('bg-greyabc');
         }else{
@@ -272,7 +267,7 @@ function configwxShare(qaShow){
       wxShareFromUrlEx(wxShareTitle,wxShareSummary,wxFriendShareStr,"",insertImgType(userTest.headPic,3),defaultWeixinSharePicUrl,realUrl);
         }
     }
-    
+
     }else{
     if(index>0){
       realUrl = currUrl.substr(0,index);
@@ -445,7 +440,7 @@ function configQaDetail(qaShow){
     }else if(qaShow.status==5){
         status = "已过期";
     }
-	
+
 	//判断是否含有图片；
     var imgStr = "";
 	var resImgArr=null;//原提问是否包括图片
@@ -461,7 +456,7 @@ function configQaDetail(qaShow){
         };
     imgStrAdd =	'<div class="question-piclist" id="img_resImgArr_id">'+
                     imgStr+
-                '</div>';   
+                '</div>';
     };
 
 	if (qaShow.answerPic!=null&&qaShow.answerPic.length>0) {
@@ -480,7 +475,7 @@ function configQaDetail(qaShow){
   if ((qaShow.status==1||qaShow.status==5)&&qaShow.aStatus!=1) {
         refuseAnswerStr = '<a onclick="refuseAnswer()" class="fs24 fc-black456 ml20">拒绝回答</a>';
   }
-    
+
   //判断是否需要显示追加的问题
   // if (qaShow.addQuestion!=null&&qaShow.addQuestion.length>0&&(reAnswerStr==3||reAnswerStr==1)) {
   if (qaShow.addQuestion!=null&&qaShow.addQuestion.length>0) {
@@ -490,52 +485,52 @@ function configQaDetail(qaShow){
 
 		  lookOriginalQuestionStr = '<a class="fs24 fc-blue bg-greyfa mb10" id="lookOriginalQuestion" onClick="lookOriginalQuestion()">查看原问题</a>';
       firstContent = qaShow.addQuestion;
-		  var answerContentStr = ""; 
+		  var answerContentStr = "";
 		  if (qaShow.aStatus == 1) {
 				 if(qaShow.answerType==1){
 					tips = "免费收听";
 					$('#voice_state_time_id_1').text(qaShow.answerLen);
 					$('#voice_state_time_id_1').show();
-				answerContentStr =	'<div class="appui-qanda-answer" id="answer_wave_mod_id">' + 
+				answerContentStr =	'<div class="appui-qanda-answer" id="answer_wave_mod_id">' +
 										//<!--回答-语音voice-语音三种状态-免费free-限次time-收费pay-->
-										'<div id="voice_state_id" class="appui-qanda-answerstyle voice free">' + 
-											'<i></i>' + 
-											'<span class="appui_qanda-voice-wave">' + 
-												'<em class="wave1"></em>' + 
-												'<em class="wave2"></em>' + 
-												'<em class="wave3"></em>' + 
-											'</span>' + 
-											'<em class="tips" id="voice_state_text_id">免费播放</em>' + 
-											'<span class="appui_qanda-voice-wait" ></span>' + 
-										'</div>' + 
-										'<em class="appui-qanda-answer-time" id="voice_state_time_id_1">'+ qaShow.answerLen + '</em>' + 
+										'<div id="voice_state_id" class="appui-qanda-answerstyle voice free">' +
+											'<i></i>' +
+											'<span class="appui_qanda-voice-wave">' +
+												'<em class="wave1"></em>' +
+												'<em class="wave2"></em>' +
+												'<em class="wave3"></em>' +
+											'</span>' +
+											'<em class="tips" id="voice_state_text_id">免费播放</em>' +
+											'<span class="appui_qanda-voice-wait" ></span>' +
+										'</div>' +
+										'<em class="appui-qanda-answer-time" id="voice_state_time_id_1">'+ qaShow.answerLen + '</em>' +
                         '</div>';
 
 				}
 				else{
-			answerContentStr =	'<div class="pictext-info fs30" id="answer_picmod_mod_id" >' + 
-										'<p class="pictext-text fc-grey666" id="pictext_text_id">' + qaShow.answerText +'</p>' + 
-										imgStrAdd_answer +  
+			answerContentStr =	'<div class="pictext-info fs30" id="answer_picmod_mod_id" >' +
+										'<p class="pictext-text fc-grey666" id="pictext_text_id">' + qaShow.answerText +'</p>' +
+										imgStrAdd_answer +
 									'</div>' ;
 				}
 	     }
-         oldQuestionStr = 
-		 '<div class="old-quest-answer old-problem bg-white mt5" style="display:none;" id="oldQuestAnswer">' + 
+         oldQuestionStr =
+		 '<div class="old-quest-answer old-problem bg-white mt5" style="display:none;" id="oldQuestAnswer">' +
 						//<!--原问--可有图-->
-						'<div class="question-common">' + 
+						'<div class="question-common">' +
 							//<!--问题内容-->
-							'<div class="question-info fs30">' + 
-								'<span class="question-tag fc-blue fwb mr5">原问</span>' + 
-								'<p class="question-text fc-black" id="asker_content_id">'+qaShow.content+'</p>' + 
-							'</div>' + 
+							'<div class="question-info fs30">' +
+								'<span class="question-tag fc-blue fwb mr5">原问</span>' +
+								'<p class="question-text fc-black" id="asker_content_id">'+qaShow.content+'</p>' +
+							'</div>' +
 							//<!--问题图片-问题与回答中图片列表公用部分-->
-							imgStrAdd + 
-							'<div class="answer-time-statistic fs24 fc-grey666">' + 
-								'<span class="answer-time" id="answer_time_id_1">'+getDateDiff(qaShow.answerTime)+'</span>' + 
-								'<a class="reanswer-btn bg-greyfa fs24 fc-red ml20" id="reanswer_id_1" onclick="reAnswerFromZhuiWen()">重答</a>' + 
-								'<p class="answer-statistic"><span id="listen_times_id_1">'+qaShow.listenUserTimes+'人听过</span><span id ="agree_times_id_1">'+"赞" + qaShow.agreeTimes+'</span></p>' + 
-							'</div>' + 
-						'</div>' + 
+							imgStrAdd +
+							'<div class="answer-time-statistic fs24 fc-grey666">' +
+								'<span class="answer-time" id="answer_time_id_1">'+getDateDiff(qaShow.answerTime)+'</span>' +
+								'<a class="reanswer-btn bg-greyfa fs24 fc-red ml20" id="reanswer_id_1" onclick="reAnswerFromZhuiWen()">重答</a>' +
+								'<p class="answer-statistic"><span id="listen_times_id_1">'+qaShow.listenUserTimes+'人听过</span><span id ="agree_times_id_1">'+"赞" + qaShow.agreeTimes+'</span></p>' +
+							'</div>' +
+						'</div>' +
 						//<!--回答-气泡-语音模式-->
 						'<div class="answer-common bg-white" id="answer_main_id_1">'+
 							'<div class="answer-common-bg bg-greyfa">'+
@@ -560,7 +555,7 @@ function configQaDetail(qaShow){
       oldQuestionTime = qaShow.addTime;
       oldOrAddStr = "的提问";
       firstContent = qaShow.content;
-  }								
+  }
   if(qaShow.addQuestion!=null&&qaShow.addQuestion.length>0&&(reAnswerStr==3||reAnswerStr==1)){
     judgeZhuiwen = "追问";
 		firstContent =qaShow.addQuestion;
@@ -570,7 +565,7 @@ function configQaDetail(qaShow){
     judgeZhuiwen = "原问";
 		firstContent =qaShow.content;
 		$('#oldQuestAnswer').hide();
-		
+
 		// //判断是否出现拒绝回答
 		if ((qaShow.status==1||qaShow.status==5)&&qaShow.aStatus!=1) {
 			refuseAnswerStr = '<a onclick="refuseAnswer()" class="fs24 fc-black456 ml20">拒绝回答</a>';
@@ -579,7 +574,7 @@ function configQaDetail(qaShow){
 			refuseAnswerStr = '';
 		}
 		lookOriginalQuestionStr = '';
-  }							
+  }
   var doStr = '<div class="asker-price-status bg-white">'+
                   '<a class="asker-info" onclick="gotoUser_pageHtml('+qaShow.qustionUser.id+')">'+
                     '<span class="asker-headpic"><img id="asker_pic_id" src="'+insertImgType(qaShow.qustionUser.headPic, 3)+'"></span>'+
@@ -597,8 +592,8 @@ function configQaDetail(qaShow){
                   '</div>'+
                 '</div>'+
                 '<div class="question-common bg-white">'+
-                  '<div class="pictext-info fs30" id="answer_picmod_mod_id" >' + 
-                      '<span class="answer-tag fc-blue fwb mr5">'+judgeZhuiwen+'</span>' + 
+                  '<div class="pictext-info fs30" id="answer_picmod_mod_id" >' +
+                      '<span class="answer-tag fc-blue fwb mr5">'+judgeZhuiwen+'</span>' +
                       '<p class="fs32 fc-black pictext-text fc-grey666" id="pictext_text_id">' + firstContent +'</p>' +
                     '</div>'+
 					imgStrAdd+
@@ -620,7 +615,7 @@ function configQaDetail(qaShow){
       $("#price_line_id").hide();
       $("#price_coupon_id").hide();
   }
-  
+
   if (qaShow.status != 3 && qaShow.status != 4 && qaShow.status != 5) {
       if(qaShow.payPype == 2||qaShow.afee!=0){
           $(".problem-name").addClass("use_coupon");
@@ -657,8 +652,8 @@ function configQaDetail(qaShow){
 			$(this).toggleClass('on');
 		});
 	}
-	
-  
+
+
   // lookOriginalQuestion();
 }
 //重新回答问题
@@ -678,7 +673,7 @@ function refuseAnswer(){
     // isRefuse = 1;
     // friendTips("是否要拒绝回答这个问题？","取消","确定",2)
     var type = "";
-   
+
     $('#refuse_dialog').show();
     $('#closeID').click(function(){
         $('#refuse_dialog').hide();
@@ -708,14 +703,14 @@ function refuseAnswer(){
 }
 function refuseClick(type){
     $('#configRefuse').unbind("click").click(function(){
-	
+
         if ($(this).hasClass('bg-red')) {
             if (type==4) {
                 notes = $('#reasonTextarea').val();
                 var counter = $.trim(notes).length;
                 if (counter<2&&$("#refuseTips").is(":hidden")) {
                   $('#refuseTips').text("拒绝理由不得少于两个字");
-                  $('#refuseTips').show(300).delay(2000).hide(300); 
+                  $('#refuseTips').show(300).delay(2000).hide(300);
                 };
             }
 
@@ -738,18 +733,18 @@ function refuseClick(type){
                     }
                 }
             });
-            
+
         }
     });
 }
 function monitorCount(){
-    $('#reasonTextarea').bind('onpropertychange input', function () { 
+    $('#reasonTextarea').bind('onpropertychange input', function () {
         var counter = $('#reasonTextarea').val().length;
         if (counter>30) {
             this.value = this.value.substring(0, 30);
             if ($("#refuseTips").is(":hidden")) {
                 $('#refuseTips').text("您已经超过最大输入字数");
-                $('#refuseTips').show(300).delay(2000).hide(300); 
+                $('#refuseTips').show(300).delay(2000).hide(300);
             }
             return false;
         }
@@ -765,24 +760,22 @@ function monitorCount(){
 
 //重新回答；
 function reAnswerFunction(wxRecordId,curCount){
+    alert(2);
     var deviceTypeStr = 1;
     if (appType != 'h5' && !!appType) {
         deviceTypeStr = 3;
         curCount = Math.floor(curCount/100) + 1;
     }
     dataLoading("数据加载中...");
-     //dataLoadedError("数据错误");
     $.ajax({
         type: "post",
         url: reAnswer,
         dataType: "json",
         async: true,
-        //data:{"qaId":"id","deviceType":"1-weixin","url":"weixin时，输入微信音频上传返回的serverId","answerLen":"","isZhuiwen":"0-不是，1-是追问的重答"},
-        // data:{"qaId":"id","deviceType":"1-weixin","url":"weixin时，输入微信音频上传返回的serverId","answerLen":"","isZhuiwen":"0-不是，1-是追问的重答"}
         data:{"qaId":qaId,"deviceType":deviceTypeStr,"url":wxRecordId,"answerLen":curCount,"isZhuiwen":reAnswerStr},
         success: function(result) {
             clearToastDialog();
-            if (result.result == "success") {  
+            if (result.result == "success") {
                dataLoadedSuccess("重新回答问题成功");
                window.location.replace("qanda_detail.html?id="+qaId+"&typeId="+typeId);
             }else {
@@ -793,6 +786,7 @@ function reAnswerFunction(wxRecordId,curCount){
 }
 //首次回答成功 或者回答追问
 function postAnswerOfQuestionRequest(wxRecordId,curCount) {
+    alert(1);
     var urlStr = "";
     var deviceTypeStr = 1;
     if (appType != 'h5' && !!appType) {
@@ -881,7 +875,7 @@ function wxShare1() {
                     wx.onVoiceRecordEnd({
                         complete: function(res) {
                             //alert("异常错误"+res);
-                            recordIdArray.splice(currentVoiceIndex, 0, res.localId);  
+                            recordIdArray.splice(currentVoiceIndex, 0, res.localId);
                              // clearInterval(recording);//暂停录音----清除录音定时器
                             // if(recordPercent!=360){
                             //     stopRecordButton();
@@ -946,7 +940,7 @@ function startRecord1(){
 function stopRecord1(){
     wx.stopRecord({
         success: function(res) {
-            recordIdArray.splice(currentVoiceIndex, 0, res.localId);  
+            recordIdArray.splice(currentVoiceIndex, 0, res.localId);
             stopRecordButton();
         },
         fail: function(res) {
@@ -989,7 +983,7 @@ function loadVoice1(i){
         isShowProgressTips: 1, // 默认为1，显示进度提示
             success: function (res) {
                 var serverId = res.serverId; // 返回音频的服务器端ID
-                wxRecordId += serverId+','; 
+                wxRecordId += serverId+',';
                 i++;
                 if (i < recordIdArray.length) {
                     loadVoice1(i);
@@ -1096,7 +1090,7 @@ function initVoice(){
     //暂停播放
     $('.play-stop').click(function(e) {
         pauseVoice1(recordIdArray[currentVoiceIndex]);
-    }); 
+    });
 
     //重录
     $('#chonglu-btn').click(function(e) {
@@ -1128,7 +1122,7 @@ function initVoice(){
         }else{
             dataLoadedError("您已经无法进行加录");
         }
-    });        
+    });
 
     //发送回答
     $('.send-answer').click(function(e) {
@@ -1208,7 +1202,7 @@ function initVoice(){
                     }
                 });
             }
-            
+
         }
     });
 }
@@ -1243,7 +1237,7 @@ function stopRecordButton(){
     //暂停录音时将已录制的时长传递并换算传递给 ---单次录音时长
     addRecordTime = Math.floor(recordPercent/6);
     //添加动态秒数
-    recordPercentArray.splice(currentVoiceIndex, 0, recordPercent); 
+    recordPercentArray.splice(currentVoiceIndex, 0, recordPercent);
     var leftAndWidth = addRecordTime/60*100+'%';
     $('#answer-log-item'+currentVoiceIndex+' i').css('left',leftAndWidth);
     $('#answer-log-item'+currentVoiceIndex+' em').css('width',leftAndWidth);
@@ -1297,7 +1291,7 @@ function recordPercentFun()
         // if (recordPercentArray.length==5) {
         //    $('#addlu-btn').fadeOut();
         // }else{
-        //    $('#addlu-btn').fadeIn();//显示----加录按钮 
+        //    $('#addlu-btn').fadeIn();//显示----加录按钮
         // }
         // addRecordTime = Math.floor(recordPercent/6);
 
@@ -1307,12 +1301,12 @@ function recordPercentFun()
     else if(recordPercent>180){
         $('.record-percent-circle').addClass('clip-auto');
         $('.right-record-percent').removeClass('wth0');
-    }  
+    }
     $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+recordPercent+"deg)"},1000/6);
-    recordPercent = recordPercent + 1 ; 
+    recordPercent = recordPercent + 1 ;
     $('.time-show').html(Math.floor(recordPercent/6) + 's');
-} 
-                 
+}
+
 //播放录音计时
 function playPercentFun()
 {
@@ -1331,17 +1325,17 @@ function playPercentFun()
         if (recordPercentArray.length==5) {
            $('#addlu-btn').fadeOut();
         }else{
-           $('#addlu-btn').fadeIn();//显示----加录按钮 
+           $('#addlu-btn').fadeIn();//显示----加录按钮
         }
     }else if(playPercent>180)
     {
         $('.play-percent-circle').addClass('clip-auto');
         $('.right-play-percent').removeClass('wth0');
-    }  
+    }
     $('.left-play-percent').stop().css({"-webkit-transform":"rotate("+playPercent+"deg)"},1000);
-    playPercent = playPercent + 1 ; 
+    playPercent = playPercent + 1 ;
     $('.time-show').html(Math.floor(recordPercent/6)-Math.floor(playPercent/6) + 's');//提示----信息更改
-}                
+}
 
 //点击各个voice方法
 function recordButton(index){
@@ -1376,7 +1370,7 @@ function recordButton(index){
             }else{
                 $('.record-percent-circle').removeClass('clip-auto');
                 $('.right-record-percent').addClass('wth0');
-            }  
+            }
             $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+recordPercent+"deg)"},1000/6);
             $('.time-show').html(Math.floor(recordPercent/6) + 's');
             $('#chonglu-btn').fadeIn();//显示----重录按钮
@@ -1399,317 +1393,6 @@ function recordButton(index){
         }
     }
 }
-/*window.onbeforeunload=function(){
-    if (appType==isApp) {
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction,  "SpeechOFFSynthesize", "del", [0]);
-    };
-}*/
-
-/*
-//app客户端 录音操作
-var appCurRecordSeconds = 0; //当前录音时长
-var appCurPlayingSeconds = 0;//当前播放时长
-var appCurrentVoiceStr = "";
-var appTolMaxRecordCount = 600000; //录音最长时间
-var playstate = false;
-function initAppRecordUI(){
-    var oHead = document.getElementsByTagName("head")[0];
-    var oScript = document.createElement("script");        
-    var appVersions = readClientSession("appVersions");
-     if (appVersions.indexOf("ios")>-1) {
-            oScript.src = "js/webApp/ios/cordova.js";
-        }else{
-            oScript.src = "js/webApp/cordova.js";
-        }
-    oHead.appendChild(oScript);
-    $('#appMessageVoiceId').show();
-    //app录音
-    $('#appRecordBtnId').click(function(e) {
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction,  "SpeechOFFSynthesize", "start", [0]);
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "start", [0]);
-    });
-    //停止录音
-    $('.record-stop').click(function(e) {
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction,  "SpeechOFFSynthesize", "stop", [0]);
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "pause", [0]);
-    });
-    // 播放录音与暂停录音
-    $("#appPlay-btn").click(function(){
-        if($('#appPlay-btn').attr("state") == "false") return false;
-        if($("#appPlay-btn > img").is(':hidden')){
-            cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "SpeechOFFSynthesize", "pause", [0]);
-            cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "playPause", [0]);
-        }else{
-            cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "SpeechOFFSynthesize", "open", [0]);
-            if(playstate){
-                cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "resum", [0]);
-            }else{
-                cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "play", [0]);
-            }
-        }
-    }); 
-    //重录
-    $('#appChonglu-btn').click(function(e) {
-        if($('#appChonglu-btn').attr("state") == "false") return false;
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction,  "SpeechOFFSynthesize", "del", [0]);
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "restart", [0]);
-    });
-
-    //发送回答
-    $('.send-answer').unbind('click').click(function(e) {
-      if ($('.send-answer').hasClass("bg-greyabc")) {
-        return false;
-      };
-        if (isVoiceAns == 0) {
-            // alert("是不是语音"+isVoiceAns);
-            if (appType==isApp) {
-                // totleSeconds = $('.time-show').text();
-                var s = Math.floor(appCurRecordSeconds/100) + 1;
-                friendTips("您总共录了"+s+"s,是否确定发送？","取消","确定",3);
-            }
-        }else{
-            var postWhere = "";
-            var isReAns = 0;
-            //reAnswerStr 0 重答原问题 1重答追问，2回答原问题 ,3回答追问
-            if (reAnswerStr == 2 || reAnswerStr == 3) {
-                if (reAnswerStr == 2) {
-                    postWhere = postAnswer;
-                }else if (reAnswerStr == 3) {
-                    postWhere = postAnswerForZhuiwen;
-                }
-                dataLoading("图文回答提交中");
-                $.ajax({
-                    url: postWhere,
-                    type: 'post',
-                    dataType: 'json',
-                    data: {"qaId":qaId,"deviceType":2,"url":"","answerLen":"","content":$("#textField").val(),"pics":pics},
-                    success: function(result){
-                        clearToastDialog();
-                        if (result.result=="success") {
-                            dataLoadedSuccess("提交成功!");
-                            window.location.replace("qanda_detail.html?id="+qaId+"&typeId="+typeId);
-                        }else{
-                            dataLoadedError(result.message);
-                        }
-                    }
-                });
-            }else if(reAnswerStr == 1 || reAnswerStr == 0){
-                postWhere = reAnswer;
-                isReAns = reAnswerStr;
-                $.ajax({
-                    url: postWhere,
-                    type: 'post',
-                    dataType: 'json',
-                    data: {"qaId":qaId,"deviceType":2,"url":"","isZhuiwen":isReAns,"answerLen":"","content":$("#textField").val(),"pics":pics},
-                    success: function(result){
-                        if (result.result=="success") {
-                            dataLoadedSuccess("提交成功!");
-                            window.location.replace("qanda_detail.html?id="+qaId+"&typeId="+typeId);
-                        }else{
-                            dataLoadedError(result.message);
-                        }
-                    }
-                });
-            }
-
-        }
-    });
-
-    // 继续录音
-    $("#continue-record").click(function(){
-        if($('#continue-record').attr("state") == "false") return false;
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction,  "SpeechOFFSynthesize", "add", [""]);
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction, "RecorderPlugin", "start", [0]);
-    })
-}
-function reStartAppRecordUI(){
-    if($('#appChonglu-btn').attr("state") == "false") return false;
-    isReRecordingBool = 1;
-    intAppRecordPlayFunc();//录音控件初始化
-    $('.record-tips').stop().text('点击开始录音，每次最多可录'+appTolMaxRecordCount/1000+'秒');//提示----信息更改
-    addRecordTime = 0 ;//重录和发送回答后单词录音时长置为0
-}
-function startAppRecordUI(){
-    // alert("开始录音");
-    isRecordingBool = 1;
-    $('#appRecordBtnId').hide();//隐藏----录音按钮
-    $('#appRecord-play').show();//显示----录音&播放按钮
-    $('.record-stop').show();
-    //清除录音定时器
-    recordPercent = 0;
-    appCurRecordSeconds = 0;
-    $('#recordPercent').removeClass('clip-auto');
-    $('#right-record-percent').addClass('wth0');
-    // $('#left-record-percent').stop().css({"-webkit-transform":"rotate("+recordPercent+"deg)"},1200);
-    clearInterval(recording);//暂停录音----清除录音定时器
-    //初始化录音进程容器
-    $('.record-percent-circle').stop().css('opacity','1');//将录音进度跳改变透明度1
-    $('.play-percent-circle').hide();//隐藏----播放录音进度条
-    $('#continue-record').hide();//隐藏----播放录音进度条
-    //$('.time-show').show();//显示----录音时长
-    $('.record-tips').stop().text('点击可暂停录音');//提示----信息更改
-    //开启录音计时
-    recording = setInterval("appRecordPercentFun()",10);
-    $('#appRecordStop').show();//显示----暂停录音按钮
-}
-
-// 继续录音
-function continueAppTranscribe(){
-    //开启录音计时
-    recording = setInterval("appRecordPercentFun()",10);
-    $('.record-percent-circle').stop().css('opacity','1');//将录音进度改变透明度0.3
-    $('.play-percent-circle').stop().css('opacity','0.3');//将录音进度改变透明度0.3
-    $('.record-stop').show(); //显示----暂停录音按钮
-    $('#continue-record').hide(); //隐藏----继续录音按钮
-    $('#appPlay-btn').css('opacity', '0.3').attr("state", "false"); // 透明度设置并设置状态----播放按钮
-    $('#appChonglu-btn').css('opacity', '0.3').attr("state", "false"); // 透明度设置并设置状态----重录按钮
-}
-
-//录音计时
-function appRecordPercentFun()
-{
-    //每次录音满60s时停止录音
-    if(recordPercent.toFixed(1)==360.0||appCurRecordSeconds==appTolMaxRecordCount){
-        cordova.exec(callAppsSuccessFunction, callAppsFailFunction,  "SpeechOFFSynthesize", "stop", [0]);
-        stopAppRecordUI();
-        return;
-    }
-    else if(recordPercent>180.0){
-        $('.record-percent-circle').addClass('clip-auto');
-        $('.right-record-percent').removeClass('wth0');
-    }  
-    appCurRecordSeconds++;
-    recordPercent = parseFloat(recordPercent) + 0.006;
-    $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+recordPercent+"deg)"},1000);
-    var m = Math.floor(appCurRecordSeconds/6000)>9?Math.floor(appCurRecordSeconds/6000):'0'+Math.floor(appCurRecordSeconds/6000);
-    var s = Math.floor(appCurRecordSeconds%6000/100)>9?Math.floor(appCurRecordSeconds%6000/100):'0'+Math.floor(appCurRecordSeconds%6000/100);
-    var S = appCurRecordSeconds%100>9?appCurRecordSeconds%100:'0' + appCurRecordSeconds%100;
-    var str = m.toString() +　':' + s.toString() + '.' + S.toString();
-    $('.time-show').html(str);
-} 
-function stopAppRecordUI(){
-    isRecordingBool = 0;
-    clearInterval(recording);//暂停录音----清除录音定时器
-    $('.stop-btn').show();//显示----录音按钮
-    $('.play-btn').show();//显示----播放录音按钮
-    $('.record-stop').hide();//隐藏----暂停录音按钮
-    //初始化录音播放进程容器
-    $('.record-percent-circle').stop().css('opacity','0.3');//将录音进度改变透明度0.3
-    $('.play-percent-circle').show();//显示----播放录音进度条
-    $('.record-tips').stop().text('重录、加录、试听或者发送');//提示----信息更改
-    //其他操作按钮初始化
-    $('#appChonglu-btn').fadeIn();//显示----重录按钮
-    $('.send-answer').removeClass('bg-greyabc').addClass('bg-orange');//发送回答变成可操作状态
-    $('#appPlay-btn').css('opacity', '1').attr("state", "true"); // 透明度设置并设置状态----播放按钮
-    $('#appChonglu-btn').css('opacity', '1').attr("state", "true"); // 透明度设置并设置状态----重录按钮
-}
-function startAppPlayVoiceUI(){
-    // dataLoadedError("播放语音的UI");
-    clearInterval(playing);//暂停播放----清除播放录音定时器
-    $('#continue-record').css('opacity', '0.3').attr("state", "false");//隐藏继续录制按钮
-    $('.record-tips').stop().text('暂停播放');//提示----信息更改
-    $('#appChonglu-btn').css('opacity', '0.3').attr("state", "false");//隐藏----重录按钮
-    $('#appPlay-btn img').hide();
-    $('#appPlay-btn span').show();
-    //判断上次播放是否已全部播完，已播放完则重新播放，未播放完则继续播
-    if(playPercent >= recordPercent)
-    {
-        playPercent = 0 ;
-        $('.left-play-percent').stop().css({"-webkit-transform":"rotate("+playPercent+"deg)"},1000);
-    }
-    playing = setInterval("appPlayPercentFun()",10);
-}
-//发布按钮点击接受语音地址
-function sendAppFileVoice(voiceFile,status){
-    // status 0成功 1失败
-    if (status==1) {
-        dataLoadedError("发布语音失败，请重新发布");
-    }else{
-        if (reAnswerStr==2||reAnswerStr==3) {
-            postAnswerOfQuestionRequest(voiceFile,appCurRecordSeconds);
-        }else{
-            reAnswerFunction(voiceFile,appCurRecordSeconds);
-        };
-    }
-}
-//播放录音计时
-function appPlayPercentFun()
-{
-    playstate = true;
-    appCurPlayingSeconds++;
-    //dataLoadedError(recordPercent);
-    //判断是否播放完-是则停止播放
-    if(playPercent>=recordPercent)
-    {
-        playstate = false;
-        playPercent=0;
-        appCurPlayingSeconds = 0;
-        clearInterval(playing);//暂停播放
-        $('#continue-record').css('opacity', '1').attr("state", "true");//显示继续录制按钮
-        $('#appPlay-btn > img').show(); // 显示播放按钮
-        $('#appPlay-btn > span').hide(); // 隐藏暂停按钮
-        $('.play-percent-circle').removeClass('clip-auto');
-        $('.right-play-percent').addClass('wth0');
-        $('#appChonglu-btn').css('opacity', '1').attr("state", "true");//显示----重录按钮
-        $('.record-tips').stop().text('重录、试听或者发送');//提示----信息更改
-        $('.left-play-percent').stop().css({"-webkit-transform":"rotate("+playPercent+"deg)"},1000);
-        return;
-    }else if(playPercent>180)
-    {
-        $('.play-percent-circle').addClass('clip-auto');
-        $('.right-play-percent').removeClass('wth0');
-    }  
-    playPercent = playPercent + 0.006;
-    $('.left-play-percent').stop().css({"-webkit-transform":"rotate("+playPercent+"deg)"},1000);
-    var m = Math.floor(appCurPlayingSeconds/6000)>9?Math.floor(appCurPlayingSeconds/6000):'0'+Math.floor(appCurPlayingSeconds/6000);
-    var s = Math.floor(appCurPlayingSeconds%6000/100)>9?Math.floor(appCurPlayingSeconds%6000/100):'0'+Math.floor(appCurPlayingSeconds%6000/100);
-    var S = appCurPlayingSeconds%100>9?appCurPlayingSeconds%100:'0' + appCurPlayingSeconds%100;
-    var str = m.toString() + ":" + s.toString() + "." + S.toString();
-    $('.time-show').html(str);//提示----信息更改
-}     
-//暂停播放录音
-function pauseAppPlayVoiceUI(){
-    $('#appChonglu-btn').fadeIn();//显示----重录按钮
-    $('#continue-record').css('opacity', '1').attr("state", "true");//显示继续录制按钮
-    $('#appChonglu-btn').css('opacity', '1').attr("state", "true");//显示重新录制按钮
-    $('#appPlay-btn > img').show(); // 显示播放按钮
-    $('#appPlay-btn > span').hide(); // 隐藏暂停按钮
-    $('.record-tips').stop().text('重录、试听或者发送');//提示----信息更改
-    clearInterval(playing);//暂停播放----清除播放录音定时器
-}
-
-//录音控件初始化
-function intAppRecordPlayFunc()
-{
-    //回到初始状态-只有录音按钮可点击
-    $('.time-show').html('00:00.00');//隐藏----录音时长
-    $('#appChonglu-btn').css('opacity', '0.3').attr("state", "false");//隐藏----重录按钮
-    $('#appRecord-play').hide();//隐藏----录音和播放控制按钮容器
-    $('.record-stop').hide();//隐藏----暂停录音按钮
-    $('.play-start').hide();//隐藏----播放录音按钮
-    $('.play-stop').hide();//隐藏----暂停播放按钮
-    $('#appPlay-btn').css('opacity', '0.3').attr("state", "false");//隐藏----播放录音按钮
-    $('.stop-btn').hide();//隐藏----隐藏继续录音按钮
-    // $('.send-answer').removeClass('bg-orange').addClass('bg-greyabc');//发送回答变成不可操作状态
-    $('#appRecordBtnId').show();//显示----录音按钮
-    //清除播放录音定时器
-    playPercent=0;
-    $('.play-percent-circle').removeClass('clip-auto');
-    $('.right-play-percent').addClass('wth0');
-    $('.left-play-percent').stop().css({"-webkit-transform":"rotate("+playPercent+"deg)"},1000);
-    clearInterval(playing);
-
-    //清除录音定时器
-    recordPercent = 0;
-    $('.record-percent-circle').removeClass('clip-auto');
-    $('.right-record-percent').addClass('wth0');
-    $('.left-record-percent').stop().css({"-webkit-transform":"rotate("+recordPercent+"deg)"},100);
-    clearInterval(recording);
-
-    appCurRecordSeconds = 0; //当前录音时长
-    appCurPlayingSeconds = 0;//当前播放时长
-}*/
-
 //发布按钮点击接受语音地址
 function sendAppFileVoice(voiceFile,status){
     // status 0成功 1失败

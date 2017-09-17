@@ -176,7 +176,7 @@ class htmls
                 $hour=date('h',$time);
                 return "前天".$hour.'点';
             }else{//三天前
-                return date('m月d号',$time);
+                return date('Y年m月d号',$time);
             }
         }
     }

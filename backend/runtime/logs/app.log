@@ -36142,3 +36142,649 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1505543762.0607
     'REQUEST_TIME' => 1505543762
 ]
+2017-09-17 15:16:43 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+    in /www/wwwroot/bdt/backend/views/layouts/main.php:54
+    in /www/wwwroot/bdt/backend/controllers/SiteController.php:93
+2017-09-17 15:16:43 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+2017-09-17 15:16:43 [223.72.91.243][1][-][info][application] $_COOKIE = [
+    'advanced-backend' => '0gbt5747m8eo9lsrkq7kifa522'
+    '_csrf-backend' => '\".8ùõâœ¾¥àž5ÞŽà3òÇ6X‹Õÿ¿,™'
+    '_identity-backend' => '[1,\"_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb\",2592000]'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'proxy-nokeepalive' => '1'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,en;q=0.6'
+    'HTTP_COOKIE' => 'advanced-backend=0gbt5747m8eo9lsrkq7kifa522; _csrf-backend=%22.8%8D%F9%F5%E2%17%9C%0F%BE%90%A5%E0%9E5%DE%8E%E03%F2%C76X%8B%D5%FF%BF%16%2C%99%15; _identity-backend=%5B1%2C%22_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb%22%2C2592000%5D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '223.72.91.243'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '20784'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505632603.4603
+    'REQUEST_TIME' => 1505632603
+]
+2017-09-17 15:16:43 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+    in /www/wwwroot/bdt/backend/views/layouts/main.php:54
+    in /www/wwwroot/bdt/backend/controllers/IndexController.php:50
+2017-09-17 15:16:43 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+2017-09-17 15:16:43 [223.72.91.243][1][-][info][application] $_COOKIE = [
+    '_csrf-backend' => '\".8ùõâœ¾¥àž5ÞŽà3òÇ6X‹Õÿ¿,™'
+    'advanced-backend' => 'rvb4f1olt8r5caei2g4it1bh80'
+    '_identity-backend' => '[1,\"_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb\",2592000]'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'REDIRECT_STATUS' => '200'
+    'proxy-nokeepalive' => '1'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://gola.emifo.top/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,en;q=0.6'
+    'HTTP_COOKIE' => '_csrf-backend=%22.8%8D%F9%F5%E2%17%9C%0F%BE%90%A5%E0%9E5%DE%8E%E03%F2%C76X%8B%D5%FF%BF%16%2C%99%15; advanced-backend=rvb4f1olt8r5caei2g4it1bh80; _identity-backend=%5B1%2C%22_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb%22%2C2592000%5D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '223.72.91.243'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '20802'
+    'REDIRECT_URL' => '/index/welcome.html'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/index/welcome.html'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505632603.8365
+    'REQUEST_TIME' => 1505632603
+]
+2017-09-17 15:16:45 [223.72.91.243][1][rvb4f1olt8r5caei2g4it1bh80][error][yii\web\HttpException:404] exception 'yii\web\NotFoundHttpException' with message 'é¡µé¢æœªæ‰¾åˆ°ã€‚' in /www/wwwroot/bdt/vendor/yiisoft/yii2/web/Request.php:195
+Stack trace:
+#0 /www/wwwroot/bdt/vendor/yiisoft/yii2/web/Application.php(82): yii\web\Request->resolve()
+#1 /www/wwwroot/bdt/vendor/yiisoft/yii2/base/Application.php(379): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 /www/wwwroot/bdt/backend/web/index.php(19): yii\base\Application->run()
+#3 {main}
+2017-09-17 15:16:45 [223.72.91.243][1][rvb4f1olt8r5caei2g4it1bh80][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+    in /www/wwwroot/bdt/backend/views/layouts/main.php:54
+2017-09-17 15:16:45 [223.72.91.243][1][rvb4f1olt8r5caei2g4it1bh80][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+2017-09-17 15:16:45 [223.72.91.243][1][rvb4f1olt8r5caei2g4it1bh80][info][application] $_COOKIE = [
+    '_csrf-backend' => '\".8ùõâœ¾¥àž5ÞŽà3òÇ6X‹Õÿ¿,™'
+    'advanced-backend' => 'rvb4f1olt8r5caei2g4it1bh80'
+    '_identity-backend' => '[1,\"_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb\",2592000]'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'REDIRECT_STATUS' => '200'
+    'proxy-nokeepalive' => '1'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    'HTTP_ACCEPT' => 'image/webp,image/apng,image/*,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://gola.emifo.top/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,en;q=0.6'
+    'HTTP_COOKIE' => '_csrf-backend=%22.8%8D%F9%F5%E2%17%9C%0F%BE%90%A5%E0%9E5%DE%8E%E03%F2%C76X%8B%D5%FF%BF%16%2C%99%15; advanced-backend=rvb4f1olt8r5caei2g4it1bh80; _identity-backend=%5B1%2C%22_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb%22%2C2592000%5D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '223.72.91.243'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '20821'
+    'REDIRECT_URL' => '/favicon.ico'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/favicon.ico'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505632605.2074
+    'REQUEST_TIME' => 1505632605
+]
+2017-09-17 15:16:47 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+    in /www/wwwroot/bdt/backend/views/layouts/main.php:54
+    in /www/wwwroot/bdt/backend/controllers/ExpertsController.php:143
+2017-09-17 15:16:47 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+2017-09-17 15:16:46 [223.72.91.243][1][-][info][application] $_COOKIE = [
+    '_csrf-backend' => '\".8ùõâœ¾¥àž5ÞŽà3òÇ6X‹Õÿ¿,™'
+    'advanced-backend' => 'rvb4f1olt8r5caei2g4it1bh80'
+    '_identity-backend' => '[1,\"_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb\",2592000]'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'REDIRECT_STATUS' => '200'
+    'proxy-nokeepalive' => '1'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://gola.emifo.top/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,en;q=0.6'
+    'HTTP_COOKIE' => '_csrf-backend=%22.8%8D%F9%F5%E2%17%9C%0F%BE%90%A5%E0%9E5%DE%8E%E03%F2%C76X%8B%D5%FF%BF%16%2C%99%15; advanced-backend=rvb4f1olt8r5caei2g4it1bh80; _identity-backend=%5B1%2C%22_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb%22%2C2592000%5D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '223.72.91.243'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '20823'
+    'REDIRECT_URL' => '/experts/apply.html'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/experts/apply.html'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505632606.9544
+    'REQUEST_TIME' => 1505632606
+]
+2017-09-17 15:16:50 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+    in /www/wwwroot/bdt/backend/views/layouts/main.php:54
+    in /www/wwwroot/bdt/backend/controllers/ExpertsController.php:106
+2017-09-17 15:16:50 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+2017-09-17 15:16:50 [223.72.91.243][1][-][info][application] $_GET = [
+    'id' => '30'
+]
+
+$_COOKIE = [
+    '_csrf-backend' => '\".8ùõâœ¾¥àž5ÞŽà3òÇ6X‹Õÿ¿,™'
+    'advanced-backend' => 'rvb4f1olt8r5caei2g4it1bh80'
+    '_identity-backend' => '[1,\"_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb\",2592000]'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'REDIRECT_STATUS' => '200'
+    'proxy-nokeepalive' => '1'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://gola.emifo.top/experts/apply.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,en;q=0.6'
+    'HTTP_COOKIE' => '_csrf-backend=%22.8%8D%F9%F5%E2%17%9C%0F%BE%90%A5%E0%9E5%DE%8E%E03%F2%C76X%8B%D5%FF%BF%16%2C%99%15; advanced-backend=rvb4f1olt8r5caei2g4it1bh80; _identity-backend=%5B1%2C%22_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb%22%2C2592000%5D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '223.72.91.243'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '20824'
+    'REDIRECT_URL' => '/experts/update.html'
+    'REDIRECT_QUERY_STRING' => 'id=30'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=30'
+    'REQUEST_URI' => '/experts/update.html?id=30'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505632610.5365
+    'REQUEST_TIME' => 1505632610
+]
+2017-09-17 15:17:07 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+    in /www/wwwroot/bdt/backend/views/layouts/main.php:54
+    in /www/wwwroot/bdt/backend/controllers/ExpertsController.php:143
+2017-09-17 15:17:07 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+2017-09-17 15:17:07 [223.72.91.243][1][-][info][application] $_COOKIE = [
+    '_csrf-backend' => '\".8ùõâœ¾¥àž5ÞŽà3òÇ6X‹Õÿ¿,™'
+    'advanced-backend' => 'rvb4f1olt8r5caei2g4it1bh80'
+    '_identity-backend' => '[1,\"_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb\",2592000]'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'REDIRECT_STATUS' => '200'
+    'proxy-nokeepalive' => '1'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://gola.emifo.top/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,en;q=0.6'
+    'HTTP_COOKIE' => '_csrf-backend=%22.8%8D%F9%F5%E2%17%9C%0F%BE%90%A5%E0%9E5%DE%8E%E03%F2%C76X%8B%D5%FF%BF%16%2C%99%15; advanced-backend=rvb4f1olt8r5caei2g4it1bh80; _identity-backend=%5B1%2C%22_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb%22%2C2592000%5D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '223.72.91.243'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '20834'
+    'REDIRECT_URL' => '/experts/apply.html'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/experts/apply.html'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505632627.5073
+    'REQUEST_TIME' => 1505632627
+]
+2017-09-17 15:17:11 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+    in /www/wwwroot/bdt/backend/views/layouts/main.php:54
+    in /www/wwwroot/bdt/backend/controllers/ExpertsController.php:106
+2017-09-17 15:17:11 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+2017-09-17 15:17:11 [223.72.91.243][1][-][info][application] $_GET = [
+    'id' => '31'
+]
+
+$_COOKIE = [
+    '_csrf-backend' => '\".8ùõâœ¾¥àž5ÞŽà3òÇ6X‹Õÿ¿,™'
+    'advanced-backend' => 'rvb4f1olt8r5caei2g4it1bh80'
+    '_identity-backend' => '[1,\"_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb\",2592000]'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'REDIRECT_STATUS' => '200'
+    'proxy-nokeepalive' => '1'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://gola.emifo.top/experts/apply.html'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,en;q=0.6'
+    'HTTP_COOKIE' => '_csrf-backend=%22.8%8D%F9%F5%E2%17%9C%0F%BE%90%A5%E0%9E5%DE%8E%E03%F2%C76X%8B%D5%FF%BF%16%2C%99%15; advanced-backend=rvb4f1olt8r5caei2g4it1bh80; _identity-backend=%5B1%2C%22_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb%22%2C2592000%5D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '223.72.91.243'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '20836'
+    'REDIRECT_URL' => '/experts/update.html'
+    'REDIRECT_QUERY_STRING' => 'id=31'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=31'
+    'REQUEST_URI' => '/experts/update.html?id=31'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505632631.8397
+    'REQUEST_TIME' => 1505632631
+]
+2017-09-17 15:17:33 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+2017-09-17 15:17:33 [223.72.91.243][1][-][info][application] $_GET = [
+    'id' => '31'
+]
+
+$_POST = [
+    'Experts' => [
+        'member_id' => '69'
+        'honor' => 'æˆ‘æ˜¯ç§å‹Ÿä¸€å“¥'
+        'des' => 'æœ‰ä»€ä¹ˆé—®é¢˜éƒ½å¯ä»¥ç›´æŽ¥é—®æˆ‘ï¼Œä¸“ä¸šé€ è½®å­ï¼Œå¼€é»‘æŠ¢å‰æŽ’ï¼Œè®¡ç®—æœºä¸“ä¸š'
+        'price' => '1.00'
+        'open' => '0'
+        'type' => '0'
+        'vip' => '1'
+    ]
+]
+
+$_COOKIE = [
+    '_csrf-backend' => '\".8ùõâœ¾¥àž5ÞŽà3òÇ6X‹Õÿ¿,™'
+    'advanced-backend' => 'rvb4f1olt8r5caei2g4it1bh80'
+    '_identity-backend' => '[1,\"_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb\",2592000]'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'REDIRECT_STATUS' => '200'
+    'proxy-nokeepalive' => '1'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '470'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ORIGIN' => 'http://gola.emifo.top'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://gola.emifo.top/experts/update.html?id=31'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,en;q=0.6'
+    'HTTP_COOKIE' => '_csrf-backend=%22.8%8D%F9%F5%E2%17%9C%0F%BE%90%A5%E0%9E5%DE%8E%E03%F2%C76X%8B%D5%FF%BF%16%2C%99%15; advanced-backend=rvb4f1olt8r5caei2g4it1bh80; _identity-backend=%5B1%2C%22_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb%22%2C2592000%5D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '223.72.91.243'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '20848'
+    'REDIRECT_URL' => '/experts/update.html'
+    'REDIRECT_QUERY_STRING' => 'id=31'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'id=31'
+    'REQUEST_URI' => '/experts/update.html?id=31'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505632653.3143
+    'REQUEST_TIME' => 1505632653
+]
+2017-09-17 15:17:33 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+    in /www/wwwroot/bdt/backend/views/layouts/main.php:54
+    in /www/wwwroot/bdt/backend/controllers/ExpertsController.php:106
+2017-09-17 15:17:33 [223.72.91.243][1][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 223.72.91.243
+2017-09-17 15:17:33 [223.72.91.243][1][-][info][application] $_GET = [
+    'id' => '31'
+]
+
+$_COOKIE = [
+    '_csrf-backend' => '\".8ùõâœ¾¥àž5ÞŽà3òÇ6X‹Õÿ¿,™'
+    'advanced-backend' => 'rvb4f1olt8r5caei2g4it1bh80'
+    '_identity-backend' => '[1,\"_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb\",2592000]'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'REDIRECT_STATUS' => '200'
+    'proxy-nokeepalive' => '1'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://gola.emifo.top/experts/update.html?id=31'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,en;q=0.6'
+    'HTTP_COOKIE' => '_csrf-backend=%22.8%8D%F9%F5%E2%17%9C%0F%BE%90%A5%E0%9E5%DE%8E%E03%F2%C76X%8B%D5%FF%BF%16%2C%99%15; advanced-backend=rvb4f1olt8r5caei2g4it1bh80; _identity-backend=%5B1%2C%22_QWh8hXmUyfhAVz4A_0WUZLGdZW9crRb%22%2C2592000%5D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '223.72.91.243'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '20849'
+    'REDIRECT_URL' => '/experts/update.html'
+    'REDIRECT_QUERY_STRING' => 'id=31'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=31'
+    'REQUEST_URI' => '/experts/update.html?id=31'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505632653.5298
+    'REQUEST_TIME' => 1505632653
+]
+2017-09-17 16:11:10 [106.11.242.242][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 106.11.242.242
+2017-09-17 16:11:10 [106.11.242.242][-][-][info][application] $_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/'
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'proxy-nokeepalive' => '1'
+    'HTTP_ACCEPT_ENCODING' => 'gzip'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_ACCEPT' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '106.11.242.242'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '6196'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505635870.8025
+    'REQUEST_TIME' => 1505635870
+]
+2017-09-17 16:11:10 [106.11.242.129][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 106.11.242.129
+    in /www/wwwroot/bdt/backend/views/layouts/main.php:54
+    in /www/wwwroot/bdt/backend/controllers/SiteController.php:115
+2017-09-17 16:11:10 [106.11.242.129][-][-][warning][yii\debug\Module::checkAccess] Access to debugger is denied due to IP address restriction. The requesting IP address is 106.11.242.129
+2017-09-17 16:11:10 [106.11.242.129][-][-][info][application] $_COOKIE = [
+    'advanced-backend' => 'j5l0ntsl948jbf9dfpk6l7pm86'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/'
+]
+
+$_SERVER = [
+    'USER' => 'www'
+    'HOME' => '/home/www'
+    'FCGI_ROLE' => 'RESPONDER'
+    'REDIRECT_STATUS' => '200'
+    'proxy-nokeepalive' => '1'
+    'HTTP_COOKIE' => 'advanced-backend=j5l0ntsl948jbf9dfpk6l7pm86'
+    'HTTP_ACCEPT_ENCODING' => 'gzip'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_HOST' => 'gola.emifo.top'
+    'HTTP_ACCEPT' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin'
+    'LD_LIBRARY_PATH' => '/www/server/apache/lib'
+    'SERVER_SIGNATURE' => '<address>Apache Server at gola.emifo.top Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'gola.emifo.top'
+    'SERVER_ADDR' => '172.26.31.201'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '106.11.242.129'
+    'DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/www/wwwroot/bdt/backend/web/'
+    'SERVER_ADMIN' => 'webmaster@example.com'
+    'SCRIPT_FILENAME' => '/www/wwwroot/bdt/backend/web/index.php'
+    'REMOTE_PORT' => '15588'
+    'REDIRECT_URL' => '/site/login.html'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/site/login.html'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1505635870.8933
+    'REQUEST_TIME' => 1505635870
+]

@@ -334,19 +334,29 @@ function QuestionList(result,typeid){
         }else{
             var comment = 0;
         }
-        list += '<div class="appui-qanda-module mb10"><div class="appui-qanda-question" onclick="questionDetail('+result.data[i].id+')">'+result.data[i].question+'</div>'+
-            '<div class="appui-qanda-answer" onclick="questionDetail('+result.data[i].id+')"><div class="appui-qanda-expertphoto">'+
-            '<img src="'+result.file+result.data[i].expert.photo+'"><i class="appui-userlevel bc-white">' +
-            '<img src="../bdt/images/v2.png"></i>'+
-            '</div><div class="appui-qanda-answerstyle voice free" id="a_play_0_'+result.data[i].id+'" ' +
-            'onclick="playAudioQaClickFunction('+result.data[i].id+',1,1,\'a_play_0_'+result.data[i].id+'\');">'+
-            '<i></i><span class="appui_qanda-voice-wave"><em class="wave1"></em><em class="wave2">' +
-            '</em><em class="wave3"></em>'+
-            '</span><em class="tips">免费收听</em><span class="appui_qanda-voice-wait" ' +
-            'style="display:none;"></span></div>'+
-            '<em class="appui-qanda-answer-time">147"</em><span class="appui-qanda-answer-listen">63人收听</span>' +
-            '</div>'+
-            '<div class="appui-qanda-expertinfo">' +
+        //是语音还是文字
+        if(result.data[i].voice){
+            answerContent = '<div class="appui-qanda-answer" onclick="questionDetail('+result.data[i].id+')">' +
+                            '<div class="appui-qanda-expertphoto">'+
+                            '<img src="'+result.file+result.data[i].expert.photo+'"><i class="appui-userlevel bc-white">' +
+                            '<img src="../bdt/images/v2.png"></i></div><div class="appui-qanda-answerstyle voice free" id="a_play_0_'+result.data[i].id+'" ' +
+                            'onclick="playAudioQaClickFunction('+result.data[i].id+',1,1,\'a_play_0_'+result.data[i].id+'\');">'+
+                            '<i></i><span class="appui_qanda-voice-wave"><em class="wave1"></em><em class="wave2">' +
+                            '</em><em class="wave3"></em>'+
+                            '</span><em class="tips">会员免费收听</em><span class="appui_qanda-voice-wait" ' +
+                            'style="display:none;"></span></div>'+
+                            '<em class="appui-qanda-answer-time">'+result.data[i].voice_time+'"</em><span class="appui-qanda-answer-listen"></span>' +
+                            '</div> ';
+        }else if(result.data[i].article){
+            answerContent = '<div class="appui-qanda-answer" onclick="questionDetail('+result.data[i].id+')">' +
+                '<div class="appui-qanda-expertphoto">'+
+                '<img src="'+result.file+result.data[i].expert.photo+'"><i class="appui-userlevel bc-white">' +
+                '<img src="../bdt/images/v2.png"></i></div><div class="appui-qanda-answerstyle pictext free"><i></i><span class="appui-qanda-answerstyle-wave"></span><em class="tips">会员免费阅读</em></div>'+
+                '<span class="appui-qanda-answer-listen"></span>' +
+                '</div> ';
+        }
+
+        list += '<div class="appui-qanda-module mb10"><div class="appui-qanda-question" onclick="questionDetail('+result.data[i].id+')">'+result.data[i].question+'</div>'+answerContent+'<div class="appui-qanda-expertinfo">' +
             '<div class="time-statistic fs22" id="bottom_1_'+result.data[i].id+'">' +
             '<span class="fc-greyabc mr10 "><i>'+getDateDiff(result.data[i].created)+'</i></span>' +
             '<span class="fc-greyabc"><i>'+result.data[i].views+'</i>阅读</span>' +
