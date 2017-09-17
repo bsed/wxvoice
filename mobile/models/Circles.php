@@ -40,6 +40,7 @@ class Circles extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Members::className(), ['id' => 'member_id']);
     }
+
     public function getIncircle()
     {
         return $this->hasMany(Circlemembers::className(), ['cid' => 'id']);

@@ -68,11 +68,14 @@ class CircleController extends BaseController
             }
         }
         $recCircles = $model->find()->asarray()->with('user','incircle')->where(['not in','id',$filter])->all();
+        //我创建的圈子
+        $MyCreated = $model->find()->asarray()->where(['member_id'=>$member_id])->with('user','incircle')->all();
 
         return $this->render('circle_my',[
             'info'=>$info,
             'count'=>$count,
             'myCircle'=>$myCircle,
+            'MyCreated'=>$MyCreated,
             'recCircles'=>$recCircles,
         ]);
     }

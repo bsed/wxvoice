@@ -102,7 +102,6 @@ function loadEvent(){
 
 	$('#creatFinish').click(function(e){
 		createQzRequestFuntion();
-
 	});
 
 	$("#circleLogo").change(function(){
@@ -122,16 +121,9 @@ function loadEvent(){
 
     $('.sure-btn').click(function(e) {
         dataLoading("图片上传中...");
-        // var rFilter = /^(image\/jpeg|image\/png)$/i; // 检查图片格式
-        // if (!rFilter.test(file.type) && file.type.indexOf("image")<0) {
-        //     dataLoadedError("请选择jpeg、png格式的图片文件。");
-        //     $("#filehidden").val("");
-        //     return false;
-        // }
         var result = $image.cropper("getCroppedCanvas",{width: 640, height: 640});
         var imgData = result.toDataURL('image/png');
         var csrf = $('input[name="csrf"]').val();
-        // imgData = imgData.replace(/^data:image\/(png|jpeg);base64,/, "");
 
         $.ajax({
             url:'/circle/upload.html',
@@ -221,6 +213,7 @@ function monitorCount(){
 }
 
 function createQzRequestFuntion(){
+    var pics = $('input[name="pics"]').val();
 	if(feeType==0){
 		joinPrice = 0;
 	}else if(feeType==1){
@@ -230,16 +223,15 @@ function createQzRequestFuntion(){
 	}
 	var name = $('#circleName').val();
 	var summary = $('#textarea').val();
-	if(name==""){
+    if(pics == ''){
+        dataLoadedError("圈子头像不能为空");
+        return;
+    }else if(name==""){
 		dataLoadedError("圈子名称不能为空");
 		$('#circleName').focus();
 		return;
 	}else if (name.length>15) {
 		dataLoadedError("圈子名称应该在十五字以内");
-		return;
-	}
-	if(pics==""){
-		dataLoadedError("请上传图片");
 		return;
 	}
     var csrf = $('input[name="csrf"]').val();

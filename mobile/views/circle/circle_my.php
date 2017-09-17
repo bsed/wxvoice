@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a class="fc-white bg-blue" id="recommendCircleList">推荐圈子</a>
                 </div>
                 <a class="nav-act right-act" id="switchId" style="display:block"><img src="../bdt/images/nav_icon_switch1.png"></a>
-                <a class="nav-act right-act" id="switchId1" ><img src=""></a>
+                <a class="nav-act right-act" id="switchId1" ><img src="../bdt/images/nav_icon_switch1.png"></a>
             </div>
         </div>
 
@@ -82,27 +82,58 @@ $this->params['breadcrumbs'][] = $this->title;
 
                <!-- 我的圈子列表形式-->
                <div class="circle-list" id="circleList0" style="top: 0px;display:none">
-             <?php foreach($myCircle as $k=>$v):?>
-                <div class="circle-item-x bg-white fc-black mt10" onclick="gotoHtml(1,<?=$v['circle']['id']?>)">
-                        <a class="circle-headpic">
-                            <img src="<?=Yii::$app->params['public'].'/attachment'.$v['circle']['logo']?>">
-                        </a>
-                        <div class="circle-info">
-                            <h3 class="circle-info-name fs30 fc-black"><?=$v['circle']['name']?></h3>
-                            <p class="circle-info-canshu fs20 fc-grey999"><span>圈主:<?=$v['user']['nickname']?></span>
-                           <span class="ml10">成员:<em><?=count($v['incircle']);?></em>人</span>
-                            </p>
-                            <p class="circle-info-introduce fs24 fc-grey666 mt5"><?=$v['circle']['des']?></p>
-                        </div>
-                 </div>
-                   <?php endforeach;?>
+                    <!--我创建的圈子-->
+                   <?php if($MyCreated):?>
+                       <?php foreach($MyCreated as $k=>$v):?>
+                           <div class="circle-item-x bg-white fc-black mt10" onclick="gotoHtml(1,<?=$v['id']?>)">
+                               <a class="circle-headpic">
+                                   <img src="<?=Yii::$app->params['public'].'/attachment'.$v['logo']?>">
+                               </a>
+                               <div class="circle-info">
+                                   <h3 class="circle-info-name fs30 fc-black"><?=$v['name']?></h3>
+                                   <p class="circle-info-canshu fs20 fc-grey999"><span>圈主:<?=$v['user']['nickname']?></span>
+                                       <span class="ml10">成员:<em><?=count($v['incircle']);?></em>人</span></p>
+                                   <p class="circle-info-introduce fs24 fc-grey666 mt5"><?=$v['des']?></p>
+                               </div>
+                           </div>
+                       <?php endforeach;?>
+                   <?php endif;?>
 
+                    <!--我加入的圈子-->
+                     <?php foreach($myCircle as $k=>$v):?>
+                        <div class="circle-item-x bg-white fc-black mt10" onclick="gotoHtml(1,<?=$v['circle']['id']?>)">
+                                <a class="circle-headpic">
+                                    <img src="<?=Yii::$app->params['public'].'/attachment'.$v['circle']['logo']?>">
+                                </a>
+                                <div class="circle-info">
+                                    <h3 class="circle-info-name fs30 fc-black"><?=$v['circle']['name']?></h3>
+                                    <p class="circle-info-canshu fs20 fc-grey999"><span>圈主:<?=$v['user']['nickname']?></span>
+                                   <span class="ml10">成员:<em><?=count($v['incircle']);?></em>人</span>
+                                    </p>
+                                    <p class="circle-info-introduce fs24 fc-grey666 mt5"><?=$v['circle']['des']?></p>
+                                </div>
+                         </div>
+                       <?php endforeach;?>
                 </div>
             </div>
             <!-- 列表形式 END-->
 
        <!-- 图文格式-->
             <div class="circle-list" id="circleListwenzi" style="top: 0px;display:none">
+                <!--我创建的圈子-->
+                <?php if($MyCreated):?>
+                    <?php foreach($MyCreated as $k=>$v):?>
+                        <div class="circle-item bg-white fc-black" onclick="gotoHtml(1,<?=$v['id']?>)">
+                       <span style="height: 140px;">
+                           <img src="<?=Yii::$app->params['public'].'/attachment'.$v['logo']?>">
+                           <em class="fs22 fc-white"><?=count($v['incircle']);?></em>
+                       </span>
+                            <h3 class="fs28"><?=$v['name']?></h3>
+                            <i class="bg-green"></i><h4 class="fs20 fc-grey666">
+                                <img src="../bdt/images/circle_master.png"><?=$v['user']['nickname']?></h4>
+                        </div>
+                    <?php endforeach;?>
+                <?php endif;?>
                 <!--圈子列表-->
                 <?php foreach($myCircle as $k=>$v):?>
                 <div class="circle-item bg-white fc-black" onclick="gotoHtml(1,<?=$v['circle']['id']?>)">

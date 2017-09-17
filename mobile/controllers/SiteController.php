@@ -18,7 +18,7 @@ use mobile\models\Dianzan;
 
 class SiteController extends BaseController
 {
-    
+
 
     /*
      * 首页

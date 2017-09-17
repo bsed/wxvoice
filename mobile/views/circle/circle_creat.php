@@ -66,9 +66,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <!--如果是编辑的情况就把img显示出来并绑定值即可-->
                         <!-- <span style="display:none;"> -->
 
-                        <img id="circleLogoImg" src="../bdt/images/default.jpg" style="">
+<!--                        <img  src="../bdt/images/default.jpg">-->
                         <input type="hidden" name="pics" value="">
-                        <!-- <i class="bg-black"><img src="../bdt/images/add_circle_pic_icon.jpg" /></i> -->
+                         <i class="bg-black"><img  id="circleLogoImg" src="../bdt/images/add_circle_pic_icon.jpg" /></i>
 
                     </a>
                     <input id="circleName" type="text" class="circle-name-edit  fs32" placeholder="圈子名称">
@@ -143,13 +143,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <!--页面主体-->
         <div class="page__bd scrollbd">
+               <!-- 默认头像-->
                     <img id="editPic" src="../bdt/images/default.jpg">
             <div class="bottom-space1"></div>
         </div>
 
-        <div class="waitLoad" style="display:none;">
-            <img src="../bdt/images/uploading1.gif">
-        </div>
         <div class="waitUpload" style="display:none;">
             <img src="../bdt/images/uploading.gif">
         </div>
