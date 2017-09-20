@@ -28,8 +28,8 @@ class ExpertController extends BaseController
      * 查找专家
      */
    public function actionFound_expert(){
-
-      return $this->render('found_expert');
+       $type = htmls::getPiece('experttype');
+      return $this->render('found_expert',['type'=>$type]);
    }
    /*
     * ajax请求数据

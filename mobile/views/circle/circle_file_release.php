@@ -122,70 +122,6 @@
         </div>
         <!-- 编辑页面 end -->
 
-        <!-- 选择文件类型 start -->
-        <div class="selected-file" style="display: none;">
-            <!--头部信息 start-->
-            <div class="page__hd page__hd-edit fc-white bg-white bc-grey">
-                <div class="file-header-title">
-                    <div class="left fs32"><img src="../bdt/images/back80.png?v=20170510135112" style="height: 2.2rem; width: auto;"></div>
-                    <div class="center fs40">添加文件</div>
-                    <div class="right fs32 fc-blue" style="opacity: 0;">关于</div>
-                </div>
-            </div>
-            <!--头部信息 end-->
-
-            <!--选择文件类型 start-->
-            <div class="page_bd">
-                <div class="top-space1"></div>
-                <!--类型表格-->
-                <div class="file-type file-box">
-                    <div class="type-item file_doc">
-                        <span class="icon"></span>
-                        <p class="fs28">doc</p>
-                    </div>
-                    <div class="type-item file_ppt">
-                        <span class="icon"></span>
-                        <p class="fs28">ppt</p>
-                    </div>
-                    <div class="type-item file_xls">
-                        <span class="icon"></span>
-                        <p class="fs28">xls</p>
-                    </div>
-                    <div class="type-item file_pdf">
-                        <span class="icon"></span>
-                        <p class="fs28">pdf</p>
-                    </div>
-                    <div class="type-item file_txt">
-                        <span class="icon"></span>
-                        <p class="fs28">txt</p>
-                    </div>
-                    <div class="type-item file_q">
-                        <span class="icon"></span>
-                        <p class="fs28">其他</p>
-                    </div>
-                </div>
-                <!--类型表格-->
-
-                <div></div>
-            </div>
-            <!--选择文件类型 start-->
-
-            <div class="app-file">
-                <ul>
-                    <li class="file-link-list"><a href="#"><p class="fs32">密友圈文件</p><img src="../bdt/images/right.png?v=20170120133020"></a></li>
-                    <li class="file-link-list"><a href="#"><p class="fs32">QQ</p><img src="../bdt/images/right.png?v=20170120133020"></a></li>
-                    <li class="file-link-list"><a href="#"><p class="fs32">微信</p><img src="../bdt/images/right.png?v=20170120133020"></a></li>
-                    <li class="file-link-list"><a href="#"><p class="fs32">QQ邮箱</p><img src="../bdt/images/right.png?v=20170120133020"></a></li>
-                </ul>
-            </div>
-            <div class="newest-file">
-                <ul>
-                    <li class="file-link-list"><a href="#"><p class="fs32">最新文件</p>
-                            <img src="../bdt/images/right.png?v=20170120133020"></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <!-- 选择文件类型 end -->
     </div>
 </div>
@@ -207,7 +143,7 @@
 
 <div id="js-bg" class="bg-black" style="display:none" onclick="$('#js-recommend').stop().animate({'top':'-100%'},300);$('.appui-recommend-close').stop().animate({'bottom':'-500%'},300,function(){$('#js-bg').stop().fadeOut();$('#js-recommend').stop().fadeOut(500);})"></div>
 <!--文章转载-->
-<div id="js-recommend" class="bg-white" style="display:none;">
+<div id="js-recommend" class="bg-white" style="display:block;">
     <div class="appui-recommend-module">
         <div class="appui-recommend-module-hd bg-greyfa">
             <h2 class="fs28 fc-black456">发布确认</h2></div>
@@ -224,10 +160,21 @@
             <p class="fs28 fc-grey666">公开发布（允许转发到圈外）</p>
         </div>
         <div class="appui-recommend-module-fd mt5 mb10">
+            <div class="fs28">
+                <?php foreach($type as $k=>$v):?>
+                    <a class="publishtype <?php if($k == 0):?>publishcolor<?php else:?>bg-grey<?php endif;?>" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
+                <?php endforeach;?>
+            </div>
+            <script>
+                $('.publishtype').click(function(){
+                    $(this).not('bg-blue').addClass('publishcolor');
+                    $('.publishtype').not(this).removeClass('publishcolor').addClass('bg-grey');
+                });
+            </script>
             <a class="bg-blue fs28 fc-white" id="confirmSubmit">发表</a>
         </div>
     </div>
-    <a class="appui-recommend-close bg-orange" onclick="$('#js-recommend').stop().animate({'top':'-100%'},300);$('.appui-recommend-close').stop().animate({'bottom':'-500%'},300,function(){$('#js-bg').stop().fadeOut();$('#js-recommend').stop().fadeOut(500);})"><img src="..https://www.wenfangba.com/themes/img/close.png?v=20161201134425"></a>
+    <a class="appui-recommend-close bg-orange" onclick="$('#js-recommend').stop().animate({'top':'-100%'},300);$('.appui-recommend-close').stop().animate({'bottom':'-500%'},300,function(){$('#js-bg').stop().fadeOut();$('#js-recommend').stop().fadeOut(500);})"><img src="../bdt/images/close.png"></a>
 </div>
 
 

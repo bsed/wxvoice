@@ -25,11 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'des')->textArea(['rows' => '6']) ?>
-                <?= $form->field($model, 'images')->widget('common\widgets\file_upload\FileUpload',[
+                <?= $form->field($model, 'logo')->widget('common\widgets\file_upload\FileUpload',[
                     'config'=>[
+                        'logo'=>'',
                     ]
                 ]) ?>
-
                 <div style="clear:both"></div>
                 <?= $form->field($model, 'listorder')->textInput(['maxlength' => true, 'value'=>0]) ?>
 

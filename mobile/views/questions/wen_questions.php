@@ -44,7 +44,7 @@
                 <div class="qnada-q-data bg-white mt10 " id="questions" >
                     <div class="qnada-q-data-limit">
                         <span class="appui_cell__switch appui_cell__switch-on"><i class="bg-white"></i></span>
-                        <p class="fs24 fc-greyabc">公开提问，非免费期间，答案每被收听1次，你从中分成￥0.50</p>
+                        <p class="fs24 fc-greyabc">公开提问</p>
                     </div>
                     <div class="qnada-q-data-input bg-greyfa bc-grey mt10">
                         <textarea id="textarea" class="fs30 fc-black" placeholder="向他/她提问，等Ta语音回答；超过48小时未回答，将按支付路径全额退款。回答后，答案将限次免费30分钟；您可以免费向TA追问。"></textarea>

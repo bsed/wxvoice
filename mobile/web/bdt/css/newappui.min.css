@@ -750,7 +750,7 @@ span.appui_qanda-voice-time>i.restrict-state{color: #33ccbb;}
 			.appui-open-publish.on>span{ background:#57b; transition:0.5s;}
 				.appui-open-publish.on>span>i{ float:right; transition:0.5s;}
 		.appui-open-copyright{width:100%; height:1.5rem; padding:0; box-sizing:border-box; display:block; line-height:1.5rem; margin:0 auto;}
-			.appui-open-copyright>a{width:32%; height:1.5rem; display:block; float:left; line-height:1.5rem; text-align:center; border-bottom:0.25rem; margin-right:2%;}
+			.appui-open-copyright>a{width:32%; height:1.5rem; display:block; float:left; line-height:1.5rem; text-align:center; border-bottom:0.25rem; margin-right:2%;margin-top:1px}
 			.appui-open-copyright>a:nth-of-type(3){margin:0;}
 			
 		.appui-recommend-module-fd{height:2.5rem; padding:0 0.75rem; box-sizing:border-box;}
@@ -759,13 +759,26 @@ span.appui_qanda-voice-time>i.restrict-state{color: #33ccbb;}
 				.appui-recommend-module-fd>label>input[type=checkbox]:checked{content:url(../images/check_on.png);}
 			.appui-recommend-module-fd>a{width:2.5rem;height:1.5rem; display:block; float:left; line-height:1.5rem; text-align:center; float:right; margin:0.5rem 0; border-radius:0.15rem;}
 			.appui-recommend-module-fd>span{width:1.5rem; height:1.5rem; display:block; float:right; margin:0.5rem 0.5rem 0.5rem 0;}
-	.appui-recommend-close{width:1.6rem; height:1.6rem; display:block; border-radius:1.6rem; position:absolute; left:50%; margin-left:-0.8rem; bottom:-500%}
+	.appui-recommend-close{width:1.6rem; height:1.6rem; display:block; border-radius:1.6rem; position:absolute; left:50%; margin-left:-0.8rem; bottom:-1000%}
 
 
 .face_tag>img{width:1rem; height:1rem; display:inline-block; vertical-align:middle;}
 
 
-
+.publishtype{
+	width:2.5rem;
+	display:block;
+	float:left;
+	margin-left:2%;
+	margin-top:6px;
+	height:25px;
+	line-height:25px;
+	text-align:center;
+}
+.publishcolor{
+	color:#fff;
+	background: #5577bb;
+}
 /*侧滑删除*/
 .appui-delete-touch{ overflow:hidden; position:relative;}
 .appui-delete-item{width:120%; overflow: hidden; -webkit-transition:all 0.3s linear;  position:relative;}

@@ -113,17 +113,6 @@ function ajaxLabelCon(currentIndex){
     function listExperters(result){
          var list = '';
          for(var i=0;i<result.list.length;i++){
-            //专家标签
-             var tags = "";
-             if(result.list[i].user.tags){
-                 var arraytags = JSON.parse(result.list[i].user.tags);
-                     if(arraytags.length !=0){
-                         for (var a = 0; a < arraytags.length; a++) {
-                             tags +='<span>'+arraytags[a]+'</span>';
-                         }
-                     }
-             }
-             //专家标签
 
              list +='<div class="appui-expert bg-white" >'+
                      '<div class="appui-expert-headpic-level">'+
@@ -135,9 +124,7 @@ function ajaxLabelCon(currentIndex){
                      'style="display:block">'+result.list[i].price+'元提问</a>'+
                      '<h3 class="appui-expert-name fs30 fc-black" onclick="">'+result.list[i].user.nickname+'</h3>'+
                      '<p class="appui-expert-introduce fs24 fc-grey666 mt5">'+result.list[i].honor+'</p>'+
-                     '<div class="appui-expert-tags fs18 mt5 fc-greyabc">'+
-                     '<p class="appui-expert-tags-industry">'+tags+'</p>'+
-                     '<span style="display:block" onclick="">进入主页</span>'+
+                     '<div class="appui-expert-tags fs18 mt5 fc-greyabc">'+'<span style="display:block" onclick="">进入主页</span>'+
                      '</div>'+
                      '</div>'+
                      '</div>';

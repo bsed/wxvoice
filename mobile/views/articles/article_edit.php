@@ -64,35 +64,27 @@
             <textarea class="bc-grey fs32 fc-black456 mt10 mb10" id="summaryInput" contenteditable="true" placeholder="给文章添加一段摘要，能提高阅读量哦！"></textarea>
         </div>
         <div class="appui-recommend-module-fd mt5 mb10">
+            <div class="fs28">
+                <?php foreach($type as $k=>$v):?>
+                    <a class="publishtype <?php if($k == 0):?>publishcolor<?php else:?>bg-grey<?php endif;?>" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
+                <?php endforeach;?>
+            </div>
+            <script>
+                $('.publishtype').click(function(){
+                    $(this).not('bg-blue').addClass('publishcolor');
+                    $('.publishtype').not(this).removeClass('publishcolor').addClass('bg-grey');
+                });
+            </script>
             <a class="bg-blue fs28 fc-white" id="confirmSubmit">发表</a>
         </div>
+
+
+
     </div>
-    <a class="appui-recommend-close bg-orange" onclick="$('#js-recommend').stop().animate({'top':'-100%'},300);$('.appui-recommend-close').stop().animate({'bottom':'-500%'},300,function(){$('#js-bg').stop().fadeOut();$('#js-recommend').stop().fadeOut(500);})"><img src="../bdt/images/close.png?v=20161201134425"></a>
+    <a class="appui-recommend-close bg-orange" onclick="$('#js-recommend').stop().animate({'top':'-100%'},300);$('.appui-recommend-close').stop().animate({'bottom':'-500%'},300,function(){$('#js-bg').stop().fadeOut();$('#js-recommend').stop().fadeOut(500);})">
+        <img src="../bdt/images/close.png"></a>
 </div>
-<!--关联好友-->
-<div id="js-friends" class="bg-grey">
-    <div id="page-pop">
-        <!--页面导航栏-->
-        <div class="page__hd bg-blue fc-white">
-            <a class="nav-act left-act" id="closeJsFriends"><img src="../bdt/images/close.png"></a>
-            <h2 class="fs34">联系人</h2>
-            <a class="nav-act right-act fs28 fc-white" id="sureJsFriends">确定</a>
-        </div>
-        <!--页面主体-->
-        <div class="page__bd" id="contacts-page1" style="display:block;">
-            <!--占位空间-->
-            <div class="top-space1"></div>
-            <!--人肉好友-->
-            <div class="search-friends">
-                <div class="search-friends-con">
-                    <i><img src="../bdt/images/search01@3x.png"></i>
-                    <input id="serchInput" type="text" class="bg-white bc-grey" placeholder="搜索联系人">
-                    <span class="fs28 fc-orange">搜索</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <input id="articleId" value="" type="hidden">
 <input id="nickname" value="" type="hidden">
 

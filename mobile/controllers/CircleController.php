@@ -310,7 +310,9 @@ class CircleController extends BaseController
             return $this->redirect('/circle/feeuser.html');
         }
         //END
-            return $this->render('circle_file_release');
+        //获取话题类别
+        $type = htmls::getPiece('topictype');
+            return $this->render('circle_file_release',['type'=>$type]);
     }
     /*
      * 成为全局的付费会员

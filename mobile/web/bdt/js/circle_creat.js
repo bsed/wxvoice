@@ -360,7 +360,6 @@ function myClose(){
     var file=$("#"+inputFileId).get(0).files[0];
 	var rFilter = /^(image\/jpeg|image\/png)$/i; // 检查图片格式
 	if (file.type.indexOf("image") == 0) {
-		//if (file.type.indexOf("image") == 0) {
 		dataLoading("图像加载中...");
 		var URL = window.URL || window.webkitURL;
 		var blobURL;

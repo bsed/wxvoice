@@ -8,9 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <link type="text/css" rel="stylesheet" href="../bdt/css/user.min.css">
 <link type="text/css" rel="stylesheet" href="../bdt/css/cropper.css">
 <script type="text/javascript" src="../bdt/js/qanda_certify.js"></script>
-<script type="text/javascript" src="../bdt/js/cropper.js"></script>
-<script type="text/javascript" src="../bdt/js/exif.js"></script>
-<body class=" bg-greyfa" onunload="myClose()" >
+<body class=" bg-greyfa" >
 <div id="container" class="container">
     <div id="page">
         <!--页面导航栏-->
@@ -32,57 +30,85 @@ $this->params['breadcrumbs'][] = $this->title;
                     <span class="fs30 fc-greyabc mb10"><?=$info['nickname']?></span>
                 </div>
                 <!--抬头选择-->
+                <?php if(isset($apply)):?>
                 <div class="qanda-certify-item bg-white mt10">
                     <h3 class="fs32 fc-grey666">头衔</h3>
-                    <!-- onkeyup="this.value = this.value.substring(0, 100)" -->
-                    <textarea id="masterTitle" class="fc-black456 fs30" rows="4" placeholder="输入职位描述或者在企职位"></textarea>
+                    <textarea id="masterTitle" class="fc-black456 fs30" rows="4" placeholder="<?=$apply['honor']?>"><?=$apply['honor']?></textarea>
                     <span class="fs30 fc-greyabc"><i id="masterTitleCount">0</i>/18</span>
                 </div>
-                <!--头衔标签-->
-<!--                <div class="qanda-certify-item bg-white mt10">-->
-<!--                    <h3 class="fs32 fc-grey666">领域</h3>-->
-<!--                    <textarea id="label" class="fc-black456 fs30" rows="4" placeholder="高级置业顾问；销售经理；原万科高层；房地产消费者协会高级会员"></textarea>-->
-<!--                    <span class="fs30 fc-greyabc"><i id="labelCount">0</i>/5</span>-->
-<!--                </div>-->
+                <?php else:?>
+                    <div class="qanda-certify-item bg-white mt10">
+                        <h3 class="fs32 fc-grey666">头衔</h3>
+                        <textarea id="masterTitle" class="fc-black456 fs30" rows="4" placeholder="请输入您的头衔"></textarea>
+                        <span class="fs30 fc-greyabc"><i id="masterTitleCount">0</i>/18</span>
+                    </div>
+                <?php endif;?>
+
                 <!--简介-->
+                <?php if(isset($apply)):?>
                 <div class="qanda-certify-item bg-white mt10">
                     <h3 class="fs32 fc-grey666">简介</h3>
-                    <textarea id="masterInfo" class="fc-black456 fs30" rows="4" placeholder="(100个字以内)关于这些，尽情问我：房产投资、如何选择投资的房地产商品；如何挑选合适的二手房；如何理解政府最新出台限购政策......或者给你唱歌晚安小曲吧。"></textarea>
+                    <textarea id="masterInfo" class="fc-black456 fs30" rows="4" placeholder="<?=$apply['des']?>"><?=$apply['des']?></textarea>
                     <span class="fs30 fc-greyabc"><i id="masterInfoCount">0</i>/100</span>
                 </div>
-                <!--权限-->
+                <?php else:?>
+                    <div class="qanda-certify-item bg-white mt10">
+                        <h3 class="fs32 fc-grey666">简介</h3>
+                        <textarea id="masterInfo" class="fc-black456 fs30" rows="4" placeholder="请输入您的简介"></textarea>
+                        <span class="fs30 fc-greyabc"><i id="masterInfoCount">0</i>/100</span>
+                    </div>
+                <?php endif;?>
+                <?php if(isset($apply)):?>
                 <div class="qanda-certify-rights bg-white mt10">
                     <div class="fs30 fc-grey999">
                         向我提问需要支付
-                        <input id="askPrice" onkeyup="num(this)" type="text" class="bg-greyf1 fc-orange fs30 ml10 mr10" placeholder="￥0-1000"> 元
+                        <input id="askPrice" onkeyup="num(this)" type="text" class="bg-greyf1 fc-orange fs30 ml10 mr10" placeholder="￥<?=$apply['price']?>"> 元
                         <a class="fc-orange">收费规则</a>
                     </div>
-<!--                    <div id="feeAddAsk" class="fs30 fc-grey999 b-t-grey">-->
-<!--                        接受免费向我追问-->
-<!--                        <span class="appui_cell__switch bg-greyabc ml5 appui_cell__switch-on"><i class="bg-white"></i></span>-->
-<!--                        <a class="fc-orange">追问规则</a>-->
-<!--                    </div>-->
-<!--                    <div id="joinFreeFristIntv" class="fs30 fc-grey999 b-t-grey">-->
-<!--                        <i id="freeListen">回答前10次免费听</i>-->
-<!--                        <span class="appui_cell__switch bg-greyabc ml5 appui_cell__switch-on"><i class="bg-white"></i></span>-->
-<!--                        <a class="fc-orange">免费规则</a>-->
-<!--                    </div>-->
-                    <div id="joinKnowledgeShare" class="fs30 fc-grey999 b-t-grey">
-                        知识开放计划
-                        <span class="appui_cell__switch bg-greyabc ml5 appui_cell__switch-on"><i class="bg-white"></i></span>
-                        <a class="fc-orange">开放规则</a>
+                </div>
+                <?php else:?>
+                    <div class="qanda-certify-rights bg-white mt10">
+                        <div class="fs30 fc-grey999">
+                            向我提问需要支付
+                            <input id="askPrice" onkeyup="num(this)" type="text" class="bg-greyf1 fc-orange fs30 ml10 mr10" placeholder="￥1-200"> 元
+                            <a class="fc-orange">收费规则</a>
+                        </div>
                     </div>
-<!--                    <div id="applyExpertCertify" class="fs30 fc-grey999 b-t-grey">-->
-<!--                        申请专家认证-->
-<!--                        <span class="appui_cell__switch bg-greyabc ml5"><i class="bg-white"></i></span>-->
-<!--                        <a class="fc-orange">专家规则</a>-->
-<!--                    </div>-->
+                <?php endif;?>
+
+                <div class="qanda-certify-item bg-white mt10" style="border:none">
+                    <h3 class="fs32 fc-grey666">类别<span class="fs28 fc-orange">（请选择认证类别）</span></h3>
+
+                    <div class="fs28">
+                        <?php foreach($type as $k=>$v):?>
+                            <?php if(isset($apply)):?>
+                                <?php if($apply['type'] == $v['id']):?>
+                                     <a class="publishtype publishcolor" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
+                                    <?php else:?>
+                                    <a class="publishtype bg-grey" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
+                                    <?php endif;?>
+                        <?php else: ?>
+                                <a class="publishtype <?php if($k == 0):?>publishcolor<?php else:?>bg-grey<?php endif;?>" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
+                        <?php endif;?>
+                        <?php endforeach;?>
+                    </div>
+                    <script>
+                        $('.publishtype').click(function(){
+                            $(this).not('bg-blue').addClass('publishcolor');
+                            $('.publishtype').not(this).removeClass('publishcolor').addClass('bg-grey');
+                        });
+                    </script>
+                   <input type="hidden" name="mid" value="<?=$apply['member_id']?>">
                 </div>
                 <!--名片上传-->
                 <div class="qanda-certify-item bg-white mt10">
                     <h3 class="fs32 fc-grey999" id="certifiedPicTips">申请专家认证<span class="fs28 fc-orange">（专家文章更容易通过审核）</span></h3>
                     <!--未上传-->
-                    <div class="upload-card bc-grey" id="uploadCertifiedPic">
+                    <?php if(isset($apply)):?>
+                    <div class="upload-card bc-grey" id="uploadCertifiedPic" style="display:none">
+                        <?php else:?>
+                        <div class="upload-card bc-grey" id="uploadCertifiedPic">
+                        <?php endif;?>
                         <a>
                             <span class="bg-greyf1"></span>
                             <span class="bg-greyf1"></span>
@@ -90,11 +116,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         <p class="fs30 fc-greyabc mt10">上传名片</p>
                         <input class="uploadCertifiedPic" accept="image/*" id="cardUpload1" type="file" name="cardUpload" onchange="cardChange('cardUpload1');">
                     </div>
-                    <input type="hidden" name="uploadCertifiedPic" value=""/>
-                    <div class="upload-card bc-grey upload-card-ok" id="certifiedPic" style="display:none;">
-                        <img src="../bdt/images/category_adv1.jpg">
-                        <input class="uploadCertifiedPic" id="cardUpload2" type="file" name="cardUpload" onchange="cardChange('cardUpload2');">
-                    </div>
+                        <?php if(isset($apply)):?>
+                           <input type="hidden" name="uploadCertifiedPic" value="<?=$apply['card']?>"/>
+                        <?php else:?>
+                            <input type="hidden" name="uploadCertifiedPic" value=""/>
+                        <?php endif;?>
+                    <?php if(isset($apply)):?>
+                        <div class="upload-card bc-grey upload-card-ok" id="certifiedPic">
+                            <img src="<?=Yii::$app->params['public'].'/attachment'.$apply['card']?>">
+                            <input class="uploadCertifiedPic" id="cardUpload2" type="file" name="cardUpload" onchange="cardChange('cardUpload2');">
+                        </div>
+                        <?php else:?>
+                        <div class="upload-card bc-grey upload-card-ok" id="certifiedPic" style="display:none;">
+                            <img src="">
+                            <input class="uploadCertifiedPic" id="cardUpload2" type="file" name="cardUpload" onchange="cardChange('cardUpload2');">
+                        </div>
+                    <?php endif;?>
+
                 </div>
                 <a class="qanda-certify-postbtn bg-orange fc-white fs30" onclick="applyMasterMethods()">申请成为行家</a>
                 <p>
@@ -131,33 +169,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <img src="../bdt/images/uploading.gif">
 </div>
 <div class="upload-container bg-black123">
-    <div class="row" style="margin-top: 0px;">
+    <div class="row">
         <div class="col-md-9">
             <div class="img-container" id="img-container">
-                <img src="../bdt/images/picture.jpg" alt="Picture" id="image" class="cropper-hidden">
-                <div class="cropper-container" style="width: 400px; height: 400px;"><div class="cropper-wrap-box">
-                        <div class="cropper-canvas" style="width: 400px; height: 400px; left: 0px; top: 0px;">
-                            <img src="../bdt/images/picture.jpg" style="width: 400px; height: 400px; margin-left: 0px; margin-top: 0px; transform: none;">
+                <img src="" alt="Picture" id="image" class="cropper-hidden">
+                <div class="cropper-container"><div class="cropper-wrap-box">
+                        <div class="cropper-canvas" >
+                            <img src="">
                         </div></div>
                     <div class="cropper-drag-box cropper-modal cropper-move"></div>
-                    <div class="cropper-crop-box" style="width: 320px; height: 200.93px; left: 40px; top: 99.5349px;">
-                        <span class="cropper-view-box"><img src="../bdt/images/picture.jpg" style="width: 400px; height: 400px; margin-left: -40px; margin-top: -99.5349px; transform: none;"></span>
+                    <div class="cropper-crop-box">
+                        <span class="cropper-view-box">
+                            <img src=""></span>
                         <span class="cropper-dashed dashed-h"></span>
                         <span class="cropper-dashed dashed-v"></span>
                         <span class="cropper-center"></span>
                         <span class="cropper-face cropper-move"></span>
-                        <span class="cropper-line line-e cropper-hidden" data-action="e"></span>
-                        <span class="cropper-line line-n cropper-hidden" data-action="n"></span>
-                        <span class="cropper-line line-w cropper-hidden" data-action="w"></span>
-                        <span class="cropper-line line-s cropper-hidden" data-action="s"></span>
-                        <span class="cropper-point point-e cropper-hidden" data-action="e"></span>
-                        <span class="cropper-point point-n cropper-hidden" data-action="n"></span>
-                        <span class="cropper-point point-w cropper-hidden" data-action="w"></span>
-                        <span class="cropper-point point-s cropper-hidden" data-action="s"></span>
-                        <span class="cropper-point point-ne cropper-hidden" data-action="ne"></span>
-                        <span class="cropper-point point-nw cropper-hidden" data-action="nw"></span>
-                        <span class="cropper-point point-sw cropper-hidden" data-action="sw"></span>
-                        <span class="cropper-point point-se cropper-hidden" data-action="se"></span>
                     </div>
                 </div>
             </div>

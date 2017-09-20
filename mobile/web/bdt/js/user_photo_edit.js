@@ -38,35 +38,40 @@ $(document).ready(function() {
     var result = $image.cropper("getCroppedCanvas",{width: 640, height: 640});
     var imgData = result.toDataURL('image/png');
     var csrf = $('input[name="csrf"]').val();
-    imgData = imgData.replace(/^data:image\/(png|jpeg);base64,/, "");
+    // imgData = imgData.replace(/^data:image\/(png|jpeg);base64,/, "");
+     //压缩图片
+      convertImgToBase64(imgData, function(base64Img){
+         //  ajax
+              $.ajax({
+                url:'/members/uploadheader.html',
+                data:{content:base64Img, _csrf:csrf},
+                type:"post",
+                dataType:'json',
+                success:function(data,status){
+                  clearToastDialog();
+                if(data.result == "success"){
+                    $.ajax({
+                        url: '/members/uploader.html',
+                        data: {photo: data.img, _csrf: csrf},
+                        dataType: 'json',
+                        type: "post",
+                        success: function (data, status) {
+                            if (data.result == 'success') {
+                                window.location.href = "/members/personal_data.html";
+                            }
 
-      $.ajax({
-        url:'/site/upload.html?action=uploadimage',
-        data:{file:imgData,  _csrf:csrf},
-        type:"post",
-        dataType:'json',
-        success:function(data,status){
-          clearToastDialog();
-		if(data.state == "SUCCESS"){
-            $.ajax({
-                url: '/members/uploader.html',
-                data: {photo: data.url, _csrf: csrf},
-                dataType: 'json',
-                type: "post",
-                success: function (data, status) {
-                    if (data.result == 'success') {
-                        window.location.href = "personal_data.html";
-                    }
+                        }
+                    });
 
-                }
-            });
+                }else{
+                    dataLoadedError(result.message);
+                  }
+                },
 
-		}else{
-            dataLoadedError(result.message);
-          }
-        },
-
+              });
+          //  ajax End
       });
+
     //$("#a_content").val(imgData);
     //$("#a_fileType").val(fileType);
     //$("#uploadForm").submit();

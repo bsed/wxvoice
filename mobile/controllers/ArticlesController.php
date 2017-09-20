@@ -210,6 +210,7 @@ class ArticlesController extends BaseController
             $model->title = $post['title'];
             $model->member_id = $member_id;
             $model->summary = $post['summary'];
+            $model->type = $post['type'];
             $model->content = $post['content'];
             $model->pics = json_encode($img);
             $model->videos = json_encode($video[1]);
@@ -236,10 +237,7 @@ class ArticlesController extends BaseController
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
         }
-        if(!$feeuser){
-            Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-            return $this->redirect('/circle/feeuser.html');
-        }
+
         //END
 
         $model = new Articles();
@@ -264,12 +262,26 @@ class ArticlesController extends BaseController
         //判断是否属于圈子的文章
         $circle_info = [];
         if($info['circle_id'] != 0){
+
             //查找圈子的相关信息，圈名字，介绍，圈主等
             $circle_id = $info['circle_id'];
             $model = new Circles();
             $circle_info = $model->find()->asarray()->with('user')->where(['id'=>$circle_id])->one();
-        }
+            //判断是否是自己创建的圈子 $circle_info['member_id'] == $member_id
 
+            if($circle_info['member_id'] != $member_id){
+                if(!$feeuser){
+                    Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
+                    return $this->redirect('/circle/feeuser1.html');
+                }
+            }
+
+        }else{
+            if(!$feeuser){
+                Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
+                return $this->redirect('/circle/feeuser1.html');
+            }
+        }
 
 
         //获取点赞的次数
@@ -283,9 +295,15 @@ class ArticlesController extends BaseController
         //判断用户加入的圈子
         $circleModel = new Circlemembers();
         $circleInfo = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$info['circle_id']])->count();
-        if(!$circleInfo && $info['from'] == 'circle'){
-            return $this->redirect('/circle/circle_share_detail.html?id='.$info['circle_id']);
+        if($circle_info) {
+            if ($circle_info['member_id'] != $member_id) {
+                if (!$circleInfo && $info['from'] == 'circle') {
+                    return $this->redirect('/circle/circle_share_detail.html?id=' . $info['circle_id']);
+                }
+            }
         }
+
+
         return $this->render('article_detail',
             [
                 'info'=>$info,
@@ -497,7 +515,8 @@ class ArticlesController extends BaseController
             return $this->redirect('/circle/feeuser.html');
         }
         //END
-        return $this->render('article_edit');
+        $type = htmls::getPiece('topictype');
+        return $this->render('article_edit',['type'=>$type]);
     }
 
     /**

@@ -250,6 +250,27 @@ function formatDateTime(timeStamp) {
     // return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
 };
 
+//压缩图片
+function convertImgToBase64(url, callback, outputFormat){
+    var canvas = document.createElement('CANVAS');
+    var ctx = canvas.getContext('2d');
+    var img = new Image;
+    img.crossOrigin = 'Anonymous';
+    img.onload = function(){
+        var width = img.width;
+        var height = img.height;
+        // 按比例压缩2倍
+        var rate = (width<height ? width/height : height/width)/1.5;
+        canvas.width = width*rate;
+        canvas.height = height*rate;
+        ctx.drawImage(img,0,0,width,height,0,0,width*rate,height*rate);
+        var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+        callback.call(this, dataURL);
+        canvas = null;
+    };
+    img.src = url;
+}
+
 // function getDateDiff(time){
 //     //将PHP的时间戳转成js的时间戳
 //     dateTimeStamp = new Date(parseInt(time) * 1000);

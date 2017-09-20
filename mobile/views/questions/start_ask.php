@@ -10,15 +10,11 @@
             <h1>提问</h1>
         </div>
 
-        <div class="page__hd-tips bg-greyf1"  id="coupon_count_div">
-            <p class="fs24 fc-grey999">您有<span class="fc-black fs28" id="coupon_count_id">1</span>张提问券，快去提问吧！</p>
-            <a class="bg-white" id="coupon_count_close"><img src="../bdt/images/nav_icon_close1.png"></a>
-        </div>
 
         <div id="ask_content">
             <div class="qnada-q-data-limit" style="margin-bottom:0.2rem">
                 <span class="appui_cell__switch appui_cell__switch-on"><i class="bg-white"></i></span>
-                <p class="fs24 fc-greyabc">公开提问，非免费期间，答案每被收听1次，你从中分成￥0.50</p>
+                <p class="fs24 fc-greyabc">公开提问</p>
             </div>
                 <textarea id="content" placeholder="请告知你想了解的有关地产项目的问题，我会一一为你解答"></textarea>
             <!--短消息-插入图片示例-->
@@ -36,10 +32,11 @@
             <a class="ask_tips fs24 fc-orange mt5">查看问答细则及责任声明</a>
             <h2 class="fs30 fc-black456">请选择专家类型</h2>
             <ul id="typeCho">
-                <li id="oLi0" onclick="gotoProfessList(0,'投资')">投资</li>
-                <li id="oLi1" onclick="gotoProfessList(1,'学区')">学区</li>
-                <li id="oLi2" onclick="gotoProfessList(2,'贵金属')">贵金属</li>
-                <li id="oLi3" onclick="gotoProfessList(3,'避险')">避险</li>
+
+                <li id="oLi0" onclick="gotoProfessList(0,'推荐')">推荐</li>
+                <?php foreach($type as $k=>$v):?>
+                    <li id="oLi<?=$k+1;?>" onclick="gotoProfessList(<?=$v['id']?>,'<?=$v['name']?>')"><?=$v['name']?></li>
+                <?php endforeach;?>
             </ul>
         </div>
     </div>

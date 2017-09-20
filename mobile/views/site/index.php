@@ -40,7 +40,7 @@ use common\tools\htmls;
                     <div class="swiper-wrapper" >
                         <?php foreach($banner as $k=>$v):?>
                         <div class="swiper-slide swiper-slide-prev" ><a href="<?=$v['link']?>">
-                                <img src="<?=Yii::$app->params['public']?><?=$v['images']?>"></a>
+                                <img src="<?=Yii::$app->params['public']?><?=$v['logo']?>"></a>
                         </div>
                         <?php endforeach;?>
                     </div>

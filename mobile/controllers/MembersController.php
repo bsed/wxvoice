@@ -587,8 +587,13 @@ class MembersController extends BaseController
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
         }
+        //查看会员信息
         $info = Members::find()->asarray()->where(['id'=>$member_id])->one();
-        return $this->render('qanda_certify',['info'=>$info]);
+        //查看认证的信息
+        $apply = Experts::find()->asarray()->where(['member_id'=>$member_id])->one();
+
+        $type = htmls::getPiece('experttype');
+        return $this->render('qanda_certify',['info'=>$info,'type'=>$type,'apply'=>$apply]);
     }
     public function actionApply(){
         if($_POST){
@@ -598,6 +603,7 @@ class MembersController extends BaseController
             $model->honor = $_POST['honor'];
             $model->des = $_POST['des'];
             $model->price = $_POST['price'];
+            $model->type = $_POST['type'];
             $model->card = $_POST['card'];
             $model->vip = 0;
             $model->created = time();
@@ -608,6 +614,25 @@ class MembersController extends BaseController
             }
         }
     }
+    public function actionChangeapply(){
+        $model = new Experts();
+        $mid = $_POST['mid'];
+        $info = $model->updateAll([
+            'honor'=>$_POST['honor'],
+            'des'=>$_POST['des'],
+            'price'=>$_POST['price'],
+            'type'=>$_POST['type'],
+            'card'=>$_POST['card'],
+            'vip'=>0,
+            'created'=>time(),
+        ], "member_id ='{$mid}'");
+        if($info){
+            die(json_encode(['result'=>'success']));
+        }else{
+            die(json_encode(['result'=>'error']));
+        }
+
+    }
     /*
      * 上传图片认证图片
      */
@@ -615,6 +640,18 @@ class MembersController extends BaseController
         $uploader = new Uploadfile();
         $base = Yii::getAlias("@public");
         $directory = '/expert/';
+        $path = $base.$directory;
+        $img = $directory.$uploader->base64_images($_POST['content'],$path);
+        $file = Yii::$app->params['public'].'/attachment';
+        die(json_encode(['result'=>'success','img'=>$img,'file'=>$file]));
+    }
+    /*
+     * 上传头像
+     */
+    public function actionUploadheader(){
+        $uploader = new Uploadfile();
+        $base = Yii::getAlias("@public");
+        $directory = '/wxhead/';
         $path = $base.$directory;
         $img = $directory.$uploader->base64_images($_POST['content'],$path);
         $file = Yii::$app->params['public'].'/attachment';

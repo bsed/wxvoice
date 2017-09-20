@@ -167,10 +167,9 @@ function listExperters(result){
 		    '<div class="appui-expert-name-title fs30 fc-black"><p class="appui-expert-name fwb">'+result.list[i].user.nickname+'</p>' +
 			'</div>' +
 			'<p class="appui-expert-introduce fs26 fc-black mt10">'+result.list[i].user.slogan+'</p>' +
-			'<div class="appui-expert-tags fs24 mt10 fc-grey666">擅长： '+tags+'' +
-			'<span class="mr5">上海</span></div></div></div>' +
+			'</div></div>' +
 			'<div class="appui-expert-statistic fs26 fc-black mt15" style="margin-top:0.2rem">' +
-			'<span></span><span></span><span onclick="gotoUserPageHtml('+result.list[i].user.id+')" >查看主页</span></div></div>';
+			'</div></div>';
     }
     $('#profCho').append(list);
     showMessage(result);

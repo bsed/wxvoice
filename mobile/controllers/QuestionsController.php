@@ -27,7 +27,9 @@ use dosamigos\qrcode\QrCode;
 class QuestionsController extends BaseController
 {
   public function actionQanda(){
-      return $this->render('qanda');
+      //
+      $type = htmls::getPiece('experttype');
+      return $this->render('qanda',['type'=>$type]);
   }
 /*
  * 问答详情
@@ -72,7 +74,7 @@ class QuestionsController extends BaseController
       $RecQuestions =  $questionModel->find()->with('expert')->asarray()->limit(3)->orderBy('views DESC')->all();
       //更新阅读次数
       $questionModel->updateAll(['views' => $question['views'] + 1], 'id ='.$id);
-
+         //
 
 
       return $this->render('qanda_detail',[
@@ -147,13 +149,16 @@ class QuestionsController extends BaseController
    * 接收问题
    */
   public function actionAsk(){
-
+      $model = new Questions();
       $member_id = Yii::$app->session['member_id'];
+      //查找对应的type
+      $expert = Experts::find()->asarray()->where(['member_id'=>$member_id])->one();
+
       if(!$member_id){
           Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
           return $this->redirect('/members/login.html');
       }
-      $model = new Questions();
+
       $uploader = new Uploadfile();
       $pics = $_POST['pics'];
       $nums = count($pics);
@@ -176,6 +181,7 @@ class QuestionsController extends BaseController
       $model->expert_id = $_POST['expert_id'];
       $model->member_id = $member_id;
       $model->askprice = $_POST['price'];
+      $model->typeid = $expert['type'];
       //正确应该用回调去更改状态,太累了就不做了
       $model->status = 1;
       $model->from = $_POST['from'];
@@ -276,7 +282,7 @@ class QuestionsController extends BaseController
           ],
           'file'=>$file,
           'mid'=>intval($member_id),
-      ]));
+      ]));           
   }
 
   public function actionStart_ask(){
@@ -291,8 +297,9 @@ class QuestionsController extends BaseController
           Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
           return $this->redirect('/circle/feeuser.html');
       }
+      $type = htmls::getPiece('experttype');
       //END
-      return $this->render('start_ask');
+      return $this->render('start_ask',['type'=>$type]);
   }
 
     /*

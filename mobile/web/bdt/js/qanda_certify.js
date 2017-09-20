@@ -6,7 +6,7 @@ var totalPage = "";
 var isMaster = 0;
 var jiaodu=0;
 var fromIndex = null;
-
+var imgConverData = '';
 var InterValObj; //timer变量，控制时间
 var count = 60; //间隔函数，1秒执行
 var curCount;//当前剩余秒数
@@ -25,43 +25,51 @@ $(document).ready(function() {
     dataLoading("图像上传中...");
     var result = $image.cropper("getCroppedCanvas");
     var imgData = result.toDataURL('image/png');
-      $.ajax({
-        url:'/members/upload.html',
-        data:{"content":imgData,"orientation":jiaodu,"_csrf":csrf},
-        type:"post",
-        dataType:'json',
-        success:function(data,status){
-          clearToastDialog();
-          if(data.result == "success"){
-            dataLoadedSuccess("上传认证图片成功");
-            // var certifiedPic = data.data.certifiedPic;
-            var certifiedPic = data.file+data.img;
-            if(certifiedPic == null || certifiedPic.length==0){
-                $("#uploadCertifiedPic").show();
-                $("#certifiedPic").hide();
-            }else{
-                $("#certifiedPicTips").html("当前名片<span class='fs28 fc-orange'>（点击可重新上传名片）</span>");
-                $("#uploadCertifiedPic").hide();
-                $("#certifiedPic").show();
-                $("#certifiedPic img").attr("src",certifiedPic);
-                $('input[name="uploadCertifiedPic"]').val(data.img);
-            }
-           $('.upload-container').css({'visibility':'hidden','z-index':'-1'},500);
-            $("#sure-btn").hide();
-            $("#modifyPicPage").hide();
-            $("#certifyHome").show();
-            
-          }else{
-            dataLoadedError(result.message);
-          }
-        },
-        error:function(data,status,e){
-          clearToastDialog();
-          alert(e);
-        }
+    //将base64 压缩后
+      convertImgToBase64(imgData, function(base64Img){
+          var imgConverData = base64Img;
+          $.ajax({
+              url:'/members/upload.html',
+              data:{"content":imgConverData,"orientation":jiaodu,"_csrf":csrf},
+              type:"post",
+              dataType:'json',
+              success:function(data,status){
+                  clearToastDialog();
+                  if(data.result == "success"){
+                      dataLoadedSuccess("上传认证图片成功");
+                      // var certifiedPic = data.data.certifiedPic;
+                      var certifiedPic = data.file+data.img;
+                      if(certifiedPic == null || certifiedPic.length==0){
+                          $("#uploadCertifiedPic").show();
+                          $("#certifiedPic").hide();
+                      }else{
+                          $("#certifiedPicTips").html("当前名片<span class='fs28 fc-orange'>（点击可重新上传名片）</span>");
+                          $("#uploadCertifiedPic").hide();
+                          $("#certifiedPic").show();
+                          $("#certifiedPic img").attr("src",certifiedPic);
+                          $('input[name="uploadCertifiedPic"]').val(data.img);
+                      }
+                      $('.upload-container').css({'visibility':'hidden','z-index':'-1'},500);
+                      $("#sure-btn").hide();
+                      $("#modifyPicPage").hide();
+                      $("#certifyHome").show();
+
+                  }else{
+                      dataLoadedError(result.message);
+                  }
+              },
+              error:function(data,status,e){
+                  clearToastDialog();
+                  alert(e);
+              }
+          });
       });
+
+
+
   });
 });
+
 //查看是否绑定了手机
 function ifBindMobile(){
     var csrf = $('input[name="csrf"]').val();
@@ -155,15 +163,7 @@ function configUserDataUI(user) {
     if (isMaster>0) {
         $('#askPrice').val(user.askPrice);
     };
-    // if (user.feeAddAsk==0) {
-    //     $('#feeAddAsk span').removeClass("appui_cell__switch-on");
-    // };
-    // if (user.joinFreeFristIntv==0) {
-    //     $('#joinFreeFristIntv span').removeClass("appui_cell__switch-on");
-    // };
-    // if (user.joinKnowledgeShare==0) {
-    //     $('#joinKnowledgeShare span').removeClass("appui_cell__switch-on");
-    // };
+
 
     }
 
@@ -291,6 +291,7 @@ function applyMasterMethods(){
     var askPrice   = $('#askPrice').val();
     var masterInfo = $('#masterInfo').val();
     var masterTitle = $('#masterTitle').val();
+    var type = $('.publishcolor').data('type');
     // var feeAddAsk  = hasSwitchOnClass("feeAddAsk");
     // var joinFreeFristIntv = hasSwitchOnClass("joinFreeFristIntv");
     // var joinKnowledgeShare = hasSwitchOnClass("joinKnowledgeShare");
@@ -309,21 +310,29 @@ function applyMasterMethods(){
         dataLoadedError("您的金额应大于等于1或者为 0");
     }else{
         //提交资料
-        sendInfosForExpert(askPrice, masterInfo, masterTitle);
+        sendInfosForExpert(askPrice, masterInfo, masterTitle, type);
     }
 }
 //提交资料审核
-function sendInfosForExpert(askPrice, masterInfo, masterTitle){
+function sendInfosForExpert(askPrice, masterInfo, masterTitle, type){
+    var mid = $('input[name="mid"]').val();
+    if(mid){
+        url = "/members/changeapply.html"
+    }else{
+        url = "/members/apply.html"
+    }
     var csrf = $('input[name="csrf"]').val();
     var certifiedPic = $('input[name="uploadCertifiedPic"]').val();
     dataLoading("正在提交...");
     $.ajax({
         type: "POST",
-        url: "/members/apply.html",
+        url: url,
         data: {
+            'mid':mid,
             "honor":masterTitle,
             "des":masterInfo,
             "price":askPrice,
+            "type":type,
             "card":certifiedPic,
             "_csrf":csrf
         },

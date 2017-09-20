@@ -26,7 +26,7 @@ class BannerModel extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'type'], 'required'],
-            [['des', 'link', 'images', 'listorder', 'value'],'safe'],
+            [['des', 'link', 'logo', 'listorder', 'value'],'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class BannerModel extends \yii\db\ActiveRecord
             'name' => '标题',
             'des' => '描述',
             'link' => '链接',
-            'images' => '图片',
+            'logo' => '图片',
             'listorder' => '排序',
             'value' => '多图上传',
         ];

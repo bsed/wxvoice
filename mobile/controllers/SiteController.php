@@ -27,8 +27,8 @@ class SiteController extends BaseController
     {
         $mid = Yii::$app->session['member_id'];
         //轮播图
-        $bannerModel = new Banners();
-        $banner = $bannerModel->find()->all();
+        $banner = htmls::getPiece('hdp');
+
         //问题，包括语音问答
         $questionModel = new Questions();
         $questions = $questionModel->find()->where(['rec'=>1])->with('expert')->limit(3)->all();

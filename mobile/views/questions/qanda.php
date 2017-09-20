@@ -28,12 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <div id="smallNav" style="height: 2.5rem; top: 2.55rem;">
                 <div>
                     <p>
-                        <span class="fs28 fc-grey666 active" onclick="judgeIndex1(0,1146,'推荐',1)">推荐</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(1,10005,'制造',1)">制造</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(2,1140,'设计',1)">设计</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(3,1141,'封装',1)">封装</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(4,1147,'测试',1)">测试</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(5,1148,'元器件',1)">元器件</span>
+                        <span class="fs28 fc-grey666 active" onclick="judgeIndex1(0,0,'推荐',1)">推荐</span>
+                        <?php foreach($type as $k=>$v):?>
+                        <span class="fs28 fc-grey666 <?php if($k==0):?><?php endif;?>" onclick="judgeIndex1(<?=$v['id'];?>,<?=$v['id'];?>,'<?=$v['name']?>',1)"><?=$v['name']?></span>
+                        <?php endforeach;?>
                     </p>
                     <img id="showMoreBtn" src="../bdt/images/nav_more.png" >
                 </div>

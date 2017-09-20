@@ -1418,31 +1418,16 @@ $(function(){
             dataLoadedError("请输入要分享的内容");
             return false;
         }
+        $('#js-bg').stop().fadeIn();
+        $('#js-recommend').stop().fadeIn(500,function(){$('#js-recommend').stop().animate({'top':'20%'},300);$('.appui-recommend-close').stop().animate({'bottom':'-2.4rem'},300);$('.link-style p').each(function(){
+            $(this).css('margin-top',-$(this).height()/2);
+        });
+        });
+
+    });
+    $("#confirmSubmit").click(function(){
         submitssayData();
     });
-
-    // 是否显示标签选项
-    var type = request('publishLocationType');
-    if(type == 1 || type == 2){
-        $(".nav-label").show();
-        $(".nav-label").on('click', function(){
-            $(".content-box .voice-box").hide();
-            $(".content-box").show();
-            $("#tagLabelList").show();
-            showVoiceIcon(2);
-        });
-        // 判断是否是圈子并判断是否是圈主发布
-        if(type == 2){
-            userTest = getSessionUserNoRedirect();
-            if(userTest== null ){
-                userTest = getSessionUser();
-            }
-            FileReleaseRequestQzShow(request('publishLocationId'));
-        }
-        selectLabel.LoadLabel(request("publishLocationId"),type);
-    }
-
-
 
     // 标题文字控制
     $("#message_title").on('input', function(){
@@ -1631,6 +1616,10 @@ function saveFunction(){
 // 上传内容代码
 function issueContent(){
     dataLoading("发布中,请勿操作...");
+
+    var content = $.trim($("#edit-mark").val());
+    var type = $('.publishcolor').data('type');
+    var summary = getTextFromHtml(trim($("#summaryInput").val()));
     var csrf = $('input[name="csrf"]').val();
     // 表示有上传图片
     if($(".select-view > figure").length > 0){
@@ -1648,13 +1637,14 @@ function issueContent(){
         // 上传的语音
         if(initOs.getOs() == 'h5'){
             //先将数据放到发帖的数据表中
-            var content = $.trim($("#edit-mark").val());
+
             (function(){
                 $.ajax({
                     data: {
                         'title':content,
-                        'summary':content,
+                        'summary':summary,
                         'content':content,
+                        'type':type,
                         'voices':'',//先上传其他的，然后再更新voices
                         'from':request('from'),
                         'publishtype':request('publishtype'),
@@ -1683,13 +1673,13 @@ function issueContent(){
     }else if(h5_Voice.recordPercent > 0 || h5_Voice.currentVoiceIndex > 0){
         //非iOS录音
         //先将数据放到发帖的数据表中
-        var content = $.trim($("#edit-mark").val());
         (function(){
             $.ajax({
                 data: {
                     'title':content,
-                    'summary':content,
+                    'summary':summary,
                     'content':content,
+                    'type':type,
                     'voices':'',//先上传其他的，然后再更新voices
                     'from':request('from'),
                     'publishtype':request('publishtype'),
@@ -1774,16 +1764,19 @@ function issueSubmit(fileId, state, imgArr,wxImg){
     }
     var headerTxt = $.trim($("#message_title").val());
     var contentTxt = $.trim($("#edit-mark").val());
-
+    var content = $.trim($("#edit-mark").val());
+    var type = $('.publishcolor').data('type');
+    var summary = getTextFromHtml(trim($("#summaryInput").val()));
     $.ajax({
         type: "post",
         url: '/articles/article_data.html',
         dataType: "json",
         data: {
-            "title":contentTxt,
+            "title":summary,
             "pics": imgArr,
             "videos": '',
-            "summary": contentTxt,
+            "type": type,
+            "summary": summary,
             "content": contentTxt,
             'from':request('from'),
             'circle_id':request('circle_id'),

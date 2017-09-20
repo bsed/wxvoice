@@ -161,10 +161,9 @@ $(function() {
 		var title = trim($("#titleInput").val()).replace(/</g, "&lt;").replace(/>/g, "&gt;");
 		var summary = getTextFromHtml(trim($("#summaryInput").val()));
 		var editNode = document.getElementById("edit-mark");
-
 		if(title == ""){
 			dataLoadedError("请输入文章的标题");
-		}else if(trim(editNode.innerText.replace(/[\r\n]/g,""))=="" && !hasImgNode(editNode) && !hasVideoNode(editNode)){
+		}else if(trim(editNode.innerText.replace(/[\r\n]/g,""))=="" && !hasImgNode(editNode) && !hasVideoNode(editNode) ||editNode.innerText=="请输入正文"){
 			dataLoadedError("请输入要分享的内容");
 		}else{
 			if(summary == ""){
@@ -174,6 +173,7 @@ $(function() {
 					initContentGet();
 					setInputToContents(editNode);
 					var textContent = getInputContentFromContents();
+					var shareSummary = createAutoSummary(textContent);
 					$("#summaryInput").val(createAutoSummary(textContent));
 				}
 			}
@@ -192,6 +192,8 @@ $(function() {
 		var title = trim($("#titleInput").val()).replace(/</g, "&lt;").replace(/>/g, "&gt;");
 		var summary = getTextFromHtml(trim($("#summaryInput").val()));//.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 		var editNode = document.getElementById("edit-mark");
+        //获取标签类型
+		var type = $('.publishcolor').data('type');
 
 		//summary中不能有连续2个回车键。过滤连续两个回车键
 	 	while (true){
@@ -215,12 +217,7 @@ $(function() {
 			dataLoadedError("请输入要分享的内容");
 		}else{
 			if($("#articleId")!=null && $("#articleId").val()!=""){
-				//textContent=$("#edit-mark").html();
-				//var contentNode = document.getElementById("edit-mark");
 				var imgStr = getPisStrFromNode(editNode);
-//				initContentGet();
-//				setInputToContents(editNode);
-//				alert(imgStr.length);
 				publishGrabArticle($("#articleId").val(),$("#nickname").val(),$("#edit-mark").html(),title,summary,imgStr);
 			}else{
 				initContentGet();
@@ -237,7 +234,7 @@ $(function() {
 
 
 
-				submitContent(textContent,title,summary);
+				submitContent(textContent,title,summary,type);
 				$('#js-recommend').stop().animate({'top':'-100%'},300);
 				$('.appui-recommend-close').stop().animate({'bottom':'-500%'},300,function(){$('#js-bg').stop().fadeOut();$('#js-recommend').stop().fadeOut(500);});
 			}
@@ -363,7 +360,7 @@ function saveFunction(){
 				// var imgStr = getPisStrFromNode(contentNode);
 				publishGrabArticle($("#articleId").val(),$("#nickname").val(),$("#edit-mark").html(),title,summary,uploadPics);
 			}else{
-				submitContent(textContent,title,summary);
+				submitContent(textContent,title,summary,type);
 				$('#js-recommend').stop().animate({'top':'-100%'},300);
 				$('.appui-recommend-close').stop().animate({'bottom':'-500%'},300,function(){$('#js-bg').stop().fadeOut();$('#js-recommend').stop().fadeOut(500);});
 			}
@@ -912,7 +909,7 @@ function createAutoSummary(textContent){
 }
 
 //发布文章
-function submitContent(textContent,title,summary){
+function submitContent(textContent,title,summary,type){
 	dataLoading("正在发布中...");
     var title = title;
     var content = textContent;
@@ -930,6 +927,7 @@ function submitContent(textContent,title,summary){
         	"title":title,
 			"content":content,
 			"summary":summary,
+			"type":type,
 			"pics":uploadPics,
 			"videos":uploadVideos,
             'from':request('from'),

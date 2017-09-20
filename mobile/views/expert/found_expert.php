@@ -25,13 +25,9 @@
                 <div>
                     <p>
                         <span class="fs28 fc-grey666 active" onclick="judgeIndex1(0,0,'推荐',1)">推荐</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(1,1,'制造',1)">制造</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(2,2,'设计',1)">设计</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(3,1214,'封装',1)">封装</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(4,1215,'测试',1)">测试</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(5,1216,'元器件',1)">元器件</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(6,1216,'耗材',1)">耗材</span>
-                        <span class="fs28 fc-grey666" onclick="judgeIndex1(7,1216,'投资',1)">投资</span>
+                        <?php foreach($type as $k=>$v):?>
+                            <span class="fs28 fc-grey666 <?php if($k==0):?><?php endif;?>" onclick="judgeIndex1(<?=$v['id'];?>,<?=$v['id'];?>,'<?=$v['name']?>',1)"><?=$v['name']?></span>
+                        <?php endforeach;?>
                     </p>
                     <img id="showMoreBtn" src="../bdt/images/nav_more.png">
                 </div>
