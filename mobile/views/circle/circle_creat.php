@@ -68,8 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <!--                        <img  src="../bdt/images/default.jpg">-->
                         <input type="hidden" name="pics" value="">
-                         <i class="bg-black"><img  id="circleLogoImg" src="../bdt/images/add_circle_pic_icon.jpg" /></i>
-
+                         <i class="bg-black"><img  id="circleLogoImg" src="../bdt/images/add_circle_pic.jpg" /></i>
                     </a>
                     <input id="circleName" type="text" class="circle-name-edit  fs32" placeholder="圈子名称">
                 </div>

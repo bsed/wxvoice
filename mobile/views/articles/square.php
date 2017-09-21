@@ -7,7 +7,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <link type="text/css" rel="stylesheet" href="../bdt/css/edit.min.css">
 <link type="text/css" rel="stylesheet" href="../bdt/css/swiper-3.4.0.min.css">
-<!--<script type="text/javascript" src="../bdt/js/foucs_util.js"></script>-->
 <script type="text/javascript" src="../bdt/js/square.js"></script>
 <script type="text/javascript" src="../bdt/js/commonArticList.js"></script>
 <script type="text/javascript" src="../bdt/js/commentListInPostlist.js"></script>
@@ -20,18 +19,29 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="statebar">
                 <a class="nav-act left-act" onclick="goBack();">
                     <img src="../bdt/images/nav_icon_back1.png"></a>
-                <h2 class="fs34">发现</h2>
-                <a class="shaixuan fs28 fc-black" id="shaixuanId">
-                    <span id="shaixuantext">筛选</span>
-                    <img src="../bdt/images/shaixuan.png"></a>
+                <h2 class="fs34">论坛</h2>
+<!--                <a class="shaixuan fs28 fc-black" id="shaixuanId">-->
+<!--                    <span id="shaixuantext">筛选</span>-->
+<!--                    <img src="../bdt/images/shaixuan.png"></a>-->
             </div>
 
-            <div class="shaixuan-list bc-grey bg-white fs28" id="shaixuanListId" style="display:none;">
-                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_all.png">全部</a>
-                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_hot.png">最热</a>
-                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_topic.png">话题</a>
-                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_zixun.png">资讯</a>
-                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_jingxuan.png">精选</a>
+<!--            <div class="shaixuan-list bc-grey bg-white fs28" id="shaixuanListId" style="display:none;">-->
+<!--                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_all.png">全部</a>-->
+<!--                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_hot.png">最热</a>-->
+<!--                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_topic.png">话题</a>-->
+<!--                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_zixun.png">资讯</a>-->
+<!--                <a class="shaixuan-item fc-black"><img src="../bdt/images/shaixuan_jingxuan.png">精选</a>-->
+<!--            </div>-->
+        </div>
+        <div id="smallNav" class="expert" style="top: 2rem; height: 2.5rem;">
+            <div>
+                <p>
+                    <span class="fs28 fc-grey666 luntantype active" data-type="0">综合</span>
+                    <?php foreach($type as $k=>$v):?>
+                        <span class="fs28 fc-grey666 luntantype" data-type="<?=$v['id'];?>"><?=$v['name']?></span>
+                    <?php endforeach;?>
+                </p>
+                 <img id="showMoreBtn" src="../bdt/images/nav_more.png">
             </div>
         </div>
 

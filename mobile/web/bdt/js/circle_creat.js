@@ -124,29 +124,35 @@ function loadEvent(){
         var result = $image.cropper("getCroppedCanvas",{width: 640, height: 640});
         var imgData = result.toDataURL('image/png');
         var csrf = $('input[name="csrf"]').val();
+        //压缩图片
 
-        $.ajax({
-            url:'/circle/upload.html',
-            data:{file:imgData,  _csrf:csrf},
-            type:"post",
-            dataType:'json',
-            success:function(data,status){
-                clearToastDialog();
-                if(data.result == "success"){
+        convertImgToBase64(imgData, function(base64Img){
+		   //ajax start
+			$.ajax({
+				url:'/circle/upload.html',
+				data:{file:base64Img,  _csrf:csrf},
+				type:"post",
+				dataType:'json',
+				success:function(data,status){
+					clearToastDialog();
+					if(data.result == "success"){
 
-                    $("#circleContainer1").css('display','block');
-                    $("#circleContainer2").css('display','block');
-                    $(".toview").css('display','none');
-                    $('.upload-container').css({'visibility':'hidden','z-index':'9'},500);
-                    $('#circleLogoImg').attr("src",publicImg+data.img);
-                    $('input[name="pics"]').val(data.img);
+						$("#circleContainer1").css('display','block');
+						$("#circleContainer2").css('display','block');
+						$(".toview").css('display','none');
+						$('.upload-container').css({'visibility':'hidden','z-index':'9'},500);
+						$('#circleLogoImg').attr("src",publicImg+data.img);
+						$('input[name="pics"]').val(data.img);
 
-                }else{
-                    dataLoadedError(result.message);
-                }
-            },
+					}else{
+						dataLoadedError(result.message);
+					}
+				},
 
+			});
+			//ajax end
         });
+
     });
 
 	monitorCount();
@@ -258,7 +264,6 @@ function createQzRequestFuntion(){
 function uploadImgFuntion(file){
 	// var file = $(this).get(0).files[i];
 	// var imageNameStr = $(this).get(0).value;
-	console.log(file.size);
 	var rFilter = /^(image\/jpeg|image\/png)$/i; // 检查图片格式
 	if (!rFilter.test(file.type) && file.type.indexOf("image")<0) {
         dataLoadedError("请选择jpeg、png格式的图片文件。");
@@ -356,7 +361,8 @@ function SetPicData(data){
 
 function myClose(){
 
-}function cardChange(inputFileId){
+}
+function cardChange(inputFileId){
     var file=$("#"+inputFileId).get(0).files[0];
 	var rFilter = /^(image\/jpeg|image\/png)$/i; // 检查图片格式
 	if (file.type.indexOf("image") == 0) {

@@ -36,8 +36,10 @@ class ArticlesController extends BaseController
     public function actionSquare(){
         $model = new Articles();
         $list = $model->find()->asarray()->all();
+        $type = htmls::getPiece('topictype');
         return $this->render('square',[
                 'list'=>$list,
+                'type'=>$type,
             ]
         );
     }

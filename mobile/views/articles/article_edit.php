@@ -65,8 +65,9 @@
         </div>
         <div class="appui-recommend-module-fd mt5 mb10">
             <div class="fs28">
+                <a class="publishtype publishcolor " data-type="0">综合</a>
                 <?php foreach($type as $k=>$v):?>
-                    <a class="publishtype <?php if($k == 0):?>publishcolor<?php else:?>bg-grey<?php endif;?>" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
+                    <a class="publishtype bg-grey" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
                 <?php endforeach;?>
             </div>
             <script>

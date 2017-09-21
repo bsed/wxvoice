@@ -45,22 +45,22 @@ $(document).ready(function() {
 	$('.page__bd *').click(function(e) {
 		$('#shaixuanListId').slideUp();
 	});
-
-	//页面筛选按钮的事件绑定
-	$('#shaixuanListId').find("a").each(function(index,e){
-		$(this).click(function(e) {
-			$("#shaixuantext").text($(this).text());
-			if($("#searchtype")!=null && $("#searchtype").length>0){//表示存在
-				$("#searchtype").val(index);
-			}else{//隐藏域不存在
-				$("body").append("<input type='hidden' id='searchtype' value='"+(index)+"'/>");
-			}
-			currentPage=1;
-			$("#squareList").html("");
-			//读取数据
-			getSquarePageListRequest(index);
-		});
-	});
+    
+	//页面筛选的点击事件
+    $('.luntantype').click(function(){
+        var index = $(this).data('type');
+        currentPage=1;
+        $("#squareList").html("");
+        getSquarePageListRequest(index);
+        $(this).not('luntantype').addClass('active');
+        $('.luntantype').not(this).removeClass('active').addClass('luntantype');
+        $("#shaixuantext").text($(this).text());
+        if($("#searchtype")!=null && $("#searchtype").length>0){//表示存在
+            $("#searchtype").val(index);
+        }else{
+            $("body").append("<input type='hidden' id='searchtype' value='"+(index)+"'/>");
+        }
+    });
 
 });
 

@@ -260,7 +260,7 @@ function convertImgToBase64(url, callback, outputFormat){
         var width = img.width;
         var height = img.height;
         // 按比例压缩2倍
-        var rate = (width<height ? width/height : height/width)/1.5;
+        var rate = (width<height ? width/height : height/width)/1.8;
         canvas.width = width*rate;
         canvas.height = height*rate;
         ctx.drawImage(img,0,0,width,height,0,0,width*rate,height*rate);
