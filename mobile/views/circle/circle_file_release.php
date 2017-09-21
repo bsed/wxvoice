@@ -151,7 +151,7 @@
         <div class="appui-recommend-module-bd mt5">
             <div class="clear"></div>
             <h4 class="fs28 fc-grey666 mt10">请输入标题(可选)，能提高阅读量哦！</h4>
-            <textarea class="bc-grey fs32 fc-black456 mt10 mb10" id="summaryInput" contenteditable="true" maxlength="40"></textarea>
+            <textarea class="bc-grey fs32 fc-black456 mt10 mb10" id="summaryInput"   placeholder="请输入标题(可选)，能提高阅读量哦！" contenteditable="true" maxlength="40"></textarea>
         </div>
         <div class="appui-open-publish" id="appuiOpenPublish" style="display:none;">
 				<span class="mr5" style="margin-left: 0.8rem;">
@@ -161,8 +161,9 @@
         </div>
         <div class="appui-recommend-module-fd mt5 mb10">
             <div class="fs28">
+                <a class="publishtype publishcolor" data-type="0">综合</a>
                 <?php foreach($type as $k=>$v):?>
-                    <a class="publishtype <?php if($k == 0):?>publishcolor<?php else:?>bg-grey<?php endif;?>" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
+                    <a class="publishtype bg-grey" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
                 <?php endforeach;?>
             </div>
             <script>

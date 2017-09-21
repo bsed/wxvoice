@@ -321,6 +321,7 @@ class CircleController extends BaseController
         $member_id = Yii::$app->session['member_id'];
         $preurl = Yii::$app->session['tryinto'];
         $feeUser = htmls::site();
+
         return $this->render('feeuser',[
             'mid'=> $member_id,
             'preurl'=> $preurl,

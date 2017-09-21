@@ -203,7 +203,6 @@ class MembersController extends BaseController
         $user = $cookie->getValue('user');
         //查询数据库中是否已有数据
         if(!$user){
-            Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             $this->startWx();
         }
        //写入之前，如果存在就直接返回到上一级页面，避免访问同一个url造成数据重复

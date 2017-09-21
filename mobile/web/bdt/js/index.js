@@ -269,7 +269,7 @@ function configDynamicList(result,index){
                 '<a class="'+getPocket+'">领红包</a></div>';
             var contents = '<div class="module-content mt10" >'+articles+'</div>';
         }else if(result.data.list[i].redid == 0){
-            var articles = '<h4 class="f-l-height fs30 find-text fwb mb5">'+result.data.list[i].title+'</h4>' +
+            var articles = '<h4 class="f-l-height fs30 find-text fwb mb5">'+result.data.list[i].content+'</h4>' +
                 '<p class="text-style fs28 fc-black face_tag mb10">' +
                 '<a class="fc-blue"></a>'+detailType+'</p>' +
                 '<div class="pic-layout message-pic-1-style mb5"><i>'+pics+'</i></div>';

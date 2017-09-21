@@ -213,7 +213,7 @@ function circleList(result){
                 '<span class="appui_qanda-voice-wave"><em class="wave1"></em><em class="wave2"></em><em class="wave3"></em></span><em class="tips">免费收听</em>' +
                 '<span class="appui_qanda-voice-wait" style="display:none;"></span></div><em class="appui-qanda-answer-time">3"</em></div></div>';
         }else if(result.data.list[i].videos != "0"){
-            detailType = result.data.list[i].summary;
+            detailType = result.data.list[i].content;
         }
         //判断是否已经领过红包,使用1对多关系
         getPocket = "";
@@ -240,7 +240,7 @@ function circleList(result){
                 '<a class="'+getPocket+'">领红包</a></div>';
             var contents = '<div class="module-content mt10" >'+articles+'</div>';
         }else if(result.data.list[i].redid == 0){
-            var articles = '<h4 class="f-l-height fs30 find-text fwb mb5">'+result.data.list[i].title+'</h4>' +
+            var articles = '<h4 class="f-l-height fs30 find-text fwb mb5">'+result.data.list[i].content+'</h4>' +
                 '<p class="text-style fs28 fc-black face_tag mb10">' +
                 '<a class="fc-blue"></a>'+detailType+'</p>' +
                 '<div class="pic-layout message-pic-1-style mb5"><i>'+pics+'</i></div>';

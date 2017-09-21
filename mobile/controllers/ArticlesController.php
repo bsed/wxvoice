@@ -274,14 +274,14 @@ class ArticlesController extends BaseController
             if($circle_info['member_id'] != $member_id){
                 if(!$feeuser){
                     Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-                    return $this->redirect('/circle/feeuser1.html');
+                    return $this->redirect('/circle/feeuser.html');
                 }
             }
 
         }else{
             if(!$feeuser){
                 Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-                return $this->redirect('/circle/feeuser1.html');
+                return $this->redirect('/circle/feeuser.html');
             }
         }
 
