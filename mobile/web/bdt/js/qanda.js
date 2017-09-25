@@ -343,7 +343,7 @@ function QuestionList(result,typeid){
                             'onclick="playAudioQaClickFunction('+result.data[i].id+',1,1,\'a_play_0_'+result.data[i].id+'\');">'+
                             '<i></i><span class="appui_qanda-voice-wave"><em class="wave1"></em><em class="wave2">' +
                             '</em><em class="wave3"></em>'+
-                            '</span><em class="tips">会员免费收听</em><span class="appui_qanda-voice-wait" ' +
+                            '</span><em class="tips">点击收听</em><span class="appui_qanda-voice-wait" ' +
                             'style="display:none;"></span></div>'+
                             '<em class="appui-qanda-answer-time">'+result.data[i].voice_time+'"</em><span class="appui-qanda-answer-listen"></span>' +
                             '</div> ';
@@ -351,7 +351,7 @@ function QuestionList(result,typeid){
             answerContent = '<div class="appui-qanda-answer" onclick="questionDetail('+result.data[i].id+')">' +
                 '<div class="appui-qanda-expertphoto">'+
                 '<img src="'+result.file+result.data[i].expert.photo+'"><i class="appui-userlevel bc-white">' +
-                '<img src="../bdt/images/v2.png"></i></div><div class="appui-qanda-answerstyle pictext free"><i></i><span class="appui-qanda-answerstyle-wave"></span><em class="tips">会员免费阅读</em></div>'+
+                '<img src="../bdt/images/v2.png"></i></div><div class="appui-qanda-answerstyle pictext free"><i></i><span class="appui-qanda-answerstyle-wave"></span><em class="tips">点击阅读</em></div>'+
                 '<span class="appui-qanda-answer-listen"></span>' +
                 '</div> ';
         }

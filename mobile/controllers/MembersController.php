@@ -287,7 +287,7 @@ class MembersController extends BaseController
                     Yii::$app->session['feeuser'] = 1;
                     die(json_encode(['result'=>'success']));
                 }
-                if($wxMember['feeuser']){
+                if($wxMember['feeuser'][0]['status'] == 1){
                     //查看加入时间
                     $addTime = $wxMember['feeuser'][0]['created'];
                     if(time() - $addTime > 365*24*3600){

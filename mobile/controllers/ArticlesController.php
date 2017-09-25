@@ -512,9 +512,18 @@ class ArticlesController extends BaseController
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
         }
-        if(!$feeuser){
-            Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-            return $this->redirect('/circle/feeuser.html');
+        if(isset($_GET['circle_id'])){
+            //查看是否加入了这个圈子
+            $circleModel = new Circlemembers();
+            $circleInfo = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$_GET['circle_id']])->one();
+            if(!$circleInfo){
+                return $this->redirect('/circle/circle_share_detail.html?id='.$_GET['circle_id']);
+            }
+        }else{
+            if(!$feeuser){
+                Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
+                return $this->redirect('/circle/feeuser.html');
+            }
         }
         //END
         $type = htmls::getPiece('topictype');

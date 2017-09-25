@@ -210,7 +210,7 @@ function circleList(result){
         if(result.data.list[i].voices){
             detailType = '<div class="voice-layout mt10"><div class="appui-qanda-answer">' +
                 '<div class="appui-qanda-answerstyle voice free" id="a_play_0_'+result.data.list[i].id+'" onclick="playAudioQaClickFunction('+result.data.list[i].id+',2,1,\'a_play_0_'+result.data.list[i].id+'\');"><i></i>' +
-                '<span class="appui_qanda-voice-wave"><em class="wave1"></em><em class="wave2"></em><em class="wave3"></em></span><em class="tips">免费收听</em>' +
+                '<span class="appui_qanda-voice-wave"><em class="wave1"></em><em class="wave2"></em><em class="wave3"></em></span><em class="tips">点击收听</em>' +
                 '<span class="appui_qanda-voice-wait" style="display:none;"></span></div><em class="appui-qanda-answer-time">3"</em></div></div>';
         }else if(result.data.list[i].videos != "0"){
             detailType = result.data.list[i].content;
