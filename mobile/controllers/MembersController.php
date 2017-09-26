@@ -7,6 +7,7 @@ use mobile\models\Members;
 use mobile\models\Wxpayrecord;
 use mobile\models\Experts;
 use mobile\models\Concerns;
+use mobile\models\Tixian;
 use mobile\models\Circlemembers;
 use mobile\models\Articles;
 use mobile\models\Questions;
@@ -115,7 +116,10 @@ class MembersController extends BaseController
         $fans = $model->find()->asarray()->with('fans')->where(['to_mid'=>$member_id])->count();
         //判断是否是付费会员
         $feeuser = Wxpayrecord::find()->asarray()->where(['mid'=>$member_id,'pay_type'=>'feeuser'])->count();
-
+        //如果加入了会员，则显示会员信息
+        $circelMember = Circlemembers::find()->asarray()->where(['mid'=>$member_id])->one();
+        //提现的金额
+        $tixian = Tixian::find()->where(['mid'=>$member_id])->sum('price');
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'user' => $user,
@@ -127,6 +131,8 @@ class MembersController extends BaseController
             'member_id' => $member_id,
             'feeuser' => $feeuser,
             'total' => $total,
+            'tixian' => $tixian,
+            'circelMember' => $circelMember,
         ]);
     }
     /**
@@ -292,7 +298,7 @@ class MembersController extends BaseController
                     $addTime = $wxMember['feeuser'][0]['created'];
                     if(time() - $addTime > 365*24*3600){
                         Yii::$app->session['feeuser'] = 0;
-                        die(json_encode(['result'=>'success']));
+                        die(json_encode(['result'=>'error']));
                     }else{
                         Yii::$app->session['feeuser'] = 1;
                         die(json_encode(['result'=>'success']));
@@ -300,7 +306,7 @@ class MembersController extends BaseController
 
                 }else{
                     Yii::$app->session['feeuser'] = 0;
-                    die(json_encode(['result'=>'success']));
+                    die(json_encode(['result'=>'error']));
                 }
 
                 }
@@ -477,14 +483,46 @@ class MembersController extends BaseController
         if(!$CirclePrice){
             $CirclePrice = '0.00';
         }
+        if(!$PocketPrice){
+            $PocketPrice = '0.00';
+        }
         //总的收入等于回答收入+红包收入+圈子收入
         $total = $QuestionPrice + $PocketPrice + $CirclePrice;
+        //提现的金额
+        $tixian = Tixian::find()->where(['mid'=>$member_id])->sum('price');
+        //提现记录
+        $tixianRecord = Tixian::find()->where(['mid'=>$member_id])->all();
         return $this->render('mywallet',[
             "QuestionPrice"=>$QuestionPrice,
             "PocketPrice"=>$PocketPrice,
             "CirclePrice"=>$CirclePrice,
             "total"=>$total,
+            "tixian"=>$tixian,
+            "tixianRecord"=>$tixianRecord,
         ]);
+    }
+    public function actionTixian(){
+        //提交体现申请
+        $mid = Yii::$app->session['member_id'];
+        $info = Members::find()->asarray()->where(['id'=>$mid])->one();
+        if($info['openid']){
+            $model = new Tixian();
+            $model -> mid = $mid;
+            $model -> openid = $info['openid'];
+            $model -> price = $_POST['price'];
+            $model -> created = time();
+            $model -> save();
+            $id = $model->id;
+            if($id){
+                die(json_encode(['result'=>'success']));
+            }else{
+                die(json_encode(['result'=>'error']));
+            }
+
+        }else{
+            die(json_encode(['result'=>'error']));
+        }
+
     }
     public function actionMycoupon(){
         $member_id = Yii::$app->session['member_id'];

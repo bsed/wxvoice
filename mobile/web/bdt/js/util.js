@@ -1731,8 +1731,7 @@ function customHistoryUtilsAdd(){
 
 
 function customHistoryUtilsBack(){
-	writeClientSession("backBool",1);
-	historyUtils.back();  
+    history.back(-1);
 }
 
 //测试昵称合法性

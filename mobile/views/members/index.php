@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <!--好友信息-->
                     <div class="u-i-moudele-bottom bg-white fs30">
-                        <a href="mywallet.html"><i id="moneyCount" class="fc-black"><?=$total;?></i><i class="fc-grey678">收入</i></a>
+                        <a href="mywallet.html"><i id="moneyCount" class="fc-black"><?=$total - $tixian;?></i><i class="fc-grey678">收入</i></a>
                         <a class="bc-grey" href="/members/myrelations.html#1"><i id="focusCount" class="fc-black"><?=$concern;?></i><i class="fc-grey678">关注</i></a>
                         <a href="/members/myrelations.html#2"><i id="fansCount" class="fc-black"><?=$fans;?></i><i class="fc-grey678">粉丝</i></a>
                     </div>
@@ -71,22 +71,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="function-module">
                     <!--功能列表-->
                     <div class="function bg-white bc-grey mt10">
-<!--                        <a class="function-btn bc-grey fc-black" href="circle_my.html">--> 
-<!--                            <img class="btn-img" src="../bdt/images/circle_grey.png">-->
-<!--                            <span class="fs30">密友圈</span>-->
-<!--                            <img class="btn-arrow" src="../bdt/images/icon06.png">-->
-<!--                        </a>-->
+                        <?php if($circelMember):?>
+                            <a class="function-btn bc-grey fc-black" href="#">
+                                <img class="btn-img" src="../bdt/images/circle_grey.png">
+                                <span class="fs30">会员有效期:  <?=date('Y-m-d',$circelMember['created']);?>至<?=date('Y-m-d',strtotime('+1 year'));?></span>
+                            </a>
+                        <?php endif;?>
 <!--                        <a class="function-btn bc-grey fc-black" href="square.html">-->
 <!--                            <img class="btn-img" src="../bdt/images/square_grey.png">-->
 <!--                            <span class="fs30">广场</span>-->
 <!--                            <img class="btn-arrow" src="../bdt/images/icon06.png">-->
 <!--                        </a>-->
-                        <a class="function-btn bc-grey fc-black" href="house_circle.html">
-                            <img class="btn-img" src="../bdt/images/icon07_grey.png">
-                            <span class="fs30">我关注的</span>
-                            <img class="btn-arrow" src="../bdt/images/icon06.png">
+<!--                        <a class="function-btn bc-grey fc-black" href="house_circle.html">-->
+<!--                            <img class="btn-img" src="../bdt/images/icon07_grey.png">-->
+<!--                            <span class="fs30">我关注的</span>-->
+<!--                            <img class="btn-arrow" src="../bdt/images/icon06.png">-->
 <!--                            <i class="subscribetips bg-red fs26 fc-white" id="subscribetips" style="display:block;"></i>-->
-                        </a>
+<!--                        </a>-->
                         <a class="function-btn bc-grey fc-black" href="myhomepage.html#0">
                             <img class="btn-img" src="../bdt/images/icon6_grey.png">
                             <span class="fs30">我的问答</span>

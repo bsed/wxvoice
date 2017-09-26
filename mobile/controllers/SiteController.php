@@ -6,6 +6,7 @@ use Yii;
 use mobile\controllers\BaseController;
 use common\tools\htmls;
 use mobile\models\Questions;
+use mobile\models\Articles;
 use mobile\models\Products;
 use mobile\models\Banners;
 use mobile\models\Members;
@@ -62,11 +63,16 @@ class SiteController extends BaseController
         //问答 ask
         $questionModel = new Questions();
         $ask = $questionModel->find()->asarray()->where(['like','question',$keys])->andwhere(['status'=>2])->with('expert','dianzan','comment')->all();
+        //论坛
+        $articlesModel = new Articles();
+        $articles = $articlesModel->find()->asarray()->where(['like','title',$keys])->andwhere(['from'=>'index'])->with('user','dianzan','comment','redpocket')->all();
+
         return $this->render('search',[
             "expert"=>$expert,
             "circle"=>$circle,
             "ask"=>$ask,
             "mid"=>$mid,
+            "articles"=>$articles,
         ]);
     }
 

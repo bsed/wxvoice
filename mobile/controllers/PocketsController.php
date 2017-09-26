@@ -15,6 +15,7 @@ use yii\filters\VerbFilter;
 use mobile\controllers\BaseController;
 use common\tools\htmls;
 use common\tools\Reward;
+use mobile\models\Circles;
 use dosamigos\qrcode\QrCode;
 
 
@@ -29,11 +30,14 @@ class PocketsController extends BaseController
             return $this->redirect('/members/login.html');
         }
         if(isset($_GET['circle_id'])){
-            //查看是否加入了这个圈子
-            $circleModel = new Circlemembers();
-            $circleInfo = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$_GET['circle_id']])->one();
-            if(!$circleInfo){
-                return $this->redirect('/circle/circle_share_detail.html?id='.$_GET['circle_id']);
+            //一，判断是否是自己创建的，不是的话再判断是否是已经购买这个圈子了
+            $ifCircle = Circles::find()->asarray()->where(['id'=>$_GET['circle_id']])->count();
+            if(!$ifCircle){
+                $circleModel = new Circlemembers();
+                $circleInfo = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$_GET['circle_id']])->one();
+                if(!$circleInfo){
+                    return $this->redirect('/circle/circle_share_detail.html?id='.$_GET['circle_id']);
+                }
             }
         }else{
             if(!$feeuser){

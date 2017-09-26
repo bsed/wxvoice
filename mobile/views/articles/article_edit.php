@@ -64,6 +64,7 @@
             <textarea class="bc-grey fs32 fc-black456 mt10 mb10" id="summaryInput" contenteditable="true" placeholder="给文章添加一段摘要，能提高阅读量哦！"></textarea>
         </div>
         <div class="appui-recommend-module-fd mt5 mb10">
+            <?php if($_GET['from'] != 'circle'):?>
             <div class="fs28">
                 <a class="publishtype publishcolor " data-type="0">综合</a>
                 <?php foreach($type as $k=>$v):?>
@@ -76,6 +77,7 @@
                     $('.publishtype').not(this).removeClass('publishcolor').addClass('bg-grey');
                 });
             </script>
+            <?php endif;?>
             <a class="bg-blue fs28 fc-white" id="confirmSubmit">发表</a>
         </div>
 

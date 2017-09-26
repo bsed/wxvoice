@@ -46,6 +46,7 @@ $c = Yii::$app->controller->action->id;
     <script type="text/javascript" src="../bdt/js/exif.js"></script>
     <script type="text/javascript" src="../bdt/js/cropper.js"></script>
     <script type="text/javascript" src="../bdt/js/playVoiceCommon.js"></script>
+    <script type="text/javascript" src="../bdt/js/jquerysession.js"></script>
     <?php if($c != 'article_edit'):?>
     <script type="text/javascript" src="../bdt/js/uploadimgs.js"></script>
     <?php endif;?>

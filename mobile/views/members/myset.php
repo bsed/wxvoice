@@ -59,12 +59,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         <i class="appui_cell__go"><img src="../bdt/images/icon06_blue.png"></i>
                     </div>
                     <hr class="appui-navline-x bg-greyf1">
-                    <div class="appui_cell fs28" onclick="location='feedback.html'">
-                        <div class="appui_cell__bd">
-                            <p class="fc-black">意见反馈</p>
-                        </div>
-                        <i class="appui_cell__go"><img src="../bdt/images/icon06_blue.png"></i>
-                    </div>
+<!--                    <div class="appui_cell fs28" onclick="location='feedback.html'">-->
+<!--                        <div class="appui_cell__bd">-->
+<!--                            <p class="fc-black">意见反馈</p>-->
+<!--                        </div>-->
+<!--                        <i class="appui_cell__go"><img src="../bdt/images/icon06_blue.png"></i>-->
+<!--                    </div>-->
                     <hr class="appui-navline-x bg-greyf1">
                     <div class="appui_cell fs28" onclick="location='aboutus_details.html'">
                         <div class="appui_cell__bd">

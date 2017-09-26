@@ -1765,7 +1765,12 @@ function issueSubmit(fileId, state, imgArr,wxImg){
     var headerTxt = $.trim($("#message_title").val());
     var contentTxt = $.trim($("#edit-mark").val());
     var content = $.trim($("#edit-mark").val());
-    var type = $('.publishcolor').data('type');
+    if(request('from') == 'circle'){
+        var type = 0;
+    }else{
+        var type = $('.publishcolor').data('type');
+    }
+
     var summary = getTextFromHtml(trim($("#summaryInput").val()));
     $.ajax({
         type: "post",

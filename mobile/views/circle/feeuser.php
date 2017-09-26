@@ -1,5 +1,6 @@
 <body>
 <script type="text/javascript" src="../bdt/js/picPop.js"></script>
+<script type="text/javascript" src="../bdt/js/feeuser.js"></script>
 <link type="text/css" rel="stylesheet" href="../bdt/css/circle.css">
 <div id="container" class="container article-container bg-grey">
     <div id="page">

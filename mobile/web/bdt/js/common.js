@@ -9,7 +9,11 @@ $(document).ready(function(e) {
     });
 
 	//----------------------判断是否是付费会员-----------------------//
-    isFeeUser();
+    var isFee = $.session.get('feeuser');
+    if(!isFee){
+        isFeeUser();
+    }
+
 	//----------------------首页热门回答-保证语音控件和用户姓名能和头像同行显示-----------------------//
 	var wLeft = $('.qanda-module').width();
 	$('.qanda-right').width(wLeft-51);//51是减去左侧头像40和间距10，并且保证右浮动减少一像素，所以是减少51像素
@@ -166,7 +170,12 @@ function isFeeUser(){
         },
         dataType: "json",
         success: function(data){
-         // alert(data.addtime);
+            if(data.result == 'success'){
+                $.session.set('feeuser', 1);
+            }else{
+                $.session.set('feeuser', 0);
+            }
+
         }
     });
 }

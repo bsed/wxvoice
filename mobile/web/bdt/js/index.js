@@ -175,7 +175,7 @@ function getSquarePageListRequest(){
 }
 
 
-//生成楼市百态数据列表
+//生成数据列表
 function configDynamicList(result,index){
 	var list = "";
     for(var i = 0; i < result.data.list.length; i++){
@@ -262,18 +262,17 @@ function configDynamicList(result,index){
         }
         //判断红包
         if(result.data.list[i].redid != 0){
-
             var articles = '<p class="text-style fs32 fc-black456 face_tag mb5">'+result.data.list[i].title+'</p>' +
                 '<div class="redpacket-show mt5 mb5" onclick="gotoRedPocketDetailHtml('+result.data.list[i].redid+', this);" id="redPacket">' +
                 '<img src="../bdt/images/hongbao_details.png"><p class="fs30 fc-black">'+result.data.list[i].user.nickname+'发的新手红包</p>' +
                 '<a class="'+getPocket+'">领红包</a></div>';
             var contents = '<div class="module-content mt10" >'+articles+'</div>';
         }else if(result.data.list[i].redid == 0){
-            var articles = '<h4 class="f-l-height fs30 find-text fwb mb5">'+result.data.list[i].content+'</h4>' +
+            var articles = '<h4 class="f-l-height fs30 find-text fwb mb5" onclick=gotoArticDetailHtml('+result.data.list[i].id+',\''+from+'\',\''+publishtype+'\');>'+result.data.list[i].content+'</h4>' +
                 '<p class="text-style fs28 fc-black face_tag mb10">' +
                 '<a class="fc-blue"></a>'+detailType+'</p>' +
                 '<div class="pic-layout message-pic-1-style mb5"><i>'+pics+'</i></div>';
-            var contents = '<div class="module-content mt10" onclick=gotoArticDetailHtml('+result.data.list[i].id+',\''+from+'\',\''+publishtype+'\');>'+articles+'</div>';
+            var contents = '<div class="module-content mt10" >'+articles+'</div>';
         }
         // onclick="gotoUser_pageHtml('+result.data.list[i].user.id+');"
         list +='<div class="f-f-module mb10 bg-white"><div class="find-container"><div class="find-header"><div class="f-h-left">' +

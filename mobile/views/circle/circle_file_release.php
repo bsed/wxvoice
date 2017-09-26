@@ -160,18 +160,21 @@
             <p class="fs28 fc-grey666">公开发布（允许转发到圈外）</p>
         </div>
         <div class="appui-recommend-module-fd mt5 mb10">
-            <div class="fs28">
-                <a class="publishtype publishcolor" data-type="0">综合</a>
-                <?php foreach($type as $k=>$v):?>
-                    <a class="publishtype bg-grey" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
-                <?php endforeach;?>
-            </div>
-            <script>
-                $('.publishtype').click(function(){
-                    $(this).not('bg-blue').addClass('publishcolor');
-                    $('.publishtype').not(this).removeClass('publishcolor').addClass('bg-grey');
-                });
-            </script>
+         <?php if($_GET['from'] != 'circle'):?>
+                <div class="fs28">
+                    <a class="publishtype publishcolor" data-type="0">综合</a>
+                    <?php foreach($type as $k=>$v):?>
+                        <a class="publishtype bg-grey" data-type="<?=$v['id'];?>"><?=$v['name'];?></a>
+                    <?php endforeach;?>
+                </div>
+                <script>
+                    $('.publishtype').click(function(){
+                        $(this).not('bg-blue').addClass('publishcolor');
+                        $('.publishtype').not(this).removeClass('publishcolor').addClass('bg-grey');
+                    });
+                </script>
+            <?php endif;?>
+
             <a class="bg-blue fs28 fc-white" id="confirmSubmit">发表</a>
         </div>
     </div>

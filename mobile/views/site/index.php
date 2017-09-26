@@ -69,57 +69,10 @@ use common\tools\htmls;
             </div>
 
 
-            <!--热门楼盘-->
-            <div class="index-module mt10 indexloupan"  style="display:none">
-                <h3 class="index-module-head b-b-greyf5 bg-white">
-                    <span class="fs32 fc-black">热门楼盘</span>
-                    <a href="/loupan/loupan_list.html"><img src="../bdt/images/go80 .png"></a>
-                </h3>
-                <div class="index-module-body fs30 fc-black indexloupan-list">
-                    <?php foreach($recLoupan as $k=>$v):?>
-                    <div class="indexloupan-item bg-white" onclick="gotoLou(<?=$v['id'];?>)">
-                        <i style="height: 98px;">
-                            <img src="<?=Yii::$app->params['public']?>/attachment<?=$v['cover']?>"></i>
-                        <h3 class="fs30 fc-black"><?=$v['name']?></h3><em></em>
-                        <p class="fs24 fc-grey999"><img src="../bdt/images/address_tag.png"><?=$v['place']?></p>
-                    </div>
-                    <?php endforeach;?>
-
-                </div>
-            </div>
-
-            <!--问答精选-->
-            <div class="index-module indexqanda" style="display:none">
-                <h3 class="index-module-head b-b-greyf5 bg-white">
-                    <span class="fs32 fc-black">问答精选</span>
-                    <a href="/questions/qanda.html"><img src="../bdt/images/go80 .png"></a>
-                </h3>
-
-                  <!--list-->
-                <?php foreach($questions as $k=>$v):?>
-                    <div class="index-module-body fs30 fc-black indexqanda-list" <?php if($k%2 == 1):?>style="background:#fff"<?php endif;?>>
-                        <div class="indexqanda-item"><div class="play-voice-box wrap" onclick="playQAHotVoice(<?=$v['id']?>,this)">
-                                <div class="circle"><div class="percent left"></div>
-                                    <div class="percent right wth0"></div></div>
-                                <div class="play-voice-state">
-                                    <img src="<?=Yii::$app->params['public'].'/attachment'.$v['expert']['photo']?>"><span>
-                                        <img class="paly-btn" src="../bdt/images/play.png">
-                                        <img class="suspend-btn" style="display: none;" src="../bdt/images/suspend.png"></span>
-                                </div>
-                            </div>
-                            <h3 class="fs30 fc-black" onclick="window.location.href='/questions/qanda_detail.html?id=<?=$v['id']?>'"><?=$v['question']?></h3>
-                            <p class="fs26 fc-grey999">上官剑</p>
-                            <span class="fs26 fc-grey999">28人</span>
-                        </div>
-                    </div>
-                <?php endforeach;?>
-                  <!--listEND-->
-            </div>
-
             <!--楼市百态-->
             <div class="index-module indexsquare">
                 <h3 class="index-module-head b-b-greyf5 bg-white">
-                    <span class="fs32 fc-black">楼市百态</span>
+                    <span class="fs32 fc-black">精选</span>
                     <a href="/articles/square.html"><img src="../bdt/images/go80 .png"></a>
                 </h3>
                 <div class="index-module-body fs30 fc-black indexsquare-list" id="indexSquareList">

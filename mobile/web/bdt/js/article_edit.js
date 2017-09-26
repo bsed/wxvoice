@@ -193,7 +193,11 @@ $(function() {
 		var summary = getTextFromHtml(trim($("#summaryInput").val()));//.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 		var editNode = document.getElementById("edit-mark");
         //获取标签类型
-		var type = $('.publishcolor').data('type');
+        if(request('from') == 'circle'){
+            var type = 0;
+        }else{
+            var type = $('.publishcolor').data('type');
+        }
 
 		//summary中不能有连续2个回车键。过滤连续两个回车键
 	 	while (true){
@@ -911,6 +915,7 @@ function createAutoSummary(textContent){
 //发布文章
 function submitContent(textContent,title,summary,type){
 	dataLoading("正在发布中...");
+
     var title = title;
     var content = textContent;
     var csrf = $('input[name="csrf"]').val();

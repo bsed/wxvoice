@@ -542,7 +542,7 @@ ul.income-details>li:nth-of-type(3n+2):after{content:''; width:0.05rem; height:1
 ul.income-details>li>span{width:100%; height:auto; display:block;}
 .cash-btn{width:6rem; height:1.6rem; display:block; border-radius:1.6rem; background:#f54; text-align:center; line-height:1.6rem; margin:1.5rem auto 0; box-shadow:0 0.25rem 1rem rgba(255,85,68,0.15);}
 .cash-con.cannot .cash-btn{background:rgba(85,119,187,0.2); box-shadow:0 0.25rem 1rem rgba(85,119,187,0.15);}
-.cash-tips{width:100%; height:1rem; display:none; text-align:center; line-height:1rem; margin-top:0.5rem;}
+.cash-tips{width:100%; height:1rem; text-align:center; line-height:1rem; margin-top:0.5rem;}
 .cash-con.cannot .cash-tips{display:block;}
 .cash-rule{width:3rem; height:1.5rem; display:none; position:fixed; bottom:1.5rem; left:50%; margin-left:-1.5rem; text-align:center; line-height:1.5rem;}
 

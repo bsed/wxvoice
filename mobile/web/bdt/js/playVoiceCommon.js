@@ -193,7 +193,12 @@ function initAllPlayVoiceState(){
 
 //播放qa
 function playAudioQaClickFunction(id, type, listenType, objId, allowPauseBool) {
-    //记录每一次播放的记录
+    //怎么判断是否是付费会员
+    var m = $.session.get('feeuser');
+    if(!m){
+        window.location.href="/circle/feeuser.html";
+        return false;
+    }
     g_all_contentType = 2;
     playAudioClickFunctionEx(id, type, listenType, objId, allowPauseBool, 0);
 }

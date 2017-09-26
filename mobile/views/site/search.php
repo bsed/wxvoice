@@ -20,22 +20,7 @@ use common\tools\htmls;
         </div>
         <div class="page__bd scrollbd bg-grey" id="page__bd">
             <div class="top-space7"></div>
-            <!--热门搜索-->
-            <div class="search-hot mt10 bg-white" style="display: none;" id="hotLabel">
-                <h3 class="fs28 fc-black">热门搜索</h3>
-                <div class="search-hot-list fs28 fc-black456">
-                    <span class="bg-greyf1">云杉郡</span>
-                    <span class="bg-greyf1">大老哥</span>
-                    <span class="bg-greyf1">Mr.</span>
-                    <span class="bg-greyf1">上海</span>
-                    <span class="bg-greyf1">杭州</span>
-                    <span class="bg-greyf1">和昌府</span>
-                    <span class="bg-greyf1">青岛</span>
-                    <span class="bg-greyf1">调控</span>
-                    <span class="bg-greyf1">税费</span>
-                    <span class="bg-greyf1">张百忍</span>
-                </div>
-            </div>
+
             <?php if($expert):?>
             <!--搜索结果推荐-行家-->
             <div class="search-resault bg-white" id="search-resault-expert" style="display:block;">
@@ -116,9 +101,9 @@ use common\tools\htmls;
                 </h3>
                 <div class="search-resault-list bg-grey fs28 fc-black456 qandaList">
                     <?php foreach($ask as $k=>$v):?>
-                    <div class="appui-qanda-module mb10" onclick="goQADetailHtml(<?=$v['id']?>)">
-                        <div class="appui-qanda-question"><?=$v['question']?></div>
-                        <div class="appui-qanda-answer"><div class="appui-qanda-expertphoto" onclick="gotoUser_pageHtml(1)">
+                    <div class="appui-qanda-module mb10" >
+                        <div class="appui-qanda-question" onclick="goQADetailHtml(<?=$v['id']?>)"><?=$v['question']?></div>
+                        <div class="appui-qanda-answer"><div class="appui-qanda-expertphoto" >
                                 <img src="<?=Yii::$app->params['public'].'/attachment'.$v['expert']['photo']?>">
                                 <i class="appui-userlevel bc-white">
                                     <img src="../bdt/images/v2.png"></i></div>
@@ -143,6 +128,40 @@ use common\tools\htmls;
 
                 </div>
             </div>
+            <?php endif;?>
+            <?php if($articles):?>
+                <!--搜索结果推荐-问答-->
+                <div class="search-resault bg-white mt10" id="search-resault-qanda" style="display:block;">
+                    <h3 class="fs28 fc-black b-b-grey">论坛</h3>
+                    <div class="search-resault-list bg-grey fs28 fc-black456 qandaList">
+                        <?php foreach($articles as $k=>$v):?>
+                            <div class="appui-qanda-module mb10" >
+                                <div class="appui-qanda-question" onclick="goQADetailHtml(<?=$v['id']?>)"><?=$v['title']?></div>
+                                <div class="appui-qanda-answer"><div class="appui-qanda-expertphoto">
+                                        <img src="<?=Yii::$app->params['public'].'/attachment'.$v['user']['photo']?>">
+                                        <i class="appui-userlevel bc-white">
+                                            <img src="../bdt/images/v2.png"></i></div>
+                                    <div class="appui-qanda-answerstyle voice free" id="a_play_0_<?=$v['id']?>" onclick="playAudioQaClickFunction(<?=$v['id']?>,2   ,1,'a_play_0_<?=$v['id']?>');">
+                                        <i></i>
+                                        <span class="appui_qanda-voice-wave">
+						<em class="wave1"></em><em class="wave2"></em>
+						<em class="wave3"></em></span>
+                                        <em class="tips">免费收听</em>
+                                        <span class="appui_qanda-voice-wait" style="display:none;"></span></div>
+                                    <em class="appui-qanda-answer-time"><?=$v['voice_time']?>"</em></div>
+                                <div class="appui-qanda-expertinfo"><div class="appui-qanda-expertinfo">
+                                        <div class="time-statistic fs22" id="bottom_1_<?=$v['id'];?>">
+                                            <span class="fc-greyabc mr10 "><i><?=htmls::formatTime($v['created']);?></i></span>
+                                            <span class="fc-greyabc"><i><?=$v['counts']?></i>阅读</span>
+                                            <span class="fc-red"></span><div class="statistic">
+                                                <a class="like fc-greyabc <?php if(htmls::dianzan($v['id'])):?>on fc-red<?php endif;?>" onclick="dianzanClickluntan(<?=$v['id']?>,1,<?=$mid;?>)" id="dianzan<?=$v['id']?>"><?=count($v['dianzan'])?></a>
+                                                <a class="comment ml10 fc-greyabc" id="pinglun_<?=$v['id']?>"><?=count($v['comment'])?></a>
+                                            </div></div></div></div>
+                            </div>
+                        <?php endforeach;?>
+
+                    </div>
+                </div>
             <?php endif;?>
             <script>
                 function seeMoreExpert(){
@@ -177,6 +196,21 @@ use common\tools\htmls;
                         }
                     }
                 }
+                function dianzanClickluntan(id,type, mid){
+                    if(mid == undefined){
+                        dataLoading("请先登录");
+                        window.location.href="/members/login.html";
+                        return false;
+                    }
+                    if (ddClick==false) {
+                        ddClick=true;
+                        if ($('#dianzan'+id).hasClass("on")) {
+                            zanOrCaiRequestluntan(0, 1,id);
+                        }else{
+                            zanOrCaiRequestluntan(1, 1,id);
+                        }
+                    }
+                }
                 //data:{"articleId":1,"type":"0-取消操作，1-执行操作","status":"0-踩，1-点赞","userId":"userId"}
                 function zanOrCaiRequest(type, status, id) {
                     //currAttitude：0-当前是踩，1-赞，2-无表示
@@ -188,6 +222,39 @@ use common\tools\htmls;
                         async: true,
                         data: {
                             "question_id": id,
+                            "type": type,
+                            "_csrf": csrf,
+                        },
+                        success: function(result) {
+                            ddClick = false;
+                            if (result.result == "success") {
+                                //"data":{"currStatus":"当前态度：0-踩，1-点赞，2-无表情","totLikes":"总点赞人数","totOppose":"总点踩人数"}
+                                var zanCount = $('#dianzan'+id).html();
+                                if (result.data.currStatus==1) {
+                                    $('#dianzan'+id).addClass('on fc-red');
+                                    dataLoadedSuccess("点赞成功");
+                                    $('#dianzan'+id).text(parseInt(zanCount)+1);
+                                }else if (result.data.currStatus==0) {
+                                    dataLoadedSuccess("点踩成功");
+                                    $('#dianzan'+id).text(parseInt(zanCount)-1);
+                                    $('#dianzan'+id).removeClass('on fc-red');
+                                }
+                            }
+                        }
+                    });
+
+
+                }
+                function zanOrCaiRequestluntan(type, status, id) {
+                    //currAttitude：0-当前是踩，1-赞，2-无表示
+                    var csrf = $('input[name="csrf"]').val();
+                    $.ajax({
+                        type: "post",
+                        url: '/dianzan/dianzan.html',
+                        dataType: "json",
+                        async: true,
+                        data: {
+                            "article_id": id,
                             "type": type,
                             "_csrf": csrf,
                         },
