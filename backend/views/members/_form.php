@@ -14,6 +14,8 @@ use common\widgets\tags;
         <?= $form->field($model, $v)->dropDownList(['0' => '女', '1' => '男']) ?>
     <?php elseif($v == 'vip'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
+        <?php elseif($v == 'isguanjia'):?>
+        <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
         <?php elseif($v == 'tags'):?>
          <?= $form->field($model, $v)->widget('common\widgets\tags\TagWidget') ?>
         <?php elseif($v == 'slogan'):?>

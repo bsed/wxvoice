@@ -51,7 +51,7 @@ class Articles extends \yii\db\ActiveRecord
             'member_id' => '用户',
             'title' => '标题',
             'summary' => '摘要',
-            'counts' => '阅读数'
+            'counts' => '阅读数',
             'content' => '分享内容',
             'imgs' => '照片',
             'voice' => '语音',

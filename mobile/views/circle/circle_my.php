@@ -158,9 +158,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <!--页面底部-->
-    <?php if(!$info['feeuser']):?>
+    <?php if(!$info['isguanjia']):?>
       <?php if($info['vip'] == 1 && $count < 1):?>
-            <div class="page__fd scrollfd" id="showCreateCircle" style="display:block">
+            <div class="page__fd scrollfd" style="display:block">
                 <div class="creat-circle-act">
                     <a class="creat-circle-btn fc-white bg-blue fs30" onclick="creatCircle()">创建圈子</a>
                 </div>
@@ -178,7 +178,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </style>
         <?php endif;?>
     <?php else:?>
-        <div class="page__fd scrollfd" id="showCreateCircle" style="display:block">
+        <div class="page__fd scrollfd"  style="display:block">
             <div class="creat-circle-act">
                 <a class="creat-circle-btn fc-white bg-blue fs30" onclick="creatCircle()">创建圈子</a>
             </div>

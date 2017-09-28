@@ -77,17 +77,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <span class="fs30">会员有效期:  <?=date('Y-m-d',$circelMember['created']);?>至<?=date('Y-m-d',strtotime('+1 year'));?></span>
                             </a>
                         <?php endif;?>
-<!--                        <a class="function-btn bc-grey fc-black" href="square.html">-->
-<!--                            <img class="btn-img" src="../bdt/images/square_grey.png">-->
-<!--                            <span class="fs30">广场</span>-->
-<!--                            <img class="btn-arrow" src="../bdt/images/icon06.png">-->
-<!--                        </a>-->
-<!--                        <a class="function-btn bc-grey fc-black" href="house_circle.html">-->
-<!--                            <img class="btn-img" src="../bdt/images/icon07_grey.png">-->
-<!--                            <span class="fs30">我关注的</span>-->
-<!--                            <img class="btn-arrow" src="../bdt/images/icon06.png">-->
-<!--                            <i class="subscribetips bg-red fs26 fc-white" id="subscribetips" style="display:block;"></i>-->
-<!--                        </a>-->
                         <a class="function-btn bc-grey fc-black" href="myhomepage.html#0">
                             <img class="btn-img" src="../bdt/images/icon6_grey.png">
                             <span class="fs30">我的问答</span>

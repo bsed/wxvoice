@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9c122fe449e0d3237168f8563d4d7a2",
+    "content-hash": "6b2996c5cd5ca541ea4a65476180321c",
     "packages": [
         {
             "name": "2amigos/yii2-qrcode-helper",
@@ -485,12 +485,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "065287bc14f3e606fe6aec6ecfeac9616afbd3cb"
+                "reference": "9e28b54996d260184abc9c36c59e2740be2184a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/guzzle/guzzle/065287bc14f3e606fe6aec6ecfeac9616afbd3cb.zip",
-                "reference": "065287bc14f3e606fe6aec6ecfeac9616afbd3cb",
+                "url": "https://files.phpcomposer.com/files/guzzle/guzzle/9e28b54996d260184abc9c36c59e2740be2184a4.zip",
+                "reference": "9e28b54996d260184abc9c36c59e2740be2184a4",
                 "shasum": ""
             },
             "require": {
@@ -542,7 +542,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-06-10 14:17:14"
+            "time": "2017-09-22 10:35:04"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1035,24 +1035,24 @@
         },
         {
             "name": "overtrue/wechat",
-            "version": "3.3.2",
+            "version": "3.3.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/wechat.git",
-                "reference": "18f22de7a1d88d81a8e38ce03f23fa020369e8ed"
+                "reference": "73bec904e511b2f588f6e559db2d981b6b52ba98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/overtrue/wechat/18f22de7a1d88d81a8e38ce03f23fa020369e8ed.zip",
-                "reference": "18f22de7a1d88d81a8e38ce03f23fa020369e8ed",
+                "url": "https://files.phpcomposer.com/files/overtrue/wechat/73bec904e511b2f588f6e559db2d981b6b52ba98.zip",
+                "reference": "73bec904e511b2f588f6e559db2d981b6b52ba98",
                 "shasum": ""
             },
             "require": {
                 "doctrine/cache": "~1.4",
                 "ext-openssl": "*",
-                "guzzlehttp/guzzle": "~6.2.1",
+                "guzzlehttp/guzzle": "~6.2",
                 "monolog/monolog": "^1.17",
-                "overtrue/socialite": ">=1.0.24",
+                "overtrue/socialite": ">=1.0.25",
                 "php": ">=5.5.0",
                 "pimple/pimple": "~3.0",
                 "symfony/http-foundation": "~2.6|~2.7|~2.8|~3.0",
@@ -1089,7 +1089,7 @@
                 "weixin",
                 "weixin-sdk"
             ],
-            "time": "2017-04-27T04:10:13+00:00"
+            "time": "2017-09-20T09:22:38+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -2080,7 +2080,8 @@
     "stability-flags": {
         "kartik-v/yii2-widget-fileinput": 20,
         "qiniu/php-sdk": 20,
-        "flc/dysms": 20
+        "flc/dysms": 20,
+        "guzzlehttp/guzzle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -125,7 +125,7 @@ function showMessage(result){
         $('#downloadMoreData').remove();
         $('#noticeListCon0').append('<a class="appui_loadmore fs32 fc-greyabc">已经没有了</a>');
     }else if(result.data.list.length == 0){
-        $('#noticeListCon0').html(commonNoMoreContent("暂无问答"));
+        $('#noticeListCon0').html(commonNoMoreContent("暂无消息"));
     }
 }
 //加载更多

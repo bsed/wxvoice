@@ -198,7 +198,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">收费规则</h2>
         <div class="appui-helptext-bd fc-black456 b-b-grey">
             <div class="appui-helptext-bd-con">
-                <p class="fs30 mb10">若用户使用提问券提问，则该次回答收益不超过<span>10</span>元。</p>
+                <?=$this->params['site']['guize'];?>
             </div>
         </div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
@@ -207,8 +207,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">追问规则</h2>
         <div class="appui-helptext-bd fc-black456 b-b-grey">
             <div class="appui-helptext-bd-con">
-                <p class="fs30 mb10">您回答一个问题后，提问者可以向您免费“追问”。</p>
-                <p class="fs30 mb10">开启免费追问，进一步增加您与提问者的交流机会，使问答体验更加完整。</p>
+                <?=$this->params['site']['guize'];?>
             </div>
         </div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
@@ -217,7 +216,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">免费规则</h2>
         <div class="appui-helptext-bd fc-black456 b-b-grey">
             <div class="appui-helptext-bd-con">
-                <p class="fs30 mb10">回答问题后前<span>10</span>次开放给他人免费听，即有机会登上首页精选。</p>
+                <?=$this->params['site']['guize'];?>
             </div>
         </div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
@@ -226,69 +225,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">开放规则</h2>
         <div class="appui-helptext-bd fc-black456 b-b-grey">
             <div class="appui-helptext-bd-con">
-                <p class="fs30 mb10">欢迎您加入问房知识开放计划，让您的连珠妙语使更多人受益！加入本计划后：</p>
-                <p class="fs30 mb10">1. 您回答时间超过<span>30</span>天的问题，可被免费听。</p>
-                <p class="fs30 mb10">2. 您的回答的问题，将获得更多问房推广资源，包括：问房首页、问房公众号、合作伙伴外网推荐位等等。</p>
-                <p class="fs30 mb10">3. 您可随时选择退出本计划，恢复付费状态。</p>
+                <?=$this->params['site']['guize'];?>
             </div>
         </div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
     </div>
     <div class="appui-helptext bg-white" id="helptext5" style="display:none;">
-        <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">问房认证用户管理条例</h2>
+        <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">认证用户管理条例</h2>
         <div class="appui-helptext-bd fc-black456 b-b-grey">
-            <div class="appui-helptext-bd-con">
-                <p class="fs30 mb10 fc-black fwb">第一章 一般规定</p>
-                <p class="fs30 mb10 mt5">第一条、问房根据现行法律法规及《问房社区发布规则》，制定本规定。</p>
-                <p class="fs30 mb10 mt5">第二条、本规定所称个人认证用户是指经问房审核后，拥有问房认证标识的问房行家。</p>
-                <p class="fs30 mb10 mt20 fc-black fwb">第二章 个人认证的获取</p>
-                <p class="fs30 mb10 mt5">第三条、同时符合下列条件的问房用户可申请成为个人认证用户：</p>
-                <p class="fs30 mb10">(一) 拥有个人问房帐号；</p>
-                <p class="fs30 mb10">(二) 在问房完成手机绑定；</p>
-                <p class="fs30 mb10">(三) 有问答行为且能体现活跃的真实个人。</p>
-                <p class="fs30 mb10 mt5">第四条、问房用户可选择下列方式获取个人认证：</p>
-                <p class="fs30 mb10">(一) 线上申请：用户通过“认证入口”，提交真实的身份证明、职位证明信息进行申请；</p>
-                <p class="fs30 mb10">(二) 专员邀请：由问房专员进行邀请；</p>
-                <p class="fs30 mb10">(三) 行家邀请：由在线行家进行邀请。</p>
-                <p class="fs30 mb10 mt5">第五条、认证用户信息审核方式：</p>
-                <p class="fs30 mb10">(一) 个人验证：由审核专员通过电话或线上工具联系申请者，确认身份信息，如有需要则请申请人补充身份证明材料；</p>
-                <p class="fs30 mb10">(二) 联系机构：由审核专员联系当事人所在机构，由该机构出具加盖公章的材料证明申请人身份；</p>
-                <p class="fs30 mb10">如果问房认为申请者、已获得个人认证的用户身份存在不实的可能，也会通过上述方式进行查证。</p>
-                <p class="fs30 mb10 mt5">第六条、问房通常在1-3个工作日完成审核。无论是否通过，申请者均会收到结果反馈消息。</p>
-                <p class="fs30 mb10 mt20 fc-black fwb">第三章 个人认证用户的权责</p>
-                <p class="fs30 mb10 mt5">第七条、个人认证用户与普通用户一样，享有《问房用户使用协议》、《问房社区发布规则》赋予的权利与义务。</p>
-                <p class="fs30 mb10 mt5">第八条、个人认证用户拥有V认证标识。</p>
-                <p class="fs30 mb10 mt5">第九条、个人认证用户拥有认证说明信息并在页面公开展示，个人认证用户可申请变更认证说明信息并有义务接受网友监督举报，认证说明信息需经问房审核通过方可变更，审核时间通常为3个工作日。</p>
-                <p class="fs30 mb10 mt5">第十条、个人认证用户可变更问房昵称。站方将不定期抽查昵称变更情况，不合理的昵称变更将被修复至变更之前的状态。</p>
-                <p class="fs30 mb10 mt20 fc-black fwb">第四章 个人认证的撤销</p>
-                <p class="fs30 mb10 mt5">第十一条、在有效期内，用户可以根据个人意愿，主动申请撤销个人认证。申请时需说明撤销理由，经问房审核通过后即可撤销。</p>
-                <p class="fs30 mb10 mt5">第十二条、两种情况下，机构可干涉其雇员、成员的认证说明：</p>
-                <p class="fs30 mb10">(一) 机构出具加盖公章的材料，证明当事人已非该机构雇员、成员。</p>
-                <p class="fs30 mb10">(二) 机构出具加盖公章的材料，证明当事人确系该机构雇员、成员，且其发布的言论已构成对影响该机构合理声誉。</p>
-                <p class="fs30 mb10">如当事人在变更认证说明后已不符合个人认证要求，问房将做出撤销个人认证的处理。</p>
-                <p class="fs30 mb10 mt5">第十三条、已取得个人认证的用户存在下述情况的，站方有权随时撤销个人认证：</p>
-                <p class="fs30 mb10">(一) 经站方查证所认证身份虚假的；</p>
-                <p class="fs30 mb10">(二) 认证帐户发布虚假活动的；</p>
-                <p class="fs30 mb10">(三) 多次出现昵称不合理情况的；</p>
-                <p class="fs30 mb10">(四) 严重违反《社区发布规则》的；</p>
-                <p class="fs30 mb10">(五) 其他不符合个人认证标准的情况。</p>
-                <p class="fs30 mb10 mt20 fc-black fwb">第五章 附则</p>
-                <p class="fs30 mb10 mt5">第十四条、本规定自2016年1月17日起施行。</p>
-                <p class="fs30 mb10 mt5">第十五条、问房拥有最终解释及执行的权利。</p>
-            </div>
+            <div class="appui-helptext-bd-con"><?=$this->params['site']['guanli'];?></div>
         </div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
-    </div>
-    <div id="scanMe" class="bg-white" style="display: none;">
-        <div class="outer">
-            <h3 class="fs40 fc-blue">认证提交成功!</h3>
-            <p class="scan-title fs30">关注“问房”官方公众号
-                <br>第一时间收到粉丝的提问</p>
-            <img src="../bdt/images/wenfangba.jpg?v=20170221161736" alt="">
-            <p class="scan-cheerup fs26">关注"问房吧"，可领<span class="fc-red">优惠券</span></p>
-            <p class="scan-longtap fs32">长按，识别二维码，加关注</p>
-            <a class="fs26 fc-blue" href="index.html">不了,去首页</a>
-        </div>
     </div>
 </div>
 <script>

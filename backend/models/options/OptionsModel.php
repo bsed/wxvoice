@@ -18,6 +18,9 @@ class OptionsModel extends \yii\db\ActiveRecord
     public $content;
     public $icp;
     public $shareImg;
+    public $aboutus;
+    public $guanli;
+    public $guize;
 
     /**
      * @inheritdoc
@@ -30,7 +33,7 @@ class OptionsModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title','logo','keywords','description','icp','content'],'safe'],
+            [['title','logo','keywords','description','icp','content','aboutus','guize'],'safe'],
         ];
     }
 
@@ -42,6 +45,9 @@ class OptionsModel extends \yii\db\ActiveRecord
             'logo' => '徽标',
             'keywords' => '关键词',
             'description' => '描述',
+            'aboutus' => '关于我们',
+            'guanli' => '管理条例',
+            'guize' => '收费规则',
             'icp' => '备案号',
             'content' => '统计代码',
             'ak' => 'Appid',

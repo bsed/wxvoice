@@ -56,15 +56,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <i class="appui_cell__go"><img src="../bdt/images/icon06.png"></i>
                     </div>
-                    <hr class="appui-navline-x bg-greyf1">
-                    <div class="appui_cell fs28">
-                        <div class="appui_cell__bd">
-                            <p class="fc-black">账号<span class="fc-greyabc">(不可修改)</span></p>
-                        </div>
-                        <div class="appui_cell__ft mr20">
-                            <p class="fc-grey678" id="username"><?=$user['account']?></p>
-                        </div>
-                    </div>
+<!--                    <hr class="appui-navline-x bg-greyf1">-->
+<!--                    <div class="appui_cell fs28">-->
+<!--                        <div class="appui_cell__bd">-->
+<!--                            <p class="fc-black">账号<span class="fc-greyabc">(不可修改)</span></p>-->
+<!--                        </div>-->
+<!--                        <div class="appui_cell__ft mr20">-->
+<!--                            <p class="fc-grey678" id="username">--><?//=$user['account']?><!--</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <hr class="appui-navline-x bg-greyf1">
                     <div class="appui_cell fs28" onclick="location='personal_data_area_edit.html'" style="display: none;">
                         <div class="appui_cell__bd">

@@ -30,33 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'model')->dropDownList($model_type) ?>
 
                 <?= $form->field($model, 'text')->textInput(['maxlength' => true]) ?>
-                <?= $form->field($model, 'label_img')->widget('common\widgets\file_upload\FileUpload',[
-                    'config'=>[
-                    ]
-                ]) ?>
                 <?= $form->field($model, 'content')->widget('common\widgets\ueditor\Ueditor',[
                     'options'=>[
                         'initialFrameWidth' => 800,
                     ]
                 ]) ?>
 
-                  <!-- 多图上传-->
-                <div class="col-sm-9">
-                <?= $form->field($model, 'duotu')->widget(FileInput::classname(), [
-                    'options' => [
-                            'enctype'=>'multipart/form-data',
-                            'accept' => 'image/*',
-                            'multiple' => true,
-                    ],
-                    'pluginOptions' => [
-                        'fileActionSettings' => [
-
-                        ],
-
-                    ]
-                ]) ?>
-                </div>
-                <div style="clear:both"></div>
 
                 <!--自定义字段-->
                 <?php if(!empty($names)):?>

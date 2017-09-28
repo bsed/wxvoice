@@ -59,19 +59,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         <i class="appui_cell__go"><img src="../bdt/images/icon06_blue.png"></i>
                     </div>
                     <hr class="appui-navline-x bg-greyf1">
-<!--                    <div class="appui_cell fs28" onclick="location='feedback.html'">-->
-<!--                        <div class="appui_cell__bd">-->
-<!--                            <p class="fc-black">意见反馈</p>-->
-<!--                        </div>-->
-<!--                        <i class="appui_cell__go"><img src="../bdt/images/icon06_blue.png"></i>-->
-<!--                    </div>-->
                     <hr class="appui-navline-x bg-greyf1">
                     <div class="appui_cell fs28" onclick="location='aboutus_details.html'">
                         <div class="appui_cell__bd">
                             <p class="fc-black">客服中心</p>
                         </div>
                         <div class="appui_cell__ft mr20">
-                            <p class="fc-grey678">021-68886830</p>
+                            <p class="fc-grey678"><?=$this->params['site']['online'];?></p>
                         </div>
                     </div>
                     <hr class="appui-navline-x bg-greyf1">
@@ -80,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <p class="fc-black">客服微信</p>
                         </div>
                         <div class="appui_cell__ft mr20">
-                            <p class="fc-grey678">Amanda75b</p>
+                            <p class="fc-grey678"><?=$this->params['site']['onlineWechat'];?></p>
                         </div>
                     </div>
                 </div>

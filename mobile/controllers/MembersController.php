@@ -24,14 +24,13 @@ use dosamigos\qrcode\QrCode;
 use Flc\Dysms\Client;
 use Flc\Dysms\Request\SendSms;
 
-/**
- * MembersController implements the CRUD actions for Members model.
- */
+
 class MembersController extends BaseController
 {
-    /**
-     * @inheritdoc
-     */
+    public function actions(){
+        $view = Yii::$app->view;
+        $view->params['site'] = htmls::site();
+    }
 
     public function behaviors()
     {

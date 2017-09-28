@@ -65,7 +65,12 @@ class MembersController extends BaseController
         $post = Yii::$app->request->post();
         if ($model->load($post)) {
             $model->photo = $post["filename"]['imgpath_0'];
-            $model->tags = json_encode($post['tags']);
+            if(isset($post['tags'])){
+                $model->tags = json_encode($post['tags']);
+            }else{
+                $model->tags = '';
+            }
+
             $model->save();
             return $this->redirect(['index']);
         } else {
@@ -89,7 +94,11 @@ class MembersController extends BaseController
         $post = Yii::$app->request->post();
         if ($model->load($post)) {
             $model->photo = $post["filename"]['imgpath_0'];
-            $model->tags = json_encode($post['tags']);
+            if(isset($post['tags'])){
+                $model->tags = json_encode($post['tags']);
+            }else{
+                $model->tags = '';
+            }
             $model->save();
             return $this->redirect(['update', 'id' => $model->id]);
         } else {

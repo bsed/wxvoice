@@ -30,20 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <a id="downloadMoreData" class="appui_loadmore fs32 fc-greyabc">拼命加载中<i class="loadmore"></i></a>
             </div>
             <!--系统消息-->
-            <div class="notice-list" id="noticeListCon1" style="display: none;">
-
-                <div class="notice-item bg-white b-tb-grey hasNotRead" onclick="setNoticeReadStatus(9507,1,'qanda_record.html?id=4171&amp;reAnswer=2&amp;from=notice',this)">
-                    <div class="notice_head"><i><img src="../bdt/images/user_21382.jpg"><i><img src="../bdt/images/v1.png"></i></i>
-                        <p class="fs28">系统消息</p><i><img id="isHasRead011" src="../bdt/images/unread.png"></i>
-                    </div>
-                    <p class="fs30">早上好</p>
-                    <div class="notice_bottom">
-                        <p class="fs22">06-06 09:07</p>
-                        <p class="fs22">查看详情</p>
-                    </div>
-                </div>
-
-         </div>
+            <div class="notice-list" id="noticeListCon1" style="display: none;"></div>
             <!--系统消息END-->
 
     </div>

@@ -52,8 +52,8 @@ class Uploader
         } else if ($type == "base64") {
             $this->upBase64();
         } else {
-            $this->upBase64();
-            //$this->upFile();
+//            $this->upBase64();
+            $this->upFile();
         }
         //        $this->stateMap['ERROR_TYPE_NOT_ALLOWED'] = iconv('unicode', 'utf-8', $this->stateMap['ERROR_TYPE_NOT_ALLOWED']);
     }
@@ -308,7 +308,7 @@ class Uploader
     {
         return array(
             "state"    => $this->stateInfo,
-            "url"      => $this->fullName.'.'.$this->oriName,
+            "url"      => $this->fullName,
             "title"    => $this->fileName,
             "original" => $this->oriName,
             "type"     => $this->fileType,

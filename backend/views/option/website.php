@@ -25,6 +25,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'keywords')->textInput(['maxlength' => true, 'value'=>isset($info['keywords'])?$info['keywords']:''])?>
                 <?= $form->field($model, 'description')->textArea(['rows' => '3', 'value'=>isset($info['description'])?$info['description']:'']) ?>
                 <?= $form->field($model, 'icp')->textInput(['maxlength' => true, 'value'=>isset($info['icp'])?$info['icp']:'']) ?>
+                <!--关于我们-->
+                <?= $form->field($model, 'aboutus')->widget('common\widgets\ueditor\Ueditor',[
+                    'options'=>[
+                        'initialFrameWidth' => 800,
+                        'initialFrameHeight' => 300,
+                        'initialContent' => isset($info['aboutus'])?$info['aboutus']:'',
+                    ]
+                ]) ?>
+                <!--关于我们END-->
+                <!--管理协议-->
+                <?= $form->field($model, 'guanli')->widget('common\widgets\ueditor\Ueditor',[
+                    'options'=>[
+                        'initialFrameWidth' => 800,
+                        'initialFrameHeight' => 300,
+                        'initialContent' => isset($info['guanli'])?$info['guanli']:'',
+                    ]
+                ]) ?>
+                <?= $form->field($model, 'guize')->widget('common\widgets\ueditor\Ueditor',[
+                    'options'=>[
+                        'initialFrameWidth' => 800,
+                        'initialFrameHeight' => 300,
+                        'initialContent' => isset($info['guize'])?$info['guize']:'',
+                    ]
+                ]) ?>
+
+                <!--管理协议END-->
                 <!--自定义字段-->
                 <?php if(!empty($names)):?>
                     <?php foreach ($names as $key=>$ziduan): ?>
