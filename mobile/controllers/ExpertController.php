@@ -28,6 +28,7 @@ class ExpertController extends BaseController
      * 查找专家
      */
    public function actionFound_expert(){
+       require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
        $type = htmls::getPiece('experttype');
       return $this->render('found_expert',['type'=>$type]);
    }

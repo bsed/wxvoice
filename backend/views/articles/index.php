@@ -26,7 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h5>文章列表</h5>
                 </div>
                 <div class="ibox-content">
+                    <!--搜索框-->
+                    <div class="search-form">
+                        <form action="<?=Url::toRoute('articles/index')?>" method="post">
+                            <div class="input-group">
+                                <input type="text" placeholder="文章名称" name="search" class="form-control input-lg">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-lg btn-primary" type="submit">搜索</button>
+                                </div>
+                            </div>
 
+                        </form>
+                    </div>
+                    <!--搜索框-->
                     <div class="project-list">
 
                         <table class="table table-hover">

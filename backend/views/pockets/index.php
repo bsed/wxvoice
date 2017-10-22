@@ -55,14 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td class="project-completion">
                                         <span class="label label-primary">并写到：<?=$v['message']?></span>
                                     </td>
-                                    <td class="project-completion">
-                                        <a href="<?=Url::toRoute(['pocketcomment/index', 'pocket_id'=>$v['id']])?>">
-                                        <span class="label label-primary">共有：10条评论</span>
-                                        </a>
-                                    </td>
-                                    <td class="project-completion">
-                                        <span class="label label-primary">获得：2个赞</span>
-                                    </td>
+
                                     <td class="project-actions">
                                         <a href="<?=Url::toRoute(['pocketcomment/delete','id'=>$v['id']])?>" class="btn btn-white btn-sm">
                                             <i class="fa fa-pencil"></i> 删除 </a>

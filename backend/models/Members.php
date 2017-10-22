@@ -38,15 +38,12 @@ class Members extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nickname', 'account', 'slogan', 'industry', 'areas', 'pwd', 'tags','photo'], 'string'],
-            [['sex', 'vip', 'isguanjia'], 'integer'],
+            [['nickname', 'slogan', 'photo'], 'string'],
+            [['sex', 'vip', 'isguanjia','disallowed'], 'integer'],
             [['nickname'], 'string', 'max' => 155],
-            [['account'], 'string', 'max' => 200],
-            [['slogan', 'industry'], 'string', 'max' => 255],
-            [['areas'], 'string', 'max' => 100],
-            [['pwd'], 'string', 'max' => 150],
+            [['slogan'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 15],
-            [['created', 'updated'], 'string', 'max' => 60],
+
         ];
     }
 
@@ -71,6 +68,7 @@ class Members extends \yii\db\ActiveRecord
             'tags' => '标签',
             'created' => '注册时间',
             'updated' => ' 修改时间',
+            'disallowed' => ' 是否禁言',
         ];
     }
 }

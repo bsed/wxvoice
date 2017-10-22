@@ -34,6 +34,7 @@ class ArticlesController extends BaseController
         return $this->render('index');
     }
     public function actionSquare(){
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         $model = new Articles();
         $list = $model->find()->asarray()->all();
         $type = htmls::getPiece('topictype');
@@ -120,13 +121,37 @@ class ArticlesController extends BaseController
             $model = new Articles();
             $mid = Yii::$app->session['member_id'];
             $pernum = $_POST['pernum'];
+            $start = $_POST['start'];
             $list = $model->find()->asarray()
                 ->with('user','dianzan','comment','redpocket')
                 ->where(['type'=>$_POST['type'],'from'=>'index'])
                 ->orderBy('created DESC')
-                ->offset($_POST['start'])->limit($pernum)->all();
+                ->all();
+            //判断user不能为空
+            $lists = [];
+            foreach($list as $k=>$v){
+                if($v['user'] && $v['user']['disallowed'] == 0){
+                    $lists[] = $v;
+                }
+            }
+            //将处理后的数组进行分页
+            $arrayList = array_slice($lists,$start,$pernum);
 
-            $total = $model->find()->asarray()->where(['type'=>$_POST['type'],'from'=>'index'])->count();
+            $listCount = $model->find()->asarray()
+                ->with('user','dianzan','comment','redpocket')
+                ->where(['type'=>$_POST['type'],'from'=>'index'])
+                ->all();
+            //判断user不能为空,计算总的个数
+            $listsCount = [];
+            foreach($listCount as $k=>$v){
+                if($v['user'] && $v['user']['disallowed'] == 0){
+                    $listsCount[] = $v;
+                }
+
+            }
+
+            $total = count($listsCount);
+
             $pages = ceil($total/$pernum);
             $file = Yii::$app->params['public'].'/attachment';
 
@@ -136,13 +161,13 @@ class ArticlesController extends BaseController
                     'file'=>$file,
                     'mid'=>$mid,
                     'data'=>[
-                        'list'=>$list,
+                        'list'=>$arrayList,
                         'page'=>[
-                            'currentPage'=>$_POST['currentPage'],
+                            'currentPage'=>intval($_POST['currentPage']),
                             'pages'=>$pages,
-                            'pernum'=>$pernum,
-                            'start'=>$_POST['start'],
-                            'total'=>$total,
+                            'pernum'=>intval($pernum),
+                            'start'=>intval($_POST['start']),
+                            'total'=>intval($total),
                         ],
                     ]
                 ]
@@ -232,6 +257,7 @@ class ArticlesController extends BaseController
      * 文章详情
      */
     public function actionArticle_detail(){
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         //判断是否是付费会员，如果不是就要求付费成为会员, 使用ajax去请求
         $member_id = Yii::$app->session['member_id'];
         $feeuser = Yii::$app->session['feeuser'];
@@ -347,9 +373,42 @@ class ArticlesController extends BaseController
        $model = new Articles();
        $mid = Yii::$app->session['member_id'];
        $pernum = $_POST['pernum'];
-       $list = $model->find()->asarray()->with('user','dianzan','comment','redpocket')->where(['from'=>'index'])->orderBy('created DESC')->offset($_POST['start'])->limit($pernum)->all();
+       $start = $_POST['start'];
 
-       $total = $model->find()->where(['from'=>'index'])->asarray()->count();
+       $list = $model->find()->asarray()
+           ->with('user','dianzan','comment','redpocket')
+           ->where(['from'=>'index'])
+           ->orderBy('created DESC')
+           ->all();
+        //echo $list->createCommand()->getRawSql();
+        //exit();
+       //判断user不能为空
+       $lists = [];
+       foreach($list as $k=>$v){
+           if($v['user'] && $v['user']['disallowed'] == 0){
+               $lists[] = $v;
+           }
+
+       }
+       //将处理后的数组进行分页
+       $arrayList = array_slice($lists,$start,$pernum);
+
+
+       //判断user不能为空,计算总的个数
+       $listCounts = $model->find()->asarray()
+           ->with('user','dianzan','comment','redpocket')
+           ->where(['from'=>'index'])
+           ->all();
+
+       $listsCount = [];
+       foreach($listCounts as $k=>$v){
+           if($v['user'] && $v['user']['disallowed'] == 0){
+               $listsCount[] = $v;
+           }
+
+       }
+       $total = count($listsCount);
+
        $pages = ceil($total/$pernum);
        $file = Yii::$app->params['public'].'/attachment';
        //获取用户是否关注
@@ -361,13 +420,13 @@ class ArticlesController extends BaseController
              'file'=>$file,
              'mid'=>$mid,
              'data'=>[
-             'list'=>$list,
+             'list'=>$arrayList,
              'page'=>[
-                 'currentPage'=>$_POST['currentPage'],
-                 'pages'=>$pages,
-                 'pernum'=>$pernum,
-                 'start'=>$_POST['start'],
-                 'total'=>$total,
+                 'currentPage'=>intval($_POST['currentPage']),
+                 'pages'=>intval($pages),
+                 'pernum'=>intval($pernum),
+                 'start'=>intval($_POST['start']),
+                 'total'=>intval($total),
              ],
              ]
          ]
@@ -505,30 +564,8 @@ class ArticlesController extends BaseController
     }
 
     public function actionArticle_edit(){
-        //判断是否是付费会员，如果不是就要求付费成为会员, 使用ajax去请求
-        $member_id = Yii::$app->session['member_id'];
-        $feeuser = Yii::$app->session['feeuser'];
-        if(!$member_id){
-            Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-            return $this->redirect('/members/login.html');
-        }
-        if(isset($_GET['circle_id'])){
-            //一，判断是否是自己创建的，不是的话再判断是否是已经购买这个圈子了
-            $ifCircle = Circles::find()->asarray()->where(['id'=>$_GET['circle_id']])->count();
-            if(!$ifCircle){
-                $circleModel = new Circlemembers();
-                $circleInfo = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$_GET['circle_id']])->one();
-                if(!$circleInfo){
-                    return $this->redirect('/circle/circle_share_detail.html?id='.$_GET['circle_id']);
-                }
-            }
-        }else{
-            if(!$feeuser){
-                Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-                return $this->redirect('/circle/feeuser.html');
-            }
-        }
-        //END
+
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         $type = htmls::getPiece('topictype');
         return $this->render('article_edit',['type'=>$type]);
     }

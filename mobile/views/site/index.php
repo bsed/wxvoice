@@ -73,7 +73,7 @@ use common\tools\htmls;
             <div class="index-module indexsquare">
                 <h3 class="index-module-head b-b-greyf5 bg-white">
                     <span class="fs32 fc-black">精选</span>
-                    <a href="/articles/square.html"><img src="../bdt/images/go80 .png"></a>
+<!--                    <a href="/articles/square.html"><img src="../bdt/images/go80 .png"></a>-->
                 </h3>
                 <div class="index-module-body fs30 fc-black indexsquare-list" id="indexSquareList">
                     <a id="downloadMoreData" class="appui_loadmore fs32 fc-greyabc">拼命加载中<i class="loadmore"></i></a>

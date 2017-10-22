@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-sm-12">
-
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>会员列表</h5>
@@ -28,7 +27,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         <a href="<?=Url::toRoute(['members/create'])?>" class="btn btn-primary btn-xs">创建会员</a>
                     </div>
                 </div>
+
                 <div class="ibox-content">
+                <!--搜索框-->
+                    <div class="search-form">
+                        <form action="<?=Url::toRoute('members/index')?>" method="post">
+                            <div class="input-group">
+                                <input type="text" placeholder="会员名称" name="search" class="form-control input-lg">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-lg btn-primary" type="submit">搜索</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!--搜索框-->
 
                     <div class="project-list">
 

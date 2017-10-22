@@ -42,8 +42,16 @@ class QuestionsController extends BaseController
         ]);
         $model = new Questions();
         $data = $model->find();
-        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '10']);
-        $list = $data->asArray()->offset($pages->offset)->with(['user','expert'])->limit($pages->limit)->all();
+
+        if($_POST){
+            $keys = $_POST['search'];
+            $pages = new Pagination(['totalCount' =>1, 'pageSize' => '20']);
+            $list = $data->asArray()->where(['like','question',$keys])->offset($pages->offset)->with(['user','expert'])->limit($pages->limit)->all();
+        }else{
+            $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
+            $list = $data->asArray()->offset($pages->offset)->with(['user','expert'])->limit($pages->limit)->all();
+        }
+
         return $this->render('index', [
             'list'=>$list,
             'pages'=>$pages,

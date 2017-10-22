@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <form action="<?=Url::toRoute('user/list')?>" method="post">
                             <input type="hidden" name="_csrf-backend" value="<?= Yii::$app->getRequest()->getCsrfToken();?>" />
                             <div class="input-group">
-                                <input type="text" placeholder="请输入用户名或工号" name="username" class="input-sm form-control"> <span class="input-group-btn">
+                                <input type="text" placeholder="请输入用户名" name="username" class="input-sm form-control"> <span class="input-group-btn">
                                         <button type="submit" class="btn btn-sm btn-primary"> 搜索</button> </span>
                             </div>
                         </form>

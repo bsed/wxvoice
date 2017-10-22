@@ -27,7 +27,7 @@ use dosamigos\qrcode\QrCode;
 class QuestionsController extends BaseController
 {
   public function actionQanda(){
-      //
+      require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
       $type = htmls::getPiece('experttype');
       return $this->render('qanda',['type'=>$type]);
   }
@@ -35,17 +35,8 @@ class QuestionsController extends BaseController
  * 问答详情
  */
   public function actionQanda_detail($id){
-      //判断是否是付费会员，如果不是就要求付费成为会员, 使用ajax去请求
-      $member_id = Yii::$app->session['member_id'];
-      $feeuser = Yii::$app->session['feeuser'];
-      if(!$member_id){
-          Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-          return $this->redirect('/members/login.html');
-      }
-      if(!$feeuser){
-          Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-          return $this->redirect('/circle/feeuser.html');
-      }
+
+      require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
       //END
       $questionModel = new Questions();
       $question =  $questionModel->find()->where(['id'=>$id])->asarray()->one();
@@ -262,17 +253,38 @@ class QuestionsController extends BaseController
       $member_id = Yii::$app->session['member_id'];
       $file = Yii::$app->params['public'].'/attachment';
       $pernum = $_POST['pernum'];
-      $data = $model->
-              find()->
-              asarray()->
-              where(['typeid'=>$_POST['typeid'],'status'=>2])->
-              with('expert','dianzan','comment')->offset($_POST['start'])->orderBy('created DESC')->limit($pernum)->all();
+      $start = $_POST['start'];
+      $data = $model->find()->asarray()
+          ->where(['typeid'=>$_POST['typeid'],'status'=>2])
+          ->with('expert','dianzan','comment')
+          ->orderBy('created DESC')
+          ->all();
+      $lists = [];
+      foreach($data as $k=>$v){
+           if($v['expert']){
+              $lists[] = $v;
+          }
 
-      $total = $model->find()->asarray()->where(['typeid'=>$_POST['typeid'],'status'=>2])->count();
+      }
+      //将处理后的数组进行分页
+      $arrayList = array_slice($lists,$start,$pernum);
+
+      $listCounts = $model
+          ->find()->asarray()
+          ->where(['typeid'=>$_POST['typeid'],'status'=>2])
+          ->with('expert','dianzan','comment')->all();
+      $listsCount = [];
+      foreach($listCounts as $k=>$v){
+          if($v['expert']){
+              $listsCount[] = $v;
+          }
+
+      }
+      $total = count($listsCount);
       $pages = ceil($total/$pernum);
       die(json_encode([
           'result'=>'success',
-          'data'=>$data,
+          'data'=>$arrayList,
           'page'=>[
               'currentPage'=>intval($_POST['currentPage']),
               'start'=>intval($_POST['start']),
@@ -286,19 +298,10 @@ class QuestionsController extends BaseController
   }
 
   public function actionStart_ask(){
-      //判断是否是付费会员，如果不是就要求付费成为会员, 使用ajax去请求
-      $member_id = Yii::$app->session['member_id'];
-      $feeuser = Yii::$app->session['feeuser'];
-      if(!$member_id){
-          Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-          return $this->redirect('/members/login.html');
-      }
-      if(!$feeuser){
-          Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-          return $this->redirect('/circle/feeuser.html');
-      }
+      require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
       $type = htmls::getPiece('experttype');
-      //END
+
+
       return $this->render('start_ask',['type'=>$type]);
   }
 

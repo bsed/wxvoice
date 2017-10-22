@@ -64,6 +64,7 @@ class Members extends \yii\db\ActiveRecord
             'tags' => '标签',
             'created' => '注册时间',
             'updated' => ' 修改时间',
+            'allowed' => ' 是否禁言',
         ];
     }
     public function getExpert()

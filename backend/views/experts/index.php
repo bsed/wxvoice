@@ -29,7 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
                 <div class="ibox-content">
+                    <!--搜索框-->
+                    <div class="search-form">
+                        <form action="<?=Url::toRoute('experts/index')?>" method="post">
+                            <div class="input-group">
+                                <input type="text" placeholder="专家名称" name="search" class="form-control input-lg">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-lg btn-primary" type="submit">搜索</button>
+                                </div>
+                            </div>
 
+                        </form>
+                    </div>
+                    <!--搜索框-->
                     <div class="project-list">
 
                         <table class="table table-hover">

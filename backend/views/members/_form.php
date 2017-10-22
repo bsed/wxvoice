@@ -16,8 +16,15 @@ use common\widgets\tags;
         <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
         <?php elseif($v == 'isguanjia'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
+        <?php elseif($v == 'disallowed'):?>
+        <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
         <?php elseif($v == 'tags'):?>
-         <?= $form->field($model, $v)->widget('common\widgets\tags\TagWidget') ?>
+        <?php elseif($v == 'pwd'):?>
+        <?php elseif($v == 'industry'):?>
+        <?php elseif($v == 'areas'):?>
+        <?php elseif($v == 'account'):?>
+        <?php elseif($v == 'created'):?>
+        <?php elseif($v == 'updated'):?>
         <?php elseif($v == 'slogan'):?>
         <?= $form->field($model, $v)->textarea(['maxlength' => true]) ?>
     <?php else:?>

@@ -22,39 +22,19 @@ use dosamigos\qrcode\QrCode;
 class PocketsController extends BaseController
 {
     public function actionRed_packets(){
-        //判断是否是付费会员，如果不是就要求付费成为会员, 使用ajax去请求
-        $member_id = Yii::$app->session['member_id'];
-        $feeuser = Yii::$app->session['feeuser'];
-        if(!$member_id){
-            Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-            return $this->redirect('/members/login.html');
-        }
-        if(isset($_GET['circle_id'])){
-            //一，判断是否是自己创建的，不是的话再判断是否是已经购买这个圈子了
-            $ifCircle = Circles::find()->asarray()->where(['id'=>$_GET['circle_id']])->count();
-            if(!$ifCircle){
-                $circleModel = new Circlemembers();
-                $circleInfo = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$_GET['circle_id']])->one();
-                if(!$circleInfo){
-                    return $this->redirect('/circle/circle_share_detail.html?id='.$_GET['circle_id']);
-                }
-            }
-        }else{
-            if(!$feeuser){
-                Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-                return $this->redirect('/circle/feeuser.html');
-            }
-        }
-        //END
+
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
             return $this->render('red_packets');
     }
     public function actionRed_packets_fightluck(){
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         return $this->render('red_packets_fightluck');
     }
     /*
      * 打开红包
      */
     public function actionRed_packets_open($id){
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         $member_id = Yii::$app->session['member_id'];
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();

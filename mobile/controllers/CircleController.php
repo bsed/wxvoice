@@ -44,6 +44,7 @@ class CircleController extends BaseController
      * 我的圈子
      */
     public function actionCircle_my(){
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         //判断是否登录
         $member_id = Yii::$app->session['member_id'];
         if(!$member_id){
@@ -80,6 +81,7 @@ class CircleController extends BaseController
         ]);
     }
     public function actionCircle_creat(){
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         //判断是否登录
         $member_id = Yii::$app->session['member_id'];
         if(!$member_id){
@@ -298,12 +300,18 @@ class CircleController extends BaseController
         return $this->render('circle_share_detail',['info'=>$info,'members'=>$members]);
     }
     public function actionCircle_file_release(){
-        // 判断发布帖子的权限
+
         $member_id = Yii::$app->session['member_id'];
         $feeuser = Yii::$app->session['feeuser'];
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
+        }
+        $memberInfo = Members::find()->asarray()->where(['id'=>$member_id])->one();
+        if(!empty($memberInfo)){
+            if($memberInfo['disallowed'] == 1){
+                return $this->redirect('/site/index.html');
+            }
         }
 
         if(isset($_GET['circle_id'])){

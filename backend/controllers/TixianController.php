@@ -58,7 +58,7 @@ class TixianController extends BaseController
         $model = new Tixian();
         $data = $model->find();
         $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '10']);
-        $list = $data->asArray()->orderBy('created DESC')->where(['status'=>0])->offset($pages->offset)->limit($pages->limit)->all();
+        $list = $data->asArray()->orderBy('created DESC')->with('user')->where(['status'=>0])->offset($pages->offset)->limit($pages->limit)->all();
         return $this->render('apply', [
             'list'=>$list,
             'pages'=>$pages,

@@ -11,6 +11,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
+use common\tools\htmls;
 
 $this->title = '问题列表';
 $this->params['breadcrumbs'][] = $this->title;
@@ -29,7 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
                 <div class="ibox-content">
+                    <!--搜索框-->
+                    <div class="search-form">
+                        <form action="<?=Url::toRoute('questions/index')?>" method="post">
+                            <div class="input-group">
+                                <input type="text" placeholder="专家名称" name="search" class="form-control input-lg">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-lg btn-primary" type="submit">搜索</button>
+                                </div>
+                            </div>
 
+                        </form>
+                    </div>
+                    <!--搜索框-->
                     <div class="project-list">
 
                         <table class="table table-hover">
@@ -40,14 +53,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <span class="label label-primary"><?=$k+1?>
                                     </td>
                                     <td class="project-title">
-                                        <a href=""><?=$v['user']['nickname']?></a>
+                                        <a href=""><?=htmls::substr($v['question'],30)?></a>
                                     </td>
-                                    <td class="project-title">
-                                        <span class="label label-default">问</span>
-                                    </td>
-                                    <td class="project-completion">
-                                            <span class="label label-primary"><?=$v['expert']['nickname']?></span>
-                                    </td>
+
                                     <td class="project-completion">
 
                                                 <?php if($v['status'] == 0):?>

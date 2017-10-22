@@ -42,12 +42,26 @@ class ExpertsController extends BaseController
         ]);
         $model = new Experts();
         $data = $model->find();
-        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
-        $list = $data->asArray()->offset($pages->offset)
-            ->with([ 'user' => function($query) {
-                $query->andWhere('vip=1');
-            },])
-            ->limit($pages->limit)->all();
+
+        if($_POST){
+            //闭包传入参数
+            $keys = $_POST['search'];
+            $pages = new Pagination(['totalCount' =>1, 'pageSize' => '20']);
+            $list = $data->asArray()->offset($pages->offset)
+                ->with([ 'user' => function($query) use($keys){
+                    $query->andWhere('vip=1')->andWhere(['like','nickname',$keys]);
+                },])
+                ->limit($pages->limit)->all();
+        }else{
+            $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
+            $list = $data->asArray()->offset($pages->offset)
+                ->with([ 'user' => function($query) {
+                    $query->andWhere('vip=1');
+                },])
+                ->limit($pages->limit)->all();
+        }
+
+
         return $this->render('index', [
             'list'=>$list,
             'pages'=>$pages,
