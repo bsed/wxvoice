@@ -42,13 +42,24 @@ class MembersController extends BaseController
         ]);
         $model = new Members();
         $data = $model->find();
+        //with wxpayrecord
         if($_POST){
             $keys = $_POST['search'];
+            $type = 'feeuser';
             $pages = new Pagination(['totalCount' =>1, 'pageSize' => '20']);
-            $list = $data->asArray()->where(['like','nickname',$keys])->offset($pages->offset)->limit($pages->limit)->all();
+            $list = $data->asArray()
+                ->with([ 'wxpayrecord' => function($query) use($type){
+                    $query->andWhere(['=','pay_type',$type])->andWhere('status=1')->orderBy('created DESC');
+                },])
+                ->where(['like','nickname',$keys])->offset($pages->offset)->limit($pages->limit)->all();
         }else{
+            $type = 'feeuser';
             $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '20']);
-            $list = $data->asArray()->offset($pages->offset)->limit($pages->limit)->all();
+            $list = $data->asArray()
+                ->with([ 'wxpayrecord' => function($query) use($type){
+                    $query->andWhere(['=','pay_type',$type])->andWhere('status=1')->orderBy('created DESC');
+                },])
+                ->offset($pages->offset)->limit($pages->limit)->all();
 
         }
 

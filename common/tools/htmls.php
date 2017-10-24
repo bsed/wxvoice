@@ -25,6 +25,16 @@ class htmls
         return $value;
     }
     /*
+     *  微信设置信息
+     * */
+    public static function wechat()
+    {
+        $info = OptionsModel::find()->where(['type'=>'wechat'])->asArray()->one();
+        $value = json_decode($info['value'], true);
+
+        return $value;
+    }
+    /*
      * 显示导航
      * */
     public static function nav($pid)

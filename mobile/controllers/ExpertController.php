@@ -24,6 +24,12 @@ use dosamigos\qrcode\QrCode;
  */
 class ExpertController extends BaseController
 {
+    public function actions(){
+        $view = Yii::$app->view;
+        $view->params['site'] = htmls::site();
+        $view->params['wechat'] = htmls::wechat();
+        $view->params['js'] = $this->setJs();
+    }
     /*
      * 查找专家
      */

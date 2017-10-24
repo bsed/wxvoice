@@ -59,7 +59,7 @@ function joinQz(){
             },
             success: function(data) {
               if(data.result == 'success'){
-                  getWxConfig(data.config.timestamp, data.config.nonceStr, data.config.package, data.config.signType, data.config.paySign);
+                  getWxConfig(data.config.timestamp, data.config.nonceStr, data.config.package, data.config.signType, data.config.paySign,data.trade);
               }
             }
         });
@@ -67,7 +67,7 @@ function joinQz(){
 
 }
 //微信相关
-function getWxConfig(timestamp, nonceStr, package, signType, paySign){
+function getWxConfig(timestamp, nonceStr, package, signType, paySign,trade){
         wx.chooseWXPay({
             timestamp: timestamp,
             nonceStr: nonceStr,
@@ -76,13 +76,13 @@ function getWxConfig(timestamp, nonceStr, package, signType, paySign){
             paySign: paySign,
             success: function (res) {
             // 支付成功后的回调后，记录已经加入圈子
-                addCircle();
+                addCircle(trade);
         }
     });
 }
 
 //向数据库写数据
-function addCircle(){
+function addCircle(trade){
 	var csrf = $('input[name="csrf"]').val();
 	var price = $('input[name="price"]').val();
 	var qid = $('input[name="createid"]').val();//创建者的id
@@ -91,7 +91,12 @@ function addCircle(){
         url: '/circle/addcircle.html',
         dataType: "json",
         async: true,
-        data:{"cid":id,"qid":qid,"price":price, '_csrf':csrf},
+        data:{
+            "cid":id,
+            "qid":qid,
+            "price":price,
+            "trade":trade,
+            '_csrf':csrf},
         success: function(result) {
             clearToastDialog();
             window.location.href = "/circle/circle_page.html?id="+id;

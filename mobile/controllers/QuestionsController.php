@@ -26,6 +26,12 @@ use dosamigos\qrcode\QrCode;
  */
 class QuestionsController extends BaseController
 {
+    public function actions(){
+        $view = Yii::$app->view;
+        $view->params['site'] = htmls::site();
+        $view->params['wechat'] = htmls::wechat();
+        $view->params['js'] = $this->setJs();
+    }
   public function actionQanda(){
       require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
       $type = htmls::getPiece('experttype');

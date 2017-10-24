@@ -18,7 +18,12 @@ use dosamigos\qrcode\QrCode;
  */
 class LoupanController extends BaseController
 {
-
+    public function actions(){
+        $view = Yii::$app->view;
+        $view->params['site'] = htmls::site();
+        $view->params['wechat'] = htmls::wechat();
+        $view->params['js'] = $this->setJs();
+    }
     public function actionLoupan_list(){
 
         return $this->render('loupan_list');

@@ -11,15 +11,30 @@ use common\widgets\tags;
 <?php foreach($colums as $k=>$v):?>
     <?php if($v == 'des'):?>
         <?= $form->field($model, $v)->textArea(['rows' => '6']) ?>
+        <?php elseif($v == 'question'):?>
+        <?= $form->field($model, $v)->textArea(['rows' => '6']) ?>
     <?php elseif($v == 'member_id'):?>
         <?= $form->field($model, $v)->dropDownList($members) ?>
         <?php elseif($v == 'expert_id'):?>
         <?= $form->field($model, $v)->dropDownList($experters) ?>
-    <?php elseif($v == 'freetime'):?>
-        <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
+    <?php elseif($v == 'circle_id'):?>
+    <?php elseif($v == 'open'):?>
+    <?php elseif($v == 'article'):?>
+    <?php elseif($v == 'themeid'):?>
+    <?php elseif($v == 'asktime'):?>
+    <?php elseif($v == 'typeid'):?>
+    <?php elseif($v == 'haveread'):?>
+    <?php elseif($v == 'imgs'):?>
+    <?php elseif($v == 'answerimgs'):?>
+    <?php elseif($v == 'from'):?>
+    <?php elseif($v == 'publishtype'):?>
+    <?php elseif($v == 'continue_ask'):?>
+    <?php elseif($v == 'created'):?>
     <?php elseif($v == 'answer_type'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '语音回答', '1' => '图文回答']) ?>
     <?php elseif($v == 'continue_ask'):?>
+        <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>   
+        <?php elseif($v == 'rec'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
     <?php elseif($v == 'status'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '未回答', '1' => '已回答', '2'=>'已失效', '3'=>'已撤销']) ?>
@@ -35,7 +50,7 @@ use common\widgets\tags;
 
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? '新增' : '更新', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '确定' : '更新', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
     </div>
 <?php
 if( Yii::$app->getSession()->hasFlash('error') ) {

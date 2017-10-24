@@ -3,25 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\Wxpayrecord;
+use backend\models\Experts;
 
-/**
- * This is the model class for table "bdtmembers".
- *
- * @property int $id ID
- * @property string $nickname 昵称
- * @property string $photo 头像
- * @property string $account 账号
- * @property int $sex 性别
- * @property string $slogan 个性签名
- * @property string $industry 行业
- * @property string $areas 所属地区
- * @property string $pwd  密码
- * @property string $phone 电话
- * @property int $vip 是否专家
- * @property string $tags 标签
- * @property string $created 注册时间
- * @property string $updated  修改时间
- */
 class Members extends \yii\db\ActiveRecord
 {
     /**
@@ -64,11 +48,21 @@ class Members extends \yii\db\ActiveRecord
             'pwd' => ' 密码',
             'phone' => '电话',
             'vip' => '是否专家',
-            'isguanjia' => '是否管家',
+            'isguanjia' => '是否圈管',
             'tags' => '标签',
             'created' => '注册时间',
             'updated' => ' 修改时间',
             'disallowed' => ' 是否禁言',
         ];
     }
+
+    public function getWxpayrecord()
+    {
+        return $this->hasMany(Wxpayrecord::className(), ['mid' => 'id']);
+     }
+     public function getExpert(){
+        return $this->hasOne(Experts::className(),['member_id'=>'id']);
+     }
+
+
 }

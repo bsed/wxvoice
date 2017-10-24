@@ -97,7 +97,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?php endforeach;?>
                             <?php endif;?>
                   <?php endif;?>
+                        <?php if($info['summary']):?>
                         <input type="hidden" name="title" value="<?=$info['summary']?>">
+                            <?php elseif($info['title']):?>
+                            <input type="hidden" name="title" value="<?=$info['title']?>">
+                            <?php else:?>
+                            <input type="hidden" name="title" value="<?=$info['content']?>">
+                        <?php endif;?>
+                        <input type="hidden" name="des" value="<?=$info['content']?>">
                         <!-- 正文END-->
                         <?php if(!$_GET['publishtype'] == 'fatie'):?>
                         <div class="disclaimer fs24 bg-greyfa mb10 mt10" id="disclaimer">
@@ -129,7 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 </div>
                 <div id="about_us" style="display:none;">
-                    <h2 class="fs28 mt20">关注"半导体吧",获取<span class="fc-red">最新内容</span></h2>
+                    <h2 class="fs28 mt20">关注"半导体",获取<span class="fc-red">最新内容</span></h2>
                     <div>
                         <img src="../bdt/images/wenfangba.jpg" alt="">
                     </div>

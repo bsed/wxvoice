@@ -27,7 +27,12 @@ use EasyWeChat\Payment\Order;
  */
 class CircleController extends BaseController
 {
-
+    public function actions(){
+        $view = Yii::$app->view;
+        $view->params['site'] = htmls::site();
+        $view->params['wechat'] = htmls::wechat();
+        $view->params['js'] = $this->setJs();
+    }
     public function behaviors()
     {
         return [
@@ -180,6 +185,21 @@ class CircleController extends BaseController
         }
 
     }
+    //查询是否支付成功
+    public function actionTocommit(){
+        $mid = Yii::$app->session['member_id'];
+        $cid = $_POST['id'];
+        $models = new Circlemembers();
+        $info = $models->find()-asarray()->where(['mid'=>$mid,'cid'=>$cid])->one();
+        if(!empty($info)){
+            if($info['status'] == 1){
+                die(json_encode(['result'=>'success','msg'=>'支付确认成功']));
+            }else{
+                die(json_encode(['result'=>'error','msg'=>'支付确认失败']));
+            }
+        }
+
+    }
     public function actionAddcircle(){
         //判断是否登录
         $member_id = Yii::$app->session['member_id'];
@@ -196,6 +216,8 @@ class CircleController extends BaseController
         $model->cid = $post['cid'];
         $model->qid = $post['qid'];
         $model->price = $post['price'];
+        $model->trade = $post['trade'];
+        $model->status = 0;
         $model->created = time();
         $model->save();
         die(json_encode(['status'=>'success']));
@@ -301,35 +323,7 @@ class CircleController extends BaseController
     }
     public function actionCircle_file_release(){
 
-        $member_id = Yii::$app->session['member_id'];
-        $feeuser = Yii::$app->session['feeuser'];
-        if(!$member_id){
-            Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-            return $this->redirect('/members/login.html');
-        }
-        $memberInfo = Members::find()->asarray()->where(['id'=>$member_id])->one();
-        if(!empty($memberInfo)){
-            if($memberInfo['disallowed'] == 1){
-                return $this->redirect('/site/index.html');
-            }
-        }
-
-        if(isset($_GET['circle_id'])){
-            //一，判断是否是自己创建的，不是的话再判断是否是已经购买这个圈子了
-            $ifCircle = Circles::find()->asarray()->where(['id'=>$_GET['circle_id']])->count();
-            if(!$ifCircle){
-                $circleModel = new Circlemembers();
-                $circleInfo = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$_GET['circle_id']])->one();
-                if(!$circleInfo){
-                    return $this->redirect('/circle/circle_share_detail.html?id='.$_GET['circle_id']);
-                }
-            }
-        }else{
-            if(!$feeuser){
-                Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-                return $this->redirect('/circle/feeuser.html');
-            }
-        }
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         //END
 
         //获取话题类别
@@ -340,10 +334,10 @@ class CircleController extends BaseController
      * 成为全局的付费会员
      */
     public function actionFeeuser(){
+
         $member_id = Yii::$app->session['member_id'];
         $preurl = Yii::$app->session['tryinto'];
         $feeUser = htmls::site();
-
         return $this->render('feeuser',[
             'mid'=> $member_id,
             'preurl'=> $preurl,
@@ -409,7 +403,7 @@ class CircleController extends BaseController
             $model->save();
 
         }
-        die(json_encode(['result'=>'success','config'=>$config]));
+        die(json_encode(['result'=>'success','config'=>$config,'trade'=>$rand]));
 
     }
     /*
@@ -419,9 +413,20 @@ class CircleController extends BaseController
         $payment = $this->wxPay();
         $response = $payment->handleNotify(function($notify, $successful){
             if($successful){
+                //更新账单表, 同时根据trade更新circlemembers，确保支付成功
                 $model = new Wxpayrecord();
                 $model->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
-                return true;
+
+                $models = new Circlemembers();
+                $id = $models->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
+                if($id){
+
+                    return true;
+                }else{
+                    //给微信返回false,让他们发送两次确认信息，把circlemembers表的状态更新为status=1
+                    return false;
+                }
+
             }
 
         });

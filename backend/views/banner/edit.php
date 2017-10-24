@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'listorder')->textInput(['maxlength' => true, 'value'=>0]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton($model->isNewRecord ? '新增' : '更新', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '确定' : '更新', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
                 </div>
                 <?php
                 if( Yii::$app->getSession()->hasFlash('error') ) {

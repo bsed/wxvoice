@@ -24,9 +24,9 @@ use yii\db\Expression;
  */
 class DianzanController extends BaseController
 {
-/*
- * 点赞
- */
+    /*
+     * 点赞
+     */
     public function actionDianzan(){
         $post = Yii::$app->request->post();
         $member_id = Yii::$app->session['member_id'];

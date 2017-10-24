@@ -79,8 +79,7 @@
         <input type="hidden" name="createid" value="<?=$info['member_id']?>" />
     </div>
 </div>
-<!--语音播放器-->
-<audio id="audio-mc" style="display:none;" preload="" loop="" src=""></audio>
+
 
 
 

@@ -139,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <label id="protocolLabel" class="fs24">
                         <input id="aggre" type="checkbox" class="bg-greyf1 mr5" checked="true">我已阅读并同意
                     </label>
-                    <a class="fc-orange fs24" id="manage-text">《问房认证用户管理条例》</a>
+                    <a class="fc-orange fs24" id="manage-text">《半导体认证用户管理条例》</a>
                 </p>
             </div>
             <!---------------占位空间---------------->
@@ -203,33 +203,33 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
     </div>
-    <div class="appui-helptext bg-white" id="helptext2" style="display:none;">
-        <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">追问规则</h2>
-        <div class="appui-helptext-bd fc-black456 b-b-grey">
-            <div class="appui-helptext-bd-con">
-                <?=$this->params['site']['guize'];?>
-            </div>
-        </div>
-        <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
-    </div>
-    <div class="appui-helptext bg-white" id="helptext3" style="display:none;">
-        <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">免费规则</h2>
-        <div class="appui-helptext-bd fc-black456 b-b-grey">
-            <div class="appui-helptext-bd-con">
-                <?=$this->params['site']['guize'];?>
-            </div>
-        </div>
-        <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
-    </div>
-    <div class="appui-helptext bg-white" id="helptext4" style="display:none;">
-        <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">开放规则</h2>
-        <div class="appui-helptext-bd fc-black456 b-b-grey">
-            <div class="appui-helptext-bd-con">
-                <?=$this->params['site']['guize'];?>
-            </div>
-        </div>
-        <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
-    </div>
+<!--    <div class="appui-helptext bg-white" id="helptext2" style="display:none;">-->
+<!--        <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">追问规则</h2>-->
+<!--        <div class="appui-helptext-bd fc-black456 b-b-grey">-->
+<!--            <div class="appui-helptext-bd-con">-->
+<!--                --><?//=$this->params['site']['guize'];?>
+<!--            </div>-->
+<!--        </div>-->
+<!--        <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>-->
+<!--    </div>-->
+<!--    <div class="appui-helptext bg-white" id="helptext3" style="display:none;">-->
+<!--        <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">免费规则</h2>-->
+<!--        <div class="appui-helptext-bd fc-black456 b-b-grey">-->
+<!--            <div class="appui-helptext-bd-con">-->
+<!--                --><?//=$this->params['site']['guize'];?>
+<!--            </div>-->
+<!--        </div>-->
+<!--        <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>-->
+<!--    </div>-->
+<!--    <div class="appui-helptext bg-white" id="helptext4" style="display:none;">-->
+<!--        <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">开放规则</h2>-->
+<!--        <div class="appui-helptext-bd fc-black456 b-b-grey">-->
+<!--            <div class="appui-helptext-bd-con">-->
+<!--                --><?//=$this->params['site']['guize'];?>
+<!--            </div>-->
+<!--        </div>-->
+<!--        <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>-->
+<!--    </div>-->
     <div class="appui-helptext bg-white" id="helptext5" style="display:none;">
         <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">认证用户管理条例</h2>
         <div class="appui-helptext-bd fc-black456 b-b-grey">

@@ -22,12 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php $form = ActiveForm::begin(); ?>
 
         <!-- 微信基本设置 -->
-        <?= $form->field($model, 'appId')->textInput(['maxlength' => true, 'value'=>isset($info['appId'])?$info['appId']:'' ])->label('APPID') ?>
-        <?= $form->field($model, 'secretKey')->textInput(['maxlength' => true, 'value'=>isset($info['secretKey'])?$info['secretKey']:'' ])->label('SecretKey') ?>
-        <?= $form->field($model, 'merchantId')->textInput(['maxlength' => true, 'value'=>isset($info['merchantId'])?$info['merchantId']:'' ])->label('MerchantId') ?>
-        <?= $form->field($model, 'merchantKey')->textInput(['maxlength' => true, 'value'=>isset($info['merchantKey'])?$info['merchantKey']:'' ]) ?>
+<!--        --><?//= $form->field($model, 'appId')->textInput(['maxlength' => true, 'value'=>isset($info['appId'])?$info['appId']:'' ])->label('APPID') ?>
+<!--        --><?//= $form->field($model, 'secretKey')->textInput(['maxlength' => true, 'value'=>isset($info['secretKey'])?$info['secretKey']:'' ])->label('SecretKey') ?>
+<!--        --><?//= $form->field($model, 'merchantId')->textInput(['maxlength' => true, 'value'=>isset($info['merchantId'])?$info['merchantId']:'' ])->label('MerchantId') ?>
+<!--        --><?//= $form->field($model, 'merchantKey')->textInput(['maxlength' => true, 'value'=>isset($info['merchantKey'])?$info['merchantKey']:'' ]) ?>
         <!-- 微信分享设置 -->
-        <br/>
         <h3>微信分享设置</h3><hr/>
         <?= $form->field($model, 'shareTitle')->textInput(['maxlength' => true, 'value'=>isset($info['shareTitle'])?$info['shareTitle']:'' ])->label('分享标题') ?>
         <?= $form->field($model, 'shareDesc')->textInput(['maxlength' => true, 'value'=>isset($info['shareDesc'])?$info['shareDesc']:'' ])->label('分享描述') ?>
@@ -35,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'config'=>[
                 'logo'=>$info['shareImg'],
             ]]) ?>
-        <?= $form->field($model, 'shareJumpToUrl')->textInput(['maxlength' => true, 'value'=>isset($info['shareJumpToUrl'])?$info['shareJumpToUrl']:'' ])->label('分享URL') ?>
+<!--        --><?//= $form->field($model, 'shareJumpToUrl')->textInput(['maxlength' => true, 'value'=>isset($info['shareJumpToUrl'])?$info['shareJumpToUrl']:'' ])->label('分享URL') ?>
 
 
                 <?php
@@ -49,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 ?>
                 <div class="form-group">
-                    <?= Html::submitButton($model->isNewRecord ? '新增' : '更新', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '确定' : '更新', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

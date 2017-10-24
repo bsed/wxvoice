@@ -64,11 +64,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                                     </td>
+                                    <td class="project-completion">
+                                        <?php if(!empty($v['wxpayrecord'])):?>
+                                            <?php if($v['wxpayrecord'][0]['status'] == 1):?>
+                                      <span class="label label-defaul">会员有效期：<?=date('Y-m-d H:i:s',$v['wxpayrecord'][0]['created'])?>至<?=date('Y-m-d',strtotime('+1 year'));?></span>
+                                                <?php endif;?>
+                                        <?php endif;?>
+                                    </td>
                                     <td class="project-actions">
                                         <a href="<?=Url::toRoute(['members/update','id'=>$v['id']])?>" class="btn btn-white btn-sm">
                                             <i class="fa fa-folder"></i> 查看 </a>
-                                        <a href="<?=Url::toRoute(['members/update','id'=>$v['id']])?>" class="btn btn-white btn-sm">
-                                            <i class="fa fa-folder"></i> 编辑 </a>
                                         <a href="<?=Url::toRoute(['members/delete','id'=>$v['id']])?>" class="btn btn-white btn-sm">
                                             <i class="fa fa-pencil"></i> 删除 </a>
                                     </td>

@@ -30,6 +30,7 @@ class MembersController extends BaseController
     public function actions(){
         $view = Yii::$app->view;
         $view->params['site'] = htmls::site();
+        $view->params['wechat'] = htmls::wechat();
         $view->params['js'] = $this->setJs();
     }
 
@@ -58,12 +59,11 @@ class MembersController extends BaseController
 
         //判断是否是付费会员，如果不是就要求付费成为会员
         $member_id = Yii::$app->session['member_id'];
-        $feeuser = Yii::$app->session['feeuser'];
+        $feeusers = Yii::$app->session['feeuser'];
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
         }
-        //END
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
@@ -115,9 +115,15 @@ class MembersController extends BaseController
         //粉丝 查找to_mid
         $fans = $model->find()->asarray()->with('fans')->where(['to_mid'=>$member_id])->count();
         //判断是否是付费会员
-        $feeuser = Wxpayrecord::find()->asarray()->where(['mid'=>$member_id,'pay_type'=>'feeuser'])->count();
-        //如果加入了会员，则显示会员信息
+        $feeuserStatus = Wxpayrecord::find()->asarray()->where(['mid'=>$member_id,'pay_type'=>'feeuser'])->orderBy('created DESC')->all();
+        //如果加入了会员，则显示会员信息,应该从支付订单中查找
         $circelMember = Circlemembers::find()->asarray()->where(['mid'=>$member_id])->one();
+        if(!empty($feeuserStatus)){
+            $feeuser = $feeuserStatus[0];
+        }else{
+            $feeuser = 0;
+        }
+
         //提现的金额
         $tixian = Tixian::find()->where(['mid'=>$member_id])->sum('price');
         return $this->render('index', [
@@ -130,6 +136,7 @@ class MembersController extends BaseController
             'fans' => $fans,
             'member_id' => $member_id,
             'feeuser' => $feeuser,
+            'feeusers' => $feeusers,
             'total' => $total,
             'tixian' => $tixian,
             'circelMember' => $circelMember,
@@ -293,21 +300,27 @@ class MembersController extends BaseController
                     Yii::$app->session['feeuser'] = 1;
                     die(json_encode(['result'=>'success']));
                 }
-                if($wxMember['feeuser'][0]['status'] == 1){
-                    //查看加入时间
-                    $addTime = $wxMember['feeuser'][0]['created'];
-                    if(time() - $addTime > 365*24*3600){
-                        Yii::$app->session['feeuser'] = 0;
-                        die(json_encode(['result'=>'error']));
+                    if(!empty($wxMember['feeuser'])) {
+                        if ($wxMember['feeuser'][0]['status'] == 1) {
+                            //查看加入时间
+                            $addTime = $wxMember['feeuser'][0]['created'];
+                            if (time() - $addTime > 365 * 24 * 3600) {
+                                Yii::$app->session['feeuser'] = 0;
+                                die(json_encode(['result' => 'error']));
+                            } else {
+                                Yii::$app->session['feeuser'] = 1;
+                                die(json_encode(['result' => 'success']));
+                            }
+
+                        } else {
+                            Yii::$app->session['feeuser'] = 0;
+                            die(json_encode(['result' => 'error']));
+                        }
                     }else{
-                        Yii::$app->session['feeuser'] = 1;
-                        die(json_encode(['result'=>'success']));
+                        Yii::$app->session['feeuser'] = 0;
+                        die(json_encode(['result' => 'error']));
                     }
 
-                }else{
-                    Yii::$app->session['feeuser'] = 0;
-                    die(json_encode(['result'=>'error']));
-                }
 
                 }
         }
@@ -945,13 +958,6 @@ class MembersController extends BaseController
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Members model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Members the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Members::findOne($id)) !== null) {

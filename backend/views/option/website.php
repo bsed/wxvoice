@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 ?>
                 <div class="form-group">
-                    <?= Html::submitButton($model->isNewRecord ? '新增' : '更新', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '确定' : '更新', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

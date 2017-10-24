@@ -1,6 +1,5 @@
 <body>
 <script type="text/javascript" src="../bdt/js/picPop.js"></script>
-<script type="text/javascript" src="../bdt/js/feeuser.js"></script>
 <link type="text/css" rel="stylesheet" href="../bdt/css/circle.css">
 <div id="container" class="container article-container bg-grey">
     <div id="page">
@@ -58,10 +57,10 @@
     });
     //调起微信支付,如果是免费就直接加入
     function joinFeeUser(){
-        // dataLoading("数据加载中...");
+//         dataLoading("数据加载中...");
         var price =$('#toPayUser').attr('data-price') * 100;
         if(price == 0){
-            addUser();
+            addUser(price);
         }else{
             //这里要唤起微信支付
             var csrf = $('input[name="csrf"]').val();
@@ -95,14 +94,14 @@
             paySign: paySign,
             success: function (res) {
                 // 支付成功后的回调后，返回上一个url
+
                 window.history.go(-1);
 
             }
         });
     }
     //向数据库写数据
-    function addUser(){
-        alert(2);
+    function addUser(price){
         var csrf = $('input[name="csrf"]').val();
         var mid = $('input[name="mid"]').val();
         var preurl = $('input[name="preurl"]').val();
@@ -114,17 +113,15 @@
             data:{
                 "title":'feeuser',
                 "pay_id":0,
-                "price":0,
+                "price":price,
                 '_csrf':csrf,
             },
             success: function(result) {
                 clearToastDialog();
-                alert(1);
                 window.location.href = preurl;
             }
         });
     }
 </script>
 <!--语音播放器-->
-<audio id="audio-mc" style="display:none;" preload="" loop="" src=""></audio>
 </body>

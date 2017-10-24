@@ -11,14 +11,20 @@ use yii\helpers\Url;
             'showMenuItems','hideAllNonBaseMenuItem','showAllNonBaseMenuItem','closeWindow','scanQRCode','chooseWXPay','openProductSpecificView','addCard','chooseCard','openCard'), false);?>);
         <?php if($a == 'article_detail' || $a == 'qanda_detail' || $a == 'circle_qanda_detail'):?>
             var title = $('input[name="title"]').val();
-            var imgUrl = $('.images').attr('src');
-            var des = $('input[name="title"]').val();
-            var link = '<?=Url::current([], true);?>';
+            var imgs = $('.images').attr('src');
+            var imgUrl = '';
+            if(imgs == undefined){
+                imgUrl = '<?=Yii::$app->params['public'];?><?=$this->params['wechat']['shareImg'];?>';
+            }else{
+                imgUrl = $('.images').attr('src');
+            }
+            var des = $('input[name="des"]').val();
+            var link = '<?=Yii::$app->request->hostInfo;?><?=Yii::$app->request->getUrl();?>';
         <?php else:?>
-            var title = "半导体微社区";
-            var des = "半导体,是一个专业的社区，汇集行业顶尖人才";
-            var imgUrl = "http://imgs.emifo.top/attachment/articles/user15/3531503727537642.jpeg";
-            var link = '<?=Url::current([], true);?>';
+            var title = "<?=$this->params['wechat']['shareTitle'];?>";
+            var des = "<?=$this->params['wechat']['shareDesc'];?>";
+            var imgUrl = '<?=Yii::$app->params['public'];?><?=$this->params['wechat']['shareImg'];?>';
+            var link = '<?=Yii::$app->request->hostInfo;?><?=Yii::$app->request->getUrl();?>';
         <?php endif;?>
         wx.ready(function(){
             wx.onMenuShareTimeline({

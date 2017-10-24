@@ -71,12 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="function-module">
                     <!--功能列表-->
                     <div class="function bg-white bc-grey mt10">
-                        <?php if($circelMember):?>
-                            <a class="function-btn bc-grey fc-black" href="#">
-                                <img class="btn-img" src="../bdt/images/circle_grey.png">
-                                <span class="fs30">会员有效期:  <?=date('Y-m-d',$circelMember['created']);?>至<?=date('Y-m-d',strtotime('+1 year'));?></span>
-                            </a>
-                        <?php endif;?>
+
                         <a class="function-btn bc-grey fc-black" href="myhomepage.html#0">
                             <img class="btn-img" src="../bdt/images/icon6_grey.png">
                             <span class="fs30">我的问答</span>
@@ -92,13 +87,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <img class="btn-arrow" src="../bdt/images/icon06.png">
                             <i class="messagetips bg-red fs26 fc-white" style="display:none"></i>
                         </a>
-                        <?php if(!$feeuser):?>
-                        <a class="function-btn bc-grey fc-black" href="/circle/feeuser.html">
-                            <img class="btn-img" src="../bdt/images/icon08.png">
-                            <span class="fs30">我的会员</span>
+                        <a class="function-btn bc-grey fc-black" href="myarticle.html">
+                            <img class="btn-img" src="../bdt/images/icon10_grey.png">
+                            <span class="fs30">我的发布</span>
                             <img class="btn-arrow" src="../bdt/images/icon06.png">
                         </a>
-                        <?php endif;?>
 
                          <?php if($user['vip'] == 0):?>
                              <?php if($expert):?>
@@ -133,16 +126,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                 dataLoadedSuccess("请等待审核");
                             }
                         </script>
-<!--                        <a class="function-btn bc-grey fc-black" href="myanswer.html">-->
-<!--                            <img class="btn-img" src="../bdt/images/icon.png">-->
-<!--                            <span class="fs30">我的问答</span>-->
-<!--                            <img class="btn-arrow" src="../bdt/images/icon06.png">-->
-<!--                        </a>-->
-                        <a class="function-btn bc-grey fc-black" href="myarticle.html">
-                            <img class="btn-img" src="../bdt/images/icon10_grey.png">
-                            <span class="fs30">我的发布</span>
-                            <img class="btn-arrow" src="../bdt/images/icon06.png">
-                        </a>
+
+                         <?php if($feeusers):?>
+                             <a class="function-btn bc-grey fc-black" href="#">
+                                 <img class="btn-img" src="../bdt/images/circle_grey.png">
+                                 <span class="fs30">会员有效期:  <?=date('Y-m-d',$feeuser['created']);?>至<?=date('Y-m-d',strtotime('+1 year'));?></span>
+                             </a>
+                         <?php endif;?>
+                         <?php if(!$feeusers):?>
+                             <a class="function-btn bc-grey fc-black" href="/circle/feeuser.html">
+                                 <img class="btn-img" src="../bdt/images/icon08.png">
+                                 <span class="fs30">我的会员</span>
+                                 <img class="btn-arrow" src="../bdt/images/icon06.png">
+                             </a>
+                         <?php endif;?>
+
 <!--                        <a class="function-btn bc-grey fc-black" id="usercenterPubBtn" style="display:block;">-->
 <!--                            <img class="btn-img" src="../bdt/images/icon04_grey.png">-->
 <!--                            <span class="fs30">我要发文</span>-->

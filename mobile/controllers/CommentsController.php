@@ -23,6 +23,12 @@ use common\tools\Uploadfile;
  */
 class CommentsController extends BaseController
 {
+    public function actions(){
+        $view = Yii::$app->view;
+        $view->params['site'] = htmls::site();
+        $view->params['wechat'] = htmls::wechat();
+        $view->params['js'] = $this->setJs();
+    }
     //接收评论
     public function actionComment(){
         $post = Yii::$app->request->post();

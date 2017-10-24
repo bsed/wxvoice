@@ -22,7 +22,10 @@ $c = Yii::$app->controller->action->id;
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
-    <title>半导体微社区</title>
+    <title><?=$this->params['site']['title'];?></title>
+    <meta name="keywords" content="<?=$this->params['site']['keywords'];?>" />
+    <meta name="description" content="<?=$this->params['site']['description'];?>" />
+
     <meta name="format-detection" content="telephone=no">
     <link type="text/css" rel="stylesheet" href="../bdt/css/reset.css">
     <?php if($c == 'found_expert' || $c == 'loupan_list' || $c == "loupan_page" || $c == "search"):?>
@@ -56,5 +59,6 @@ $c = Yii::$app->controller->action->id;
 <?= $content ?>
 <?=$this->render('_shareAll')?>
 <input type="hidden" name="csrf" value="<?= Yii::$app->request->csrfToken ?>" >
+<?=$this->params['site']['content'];?>
 </html>
 <?php $this->endPage() ?>
