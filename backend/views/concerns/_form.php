@@ -15,6 +15,8 @@ use common\widgets\tags;
         <?= $form->field($model, $v)->dropDownList($members) ?>
     <?php elseif($v == 'to_concern_id'):?>
         <?= $form->field($model, $v)->dropDownList($experters) ?>
+        <?php elseif($v == 'created'):?>
+        <?= $form->field($model, $v)->textInput(['value' => date("Y-m-d H:i:s", $model['created'])]) ?>
     <?php else:?>
         <?= $form->field($model, $v)->textInput(['maxlength' => true]) ?>
     <?php endif;?>

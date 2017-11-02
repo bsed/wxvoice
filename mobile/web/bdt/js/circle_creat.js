@@ -239,6 +239,9 @@ function createQzRequestFuntion(){
 	}else if (name.length>15) {
 		dataLoadedError("圈子名称应该在十五字以内");
 		return;
+	}else if(summary == ""){
+        dataLoadedError("圈子简介必填");
+        return;
 	}
     var csrf = $('input[name="csrf"]').val();
 	dataLoading("数据加载中...");
@@ -246,7 +249,16 @@ function createQzRequestFuntion(){
 		url: '/circle/circle_creat.html',
 		type: 'post',
 		dataType: 'json',
-		data:{"name":name,"summary":summary,"logo":$('input[name="pics"]').val(),"feeType":feeType,"joinPrice":joinPrice,"notes":"", _csrf:csrf},
+		data:{
+			"name":name,
+			"summary":summary,
+			"logo":$('input[name="pics"]').val(),
+			"feeType":feeType,
+			"joinPrice":joinPrice,
+			"status":0,
+			"notes":"",
+			"_csrf":csrf
+		},
 		success: function(result){
 			clearToastDialog();
 			if (result.result == "success") {

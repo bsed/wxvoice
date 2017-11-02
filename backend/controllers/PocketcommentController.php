@@ -36,9 +36,6 @@ class PocketcommentController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Pocketcomment::find(),
-        ]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => Pocketcomment::find(),

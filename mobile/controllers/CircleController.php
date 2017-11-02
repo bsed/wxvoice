@@ -3,9 +3,13 @@
 namespace mobile\controllers;
 
 use Yii;
+use mobile\models\Concerns;
+use mobile\models\Dianzan;
 use mobile\models\Members;
 use mobile\models\Experts;
 use mobile\models\Circles;
+use mobile\models\Questions;
+use mobile\models\Pockets;
 use mobile\models\Wxpayrecord;
 use mobile\models\Circlemembers;
 use common\tools\Uploadfile;
@@ -40,7 +44,10 @@ class CircleController extends BaseController
                 'class' => NoCsrf::className(),
                 'controller' => $this,
                 'actions' => [
-                    'notify',
+                    'notifyfeeuser',
+                    'notifyask',
+                    'notifyredpack',
+                    'notifycircle',
                 ]
             ]
         ];
@@ -49,7 +56,7 @@ class CircleController extends BaseController
      * 我的圈子
      */
     public function actionCircle_my(){
-        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         //判断是否登录
         $member_id = Yii::$app->session['member_id'];
         if(!$member_id){
@@ -59,12 +66,12 @@ class CircleController extends BaseController
         $model = new Circles();
         //会员信息
         $info = Members::find()->asarray()->where(['id'=>$member_id])->with('feeuser')->one();
-        //作为VIP创建的圈子个数,从circles中查找
+        //作为VIP创建的圈子个数,从circles中查找,包括审核通过和未通过
         $count = $model->find()->asarray()->where(['member_id'=>$member_id])->count();
         //加入的圈子
-        $myCircle = CircleMembers::find()->asarray()->where(['mid'=>$member_id])->with('circle','user','incircle')->all();
+        $myCircle = CircleMembers::find()->asarray()->where(['mid'=>$member_id])->andWhere(['status'=>1])->with('circle','user','incircle')->all();
         //所有圈子的列表
-        $creatCircle = $model->find()->asarray()->where(['member_id'=>$member_id])->with('user')->count();
+        $creatCircle = $model->find()->asarray()->where(['member_id'=>$member_id])->andWhere(['status'=>1])->with('user')->count();
 
         //推荐圈子，除了已经关注的其他圈子, where 不等于一个数组 In, 使用hasMany 查出有多少会员
         $filter = [];
@@ -73,9 +80,9 @@ class CircleController extends BaseController
                 $filter[] = $v['cid'];
             }
         }
-        $recCircles = $model->find()->asarray()->with('user','incircle')->where(['not in','id',$filter])->all();
+        $recCircles = $model->find()->asarray()->with('user','incircle')->where(['status'=>1])->andWhere(['not in','id',$filter])->all();
         //我创建的圈子
-        $MyCreated = $model->find()->asarray()->where(['member_id'=>$member_id])->with('user','incircle')->all();
+        $MyCreated = $model->find()->asarray()->where(['member_id'=>$member_id])->andWhere(['status'=>1])->with('user','incircle')->all();
 
         return $this->render('circle_my',[
             'info'=>$info,
@@ -86,22 +93,28 @@ class CircleController extends BaseController
         ]);
     }
     public function actionCircle_creat(){
-        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         //判断是否登录
+        $feeuser = Yii::$app->session['feeuser'];
         $member_id = Yii::$app->session['member_id'];
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
         }
         $model = new Circles();
-        //判断是否是付费会员
-        $feeuser = Yii::$app->session['feeuser'];
-        if(!$feeuser){
-            //判断专家创建了多少圈子，普通用户
-            $count = $model->find()->asarray()->where(['member_id'=>$member_id])->count();
-            if(!$count){
+        //判断是否是专家或群管,只有这两个身份才能创建圈子
+        $mInfo = Members::find()->asarray()->where(['id'=>$member_id])->one();
+        $expertInfo = Experts::find()->asarray()->where(['member_id'=>$member_id])->one();
+
+        if($mInfo['isguanjia'] == 1){//管家可以创建无数个圈子
+
+        }elseif($expertInfo['vip'] == 1){//专家只可以创建一个圈子
+            $circleNums = $model->find()->asarray()->where(['member_id'=>$member_id])->count();
+            if($circleNums > 1){
                 return $this->redirect('/circle/circle_my.html?from=index');
             }
+        }else{//如果不是这两个身份就退回到首页
+            return $this->redirect('/circle/circle_my.html?from=index');
         }
 
         $post = Yii::$app->request->post();
@@ -139,6 +152,7 @@ class CircleController extends BaseController
      */
     public function actionCircle_page(){
         //判断是否登录
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         $member_id = Yii::$app->session['member_id'];
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
@@ -148,27 +162,36 @@ class CircleController extends BaseController
         //查找会员是否在指定的圈子中
         $circleModel = new Circlemembers();
         $circleInfo = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$_GET['id']])->one();
+
         //如果圈子收费，未加入了圈子，不是作者自己
         $model = new Circles();
         $info = $model->find()->asarray()->with('user')->where(['id'=>$_GET['id']])->one();
         if( ($info['user']['id'] != $member_id) &&  (!$circleInfo) ){
             return $this->redirect('/circle/circle_share_detail.html?id='.$_GET['id']);
         }
-
+       //$info['member_id'] == $member_id 就隐藏掉提问按钮
         //加入圈子的人数
         $allCircleMembers = $circleModel->find()->where(['cid'=>$_GET['id']])->all();
         $nums = count($allCircleMembers);
         return $this->render('circle_page',[
             'circle_info'=>$info,
             'nums'=>$nums,
+            'mid'=>$member_id,
         ]);
     }
     //查询圈子是否到期
     public function actionDeadtime(){
+        $member_id = Yii::$app->session['member_id'];
+        //判断是否付费成功,查到circlemembers
+        //查找会员是否在指定的圈子中
+        $circleModel = new Circlemembers();
+        $circleCount = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$_POST['id']])->andWhere(['status'=>1])->count();
+        if(!$circleCount){
+            die(json_encode(['result'=>'paying','msg'=>'支付结果确认中,请稍候','code'=>$circleCount]));
+        }
         //判断加入圈子的类型，主要判断按年付费的是否到期
         $info =Circles::find()->asarray()->where(['id'=>$_POST['id']])->one();
         if($info['feetype'] == 1){
-            $member_id = Yii::$app->session['member_id'];
             $addCircleDate = Wxpayrecord::find()->where(['mid'=>$member_id,'pay_id'=>$_POST['id']])->asarray()->one();
             $addTime = $addCircleDate['created'];
             $nowTime = time();
@@ -180,8 +203,8 @@ class CircleController extends BaseController
                 }
 
              }
-        }else{
-            die(json_encode(['result'=>'notyear','msg'=>'不是按年付费']));
+        }else{//0免费 1按年付费 2付费后永久免费
+            die(json_encode(['result'=>'notyear','msg'=>'']));
         }
 
     }
@@ -216,7 +239,7 @@ class CircleController extends BaseController
         $model->cid = $post['cid'];
         $model->qid = $post['qid'];
         $model->price = $post['price'];
-        $model->trade = $post['trade'];
+        $model->trade = isset($post['trade'])?$post['trade']:0;
         $model->status = 0;
         $model->created = time();
         $model->save();
@@ -232,7 +255,16 @@ class CircleController extends BaseController
         }
         $model = new Experts();
         $info = $model->find()->asarray()->where(['member_id'=>$_GET['mid']])->with('user')->one();
-        return $this->render('circle_qanda_questions',['info'=>$info,'tags'=>json_decode($info['user']['tags'], true)]);
+        //获取是否已经关注
+        $foucs = Concerns::find()->asarray()->where(['mid'=>$member_id,'to_mid'=>$info['user']['id']])->one();
+        //获取已关注的人数
+        $concerns = Concerns::find()->where(['to_mid'=>$info['member_id']])->count();
+        return $this->render('circle_qanda_questions',[
+            'info'=>$info,
+            'foucs'=>$foucs,
+            'concerns'=>$concerns,
+            'member_id'=>$member_id,
+        ]);
     }
     /*
      * 查看圈子成员
@@ -309,12 +341,13 @@ class CircleController extends BaseController
             return $this->redirect('/members/login.html');
         }
         $model = new Circlemembers();
-        $info = $model->find()->asarray()->where(['cid'=>$_GET['id'],'mid'=>$member_id])->one();
+        $info = $model->find()->asarray()->where(['cid'=>$_GET['id'],'mid'=>$member_id])->andWhere(['status'=>1])->one();
         if(($info) ){
             return $this->redirect('/circle/circle_page.html?id='.$_GET['id']);
         }
         $model = new Circles();
         $info = $model->find()->asarray()->with('user')->where(['id'=>$_GET['id']])->one();
+
         //圈子成员
         $circleMembers = new Circlemembers();
         $members = $circleMembers->find()->asarray()->with('user')->where(['cid'=>$_GET['id']])->all();
@@ -334,7 +367,8 @@ class CircleController extends BaseController
      * 成为全局的付费会员
      */
     public function actionFeeuser(){
-
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         $member_id = Yii::$app->session['member_id'];
         $preurl = Yii::$app->session['tryinto'];
         $feeUser = htmls::site();
@@ -369,14 +403,22 @@ class CircleController extends BaseController
         //获取微信配置
         $payment = $this->wxPay();
         $rand = time().rand(100,999).rand(1,999);
-
+       if($title == 'redpack'){
+           $circleNotifyUrl = 'http://maibeila.emifo.top/circle/notifyredpack.html';
+       }elseif($title == 'feeuser'){
+            $circleNotifyUrl = 'http://maibeila.emifo.top/circle/notifyfeeuser.html';
+       }elseif($title == 'ask'){
+            $circleNotifyUrl = 'http://maibeila.emifo.top/circle/notifyask.html';
+       }elseif($title == 'circle'){
+           $circleNotifyUrl = 'http://maibeila.emifo.top/circle/notifycircle.html';
+       }
         $attributes = [
             'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
             'body'             => $title,
             'detail'           => $title,
             'out_trade_no'     => $rand,
             'total_fee'        => $price, // 单位：分
-            'notify_url'       => 'http://maibeila.emifo.top/circle/notify.html',
+            'notify_url'       => $circleNotifyUrl,
             'openid'           => $user['openid'],
         ];
         $order = new Order($attributes);
@@ -401,29 +443,102 @@ class CircleController extends BaseController
             $model->created = time();
             $model->status = 0;
             $model->save();
+            //将members中此会员的feeuser变为1,或者在notiyUrl中根据openid更新
 
         }
         die(json_encode(['result'=>'success','config'=>$config,'trade'=>$rand]));
 
     }
     /*
-     * notify_url
+     * notify_url,需要在NoCsrf 中把csrf关闭
      */
-    public function actionNotify(){
+    public function actionNotifyask(){//问题表
         $payment = $this->wxPay();
         $response = $payment->handleNotify(function($notify, $successful){
             if($successful){
-                //更新账单表, 同时根据trade更新circlemembers，确保支付成功
+                //更新账单表
+                $model = new Wxpayrecord();
+                $model->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
+                //更新问题表中的status
+                $QuestionModel = new Questions();
+                $id = $QuestionModel->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
+                if($id){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+        });
+        $response->send();
+
+    }
+    //feeuser的异步通知
+    public function actionNotifyfeeuser(){//付费会员表
+        $payment = $this->wxPay();
+        $response = $payment->handleNotify(function($notify, $successful){
+            if($successful){
+                //更新账单表
                 $model = new Wxpayrecord();
                 $model->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
 
-                $models = new Circlemembers();
-                $id = $models->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
+                //同时根据openid更新members表中feeuser状态
+                $memberModel = new Members();
+                $id = $memberModel->updateAll(['feeuser' => 1, 'feetime'=>time()], "openid ='{$notify['openid']}'");
                 if($id){
-
                     return true;
                 }else{
-                    //给微信返回false,让他们发送两次确认信息，把circlemembers表的状态更新为status=1
+                    return false;
+                }
+
+
+            }
+
+        });
+        $response->send();
+
+    }
+    //redpack 红包支付
+    public function actionNotifyredpack(){//红包表,列表只显示status中为1的，首页列表、论坛列表、和圈子中三个地方
+        $payment = $this->wxPay();
+        $response = $payment->handleNotify(function($notify, $successful){
+            if($successful){
+                //更新账单表
+                $model = new Wxpayrecord();
+                $model->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
+
+                //同时根据trade更新pockets表中status状态
+                $pocketsModel = new Pockets();
+                $id =  $pocketsModel->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
+                if($id){
+                    return true;
+                }else{
+                    return false;
+                }
+
+
+            }
+
+        });
+        $response->send();
+
+    }
+    //加入圈子
+    public function actionNotifycircle(){
+        $payment = $this->wxPay();
+        $response = $payment->handleNotify(function($notify, $successful){
+            if($successful){
+
+                //更新账单表
+                $model = new Wxpayrecord();
+                $model->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
+
+                //同时根据trade更新pockets表中status状态
+                $circleMemberModel = new Circlemembers();
+                $id =  $circleMemberModel->updateAll(['status' => 1], "trade ={$notify['out_trade_no']}");
+                if($id){
+                    return true;
+                }else{
                     return false;
                 }
 

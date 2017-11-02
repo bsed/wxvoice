@@ -29,7 +29,7 @@ $(document).ready(function() {
         notesStr = "我在圈子发了红包，先到先得哟!";
     }else{
         publishLocationType = "";
-        notesStr = "我在问房吧广场发了红包，先到先得哟!";
+        notesStr = "我在半导体社区发了红包";
     }
     $('.notes').attr("placeholder",notesStr);
 
@@ -73,21 +73,6 @@ $(document).ready(function() {
 	});
 	
     monitorCount(0);
-	/** by wangzhen 20170513 调整back程序
-    $("#back").click(function() {
-        if (isNormalBackBool==1) {
-            //document.referrer是获取上一页的url
-            var url = document.referrer;
-            if (url!=null&&url.length!=0) {
-               window.location.href = "javascript:history.back(-1)";
-            }else{
-               window.location.href = "index.html";
-            }
-        }else{
-            historyUtils.back();  
-        }
-    });
-	*/
 })
 
 function monitorCount(index){
@@ -188,13 +173,13 @@ function Wxpay(totleMoney, packetsCount, type, splitType, notesStr){
         },
         success: function(data) {
             if(data.result == 'success'){
-                getWxConfig(data.config.timestamp, data.config.nonceStr, data.config.package, data.config.signType, data.config.paySign, totleMoney, packetsCount, type, splitType, notesStr);
+                getWxConfig(data.trade,data.config.timestamp, data.config.nonceStr, data.config.package, data.config.signType, data.config.paySign, totleMoney, packetsCount, type, splitType, notesStr);
             }
         }
     });
 }
 //唤起微信,支付成功之后再发红包
-function getWxConfig(timestamp, nonceStr, package, signType, paySign,totleMoney, packetsCount, type, splitType, notesStr){
+function getWxConfig(trade,timestamp, nonceStr, package, signType, paySign,totleMoney, packetsCount, type, splitType, notesStr){
     wx.chooseWXPay({
         timestamp: timestamp,
         nonceStr: nonceStr,
@@ -203,14 +188,12 @@ function getWxConfig(timestamp, nonceStr, package, signType, paySign,totleMoney,
         paySign: paySign,
         success: function (res) {
             // 支付成功后的回调后，记录已经加入圈子
-            postRedPacketRequest(totleMoney, packetsCount, type, splitType, notesStr);
+            postRedPacketRequest(totleMoney, packetsCount, type, splitType, notesStr,trade);
         }
     });
 }
-function postRedPacketRequest(totleMoney, packetsCount, type, splitType, notesStr){
+function postRedPacketRequest(totleMoney, packetsCount, type, splitType, notesStr,trade){
     dataLoading("数据加载中...");
-    // alert(totleMoney);
-    // ,"publishLocationId":publishLocationId,"publishLocationType":publishLocationType
     var csrf = $('input[name="csrf"]').val();
     var circle_id = request('circle_id');
     if(circle_id){
@@ -228,6 +211,7 @@ function postRedPacketRequest(totleMoney, packetsCount, type, splitType, notesSt
             "tot":totleMoney,
             "packets":packetsCount,
             "type":type,
+            "trade":trade,
             "splitType":splitType,
             "notes":notesStr,
             "circle_id":circleId,

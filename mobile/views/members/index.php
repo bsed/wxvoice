@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 dataLoadedSuccess("请等待审核");
                             }
                         </script>
-
+                    <?php if($user['honnoruser'] != 1):?>
                          <?php if($feeusers):?>
                              <a class="function-btn bc-grey fc-black" href="#">
                                  <img class="btn-img" src="../bdt/images/circle_grey.png">
@@ -140,6 +140,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                  <img class="btn-arrow" src="../bdt/images/icon06.png">
                              </a>
                          <?php endif;?>
+                     <?php else:?>
+                        <a class="function-btn bc-grey fc-black" href="/circle/feeuser.html">
+                            <img class="btn-img" src="../bdt/images/icon08.png">
+                            <span class="fs30">荣誉会员</span>
+                            <img class="btn-arrow" src="../bdt/images/icon06.png">
+                        </a>
+                     <?php endif;?>
 
 <!--                        <a class="function-btn bc-grey fc-black" id="usercenterPubBtn" style="display:block;">-->
 <!--                            <img class="btn-img" src="../bdt/images/icon04_grey.png">-->

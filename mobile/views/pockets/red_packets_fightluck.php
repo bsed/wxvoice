@@ -16,7 +16,7 @@
 
             <div class="rp_fight_luck_content textinput" id="redpacket0" style="display: block;">
                 <div class="rpf_money bg-white">
-                    <i><img src="../bdt/images/pin.png?v=20170420111122"></i>
+                    <i><img src="../bdt/images/pin.png"></i>
                     <h1 class="fs30">总金额</h1>
                     <p class="fs30">元</p>
                     <input id="redMoney0" type="number" placeholder="输入金额" class="fs30">

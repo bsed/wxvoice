@@ -33,9 +33,9 @@ class Pockets extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'give_type', 'pocket_nums', 'pocket_type'], 'integer'],
+            [['member_id', 'give_type', 'pocket_nums', 'pocket_type','status'], 'integer'],
             [['total_money'], 'number'],
-            [['message', 'created'], 'string', 'max' => 255],
+            [['message', 'created','trade'], 'string', 'max' => 255],
         ];
     }
 

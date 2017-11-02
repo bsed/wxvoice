@@ -43,9 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <span class="label label-primary">发了<?=$v['pocket_nums']?>个</span>
                                     </td>
                                     <td class="project-completion">
-                                        <span class="label label-primary">
-                                            共<?=$v['total_money']?>元的红包给
-                                        </span>
+                                            共<?=$v['total_money']?>元
                                     </td>
                                     <td class="project-completion">
                                         <span class="label label-primary">
@@ -53,11 +51,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                         </span>
                                     </td>
                                     <td class="project-completion">
-                                        <span class="label label-primary">并写到：<?=$v['message']?></span>
+                                        并写到：<?=$v['message']?>
+                                    </td>
+                                    <td class="project-completion">
+                                        发送时间：<?=date('Y-m-d H:i:s',$v['created']);?>
                                     </td>
 
                                     <td class="project-actions">
-                                        <a href="<?=Url::toRoute(['pocketcomment/delete','id'=>$v['id']])?>" class="btn btn-white btn-sm">
+                                        <a href="<?=Url::toRoute(['pockets/delete','id'=>$v['id']])?>" class="btn btn-white btn-sm">
                                             <i class="fa fa-pencil"></i> 删除 </a>
                                     </td>
                                 </tr>

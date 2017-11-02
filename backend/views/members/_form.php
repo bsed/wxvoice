@@ -18,12 +18,19 @@ use common\widgets\tags;
         <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
         <?php elseif($v == 'disallowed'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
+        <?php elseif($v == 'feeuser'):?>
+        <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
+        <?php elseif($v == 'honnoruser'):?>
+        <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
         <?php elseif($v == 'tags'):?>
         <?php elseif($v == 'pwd'):?>
+        <?php elseif($v == 'openid'):?>
         <?php elseif($v == 'industry'):?>
+        <?php elseif($v == 'feetime'):?>
         <?php elseif($v == 'areas'):?>
         <?php elseif($v == 'account'):?>
-        <?php elseif($v == 'created'):?>
+    <?php elseif($v == 'created'):?>
+        <?= $form->field($model, $v)->textInput(['value' => date("Y-m-d H:i:s", $model['created'])]) ?>
         <?php elseif($v == 'updated'):?>
         <?php elseif($v == 'slogan'):?>
         <?= $form->field($model, $v)->textarea(['maxlength' => true]) ?>

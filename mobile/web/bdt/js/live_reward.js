@@ -37,7 +37,7 @@ $(document).ready(function() {
         '<p class="fs30 mb10">3、行家通过回答问题被第三人付费收听来获得收入。每被付费收听一次，获得<span id="touListenFee1">0</span>元；</p>'+
         '<p class="fs30 mb10">4、若问答被分享，通过分享页面进入付费收听而产生的收益，分享者获得<span id="shareListenShare">0</span>元，提问者与回答者均获得<span id="shareListenQA">0</span>元；</p>'+
         '<!-- 		<p class="fs30 mb10">5、若问答被连续二次分享，通过连续二次分享页面进入且付费收听而产生的收益，二次分享者获得<span id="lv2ShareListenShare">0</span>元，提问者、回答者与一次分享者均获得<span id="lv2ShareListenQA">0</span>元；</p> -->'+
-        '<p class="fs30 mb10">5、所有收入扣除<span id="qaFeeRate">0</span>作为平台佣金。账户余额大于<span id="minPayCash">0</span>元，每日21点系统自动将账户里的余额划到微信钱包内，用户也可前往“问房吧”公众号提现；</P>'+
+        '<p class="fs30 mb10">5、所有收入扣除<span id="qaFeeRate">0</span>作为平台佣金。账户余额大于<span id="minPayCash">0</span>元，每日21点系统自动将账户里的余额划到微信钱包内，用户也可前往“半导体”公众号提现；</P>'+
         '<p class="fs30 mb10">6、备注：免费围观券收听，行家、提问者、分享者都没有收益。</p>'+
         '</div>'+
         '</div>'+

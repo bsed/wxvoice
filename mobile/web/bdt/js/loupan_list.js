@@ -110,7 +110,7 @@ function myClose(){
 }
 
 function WxShareFunction(){
-    // icon:问房 
+    // icon:半导体 
     // 标题：你的好友+【用户名】+邀请你一起来尬聊dream house   
     // 内容:房产大咖聚众密谋大事，此处墙角可偷听！
     // @一切安好 

@@ -28,7 +28,7 @@ class PocketsController extends BaseController
         $view->params['js'] = $this->setJs();
     }
     public function actionRed_packets(){
-
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
             return $this->render('red_packets');
     }
@@ -40,6 +40,7 @@ class PocketsController extends BaseController
      * 打开红包
      */
     public function actionRed_packets_open($id){
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         $member_id = Yii::$app->session['member_id'];
         if(!$member_id){
@@ -84,8 +85,11 @@ class PocketsController extends BaseController
           $model->publishtype = $_POST['publishtype'];
           $model->created = time();
           $model->member_id = $member_id;
+          $model->status = 1;
+          $model->trade = $_POST['trade'];
           $model->save();
           $id = $model->id;
+          //同时在articles表中插入数据
               $articleModel = new Articles();
               $articleModel->redid = $id;
               $articleModel->member_id = $member_id;

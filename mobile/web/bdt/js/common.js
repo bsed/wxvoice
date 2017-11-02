@@ -203,7 +203,29 @@ function goBack(){
         }
     }
 }
+//判断来路
+function fromwhere(){
+    if ((navigator.userAgent.indexOf('MSIE') >= 0) && (navigator.userAgent.indexOf('Opera') < 0)){ // IE
+        if(history.length > 0){
+        }else{
+            window.location.href = "/";
+        }
+    }else{ //非IE浏览器
+        if (navigator.userAgent.indexOf('Firefox') >= 0 ||
+            navigator.userAgent.indexOf('Opera') >= 0 ||
+            navigator.userAgent.indexOf('Safari') >= 0 ||
+            navigator.userAgent.indexOf('Chrome') >= 0 ||
+            navigator.userAgent.indexOf('WebKit') >= 0){
 
+            if(window.history.length > 1){
+            }else{
+                window.location.href = "/";
+            }
+        }else{ //未知的浏览器
+            window.history.go( -1 );
+        }
+    }
+}
 //格式化时间戳
 function getDateDiff(time){
     //将PHP的时间戳转成js的时间戳

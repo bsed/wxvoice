@@ -26,7 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="ibox-title">
                     <h5>问题列表</h5>
                     <div class="ibox-tools">
-                        <a href="<?=Url::toRoute(['questions/create'])?>" class="btn btn-primary btn-xs">创建问题</a>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -34,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="search-form">
                         <form action="<?=Url::toRoute('questions/index')?>" method="post">
                             <div class="input-group">
-                                <input type="text" placeholder="专家名称" name="search" class="form-control input-lg">
+                                <input type="text" placeholder="问题名称" name="search" class="form-control input-lg">
                                 <div class="input-group-btn">
                                     <button class="btn btn-lg btn-primary" type="submit">搜索</button>
                                 </div>
@@ -59,11 +58,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td class="project-completion">
 
                                                 <?php if($v['status'] == 0):?>
-                                                <span class="label label-primary">未回答</span>
+                                                <span class="label label-primary">未支付</span>
                                                  <?php elseif($v['status'] ==1):?>
-                                                    <span class="label label-primary">已回答</span>
+                                                    <span class="label label-primary">已支付</span>
                                                  <?php elseif($v['status'] == 2):?>
-                                                    <span class="label label-primary">已失效</span>
+                                                    <span class="label label-primary">已回答</span>
                                                     <?php elseif($v['status'] == 3):?>
                                                     <span class="label label-default">已撤销</span>
                                                   <?php endif;?>

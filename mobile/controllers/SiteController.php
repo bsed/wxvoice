@@ -31,6 +31,7 @@ class SiteController extends BaseController
      */
     public function actionIndex()
     {
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         $mid = Yii::$app->session['member_id'];
         //轮播图
         $banner = htmls::getPiece('hdp');
@@ -55,7 +56,7 @@ class SiteController extends BaseController
      * 搜索
      */
     public function actionSearch(){
-
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         $mid = Yii::$app->session['member_id'];
         //关键词
         $keys = $_GET['keys'];

@@ -19,7 +19,6 @@ $(document).ready(function() {
             if ($('#downloadMoreData').length>0) {
                 a = document.getElementById("downloadMoreData").offsetTop;
                 if (a >= $(this).scrollTop() && a < ($(this).scrollTop()+$(window).height()-40)) {
-                // alert("div在可视范围");
                     flag = -1;
                     downloadMoreData();
                 }
@@ -182,10 +181,14 @@ function configListUI(result){
         }
         //判断红包
         if(result.data.list[i].redid != 0){
-
+            if(result.data.list[i].pockets.give_type == 1){
+                var type = '给粉丝';
+            }else{
+                var type = '给新手';
+            }
             var articles = '<p class="text-style fs32 fc-black456 face_tag mb5">'+result.data.list[i].title+'</p>' +
                 '<div class="redpacket-show mt5 mb5" onclick="gotoRedPocketDetailHtml('+result.data.list[i].redid+', this);" id="redPacket">' +
-                '<img src="../bdt/images/hongbao_details.png"><p class="fs30 fc-black">'+result.data.list[i].user.nickname+'发的新手红包</p>' +
+                '<img src="../bdt/images/hongbao_details.png"><p class="fs30 fc-black">'+result.data.list[i].user.nickname+type+'的红包</p>' +
                 '<a class="'+getPocket+'">领红包</a></div>';
             var contents = '<div class="module-content mt10" >'+articles+'</div>';
         }else if(result.data.list[i].redid == 0){

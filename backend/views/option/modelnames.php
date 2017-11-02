@@ -10,7 +10,8 @@ use yii\widgets\ActiveForm;
 $this->title = '自定义字段';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
 <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
 <link href="css/animate.min.css" rel="stylesheet">
 <link href="css/plugins/summernote/summernote.css" rel="stylesheet">
@@ -43,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_editors.html#">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="">
                             <i class="fa fa-wrench"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
@@ -86,10 +87,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h5>拖拽左侧表单元素到此区域</h5>
                     <div class="ibox-tools">
                         请选择显示的列数：
-                        <select name="type">
-                            <option value="1">显示1列</option>
-                            <option value="2">显示2列</option>
-                        </select>
                     </div>
                 </div>
 

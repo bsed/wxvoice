@@ -20,6 +20,7 @@ use common\widgets\tags;
     <?php elseif($v == 'circle_id'):?>
     <?php elseif($v == 'open'):?>
     <?php elseif($v == 'article'):?>
+    <?php elseif($v == 'trade'):?>
     <?php elseif($v == 'themeid'):?>
     <?php elseif($v == 'asktime'):?>
     <?php elseif($v == 'typeid'):?>
@@ -30,6 +31,7 @@ use common\widgets\tags;
     <?php elseif($v == 'publishtype'):?>
     <?php elseif($v == 'continue_ask'):?>
     <?php elseif($v == 'created'):?>
+        <?= $form->field($model, $v)->textInput(['value' => date("Y-m-d H:i:s", $model['created'])]) ?>
     <?php elseif($v == 'answer_type'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '语音回答', '1' => '图文回答']) ?>
     <?php elseif($v == 'continue_ask'):?>
@@ -37,7 +39,7 @@ use common\widgets\tags;
         <?php elseif($v == 'rec'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
     <?php elseif($v == 'status'):?>
-        <?= $form->field($model, $v)->dropDownList(['0' => '未回答', '1' => '已回答', '2'=>'已失效', '3'=>'已撤销']) ?>
+        <?= $form->field($model, $v)->dropDownList(['0' => '未支付', '1' => '已支付', '2'=>'已回答']) ?>
     <?php elseif($v == 'tags'):?>
         <?= $form->field($model, $v)->widget('common\widgets\tags\TagWidget') ?>
     <?php else:?>

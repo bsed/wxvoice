@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>红包列表</h5>
+                    <h5>评论列表</h5>
                 </div>
                 <div class="ibox-content">
 

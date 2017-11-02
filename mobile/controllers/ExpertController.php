@@ -34,6 +34,7 @@ class ExpertController extends BaseController
      * 查找专家
      */
    public function actionFound_expert(){
+       Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
        $type = htmls::getPiece('experttype');
       return $this->render('found_expert',['type'=>$type]);
@@ -45,11 +46,28 @@ class ExpertController extends BaseController
        $model = new Experts();
        $file = Yii::$app->params['public'].'/attachment';
        $pernum = $_POST['pernum'];
-       if($_POST['typeid'] == -1){
-           $list = $model->find()->asarray()->with('user')->offset($_POST['start'])->limit($pernum)->all();
-           $total = $model->find()->asarray()->count();
+       if($_POST['typeid'] == 0){
+           $list = $model->find()
+               ->asarray()
+               ->where(['rec'=>1])
+               ->with('user')
+               ->offset($_POST['start'])
+               ->orderBy('listorder DESC')
+               ->limit($pernum)
+               ->all();
+           $total = $model->find()
+               ->asarray()
+               ->where(['rec'=>1])
+               ->count();
        }else{
-           $list = $model->find()->asarray()->with('user')->where(['type'=>$_POST['typeid']])->offset($_POST['start'])->limit($pernum)->all();
+           $list = $model->find()
+               ->asarray()
+               ->with('user')
+               ->where(['type'=>$_POST['typeid']])
+               ->offset($_POST['start'])
+               ->limit($pernum)
+               ->orderBy('listorder DESC')
+               ->all();
            $total = $model->find()->asarray()->where(['type'=>$_POST['typeid']])->count();
        }
 
@@ -71,6 +89,7 @@ class ExpertController extends BaseController
     * 会员主页
     */
    public function actionUser_page(){
+       Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
        $model = new Experts();
        //判断是否登录
        $member_id = Yii::$app->session['member_id'];
@@ -113,6 +132,14 @@ class ExpertController extends BaseController
            'circleId'=>$circleInfo['id'],
        ]);
    }
+
+
+
+
+
+
+
+
 
 
 

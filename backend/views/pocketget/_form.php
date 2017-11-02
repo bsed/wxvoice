@@ -17,8 +17,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'member_id')->textInput() ?>
 
     <?= $form->field($model, 'get_price')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created')->textInput(['maxlength' => true]) ?>
+    
+        <?= $form->field($model, $v)->textInput(['value' => date("Y-m-d H:i:s", $model['created'])]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

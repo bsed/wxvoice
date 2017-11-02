@@ -63,7 +63,7 @@ use common\tools\htmls;
                 <a href="/articles/square.html" class="fc-black">
                     <img src="../bdt/images/index_loupan.jpg"><span>论坛</span>
                 </a>
-                <a href="http://zhaopin.211ic.com/app/index.php?i=3&c=entry&do=index_home&m=q_3354988381_rencai" class="fc-black">
+                <a href="<?=$this->params['site']['zhaopinurl'];?>" class="fc-black">
                     <img src="../bdt/images/index_topic.jpg"><span>招聘</span>
                 </a>
             </div>

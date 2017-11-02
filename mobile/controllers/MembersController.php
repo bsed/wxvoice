@@ -279,50 +279,80 @@ class MembersController extends BaseController
                   $session->removeAll();
               }
         }
-        return $this->redirect('/members/index.html');
-//        return $this->render('wxlogin',['user'=>$user]);
+        return $this->redirect(Yii::$app->session['tryinto']);
     }
     /*
      * 请求数据看 是否是付费的会员
      */
+//    public function actionIsfeeuser(){
+//        if($_POST){
+//            $member_id = Yii::$app->session['member_id'];
+//            if($member_id){
+//                $wxMember = Members::find()->asarray()
+//                    ->where(['id'=>$member_id])
+//                    ->with([
+//                        'feeuser' => function ($query){
+//                            $query->where(['pay_type'=>'feeuser'])->orderBy('created DESC');
+//                        }
+//                    ])->one();
+//                if($wxMember['vip'] == 1){//作为专家可以具有会员的权限
+//                    Yii::$app->session['feeuser'] = 1;
+//                    die(json_encode(['result'=>'success']));
+//                }
+//
+//                    if(!empty($wxMember['feeuser'])) {//不为空。联合查询支付表,找到最新的支付记录，判断是否过期
+//                        if ($wxMember['feeuser'][0]['status'] == 1) {
+//                            //查看加入时间
+//                            $addTime = $wxMember['feeuser'][0]['created'];
+//                            if (time() - $addTime > 365 * 24 * 3600) {
+//                                Yii::$app->session['feeuser'] = 0;
+//                                die(json_encode(['result' => 'error']));
+//                            } else {
+//                                Yii::$app->session['feeuser'] = 1;
+//                                die(json_encode(['result' => 'success']));
+//                            }
+//
+//                        } else {
+//                            Yii::$app->session['feeuser'] = 0;
+//                            die(json_encode(['result' => 'error']));
+//                        }
+//                    }else{//如果为空，则需要
+//                        Yii::$app->session['feeuser'] = 0;
+//                        die(json_encode(['result' => 'error']));
+//                    }
+//
+//
+//                }
+//        }
+//    }
     public function actionIsfeeuser(){
         if($_POST){
-            $member_id = Yii::$app->session['member_id'];
-            if($member_id){
-                $wxMember = Members::find()->asarray()
-                    ->where(['id'=>$member_id])
-                    ->with([
-                        'feeuser' => function ($query){
-                            $query->where(['pay_type'=>'feeuser'])->orderBy('created DESC');
-                        }
-                    ])->one();
-                if($wxMember['vip'] == 1){
-                    Yii::$app->session['feeuser'] = 1;
-                    die(json_encode(['result'=>'success']));
-                }
-                    if(!empty($wxMember['feeuser'])) {
-                        if ($wxMember['feeuser'][0]['status'] == 1) {
-                            //查看加入时间
-                            $addTime = $wxMember['feeuser'][0]['created'];
-                            if (time() - $addTime > 365 * 24 * 3600) {
-                                Yii::$app->session['feeuser'] = 0;
-                                die(json_encode(['result' => 'error']));
-                            } else {
-                                Yii::$app->session['feeuser'] = 1;
-                                die(json_encode(['result' => 'success']));
-                            }
-
-                        } else {
-                            Yii::$app->session['feeuser'] = 0;
-                            die(json_encode(['result' => 'error']));
-                        }
+            $mid = Yii::$app->session['member_id'];
+            $info = Members::find()->asarray()->where(['id'=>$mid])->one();
+            //START
+            if(!$info['honnoruser']){
+                if(!empty($info)){
+                    $time = time() - $info['feetime'];
+                    if($info['feeuser'] == 1 && $time < 365 * 24 * 3600){
+                        Yii::$app->session['feeuser'] = 1;
+                        die(json_encode(['result' => 'success']));
+                    }elseif($info['vip'] == 1){
+                        Yii::$app->session['feeuser'] = 1;
+                        die(json_encode(['result' => 'success']));
                     }else{
                         Yii::$app->session['feeuser'] = 0;
                         die(json_encode(['result' => 'error']));
                     }
-
-
+                }else{
+                    Yii::$app->session['feeuser'] = 0;
+                    die(json_encode(['result' => 'error']));
                 }
+            }else{//系统指定的会员
+                Yii::$app->session['feeuser'] = 1;
+                die(json_encode(['result' => 'success']));
+            }
+            //END
+
         }
     }
 
@@ -370,7 +400,7 @@ class MembersController extends BaseController
         if(isset($_GET['loginout'])){
             $session = \Yii::$app->session;
             $session->removeAll();
-            return $this->redirect('/members/login.html');
+            return $this->redirect('/site/index.html');
         }
         return $this->render('myset');
     }
@@ -472,6 +502,7 @@ class MembersController extends BaseController
     }
     //我的钱包
     public function actionMywallet(){
+        $site = htmls::site();
         $member_id = Yii::$app->session['member_id'];
 
         if(!$member_id){
@@ -484,27 +515,34 @@ class MembersController extends BaseController
             //回答收入
             $questionModel = new Questions();
             $QuestionPrice = $questionModel->find()->asarray()->where(['expert_id'=>$expert['id']])->sum('askprice');
+            if(!$QuestionPrice){
+                $QuestionPrice = "0.00";
+            }
         }else{
             $QuestionPrice = "0.00";
         }
         //红包收入
         $PocketgetModel = new Pocketget();
         $PocketPrice = $PocketgetModel->find()->where(['member_id'=>$member_id])->sum('get_price');
+        if(!$PocketPrice){
+            $PocketPrice = '0.00';
+        }
         //圈子收入，从加入的圈子中计算
         $CircleModel = new Circlemembers();
         $CirclePrice = $CircleModel->find()->asarray()->where(['qid'=>$member_id])->sum('price');
         if(!$CirclePrice){
             $CirclePrice = '0.00';
+        }else{
+            $CirclePrice = $CirclePrice * $site['quanzifencheng'];
         }
-        if(!$PocketPrice){
-            $PocketPrice = '0.00';
-        }
+
         //总的收入等于回答收入+红包收入+圈子收入
         $total = $QuestionPrice + $PocketPrice + $CirclePrice;
         //提现的金额
         $tixian = Tixian::find()->where(['mid'=>$member_id])->sum('price');
         //提现记录
         $tixianRecord = Tixian::find()->where(['mid'=>$member_id])->all();
+
         return $this->render('mywallet',[
             "QuestionPrice"=>$QuestionPrice,
             "PocketPrice"=>$PocketPrice,

@@ -16,7 +16,7 @@ function commonQaListFunction (cell,index) {
         statusListen = "pay";
         // tips = cell.qfee+"元";
         if(initOs.getOs() == 'ios'){
-            tips = (parseInt(cell.qfee)*100)+"问房币";
+            tips = (parseInt(cell.qfee)*100)+"半导体币";
         }else{
         tips = cell.qfee+"元";
         }

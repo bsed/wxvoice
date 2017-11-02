@@ -202,7 +202,7 @@ function configBindPhoneUI(){
             success: function (result){
                 if (result.result == "success") {
                     $('.phone_dialog').hide();
-        qrcodeDialogOfPhone('images/qrcodebg1.png' , '申请成功' , '关注问房吧后，系统会通过公众号向您<br />推送收到新提问的微信消息。' , 'success-apply' );
+        qrcodeDialogOfPhone('images/qrcodebg1.png' , '申请成功' , '关注半导体后，系统会通过公众号向您<br />推送收到新提问的微信消息。' , 'success-apply' );
                     // successBack();
                 }else{
                     dataLoadedError(result.message); 
@@ -229,7 +229,7 @@ function successBack(){
 //        var refreshBool = readClientSession("refreshBool");
 //        if (refreshBool==0) {
         //更改新的申请成功弹框
-      //      qrcodeDialog('images/qrcodebg1.png' , '申请成功' , '关注问房吧后，系统会通过公众号向您<br />推送收到新提问的微信消息。' , 'success-apply',callBack);
+      //      qrcodeDialog('images/qrcodebg1.png' , '申请成功' , '关注半导体后，系统会通过公众号向您<br />推送收到新提问的微信消息。' , 'success-apply',callBack);
         // $("#scanMe").show();
 			//			writeClientStorage("nextShowQr",(new Date()).getTime());
 //    	}

@@ -10,12 +10,13 @@ use yii\widgets\ActiveForm;
 $this->title = '自定义字段';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-<link href="css/animate.min.css" rel="stylesheet">
-<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
-<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
-<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<link rel="shortcut icon" href="favicon.ico">
+<link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="../css/animate.min.css" rel="stylesheet">
+<link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
+<link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+<link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
 
 <style>
     .names{
@@ -87,25 +88,22 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
 
                         <!--  显示字段-->
-                        <?php foreach($text as $k=>$v):?>
-                        <div class="col-md-12" style="min-height:0">
-                            <div class="form-group draggable ui-draggable dropped" style="position: static;">
-                                <label class="col-sm-3 control-label">
-                                    <input type="text" class="names" name="type[mingzi][]" value="<?=$mingzi[$k]?>">
-                                </label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="type[text][]" value="<?=$v?>">
-                                </div>
-                                <p class="tools col-sm-12 col-sm-offset-3">
-                                    <a class="edit-link">编辑HTML</a><a> |
-                                    </a><a class="remove-link">移除</a></p>
-                            </div>
-                        </div>
-                        <?php endforeach;?>
+
                         <!-- 显示字段-->
 
 
                         <div class="col-md-12 droppable sortable">
+                            <?php foreach($text as $k=>$v):?>
+                                        <label class="col-sm-3 control-label">
+                                            <input type="text" class="names" name="type[mingzi][]" value="<?=$mingzi[$k]?>">
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="type[text][]" value="<?=$v?>">
+                                        </div>
+                                        <p class="tools col-sm-12 col-sm-offset-3">
+                                            <a class="edit-link">编辑HTML</a><a> |
+                                            </a><a class="remove-link">移除</a></p>
+                            <?php endforeach;?>
                         </div>
                         <div class="col-md-6 droppable sortable" style="display: none;">
                         </div>

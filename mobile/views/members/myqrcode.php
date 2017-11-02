@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <a class="myqrcode-img"><img  src="<?= Url::to(['members/qrcode'])?>"></a>
                 <p class="myqrcode-sharetext mt10 fs28 fc-orange">我已回答了<span id="answerCnt">0</span>个问题
-                    <br>微信扫码，来[问房]向我提问</p>
+                    <br>微信扫码，来[半导体]向我提问</p>
             </div>
             <!---------------占位空间---------------->
             <div class="bottom-space1"></div>

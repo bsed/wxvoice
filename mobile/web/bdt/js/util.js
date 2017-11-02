@@ -4,7 +4,7 @@ var _hmt = _hmt || [];
 var g_erweimaShow = 0;
 
 /**
-//问房正式服务器 wenfang.mailizc.com
+//半导体正式服务器 wenfang.mailizc.com
  (function() {
    var hm = document.createElement("script");
    hm.src = "https://hm.baidu.com/hm.js?f3db1bf355dfcca320dabe417ee66a8a";
@@ -1385,7 +1385,7 @@ function isHavaCoupon(){
 											'<ul>'+oLis+'</ul>'+
 			'<a id="coupon_btn">去看看&gt;&gt;</a>';
 		if(getUserIsSubscription()==0){
-			couponCon = couponCon + '<p class="explain fs28 fc-white">关注“问房吧”服务号，可领优惠券</p>';
+			couponCon = couponCon + '<p class="explain fs28 fc-white">关注“半导体”服务号，可领优惠券</p>';
 		}
 		if(g_noRedirect_user!=null && isPhone(g_noRedirect_user.phone)==true){
             couponCon = couponCon + '<p class="explain fs28 fc-white">绑定手机号，也可领优惠券哦！</p>' ;
@@ -1478,14 +1478,14 @@ function showQrCodeForUser(){
 	var curruser = getSessionUserNoRedirectEx();
 	var currPathName = window.location.pathname;
 	if(curruser != null && currPathName != "/article_detail.html" && getNeedNextSHowQr()){
-		//正常进入问答详情界面，未关注问房吧 refreshBool 0，公众号送券 hasCouponsTo 1 用户优惠券个数couponCount，
+		//正常进入问答详情界面，未关注半导体 refreshBool 0，公众号送券 hasCouponsTo 1 用户优惠券个数couponCount，
 		var refreshBool = readClientSession("refreshBool");
 		var hasCouponsTo = readClientSession("hasCouponsTo");
     	if (refreshBool!=null&&Number(refreshBool)==0) {
 			if (hasCouponsTo==1) {
-			    qrcodeDialog('../themes/img/qrcodebg3.png?v=20170307164127' , '送优惠券啦' , '关注问房吧可领取免费围观券<br />免费偷听收费问题！' , 'listen-detail' );
+			    qrcodeDialog('../themes/img/qrcodebg3.png?v=20170307164127' , '送优惠券啦' , '关注半导体可领取免费围观券<br />免费偷听收费问题！' , 'listen-detail' );
 			}else{
-				qrcodeDialog('../themes/img/qrcodebg3.png?v=20170307164127' , '快来关注吧' , '关注问房吧获得最新消息推送！' , 'listen-detail' );
+				qrcodeDialog('../themes/img/qrcodebg3.png?v=20170307164127' , '快来关注吧' , '关注半导体获得最新消息推送！' , 'listen-detail' );
 			}
 		}else if(refreshBool==null) {
 			getUserSubscriptionStatus(0,showQrCodeForUser);
@@ -2022,7 +2022,7 @@ function qrcodeLayout(){
 		}
 		var qrcodeStr = '<div class="qrcode-module fs30 fc-white" id="g_qrcodeLayoutDiv" '+addStyle+'>'+
 							'<img class="mr5" src="../../themes/img/wenfanglogo.jpg?v=20170526154826" />'+
-							'关注问房吧，回复“福利”，有惊喜喲'+
+							'关注半导体，回复“福利”，有惊喜喲'+
 							//'<span><img src="../../themes/img/close.png?v=20161201134425" /></span>'+
 							'<a class="bg-red fs28">关注</a>'+
 						'</div>';
@@ -2068,7 +2068,7 @@ function showQrCodeLayout(){
 		|| currPathName == "/topicqanda.html"){
 		//g_clickToSubscription：保存到本地点击状态
 		var g_clickToSubscription = readClientSession("g_clickToSubscription");
-		//正常进入问答详情界面，未关注问房吧 refreshBool 0，公众号送券 hasCouponsTo 1 用户优惠券个数couponCount，
+		//正常进入问答详情界面，未关注半导体 refreshBool 0，公众号送券 hasCouponsTo 1 用户优惠券个数couponCount，
 		var refreshBool = readClientSession("refreshBool");
 
 		//alert("g_clickToSubscription="+g_clickToSubscription);

@@ -34,10 +34,10 @@ class Articles extends \yii\db\ActiveRecord
     {
         return [
             [['member_id', 'title'], 'required'],
-            [['member_id'], 'integer'],
-            [['content', 'imgs', 'summary'], 'string'],
+            [['member_id','circle_id','counts','dianzan','type','themeid','voice_time','redid','rec','listorder'], 'integer'],
+            [['content', 'pics', 'summary','from','publishtype'], 'string'],
             [['title', 'created'], 'string', 'max' => 100],
-            [['voice', 'video'], 'string', 'max' => 255],
+            [['voices', 'videos'], 'string'],
         ];
     }
 
@@ -54,8 +54,12 @@ class Articles extends \yii\db\ActiveRecord
             'counts' => '阅读数',
             'content' => '分享内容',
             'imgs' => '照片',
-            'voice' => '语音',
-            'video' => '视频',
+            'voices' => '语音',
+            'videos' => '视频',
+            'dianzan' => '点赞数',
+            'voice_time' => '语音时长',
+            'listorder' => '排序',
+            'rec' => '是否推荐',
             'created' => '创建时间',
         ];
     }

@@ -1,5 +1,5 @@
 /*公众号ID，需要特别注意，lhj*/
-//问房吧
+//半导体
 var wenxinAppid = "";
 /*服务器域名地址*/
 var hostConf                      = "";

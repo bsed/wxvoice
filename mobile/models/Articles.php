@@ -7,6 +7,7 @@ use mobile\models\Members;
 use mobile\models\Dianzan;
 use mobile\models\Comments;
 use mobile\models\Pocketget;
+use mobile\models\Pockets;
 
 
 class Articles extends \yii\db\ActiveRecord
@@ -53,6 +54,10 @@ class Articles extends \yii\db\ActiveRecord
     public function getRedpocket()
     {
         return $this->hasMany(Pocketget::className(), ['pocket_id' => 'redid']);
+    }
+    public function getPockets()
+    {
+        return $this->hasOne(Pockets::className(), ['id' => 'redid']);
     }
 
 

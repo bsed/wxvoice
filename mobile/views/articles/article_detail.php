@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <script type="text/javascript" src="../bdt/js/editor_cursor_position.js"></script>
 <script type="text/javascript" src="../bdt/js/qanda_detail.js"></script>
 <script type="text/javascript" src="../bdt/js/article_detail.js"></script>
-<script type="text/javascript" src="../bdt/js/live_reward.js"></script>
+<script type="text/javascript" src="../bdt/js/playVoiceCommon.js"></script>
 
 
 <body>

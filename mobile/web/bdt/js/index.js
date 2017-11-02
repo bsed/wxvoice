@@ -8,6 +8,7 @@ var swiperGroups = null;
 var isPcOrMobil = false;//默认移动端
 var closeSwiper = 1;
 var pernum=6;
+var start = 0;
 
 // iosAPP屏蔽 start
 window.onload = function(){
@@ -262,11 +263,19 @@ function configDynamicList(result,index){
         }
         //判断红包
         if(result.data.list[i].redid != 0){
-            var articles = '<p class="text-style fs32 fc-black456 face_tag mb5">'+result.data.list[i].title+'</p>' +
-                '<div class="redpacket-show mt5 mb5" onclick="gotoRedPocketDetailHtml('+result.data.list[i].redid+', this);" id="redPacket">' +
-                '<img src="../bdt/images/hongbao_details.png"><p class="fs30 fc-black">'+result.data.list[i].user.nickname+'发的新手红包</p>' +
-                '<a class="'+getPocket+'">领红包</a></div>';
-            var contents = '<div class="module-content mt10" >'+articles+'</div>';
+            if(result.data.list[i].pockets && result.data.list[i].pockets.status == 1) {
+                if (result.data.list[i].pockets.give_type == 1) {
+                    var type = '给粉丝';
+                } else {
+                    var type = '给新手';
+                }
+                    var articles = '<p class="text-style fs32 fc-black456 face_tag mb5">' + result.data.list[i].title + '</p>' +
+                        '<div class="redpacket-show mt5 mb5" onclick="gotoRedPocketDetailHtml(' + result.data.list[i].redid + ', this);" id="redPacket">' +
+                        '<img src="../bdt/images/hongbao_details.png"><p class="fs30 fc-black">' + result.data.list[i].user.nickname + type + '发的红包</p>' +
+                        '<a class="' + getPocket + '">领红包</a></div>';
+                    var contents = '<div class="module-content mt10" >' + articles + '</div>';
+
+            }
         }else if(result.data.list[i].redid == 0){
             var articles = '<h4 class="f-l-height fs30 find-text fwb mb5" onclick=gotoArticDetailHtml('+result.data.list[i].id+',\''+from+'\',\''+publishtype+'\');>'+result.data.list[i].content+'</h4>' +
                 '<p class="text-style fs28 fc-black face_tag mb10">' +
@@ -276,17 +285,17 @@ function configDynamicList(result,index){
         }
         // onclick="gotoUser_pageHtml('+result.data.list[i].user.id+');"
         if(result.data.list[i].user){
-            list +='<div class="f-f-module mb10 bg-white"><div class="find-container"><div class="find-header"><div class="f-h-left">' +
-                '<a onclick=""><img src="'+result.file+result.data.list[i].user.photo+'"><i>' +
-                '<img src="../bdt/images/v2.png"></i></a><div class="f-h-middle">' +
-                '<span class="fs30 fc-blue operate" onclick="">'+result.data.list[i].user.nickname+'<em class="fc-greyabc"></em></span>' +
-                '</div></div><div class="f-h-right"></div></div>'+contents+'<div class="time-statistic fs22" id="bottom_1_'+result.data.list[i].id+'">' +
-                '<span class="fc-greyabc mr10"><i>'+getDateDiff(result.data.list[i].created)+'</i></span>' +
-                '<span class="fc-greyabc"><i>'+result.data.list[i].counts+'</i>阅读</span>' +
-                '<span class="fc-red"></span><div class="statistic">' +
-                '<a class="like fc-greyabc '+onFcRed+'" onclick="dianzanClick('+result.data.list[i].id+',1,'+result.mid+')" id="dianzan'+result.data.list[i].id+'">'+dianzan+'</a>' +
-                '<a class="comment ml10 fc-greyabc" id="pinglun_'+result.data.list[i].id+'" onclick="pubcommentClick('+result.data.list[i].id+','+result.data.list[i].id+',1)">'+comment+'</a>' +
-                '</div></div></div></div>';
+                list += '<div class="f-f-module mb10 bg-white"><div class="find-container"><div class="find-header"><div class="f-h-left">' +
+                    '<a onclick=""><img src="' + result.file + result.data.list[i].user.photo + '"><i>' +
+                    '<img src="../bdt/images/v2.png"></i></a><div class="f-h-middle">' +
+                    '<span class="fs30 fc-blue operate" onclick="">' + result.data.list[i].user.nickname + '<em class="fc-greyabc"></em></span>' +
+                    '</div></div><div class="f-h-right"></div></div>' + contents + '<div class="time-statistic fs22" id="bottom_1_' + result.data.list[i].id + '">' +
+                    '<span class="fc-greyabc mr10"><i>' + getDateDiff(result.data.list[i].created) + '</i></span>' +
+                    '<span class="fc-greyabc"><i>' + result.data.list[i].counts + '</i>阅读</span>' +
+                    '<span class="fc-red"></span><div class="statistic">' +
+                    '<a class="like fc-greyabc ' + onFcRed + '" onclick="dianzanClick(' + result.data.list[i].id + ',1,' + result.mid + ')" id="dianzan' + result.data.list[i].id + '">' + dianzan + '</a>' +
+                    '<a class="comment ml10 fc-greyabc" id="pinglun_' + result.data.list[i].id + '" onclick="pubcommentClick(' + result.data.list[i].id + ',' + result.data.list[i].id + ',1)">' + comment + '</a>' +
+                    '</div></div></div></div>';
         }
 
 

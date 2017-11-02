@@ -29,31 +29,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php endif;?>
                     </div>
                     <div class="qnada-q-author-info">
-                        <span class="fs32 fc-navy" onclick="gotoUser_pageHtml(<?=$info['id']?>)"><?=$info['user']['nickname']?></span>
-                        <span class="fs24 fc-black">
-                            <i class="mr5 fs28">199</i>关注</span>
-                        <a id="facusStaus" class="bc-grey fc-orange fs24 ml10">+关注</a>
-                    </div></div>
+                        <span class="fs32 fc-navy" onclick="gotoUser_pageHtml(<?=$info['user']['id']?>)"><?=$info['user']['nickname']?>
+                        </span>
+                        <span class="fs24 fc-black"><i class="mr5 fs28"><?=$concerns?></i>关注</span>
+                        <a onclick="facus(<?=$member_id?>,<?=$info['user']['id']?>)" id="focus" class="bc-grey fc-orange fs24 ml10">
+                            <?php if($foucs):?>已关注<?php else:?>关注<? endif;?>
+                        </a>
+                    </div>
+                </div>
                 <div class="qnada-q-author-sign">
                     <p class="fs28"><?=$info['user']['slogan']?></p></div>
                 <div class="qnada-q-author-label mt10 fs24 fc-greyabc">
-                    <?php if($tags):?>
-                    <?php foreach($tags as $k=>$v):?>
-                    <span class="bc-grey mr5"><?=$v?></span>
-                    <?php endforeach;?>
-                    <?php endif;?>
                 </div>
             </div>
             <div class="qanda-questions">
 
 
                 <!-------------问题输入---------------------->
-                <div class="qnada-q-data bg-white mt10" id="questions" style="">
-                    <!-- <div class="qnada-q-data-limit"> -->
-                    <!-- <span class="appui_cell__switch appui_cell__switch-on"><i class="bg-white"></i></span> -->
-                    <!--p class="fs24 fc-greyabc">公开提问，非免费期间，答案每被收听1次，你从中分成￥<span>0.5</span>。</p-->
-                    <!-- <p class="fs24 fc-greyabc">公开提问，非免费期间，答案被付费收听，你可从中获得分成收益。</p> -->
-                    <!-- </div> -->
+                <div class="qnada-q-data bg-white mt10" id="questions">
+                    <!-- <div class="qnada-q-data-limit">-->
+                    <!-- <span class="appui_cell__switch appui_cell__switch-on"><i class="bg-white"></i></span>-->
+                    <!--<p class="fs24 fc-greyabc">公开提问</p>-->
+                    <!-- </div>-->
                     <div class="qnada-q-data-input bg-greyfa bc-grey mt10">
                         <textarea id="textarea" class="fs30 fc-black" placeholder="向圈主提问吧！"></textarea>
                         <span class="fs30 fc-greyabc"><i id="length" class="fs30 fc-greyabc">0</i>/140</span>
@@ -122,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p class="fs30">2、答主回答问题后，答主将获得赏金；</p>
                 <p class="fs30">3、若48小时内无应答，则全额退款。</p>
                 <p class="fs30 mb10 mt20 fc-black fwb">责任声明</p>
-                <p class="fs30 mb10">问房”的相关回答仅为该答主在房地产等领域的个人经验、意见或观点，不能被自动视为该答主供职单位/机构的意见或观点，仅供用户参考所用，亦不能被认为是其他类似性质的文件。解答内容及答主个人观点不代表“问房”平台观点，“问房”平台对解答内容的正确性不予担保，对在“问房”平台之外所进行的任何接洽行为的后果亦不予承担责任。烦请您在使用“问房”前仔细阅读并确保完全理解以上声明的全部内容，请知悉，谢谢。</p>
+                <p class="fs30 mb10">半导体”的相关回答仅为该答主在房地产等领域的个人经验、意见或观点，不能被自动视为该答主供职单位/机构的意见或观点，仅供用户参考所用，亦不能被认为是其他类似性质的文件。解答内容及答主个人观点不代表“半导体”平台观点，“半导体”平台对解答内容的正确性不予担保，对在“半导体”平台之外所进行的任何接洽行为的后果亦不予承担责任。烦请您在使用“半导体”前仔细阅读并确保完全理解以上声明的全部内容，请知悉，谢谢。</p>
             </div>
         </div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
@@ -130,10 +127,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div id="scanMe" class="bg-white" style="display: none;">
         <div class="outer">
             <h3 class="fs40 fc-blue"><span>提问</span>成功!</h3>
-            <p class="scan-title fs30">关注“问房”官方公众号
+            <p class="scan-title fs30">关注“半导体”官方公众号
                 <br>第一时间收到行家的回复</p>
             <img src="../bdt/images/wenfangba.jpg?v=20170221161736" alt="">
-            <p class="scan-cheerup fs26">关注"问房吧"，可领<span class="fc-red">优惠券</span></p>
+            <p class="scan-cheerup fs26">关注"半导体"，可领<span class="fc-red">优惠券</span></p>
             <p class="scan-longtap fs32">长按，识别二维码，加关注</p>
             <a class="fs26 fc-blue" href="">不了,谢谢</a>
         </div>

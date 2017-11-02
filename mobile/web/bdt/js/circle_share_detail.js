@@ -68,6 +68,7 @@ function joinQz(){
 }
 //微信相关
 function getWxConfig(timestamp, nonceStr, package, signType, paySign,trade){
+    addCircle(trade);
         wx.chooseWXPay({
             timestamp: timestamp,
             nonceStr: nonceStr,
@@ -76,13 +77,14 @@ function getWxConfig(timestamp, nonceStr, package, signType, paySign,trade){
             paySign: paySign,
             success: function (res) {
             // 支付成功后的回调后，记录已经加入圈子
-                addCircle(trade);
+                window.location.href = "/circle/circle_page.html?id="+id;
         }
     });
 }
 
 //向数据库写数据
 function addCircle(trade){
+
 	var csrf = $('input[name="csrf"]').val();
 	var price = $('input[name="price"]').val();
 	var qid = $('input[name="createid"]').val();//创建者的id
@@ -99,7 +101,7 @@ function addCircle(trade){
             '_csrf':csrf},
         success: function(result) {
             clearToastDialog();
-            window.location.href = "/circle/circle_page.html?id="+id;
+
         }
     });
 }

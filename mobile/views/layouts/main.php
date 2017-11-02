@@ -59,6 +59,7 @@ $c = Yii::$app->controller->action->id;
 <?= $content ?>
 <?=$this->render('_shareAll')?>
 <input type="hidden" name="csrf" value="<?= Yii::$app->request->csrfToken ?>" >
+<input type="hidden" name="host" value="<?=Yii::$app->params['publicVoice'];?>" >
 <?=$this->params['site']['content'];?>
 </html>
 <?php $this->endPage() ?>

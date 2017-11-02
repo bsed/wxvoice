@@ -46,14 +46,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php foreach($list as $k=>$v):?>
                                 <tr>
                                     <td class="project-status">
-                                            <span class="label label-primary"><?=$k+1?>
-                                    </td>
-                                    <td class="project-title">
-                                        <a href=""><?=$v['user']['nickname']?></a>
+                                            <span class="label label-primary"><?=$k+1?></span>
                                     </td>
                                     <td class="project-completion">
-                                        <span class="label label-primary"><?=$v['title']?></span>
+                                        <?=$v['title']?>
                                     </td>
+                                    <td class="project-title">
+                                       <?=$v['user']['nickname']?>
+                                    </td>
+
                                     <td class="project-completion">
                                         <span class="label label-primary"></span>
                                     </td>

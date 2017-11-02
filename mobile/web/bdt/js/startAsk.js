@@ -228,50 +228,90 @@ function askQuestionRequest(userId, money, nickname, level) {
 //提交提问信息
 function saveFunction(index){
     toSendData();
-
 }
 //召唤微信神龙
 function toSendData(){
+    if(price !=0){
+
+        //发起微信支付，
+        var csrf = $('input[name="csrf"]').val();
+        $.ajax({
+            type: "post",
+            url: '/circle/wxpay.html',
+            dataType: "json",
+            async: true,
+            data:{
+                "title":'ask',
+                "pay_id":expert_id,
+                "price":price * 100,
+                '_csrf':csrf,
+            },
+            success: function(data) {
+                if(data.result == 'success'){
+                    clearToastDialog1(0);
+                    getWxConfig(data.config.timestamp, data.config.nonceStr, data.config.package, data.config.signType, data.config.paySign);
+                }
+            }
+        });
+    }else{
+        askToit();
+    }
+}
+//发起微信支付
+function getWxConfig(timestamp, nonceStr, package, signType, paySign){
+    wx.chooseWXPay({
+        timestamp: timestamp,
+        nonceStr: nonceStr,
+        package: package,
+        signType: signType,
+        paySign: paySign,
+        success: function (res) {
+            // 支付成功回调后，向专家提问
+            askToit();
+        }
+    });
+}
+//提交问题
+function askToit(){
     if ($('.qnada-q-data-limit span').attr("class").indexOf("appui_cell__switch-on")>0) {
         var openstatus = 1;
-	}else{
+    }else{
         var openstatus = 0;
-	}
+    }
 
-	var content = $('#content').val();
-    var csrf = $('input[name="csrf"]').val();
     if(pics == ''){
         pics = 0;
     }
-    // dataLoading("向专家提问中...");
+    var content = $('#content').val();
+    var csrf = $('input[name="csrf"]').val();
+    dataLoading("向专家提问中...");
     $.ajax({
         url: '/questions/ask.html',
         type: 'post',
         dataType: 'json',
         data: {
-        	"price": price,
-        	"expert_id": expert_id,
-        	"openstatus": openstatus,
-        	"content": content,
+            "price": price,
+            "expert_id": expert_id,
+            "openstatus": openstatus,
+            "content": content,
             'pics':pics,
             'from':request('from'),
             'circle_id':request('circle_id'),
             'publishtype':request('publishtype'),
-			'_csrf':csrf,
+            '_csrf':csrf,
         },
         success: function(result) {
             if (result.result == "success") {
                 clearToastDialog();
-                    dataLoadedSuccess("问题提问成功");
-                    setTimeout(function() {
-                    	var id = result.data.id;
-                        window.location.replace("qanda_detail.html?id=" + id );
-                    }, 1500);
+                dataLoadedSuccess("问题提问成功");
+                setTimeout(function() {
+                    var id = result.data.id;
+                    window.location.replace("qanda_detail.html?id=" + id );
+                }, 1500);
             }
         }
     })
 }
-
 function loadCurrentProfess(index, event) {
 	$(".appui-expert").attr({
 		"background": 'transparent',

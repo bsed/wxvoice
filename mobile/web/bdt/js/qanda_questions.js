@@ -21,6 +21,7 @@ var appType = "";
 var targertQuestionId = "";
 var publishLocationType = "";
 var publishLocationId = "";
+var questionid = "";
 
 $(document).ready(function() {
     $("#back").click(function() {
@@ -111,12 +112,11 @@ function monitorCount(index){
 提交问题问题
  */
 function askQuestionRequest(content,openStatus) {
-    //公众页面向专家提问，typeid=3
-    // dataLoading("数据加载中...");
+    // dataLoading("向专家提问中...");
     var csrf = $('input[name="csrf"]').val();
     var price = $('#askPrice').attr('price');
     var coupon = $('#askPrice').attr('coupon');
-   //判断是否要支付
+
     if(price != 0){
       //发起微信支付，
         var csrf = $('input[name="csrf"]').val();
@@ -133,25 +133,26 @@ function askQuestionRequest(content,openStatus) {
             },
             success: function(data) {
                 if(data.result == 'success'){
-                    getWxConfig(data.config.timestamp, data.config.nonceStr, data.config.package, data.config.signType, data.config.paySign,content,openStatus);
+                    getWxConfig(data.config.timestamp, data.config.nonceStr, data.config.package, data.config.signType, data.config.paySign,content,openStatus,data.trade);
                 }
             }
         });
     }else{
-        askExpert(content,openStatus);
+        askExpert(content,openStatus,0);
     }
 
 
 }
+
 //向专家提问
-function askExpert(content,openStatus){
+function askExpert(content,openStatus,trade){
     var csrf = $('input[name="csrf"]').val();
     var price = $('#askPrice').attr('price');
     var coupon = $('#askPrice').attr('coupon');
     if(pics == ''){
         pics = 0;
     }
-    dataLoading("向专家提问中...");
+    // dataLoading("向专家提问中...");
     $.ajax({
         type: "post",
         url: '/questions/ask.html',
@@ -163,6 +164,7 @@ function askExpert(content,openStatus){
             'openstatus':openStatus,
             'price':price,
             'pics':pics,
+            'trade':trade,
             'from':request('from'),
             'publishtype':request('publishtype'),
             '_csrf':csrf,
@@ -170,8 +172,12 @@ function askExpert(content,openStatus){
         success: function(result) {
             clearToastDialog();
             if (result.result == "success") {
-                var id = result.data.id;
-                window.location.replace("qanda_detail.html?id="+id+"&from=index&publishtype=ask");
+                 questionid = result.data.id;
+                //跳转
+                if(price == 0){
+                    window.location.replace("qanda_detail.html?id="+questionid+"&from=index&publishtype=ask");
+                }
+
             }else{
                 dataLoadedError(result.message);
             }
@@ -179,7 +185,9 @@ function askExpert(content,openStatus){
     });
 }
 
-function getWxConfig(timestamp, nonceStr, package, signType, paySign,content,openStatus){
+function getWxConfig(timestamp, nonceStr, package, signType, paySign,content,openStatus,trade){
+    // 支付成功回调后，向专家提问
+    askExpert(content,openStatus,trade);
     wx.chooseWXPay({
         timestamp: timestamp,
         nonceStr: nonceStr,
@@ -187,8 +195,7 @@ function getWxConfig(timestamp, nonceStr, package, signType, paySign,content,ope
         signType: signType,
         paySign: paySign,
         success: function (res) {
-            // 支付成功回调后，向专家提问
-            askExpert(content,openStatus);
+            window.location.replace("qanda_detail.html?id="+questionid+"&from=index&publishtype=ask");
         }
     });
 }

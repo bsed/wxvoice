@@ -22,8 +22,8 @@ class Members extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nickname', 'slogan', 'photo'], 'string'],
-            [['sex', 'vip', 'isguanjia','disallowed'], 'integer'],
+            [['nickname', 'slogan', 'photo','feetime'], 'string'],
+            [['sex', 'vip', 'isguanjia','disallowed','feeuser','honnoruser'], 'integer'],
             [['nickname'], 'string', 'max' => 155],
             [['slogan'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 15],
@@ -49,6 +49,9 @@ class Members extends \yii\db\ActiveRecord
             'phone' => '电话',
             'vip' => '是否专家',
             'isguanjia' => '是否圈管',
+            'feeuser' => '是否付费会员',
+            'feetime' => '付费会员有效期',
+            'honnoruser' => '系统指定会员',
             'tags' => '标签',
             'created' => '注册时间',
             'updated' => ' 修改时间',

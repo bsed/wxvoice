@@ -12,11 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <!--页面导航栏-->
         <div class="page__hd bg-white fc-black b-b-grey scrollhd">
             <div class="statebar">
-                <!--a class="nav-act left-act" id="qanda_back"><img src="../bdt/images/nav_icon_back1.png" /></a-->
                 <a class="nav-act left-act" onclick="goBack();"><img src="../bdt/images/nav_icon_back1.png"></a>
                 <a class="fs32 fc-black back-btn" id="back_index" href="index.html" style="display: none;">首页</a>
                 <h2 class="fs34" id="title_id">周浩的提问</h2>
-                <!--<a class="nav-act right-act" id="collectionId"><img src="../bdt/images/nav_icon_more1.png"></a> -->
             </div>
             <div class="page__hd-tips bg-greyf1" style="display:none;" id="coupon_count_div">
                 <p class="fs24 fc-grey999">您有<span class="fc-black fs28" id="coupon_count_id">3</span>张围观券，本次收听免费！</p>
@@ -77,34 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
 
-                    <!--原问回答-气泡-语音模式-20170415汪飞注释-->
-                    <!--<div class="answer-common bg-white" style="display:none;" id="answer_main_id_1">
-                        <div class="appui-qanda-answer" id="answer_wave_mod_id" style="display:none;">
-                            <span class="answer-tag popo fc-green fwb mr5 fs30">回答</span>
-                            <div id="voice_state_id" class="appui-qanda-answerstyle">
-                                <i></i>
-                                <span class="appui_qanda-voice-wave">
-                                    <em class="wave1"></em>
-                                    <em class="wave2"></em>
-                                    <em class="wave3"></em>
-                                </span>
-                                <em class="tips" id="voice_state_text_id">免费播放</em>
-                                <span class="appui_qanda-voice-wait" style="display:none;"></span>
-                            </div>
-                            <em class="appui-qanda-answer-time" style="display:none;" id="voice_state_time_id_1"></em>
-                        </div>
-                        <div class="pictext-info fs30" id="answer_picmod_mod_id" style="display:none;">
-                            <span class="answer-tag fc-green fwb mr5">回答</span>
-                            <div class="answer-piclist" id="pictext_pic_id" style="display:none;">
-                            </div>
-                        </div>
-                        <div class="ask-time-statistic fs24 fc-grey666">
-                            <span class="ask-time" id="ask_time_id_1"></span>
-                            <a class="reanswer-btn bg-greyfa fs24 fc-red ml20" id="reanswer_id_1" style="display:none;">重答</a>
-                            <p class="answer-statistic"><span id="listen_times_id_1"></span><span id="agree_times_id_1"></span></p>
-                        </div>
-                    </div>-->
-
                     <!--原问回答-气泡-语音模式-20170415汪飞增加--新回答详情-图文||语音-->
                     <div class="answer-common bg-white" style="display:none;" id="answer_main_id_1">
                         <div class="answer-common-bg bg-greyfa">
@@ -132,11 +102,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <em class="tips" id="voice_state_text_id">免费播放</em>
                                     <span class="appui_qanda-voice-wait" style="display:none;"></span>
                                 </div>
-<!--                                <em class="appui-qanda-answer-time" style="display:none;" ></em>-->
                             </div>
 
                             <div class="pictext-info fs30" id="answer_picmod_mod_id" style="display:none;">
-                                <!--<p class="pictext-text fc-grey666" id="pictext_text_id"></p>-->
                                 <div class="answer-piclist" id="pictext_pic_id" style="display:none;"></div>
                             </div>
                         </div>
@@ -157,31 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
 
-                    <!--追问回答-气泡-语音模式-20170415汪飞注释->
-                    <!--<div class="answer-common bg-white" style="display:none;" id="answer_main_id_2">
-                        <div class="appui-qanda-answer" id="answer_wave_mod_id_2" style="display:none;">
-                            <span class="answer-tag popo fc-green fwb mr5 fs30">回答</span>
-                            <div id="voice_state_id_2" class="appui-qanda-answerstyle">
-                                <i></i>
-                                <span class="appui_qanda-voice-wave">
-                                    <em class="wave1"></em>
-                                    <em class="wave2"></em>
-                                    <em class="wave3"></em>
-                                </span>
-                                <em class="tips" id="voice_state_text_id_2">免费播放</em>
-                                <span class="appui_qanda-voice-wait" style="display:none;"></span>
-                            </div>
-                            <em class="appui-qanda-answer-time" style="display:none;" id="voice_state_time_id_2"></em>
-                        </div>
-                        <div class="pictext-info fs30" id="answer_picmod_mod_id_2" style="display:none;">
-                            <span class="answer-tag fc-green fwb mr5">回答</span>
-                            <div class="answer-piclist" id="pictext_pic_id_2" style="display:none;"></div>
-                        </div>
-                        <div class="ask-time-statistic fs24 fc-grey666">
-                            <span class="ask-time" id="ask_time_id_2"></span>
-                            <a class="reanswer-btn bg-greyfa fs24 fc-red ml20" id="reanswer_id_2" style="display:none;">重答</a>
-                        </div>
-                    </div>-->
+
 
                     <!--追问回答-气泡-语音模式-20170415汪飞增加--新回答详情-图文||语音-->
                     <div class="answer-common bg-white" style="display:none;" id="answer_main_id_2">
@@ -235,23 +179,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <a class="add-follow fs20 fc-red bc-red" onclick="requestDoFocus(22031,undefined,undefined,event)" id="focusID22031">关注</a></div>
 
-                    <!--详情页面中行家创建的圈子入口-->
-                    <div class="add-circle-con bg-white" style="padding-top: 0px;" id="articleqzinfo">
-                        <div onclick="window.location.href = 'circle_page.html?id=31&amp;from=qanda_detail'" class="add-circle-indetail bg-white">
-                            <h3 class="fc-black fs24">本文来源于<span class="fwb ml5 mr5" id="qzusernickname">绍兴师爷</span>的圈子
-                                <span class="fwb ml5 mr5" id="qzname">师哥学堂</span></h3>
-                            <div class="circle-and-expert mt20"><i>
-                                    <img src="../bdt/images/22031_1494462779535.jpeg" id="qzbgpic"></i>
-                                <div class="cae-middle"><h3 class="fs30 fwb fc-black" id="qzname1">师哥学堂</h3>
-                                    <p class="fs20 fc-grey999"><span class="expert-name" id="qzusernickname1">绍兴师爷</span>
-                                        <span class="circle-members" id="qzmembers">54</span></p>
-                                </div>
-                                <a class="add-circle-btn bc-grey fc-red fs24" href="circle_page.html?id=31&amp;from=qanda_detail" id="artaddCircleBtn">去逛逛</a></div>
-                            <p class="circle-discript fs24 fc-grey999 mt10" id="qzmemo">
-                                本群宗旨解决房地产同行工作痛点、难点，扩充思想，发现解决办法，提升自身技能，提升工作收益，提高人生幸福指数，走发财之道。
-                            </p>
-                        </div>
-                    </div>
 
                     <!--问答操作-撤回（只允许提问者在提问后的一段时间内可撤回）-追问（只对提问者开放并且只在问题被回答后开放）-->
                     <div class="qanda-act" id="qanda_act_id" style="display:block">
@@ -262,7 +189,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 
                     <div id="about_us" class="mt10" style="display:none;">
-                        <h2 class="fs28 mt20">关注"问房吧"，获取<span class="fc-red">最新内容</span></h2>
+                        <h2 class="fs28 mt20">关注"半导体"，获取<span class="fc-red">最新内容</span></h2>
                         <div>
                             <img src="../bdt/images/wenfangba.jpg?v=20170221161736" alt="">
                         </div>

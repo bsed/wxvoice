@@ -8,6 +8,7 @@ use mobile\models\Tixian as tixians;
 use backend\models\Members;
 use backend\models\Questions;
 use mobile\models\Circlemembers;
+use mobile\models\Wxpayrecord;
 use backend\models\Pocketget;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
@@ -101,6 +102,20 @@ class TixianController extends BaseController
             'totalSum'=>$totalSum,
             'tixiansSum'=>$tixiansSum,
             'tixian'=>$tixian,
+            'pages'=>$pages,
+        ]);
+    }
+    /*
+     * 流水管理
+     */
+    public function actionLiushui(){//圈子收入、会费收入在circle、feeuser
+        //找到圈子的收入
+        $model = new Wxpayrecord();
+        $data = $model->find();
+        $pages = new Pagination(['totalCount' =>$data->count(), 'pageSize' => '10']);
+        $list = $data->asArray()->orderBy('created DESC')->with('users')->where(['pay_type'=>'feeuser'])->orWhere(['pay_type'=>'circle'])->offset($pages->offset)->limit($pages->limit)->all();
+        return $this->render('liushui',[
+            'list'=>$list,
             'pages'=>$pages,
         ]);
     }

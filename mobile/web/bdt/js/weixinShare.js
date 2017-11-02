@@ -8,7 +8,7 @@ function wxSearchShare(userTest){
     }
     var realUrl = hostConf+"/index.html";
     var img = defaultWeixinSharePicUrl;
-    var wxFriendShareStr = "问房，一秒直问房产专家，干货满满，远离硬广和软文！";
+    var wxFriendShareStr = "半导体，一秒直半导体产专家，干货满满，远离硬广和软文！";
     wxShareFromUrlEx(wxShareTitle,wxShareSummary,wxFriendShareStr,"",img,img,realUrl);
 }
 //关于我的分享 
@@ -43,7 +43,7 @@ function wxShare(wxShareTitle,wxShareSummary,wxFriendShareStr,targetUrl,wxShareP
         wxShareTitle="您的好友邀您讨论房的事";
     }*/
     if (targetUrlPathname=="/index.html" ||targetUrlPathname=="/") {
-      wxShareFromUrl(wxShareTitle,"你的好友邀请你讨论房的事","【问房】专业的房产知识分享平台","","","");
+      wxShareFromUrl(wxShareTitle,"你的好友邀请你讨论房的事","【半导体】专业的房产知识分享平台","","","");
     }else if (targetUrlPathname=="/found_expert.html"){
       wxShareFromUrl(wxShareTitle,"数百位房产高手想把毕生绝学传授给你，快来收听。","数百位房产高手想把毕生绝学传授给你，快来收听。","",wxSharePicUrl);
     }else if (targetUrlPathname=="/invitation.html"){
@@ -57,16 +57,16 @@ function wxShare(wxShareTitle,wxShareSummary,wxFriendShareStr,targetUrl,wxShareP
     }else if (targetUrlPathname=="/myrelations.html"){
       //1关注 2粉丝
       if (targetUrlHash=="#2") {
-          wxShareFromUrl(wxShareTitle,"竟然有这么多人在【问房】上关注我，你想成为我的粉丝吗？","竟然有这么多人在【问房】上关注我，你想成为我的粉丝吗？","",wxSharePicUrl);
+          wxShareFromUrl(wxShareTitle,"竟然有这么多人在【半导体】上关注我，你想成为我的粉丝吗？","竟然有这么多人在【半导体】上关注我，你想成为我的粉丝吗？","",wxSharePicUrl);
       }else if (targetUrlHash=="#1") {
-          wxShareFromUrl(wxShareTitle,"我在【问房】上关注了这些大咖，邀请你来围观。","我在【问房】上关注了这些大咖，邀请你来围观。","",wxSharePicUrl);
+          wxShareFromUrl(wxShareTitle,"我在【半导体】上关注了这些大咖，邀请你来围观。","我在【半导体】上关注了这些大咖，邀请你来围观。","",wxSharePicUrl);
       }
     }else if (targetUrlPathname=="/topic.html"||targetUrlPathname=="/article.html"){
-      wxShareFromUrl(wxShareTitle,"【问房】头条，精选每日热点，听房产行家亲口说房的事。","【问房】头条，精选每日热点，听房产行家亲口说房的事。","",wxSharePicUrl);
+      wxShareFromUrl(wxShareTitle,"【半导体】头条，精选每日热点，听房产行家亲口说房的事。","【半导体】头条，精选每日热点，听房产行家亲口说房的事。","",wxSharePicUrl);
     }else if (targetUrlPathname=="/article_detail.html"){
       wxShareFromUrl(wxShareTitle,wxShareSummary,wxFriendShareStr,"","");
     }else if (targetUrlPathname=="/myqrcode.html"){
-      wxShareFromUrl(wxShareTitle,"我在【问房】上发布了新的资料，这是你熟悉的我吗？","我在【问房】上发布了新的资料，这是你熟悉的我吗？","",wxSharePicUrl);
+      wxShareFromUrl(wxShareTitle,"我在【半导体】上发布了新的资料，这是你熟悉的我吗？","我在【半导体】上发布了新的资料，这是你熟悉的我吗？","",wxSharePicUrl);
     }else if (targetUrlPathname=="/qanda_questions.html"){
       wxShareFromUrl(wxShareTitle,wxShareSummary,wxFriendShareStr,"",wxSharePicUrl,wxShareFriendsCirclePicUrl);
     }else if (targetUrlPathname=="/user_center.html"){
@@ -113,7 +113,7 @@ function wxShareFromUrlEx(wxShareTitle,wxShareSummary,wxFriendShareStr,targetUrl
   }
 
   if(wxFriendShareStr==""||typeof(wxFriendShareStr) == "undefined"){
-    wxFriendShareStr="我在问房邀您参与讨论，行家一对一为您专业解答购房难题";
+    wxFriendShareStr="我在半导体邀您参与讨论，行家一对一为您专业解答购房难题";
   }
     if(realTargeUrl==""||typeof(realTargeUrl) == "undefined"){
   if (targetUrl==""||typeof(targetUrl) == "undefined") {

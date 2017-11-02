@@ -16,7 +16,7 @@
                 <span class="appui_cell__switch appui_cell__switch-on"><i class="bg-white"></i></span>
                 <p class="fs24 fc-greyabc">公开提问</p>
             </div>
-                <textarea id="content" placeholder="请告知你想了解的有关地产项目的问题，我会一一为你解答"></textarea>
+                <textarea id="content" placeholder="请告知你想了解的问题，我会一一为你解答"></textarea>
             <!--短消息-插入图片示例-->
             <div class="qanda-pic">
                 <a class="add-qanda-pic bc-grey" contenteditable="false">
@@ -29,7 +29,7 @@
         </div>
 
         <div id="chooseType">
-            <a class="ask_tips fs24 fc-orange mt5">查看问答细则及责任声明</a>
+<!--            <a class="ask_tips fs24 fc-orange mt5">查看问答细则及责任声明</a>-->
             <h2 class="fs30 fc-black456">请选择专家类型</h2>
             <ul id="typeCho">
 
@@ -88,10 +88,10 @@
                 <p class="fs30">3、若<span>48</span>小时内无应答，则全额退款。</p>
                 <p class="fs30 mb10 mt20 fc-black fwb">责任声明</p>
                 <p class="fs30 mb10">
-                    问房”的相关回答仅为该答主在房地产等领域的个人经验、意见或观点，不能被自动视
+                    半导体”的相关回答仅为该答主在房地产等领域的个人经验、意见或观点，不能被自动视
                     为该答主供职单位/机构的意见或观点，仅供用户参考所用，亦不能被认为是其他类似性质的文件。解答内容及
-                    答主个人观点不代表“问房”平台观点，“问房”平台对解答内容的正确性不予担保，对在“问房”平台之外所进行
-                    的任何接洽行为的后果亦不予承担责任。烦请您在使用“问房”前仔细阅读并确保完全理解以上声明的全部内容
+                    答主个人观点不代表“半导体”平台观点，“半导体”平台对解答内容的正确性不予担保，对在“半导体”平台之外所进行
+                    的任何接洽行为的后果亦不予承担责任。烦请您在使用“半导体”前仔细阅读并确保完全理解以上声明的全部内容
                     ，请知悉，谢谢。
                 </p>
             </div>
@@ -101,9 +101,9 @@
     <div id="scanMe" class="bg-white" style="display: none;">
         <div class="outer">
             <h3 class="fs40 fc-blue"><span>提问</span>成功!</h3>
-            <p class="scan-title fs30">关注“问房”官方公众号<br>第一时间收到行家的回复</p>
+            <p class="scan-title fs30">关注“半导体”官方公众号<br>第一时间收到行家的回复</p>
             <img src="../bdt/images/wenfangba.jpg" alt="">
-            <p class="scan-cheerup fs26">关注"问房吧"，可领
+            <p class="scan-cheerup fs26">关注"半导体"，可领
                 <span class="fc-red">优惠券</span>
             </p>
             <p class="scan-longtap fs32">长按，识别二维码，加关注</p>

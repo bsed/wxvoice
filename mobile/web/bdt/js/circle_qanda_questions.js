@@ -98,6 +98,7 @@ function askQuestionRequest(content,openStatus) {
             "expert_id": request('mid'),
             "openstatus": 1,
             "price": 0,
+            "trade": 0,
             'from':request('from'),
             'circle_id':request('circle_id'),
             'publishtype':request('publishtype'),
@@ -107,30 +108,9 @@ function askQuestionRequest(content,openStatus) {
         },
         success: function(result) {
              clearToastDialog();
-            if (result.result == "success") {  
-			         var id = result.data.qa.id;
-						   window.location.replace("/circle_qanda_detail.html?id="+id);
-            }else if(result.result=="toPay"){
-                targertQuestionId = result.data.qa.id;
-                payParam = result.data.toPayInfo.params;
-                tradeId = result.data.toPayInfo.tradeId;
-                if (appType!=isApp) {
-                if (typeof WeixinJSBridge == "undefined"){
-                    dataLoadedError("现在网络有点小故障，正在重试...");
-                   if( document.addEventListener ){
-                       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                   }else if (document.attachEvent){
-                       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
-                       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-                   }
-                }else{
-                  // alert(result.data.qa.id);
-                   onBridgeReady1(result.data.qa.id);
-                }
-            }else{
-                    cordova.exec(callAppsSuccessFunction,callAppsFailFunction, "MyPlugin", "wxpay", [0,payParam.partnerid,payParam.prepayid,payParam.nonceStr,payParam.timeStamp,payParam.sign,payParam.appid,payParam.packageValue]);    
-                }
-
+            if (result.result == "success") {
+			         var id = result.data.id;
+						   window.location.replace("/questions/qanda_detail.html?id="+id+"&from=circle");
             }else{
                 dataLoadedError(result.message);
             }     
@@ -203,18 +183,18 @@ function configUserDataUI(user){
   // // var userTest = getSessionUserNoRedirect();
   // if (userTest!=null) {
   //     if (userTest!=null&&targetId==userTest.id) {
-  //       wxShareSummary = user.nickname+"是问房的知名行家，专注"+user.lable+"，已经回答了"+user.totAnswers+"个问题，获得"+user.totFans+"个人关注，有房产相关问题来向我提问吧！";
-  //       wxFriendShareStr = user.nickname+"是问房的知名行家，大家快来向他提问吧！";
+  //       wxShareSummary = user.nickname+"是半导体的知名行家，专注"+user.lable+"，已经回答了"+user.totAnswers+"个问题，获得"+user.totFans+"个人关注，有房产相关问题来向我提问吧！";
+  //       wxFriendShareStr = user.nickname+"是半导体的知名行家，大家快来向他提问吧！";
   //       wxShare("",wxShareSummary,wxFriendShareStr,"",wxSharePicUrl,defaultWeixinSharePicUrl);
   //     }else{
-  //       // 李华军向您强烈推荐问房知名行家“胡士洲”，他专注投资、政策，已经回答了13个问题，获得20个人关注，有房产相关问题赶紧向他提问吧！
-  //       wxShareSummary = userTest.nickname+"向您强烈推荐问房知名行家"+user.nickname+"，他专注"+user.lable+"，已经回答了"+user.totAnswers+"个问题，获得"+user.totFans+"个人关注，有房产相关问题赶紧向他提问吧！"
-  //       wxFriendShareStr = userTest.nickname+"向您强烈推荐问房知名行家"+user.nickname+"，赶紧向他提房产相关问题吧！";
+  //       // 李华军向您强烈推荐半导体知名行家“胡士洲”，他专注投资、政策，已经回答了13个问题，获得20个人关注，有房产相关问题赶紧向他提问吧！
+  //       wxShareSummary = userTest.nickname+"向您强烈推荐半导体知名行家"+user.nickname+"，他专注"+user.lable+"，已经回答了"+user.totAnswers+"个问题，获得"+user.totFans+"个人关注，有房产相关问题赶紧向他提问吧！"
+  //       wxFriendShareStr = userTest.nickname+"向您强烈推荐半导体知名行家"+user.nickname+"，赶紧向他提房产相关问题吧！";
   //       wxShare("",wxShareSummary,wxFriendShareStr,"",wxSharePicUrl,wxSharePicUrl);
   //     }
   // }else{
-  //     wxShareSummary = "向您强烈推荐问房知名行家"+user.nickname+"，他专注"+user.lable+"，已经回答了"+user.totAnswers+"个问题，获得"+user.totFans+"个人关注，有房产相关问题赶紧向他提问吧！"
-  //     wxFriendShareStr = "向您强烈推荐问房知名行家"+user.nickname+"，赶紧向他提房产相关问题吧！";
+  //     wxShareSummary = "向您强烈推荐半导体知名行家"+user.nickname+"，他专注"+user.lable+"，已经回答了"+user.totAnswers+"个问题，获得"+user.totFans+"个人关注，有房产相关问题赶紧向他提问吧！"
+  //     wxFriendShareStr = "向您强烈推荐半导体知名行家"+user.nickname+"，赶紧向他提房产相关问题吧！";
   //     wxShare("",wxShareSummary,wxFriendShareStr,"",defaultWeixinSharePicUrl,defaultWeixinSharePicUrl);
   // }
 	// $('#nickname').text(user.nickname);

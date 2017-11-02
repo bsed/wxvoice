@@ -1,4 +1,4 @@
-// playVoiceCommon.js
+
 var waveTime = null;
 var waveMcId = null;
 
@@ -20,7 +20,7 @@ var answerIDArray = new Array();
 var toListen = '/questions/listen.html';
 var toListenArticle = '/articles/listen.html';
 var toListenTopic = '/questions/listentopic.html';
-var hostConf = "http://imgs.emifo.top/attachment";
+
 var csrf = $('input[name="csrf"]').val();
 var isWX = "";
 var tradeId = 0;
@@ -437,6 +437,8 @@ function playAudioClickFunctionEx(id, type, listenType, objId, allowPauseBool, s
                             }
                             return;
                         }
+                        var hostConf = $('input[name="host"]').val();
+                        alert(hostConf);
                         playCallBack(hostConf+result.data.urls);
                         return false;
                     }
@@ -501,7 +503,7 @@ function playAudioClickFunctionEx(id, type, listenType, objId, allowPauseBool, s
                         arr = result.data.voice.urls.split(",");
                         urlType = result.data.voice.urlType;
                     }
-
+                    var hostConf = $('input[name="host"]').val();
                     for (var i = 0; i < arr.length; i++) {
                         answerIDArray[i] = hostConf + arr[i];
                         urlType = "mp3";

@@ -38,11 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
             <div class="circle-actbtn-bar bg-white" id="circleActbtnBar">
-                <a class="circle-ask-btn bc-blue fc-blue fs24" style="margin: 0px 2.5%;" href="/circle/circle_qanda_questions.html?mid=<?=$circle_info['member_id']?>&from=circle&publishtype=ask&circle_id=<?=$_GET['id']?>">
+                <?php if($circle_info['member_id'] != $mid):?>
+                <a class="circle-ask-btn bc-blue fc-blue fs24" style="margin: 0px 2.5%;" href="/circle/circle_qanda_questions.html?mid=<?=$circle_info['member_id']?>&from=circle&publish&type=ask&circle_id=<?=$_GET['id']?>">
                     <img src="../bdt/images/circle_ask_btn.png">提问</a>
+                <?php endif;?>
                 <a class="circle-pub-btn bc-blue fc-blue fs24" id="circlePubBtn" style="margin: 0px 2.5%;">
                     <img src="../bdt/images/circle_pub_btn.png">发布</a>
-                <a class="circle-member-btn bc-blue fc-blue fs24" id="menmerNum" style="margin: 0px 2.5%;">
+                <a class="circle-member-btn bc-blue fc-blue fs24" style="margin: 0px 2.5%;">
                     <img src="../bdt/images/circle_member_btn.png"><?=$nums?></a>
             </div>
 

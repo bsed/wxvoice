@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <script type="text/javascript" src="../bdt/js/edit.min.js"></script>
 <script type="text/javascript" src="../bdt/js/editor_cursor_position.js"></script>
 
+
 <div id="container" class="container">
     <div id="page">
         <!--页面导航栏-->
@@ -28,20 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <div class="page__bd bg-greyfa scrollbd">
-            <!--无优惠券-->
-            <div class="top-space1" id="noneCouponSpace" style="display: none;"></div>
-            <!--有优惠券-->
-            <div class="top-space6" id="hasCouponSpace" style="display: none;"></div>
-            <!-------------问答详情----------------------->
-            <div class="qanda-detail bg-greyfa">
-                <!-------------问题相关信息----------------------->
-                <div class="qanda-detail-con">
-                    <!--48小时未回答退款提示-未回答则显示-已回答则隐藏-->
-                    <div style="display:none" class="timeout-tips fs30 fc-grey999 bg-grey" id="tui_expired_text_id"></div>
 
-                    <!--提问者信息-价格-状态--->
+            <div class="qanda-detail bg-greyfa">
+                <div class="qanda-detail-con">
+                    <div style="display:none" class="timeout-tips fs30 fc-grey999 bg-grey" id="tui_expired_text_id"></div>
                     <div class="asker-price-status bg-white">
-                        <!--提问者信息-点击可跳转至提问者主页-->
                         <a class="asker-info">
                             <span class="asker-headpic"><img id="asker_pic_id" src="<?=Yii::$app->params['public'].'/attachment'.$user['photo']?>"></span>
                             <span class="asker-orther fs28" id="asker_nickname_id"><?=$user['nickname']?></span>
@@ -62,7 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <!--原问--可有图-->
                     <div class="question-common bg-white">
-                        <!--问题内容-->
                         <div class="question-info fs30">
                             <span class="question-tag fc-blue fwb mr5">原问</span>
                             <p class="question-text fc-black" id="asker_content_id"><?=$question['question']?></p>
@@ -74,7 +65,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?php endif;?>
                             </p>
                         </div>
-                        <!--问题图片-问题与回答中图片列表公用部分-->
                         <div class="question-piclist" style="display:none;" id="asker_content_pic_id">
                         </div>
 
@@ -85,7 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <div class="ask-time-statistic fs24 fc-grey666" id="ask_time_statistic1">
                             <span class="ask-time" id="ask_time_id_1"><?=$format_time?></span>
-                            <a class="reanswer-btn bg-greyfa fs24 fc-red ml20" id="reanswer_id_1" style="display:none;">重答</a>
                             <?php if($question['status'] == 1):?>
                             <p class="answer-statistic"><span id="listen_times_id_1"><?=$question['views'];?>人浏览</span></p>
                             <?php endif;?>
@@ -133,43 +122,51 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         </div>
                     </div>
+                    <?php else:?>
+                    <div class="answer-common bg-white" style="" id="answer_main_id_1">
+                        <div class="answer-common-bg bg-greyfa">
+                            <div class="answer-tag-expert">
+                                <span class="fs28 fc-white bg-green">行家说</span>
+                                <a class="answer-expert">
+										<span class="answer-expert-pic mr5">
+											<img src="<?=Yii::$app->params['public'].'/attachment'.$expert['photo']?>" id="answer_expert_pic1"><i>
+                                                <img src="../bdt/images/v2.png"></i>
+										</span>
+                                    <span class="answer-expert-name">
+											<i class="fs28 fc-black" id="answer_expert1"><?=$expert['nickname']?></i>
+											<i class="fs20 fc-grey999" id="answer_time1"><?=htmls::formatTime($question['created']);?></i>
+										</span>
+                                </a>
+                            </div>
+
+                                <div class="pictext-info fs30" style="display:block;">
+                                    <p class="pictext-text fc-grey666" style="text-align:center">行家暂未回答</p>
+                                </div>
+
+                        </div>
+                    </div>
                     <!--回答-气泡-语音模式 END-->
                     <?php endif;?>
 
-                    <!--追问-无图-->
-                    <div class="question-common add-question bg-white mt10" style="display:none;" id="add_question_id">
-                        <!--问题内容-->
-                        <div class="question-info fs30">
-                            <span class="question-tag fc-blue fwb mr5">追问</span>
-                            <p class="question-text fc-black" id="add_question_text_id">爽肤水地方</p>
+                    <?php if(!$question['circle_id']):?>
+                        <?php if($circle):?>
+                        <div class="add-circle-con bg-white" style="padding-top:0px;" id="articleqzinfo">
+                            <div class="add-circle-indetail bg-white">
+                                <h3 class="fc-black fs24">本文答主创建了<span class="fwb ml5 mr5" id="qzname"><?=$circle['name']?></span>圈子</h3>
+                                <div class="circle-and-expert mt20"><i>
+                                        <img src="<?=Yii::$app->params['public'].'/attachment'.$expert['photo']?>" id="qzbgpic"></i>
+                                    <div class="cae-middle">
+                                        <h3 class="fs30 fwb fc-black" id="qzname1"><?=$circle['name']?></h3>
+                                        <p class="fs20 fc-grey999">
+                                            <span class="expert-name" id="qzusernickname1"><?=$expert['nickname']?></span>
+                                    <!--<span class="circle-members" id="qzmembers">29+</span>-->
+                                        </p>
+                                    </div>
+                                    <a class="add-circle-btn bc-grey fc-red fs24" href="/circle/circle_share_detail.html?id=<?=$circle['id']?>" >去逛逛</a>
+                                </div><p class="circle-discript fs24 fc-grey999 mt10" ><?=$circle['des']?></p>
+                            </div>
                         </div>
-
-                        <div class="ask-time-statistic fs24 fc-grey666" style="display:none;" id="ask_time_statistic2">
-                            <span class="ask-time" id="ask_time_id_2"></span>
-                            <a class="reanswer-btn bg-greyfa fs24 fc-red ml20" id="reanswer_id_2" style="display:none;">重答</a>
-                            <a class="go-answer-btn bg-greyfa fs24 fc-red ml20" id="goAnswerAddQuestBtn" style="display:none;">回答</a>
-                        </div>
-                    </div>
-
-                    <?php if($circle):?>
-                    <!--详情页面中行家创建的圈子入口-->
-                    <div class="add-circle-con bg-white" style="padding-top:0px;" id="articleqzinfo">
-                        <div class="add-circle-indetail bg-white">
-                            <h3 class="fc-black fs24">本文答主创建了<span class="fwb ml5 mr5" id="qzname"><?=$circle['name']?></span>圈子</h3>
-                            <div class="circle-and-expert mt20"><i>
-                                    <img src="<?=Yii::$app->params['public'].'/attachment'.$expert['photo']?>" id="qzbgpic"></i>
-                                <div class="cae-middle">
-                                    <h3 class="fs30 fwb fc-black" id="qzname1"><?=$circle['name']?></h3>
-                                    <p class="fs20 fc-grey999">
-                                        <span class="expert-name" id="qzusernickname1"><?=$expert['nickname']?></span>
-                                <!--<span class="circle-members" id="qzmembers">29+</span>-->
-                                    </p>
-                                </div>
-                                <a class="add-circle-btn bc-grey fc-red fs24" href="/circle/circle_share_detail.html?id=<?=$circle['id']?>" >去逛逛</a>
-                            </div><p class="circle-discript fs24 fc-grey999 mt10" ><?=$circle['des']?></p>
-                        </div>
-                    </div>
-                    <!--详情页面中行家创建的圈子入口END-->
+                        <?php endif;?>
                     <?php endif;?>
 
 
@@ -280,45 +277,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <br>面益</p>
 </div>
 
-<div id="jsDialog2" class="js_dialog" style="display: none;">
-    <div class="appui-mask"></div>
-    <div id="shareMeNow">
-        <div class="share_con">
-            <div id="closeArea"></div>
-            <img class="share_title" src="../bdt/images/shareMe.png" alt="">
-            <img class="share_close" src="../bdt/images/share_close.png" alt="">
-            <img class="share_ribbon" src="../bdt/images/ribbon.png" alt="">
-            <img class="share_stars" src="../bdt/images/stars.png" alt="">
-            <h2 class="fs36 fc-black">所有人分享该页面都可获取收益<br>具体收益分配如下</h2>
-            <p class="fs24 fc-orange">(所有收益均需扣除20%的平台服务费)</p>
-            <table class="fc-black fs24">
-                <tbody><tr class="bg-grey">
-                    <th>行为</th>
-                    <th>收益
-                        <br><span>(第三人通过分享进入)</span></th>
-                    <th>收益
-                        <br><span>(第三人未通过分享进入)</span></th>
-                </tr>
-                <tr>
-                    <td>分享</td>
-                    <td>60%</td>
-                    <td>/</td>
-                </tr>
-                <tr class="bg-grey">
-                    <td>提问</td>
-                    <td>20%</td>
-                    <td>50%</td>
-                </tr>
-                <tr>
-                    <td>收听</td>
-                    <td>20%</td>
-                    <td>50%</td>
-                </tr>
-                </tbody></table>
-            <p class="fs36 fc-red"><img src="../bdt/images/join.png" alt=""><span>快邀请朋友来收听吧!</span></p>
-        </div>
-    </div>
-</div>
+
 
 <!--追问-->
 <div class="js_dialog" id="add-qanda-dialog" style="display:none;">
@@ -367,11 +326,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- swiper-slide-visible swiper-slide-active -->
     <div class="swiper" style="cursor: -webkit-grab;">
         <div class="swiper-wrapper" id="swiper-wrapper">
-            <!--<div class="swiper-slide">
-                <img data-src="C:\Users\Administrator\Desktop\2.png" class="swiper-lazy">
-                <div class="swiper-lazy-preloader"></div>
-            </div>-->
-            <!-- <a class="swiper-slide" href="javascript:;"><img src="../bdt/images/gallery/gallery1.jpg" /></a> -->
         </div>
         <div class="pagination">
             <span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span>
@@ -396,20 +350,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <!-- 被分享用户的信封 -->
 <div id="mail_story">
-    <!-- <img id="mail_back" src="../bdt/images/mail_lid1.png" alt=""> -->
-    <!-- 信封盖子 -->
-    <!--  <div class="mail_lid">
-            <img src="../bdt/images/mail_lid1.png?v=20170306201700" alt="">
-        </div> -->
-    <!-- 这是信内容 -->
-    <!-- <div id="story_con">
-            <img src="../bdt/images/mail_con.png?v=20170304165256">
-            <h3 class="fc-grey666"></h3>
-        </div>
-        <div class="mail_cover">
-            <img src="../bdt/images/mail_cover.png?v=20170304142320" alt="">
-        </div>
-        <p class="fs26 fc-red">好的,谢谢</p> -->
+
     <h3 class="fc-white fs12"></h3>
     <img class="mail_story_bg" src="../bdt/images/mail_story_bg.png" alt="">
     <div class="mail_touch"></div>
@@ -422,18 +363,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="finishTouch2"></div>
     <div class="closeMail"></div>
 </div>
-<!-- 生成 海报 -->
-<div id="posters" style="display: none;">
-    <h3>长按图片,保存后并分享朋友圈</h3>
-    <img id="closePosters" src="../bdt/images/nav_icon_close1.png" alt="">
-    <img class="posterBg" src="" alt="">
-</div>
+
 
 
 <div class="share-money" style="display:none;" id="shareView">
     <div class="appui-mask"></div>
     <div class="share-moner-con">
-        <img src="../bdt/images/share_money.png?v=20170331220507">
+        <img src="../bdt/images/share_money.png">
         <a class="has-know fc-white fs28 closePopShare_dd">知道了</a>
         <a id="closeShare" class="close bc-white closePopShare_dd"><img src="../bdt/images/close.png"></a>
     </div>

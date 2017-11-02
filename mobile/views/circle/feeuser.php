@@ -5,8 +5,9 @@
     <div id="page">
         <div class="page__hd bg-white fc-balck b-b-grey scrollhd">
             <div class="statebar">
-                <a class="nav-act left-act" onclick="goBack();" href="javascript:void(0);">
-                    <img src="../bdt/images/nav_icon_back1.png"></a>
+                <a class="nav-act left-act"  href="/site/index.html">
+                    <img src="../bdt/images/gobacktoindex.png">
+                </a>
                 <h2 class="fs34" id="qzName">成为会员</h2>
             </div>
         </div>
@@ -57,7 +58,7 @@
     });
     //调起微信支付,如果是免费就直接加入
     function joinFeeUser(){
-//         dataLoading("数据加载中...");
+//         dataLoading("支付中...");
         var price =$('#toPayUser').attr('data-price') * 100;
         if(price == 0){
             addUser(price);
@@ -93,9 +94,8 @@
             signType: signType,
             paySign: paySign,
             success: function (res) {
-                // 支付成功后的回调后，返回上一个url
-
-                window.history.go(-1);
+                // 支付成功后的回调后，返回上一个url,防止从分享中来的人支付后出现不能跳转问题
+                goBack();
 
             }
         });

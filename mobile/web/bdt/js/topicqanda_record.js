@@ -281,14 +281,14 @@ function configwxShare(qaShow){
         }
         //
         if(qaShow.aStatus == 0){
-            //未回答====我在问房上向方海锋提了一个问题，您也来看看吧
+            //未回答====我在半导体上向方海锋提了一个问题，您也来看看吧
             if (qaShow.answerUser.id==userTest.id) {
-                wxShareTitle = qaShow.qustionUser.nickname+"在问房向"+qaShow.answerUser.nickname+"提问，您也来"+listenOrLookStr+"吧！";
-                wxShareSummary = "我在问房收到提问："+qaShow.content+" 您也来"+listenOrLookStr+"吧！";
+                wxShareTitle = qaShow.qustionUser.nickname+"在半导体向"+qaShow.answerUser.nickname+"提问，您也来"+listenOrLookStr+"吧！";
+                wxShareSummary = "我在半导体收到提问："+qaShow.content+" 您也来"+listenOrLookStr+"吧！";
                 wxShareFromUrlEx(wxShareTitle,wxShareSummary,wxFriendShareStr,"",insertImgType(qaShow.answerUser.headPic,3),defaultWeixinSharePicUrl,realUrl);
             }else if (userTest!=null&&qaShow.qustionUser.id==userTest.id){
-                wxShareTitle = qaShow.qustionUser.nickname+"在问房上向"+qaShow.answerUser.nickname+"提问，您也来"+listenOrLookStr+"吧！";
-                wxShareSummary = "我在问房上向"+qaShow.answerUser.nickname+"提问："+qaShow.content+" 您也来"+listenOrLookStr+"吧。";
+                wxShareTitle = qaShow.qustionUser.nickname+"在半导体上向"+qaShow.answerUser.nickname+"提问，您也来"+listenOrLookStr+"吧！";
+                wxShareSummary = "我在半导体上向"+qaShow.answerUser.nickname+"提问："+qaShow.content+" 您也来"+listenOrLookStr+"吧。";
                 wxShareFromUrlEx(wxShareTitle,wxShareSummary,wxFriendShareStr,"",insertImgType(qaShow.qustionUser.headPic,3),defaultWeixinSharePicUrl,realUrl);
             }else{
                 wxShareTitle = userTest.nickname+"强烈推荐问题，您也来"+listenOrLookStr+"吧！";
@@ -297,12 +297,12 @@ function configwxShare(qaShow){
             }
         }else{
             if (qaShow.answerUser.id==userTest.id) {
-                wxShareTitle = qaShow.answerUser.nickname+"在问房回答了"+qaShow.qustionUser.nickname+"的提问，您也来"+listenOrLookStr+"吧！";
-                wxShareSummary = "我在问房回答了："+qaShow.content+" 您也来"+listenOrLookStr+"吧！";
+                wxShareTitle = qaShow.answerUser.nickname+"在半导体回答了"+qaShow.qustionUser.nickname+"的提问，您也来"+listenOrLookStr+"吧！";
+                wxShareSummary = "我在半导体回答了："+qaShow.content+" 您也来"+listenOrLookStr+"吧！";
                 wxShareFromUrlEx(wxShareTitle,wxShareSummary,wxFriendShareStr,"",insertImgType(qaShow.answerUser.headPic,3),defaultWeixinSharePicUrl,realUrl);
             }else if (userTest!=null&&qaShow.qustionUser.id==userTest.id){
-                wxShareTitle = qaShow.answerUser.nickname+"回答了我在问房提出的的问题，您也来"+listenOrLookStr+"吧！";
-                wxShareSummary = qaShow.answerUser.nickname+"回答了我在问房提出的问题："+qaShow.content+" 您也来"+listenOrLookStr+"吧。";
+                wxShareTitle = qaShow.answerUser.nickname+"回答了我在半导体提出的的问题，您也来"+listenOrLookStr+"吧！";
+                wxShareSummary = qaShow.answerUser.nickname+"回答了我在半导体提出的问题："+qaShow.content+" 您也来"+listenOrLookStr+"吧。";
                 wxShareFromUrlEx(wxShareTitle,wxShareSummary,wxFriendShareStr,"",insertImgType(qaShow.qustionUser.headPic,3),defaultWeixinSharePicUrl,realUrl);
             }else{
                 wxShareTitle = userTest.nickname+"强烈推荐"+qaShow.answerUser.nickname+"回答的问题，您也来"+listenOrLookStr+"吧！";

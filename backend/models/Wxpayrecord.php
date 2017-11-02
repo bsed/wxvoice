@@ -46,4 +46,5 @@ class Wxpayrecord extends \yii\db\ActiveRecord
 
 
 
+
 }

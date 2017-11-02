@@ -124,7 +124,7 @@ function ajaxLabelCon(currentIndex){
                      'style="display:block">'+result.list[i].price+'元提问</a>'+
                      '<h3 class="appui-expert-name fs30 fc-black" onclick="">'+result.list[i].user.nickname+'</h3>'+
                      '<p class="appui-expert-introduce fs24 fc-grey666 mt5">'+result.list[i].honor+'</p>'+
-                     '<div class="appui-expert-tags fs18 mt5 fc-greyabc">'+'<span style="display:block" onclick="">进入主页</span>'+
+                     '<div class="appui-expert-tags fs18 mt5 fc-greyabc">'+'<span style="display:block" onclick=""></span>'+
                      '</div>'+
                      '</div>'+
                      '</div>';

@@ -45,6 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td class="project-completion">
                                         <span class="label label-primary"><?=$v['get_price']?></span>
                                     </td>
+                                    <td class="project-completion">
+                                        <span class="label label-primary">领取时间: <?=date('Y-m-d H:i:s',$v['created']);?></span>
+                                    </td>
                                     <td class="project-actions">
                                         <a href="<?=Url::toRoute(['pocketget/delete','id'=>$v['id']])?>" class="btn btn-white btn-sm">
                                             <i class="fa fa-pencil"></i> 删除 </a>

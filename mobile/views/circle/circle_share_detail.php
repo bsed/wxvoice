@@ -26,8 +26,8 @@
                         <i class="mt30">
                             <img  src="<?=Yii::$app->params['public'].'/attachment'.$info['logo']?>">
                         </i>
-                        <h4 class="fs30 fc-black mt15" id="qzName2"><?=$info['name']?></h4>
-                        <p class="fs20 fc-black " id="author"><?=$info['name']?>&nbsp;<?=date('Y-m-d',$info['created']);?></p>
+                        <h4 class="fs30 fc-black mt15"><?=$info['name']?></h4>
+                        <p class="fs20 fc-black"><?=$info['user']['nickname']?></p>
                     </div>
                 </div>
 
@@ -50,16 +50,15 @@
                     <div class="csd-brief-join">
                         <em class="csd-brief-liststyle"><i></i></em>
                         <h4 class="fs28 fwb" id="joinPrice">加入圈子:
-                            <?php if($info['feetype'] == 1):?> ￥<?=$info['joinprice']?>/年
-                            <?php elseif($info['feetype'] == 2):?>
-                                ￥<?=$info['joinprice']?>/永久<?php endif;?></h4>
-
+                            <?php if($info['feetype'] == 1):?> ￥<?=$info['joinprice']?>/年<?php elseif($info['feetype'] == 2):?>￥<?=$info['joinprice']?>/永久<?php else:?>免费<?php endif;?></h4>
                             <?php if($info['feetype'] == 1):?>
                                 <p class="fs26 mt10" id="joinSummary">付款成功后，您可以在
                             <span><?=date('Y年m月d日',time());?>至<?=date('Y年m月d日',strtotime('+1 year'));?></span>
                             期间，进入 <?=$info['name']?> 的圈子，查看 <span><?=$info['name']?></span> 中的内容。</p>
                             <?php elseif($info['feetype'] == 2):?>
                                 <p class="fs26 mt10" id="joinSummary">付款成功后，您可以永久查看<span> <?=$info['name']?> </span> 中的内容。</p>
+                                <?php else:?>
+                                <p class="fs26 mt10" id="joinSummary">免费加入圈子，您可以永久查看<span> <?=$info['name']?> </span> 中的内容。</p>
                             <?php endif;?>
 
                     </div>

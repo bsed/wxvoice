@@ -35,10 +35,11 @@ class ArticlesController extends BaseController
     }
 
     public function actionIndex(){
-
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         return $this->render('index');
     }
     public function actionSquare(){
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         $model = new Articles();
         $list = $model->find()->asarray()->all();
@@ -53,6 +54,7 @@ class ArticlesController extends BaseController
      * 圈子里的详情
      */
         public function actionSquare_detail(){
+            Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             $model = new Articles();
             $member_id = Yii::$app->session['member_id'];
             $id = Yii::$app->request->get('id');
@@ -128,7 +130,7 @@ class ArticlesController extends BaseController
             $pernum = $_POST['pernum'];
             $start = $_POST['start'];
             $list = $model->find()->asarray()
-                ->with('user','dianzan','comment','redpocket')
+                ->with('user','dianzan','comment','redpocket','pockets')
                 ->where(['type'=>$_POST['type'],'from'=>'index'])
                 ->orderBy('created DESC')
                 ->all();
@@ -143,7 +145,7 @@ class ArticlesController extends BaseController
             $arrayList = array_slice($lists,$start,$pernum);
 
             $listCount = $model->find()->asarray()
-                ->with('user','dianzan','comment','redpocket')
+                ->with('user','dianzan','comment','redpocket','pockets')
                 ->where(['type'=>$_POST['type'],'from'=>'index'])
                 ->all();
             //判断user不能为空,计算总的个数
@@ -186,9 +188,12 @@ class ArticlesController extends BaseController
       $model = new Articles();
       $member_id = Yii::$app->session['member_id'];
       $post = Yii::$app->request->post();
+      $circle_id = isset($post['circle_id'])?$post['circle_id']:0;
+      $title = !empty($post['title'])?$post['title']:$post['content'];
+      $summary = !empty($post['summary'])?$post['summary']:$post['content'];
       if($post){
-          $model->title = $post['title'];
-          $model->summary = $post['summary'];
+          $model->title = $title;
+          $model->summary = $summary;
           $model->content = $post['content'];
           $model->member_id = $member_id;
           $model->from =  $post['from'];
@@ -262,7 +267,10 @@ class ArticlesController extends BaseController
      * 文章详情
      */
     public function actionArticle_detail(){
+        Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
+        require_once(dirname(dirname(__FILE__)).'/rules/details.php');
+
         //判断是否是付费会员，如果不是就要求付费成为会员, 使用ajax去请求
         $member_id = Yii::$app->session['member_id'];
         $feeuser = Yii::$app->session['feeuser'];
@@ -310,10 +318,10 @@ class ArticlesController extends BaseController
             }
 
         }else{
-            if(!$feeuser){
-                Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-                return $this->redirect('/circle/feeuser.html');
-            }
+//            if(!$feeuser){
+//                Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
+//                return $this->redirect('/circle/feeuser.html');
+//            }
         }
 
 
@@ -381,16 +389,13 @@ class ArticlesController extends BaseController
        $start = $_POST['start'];
 
        $list = $model->find()->asarray()
-           ->with('user','dianzan','comment','redpocket')
+           ->with('user','dianzan','comment','redpocket','pockets')
            ->where(['from'=>'index'])
-           ->orderBy('created DESC')
+           ->orderBy('listorder DESC, created DESC')
            ->all();
-        //echo $list->createCommand()->getRawSql();
-        //exit();
-       //判断user不能为空
        $lists = [];
        foreach($list as $k=>$v){
-           if($v['user'] && $v['user']['disallowed'] == 0){
+           if($v['user'] && $v['user']['disallowed'] == 0 ){
                $lists[] = $v;
            }
 
@@ -401,13 +406,13 @@ class ArticlesController extends BaseController
 
        //判断user不能为空,计算总的个数
        $listCounts = $model->find()->asarray()
-           ->with('user','dianzan','comment','redpocket')
+           ->with('user','dianzan','comment','redpocket','pockets')
            ->where(['from'=>'index'])
            ->all();
 
        $listsCount = [];
        foreach($listCounts as $k=>$v){
-           if($v['user'] && $v['user']['disallowed'] == 0){
+           if($v['user'] && $v['user']['disallowed'] == 0 ){
                $listsCount[] = $v;
            }
 
@@ -444,10 +449,39 @@ class ArticlesController extends BaseController
         $model = new Articles();
         $mid = Yii::$app->session['member_id'];
         $pernum = $_POST['pernum'];
+        $start = $_POST['start'];
         $circle_id = $_POST['circle_id'];
-        $list = $model->find()->asarray()->with('user','dianzan','comment','redpocket')->where(['from'=>'circle','circle_id'=>$circle_id])->offset($_POST['start'])->orderBy("created DESC")->limit($pernum)->all();
+        $list = $model->find()->asarray()
+            ->with('user','dianzan','comment','redpocket','pockets')
+            ->where(['from'=>'circle','circle_id'=>$circle_id])
+            ->orderBy("created DESC")
+            ->all();
+        $lists = [];
+        foreach($list as $k=>$v){
+            if($v['user'] && $v['user']['disallowed'] == 0){
+                $lists[] = $v;
+            }
 
-        $total = $model->find()->asarray()->where(['from'=>'circle','circle_id'=>$circle_id])->count();
+        }
+
+        //将处理后的数组进行分页
+        $arrayList = array_slice($lists,$start,$pernum);
+
+
+        //判断user不能为空,计算总的个数
+        $listCounts = $model->find()->asarray()
+            ->with('user','dianzan','comment','redpocket','pockets')
+            ->where(['from'=>'circle','circle_id'=>$circle_id])
+            ->all();
+
+        $listsCount = [];
+        foreach($listCounts as $k=>$v){
+            if($v['user'] && $v['user']['disallowed'] == 0){
+                $listsCount[] = $v;
+            }
+
+        }
+        $total = count($listsCount);
         $pages = ceil($total/$pernum);
         $file = Yii::$app->params['public'].'/attachment';
         //获取用户是否关注
@@ -459,7 +493,7 @@ class ArticlesController extends BaseController
                 'file'=>$file,
                 'mid'=>$mid,
                 'data'=>[
-                    'list'=>$list,
+                    'list'=>$arrayList,
                     'page'=>[
                         'currentPage'=>$_POST['currentPage'],
                         'pages'=>$pages,

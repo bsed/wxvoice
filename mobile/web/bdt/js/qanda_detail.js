@@ -1323,14 +1323,14 @@ function showCouposView(){
         // alert(isActivity);
         if (isActivity==0) {
 
-        	//正常进入问答详情界面，未关注问房吧 refreshBool 0，公众号送券 hasCouponsTo 1 用户优惠券个数couponCount，
+        	//正常进入问答详情界面，未关注半导体 refreshBool 0，公众号送券 hasCouponsTo 1 用户优惠券个数couponCount，
         	var refreshBool = readClientSession("refreshBool");
 			var hasCouponsTo = readClientSession("hasCouponsTo");
         	if (hasCouponsTo==1&&refreshBool==0&&couponCount<=0) {
         		if(getNeedNextSHowQr()){
         			createStatWithParamlog(window.location.href,"/coupons.html","4",window.location.search);
-        			qrcodeDialog('images/qrcodebg3.png' , '送优惠券啦' , '关注问房吧可领取免费围观券<br />免费偷听收费问题！' , 'listen-detail' );
-        		}//qrcodeDialog('images/qrcodebg3.png' , '快来关注吧' , '关注问房吧获得最新消息推送！' , 'listen-detail' );
+        			qrcodeDialog('images/qrcodebg3.png' , '送优惠券啦' , '关注半导体可领取免费围观券<br />免费偷听收费问题！' , 'listen-detail' );
+        		}//qrcodeDialog('images/qrcodebg3.png' , '快来关注吧' , '关注半导体获得最新消息推送！' , 'listen-detail' );
         	}else{
 	            $('#shareView').show();
 	            $('.closePopShare_dd').unbind("click").click(function(){

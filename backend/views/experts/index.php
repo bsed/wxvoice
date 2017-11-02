@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="ibox-title">
                     <h5>专家列表</h5>
                     <div class="ibox-tools">
-                        <a href="<?=Url::toRoute(['experts/create'])?>" class="btn btn-primary btn-xs">创建专家</a>
+                       
                     </div>
                 </div>
                 <div class="ibox-content">

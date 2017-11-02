@@ -38,7 +38,7 @@ class Questions extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'expert_id', 'status', 'views', 'answer_type','typeid','circle_id','open','rec','themeid','haveread','voice_time'], 'integer'],
+            [['member_id', 'expert_id', 'status', 'views', 'answer_type','typeid','circle_id','open','rec','themeid','haveread','voice_time','listorder','trade'], 'integer'],
             [['question', 'voice', 'article', 'continue_ask',], 'string'],
             [['askprice'], 'number'],
             [['created', 'asktime','article','asktime','imgs','answerimgs','from','publishtype'], 'string'],
@@ -65,6 +65,7 @@ class Questions extends \yii\db\ActiveRecord
             'created' => '提问时间',
             'asktime' => '回答时间',
             'rec' => '是否推荐',
+            'listorder' => '排序',
             'voice_time' => '语音时间',
         ];
     }

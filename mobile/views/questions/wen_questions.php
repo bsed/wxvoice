@@ -47,7 +47,7 @@
                         <p class="fs24 fc-greyabc">公开提问</p>
                     </div>
                     <div class="qnada-q-data-input bg-greyfa bc-grey mt10">
-                        <textarea id="textarea" class="fs30 fc-black" placeholder="向他/她提问，等Ta语音回答；超过48小时未回答，将按支付路径全额退款。回答后，答案将限次免费30分钟；您可以免费向TA追问。"></textarea>
+                        <textarea id="textarea" class="fs30 fc-black" placeholder="向他/她提问"></textarea>
                         <span class="fs30 fc-greyabc"><i id="length" class="fs30 fc-greyabc">0</i>/140</span>
                         <!--提问-插入图片示例-->
                         <div class="qanda-pic mt5">
@@ -85,11 +85,8 @@
         <div class="appui-helptext-bd fc-black456 b-b-grey">
             <div class="appui-helptext-bd-con">
                 <p class="fs30 mb10 fc-black fwb">问答细则</p>
-                <p class="fs30">1、提出问题，支付赏金后，将等待答主开始回答；</p>
-                <p class="fs30">2、答主回答问题后，答主将获得赏金；</p>
-                <p class="fs30">3、若48小时内无应答，则全额退款。</p>
                 <p class="fs30 mb10 mt20 fc-black fwb">责任声明</p>
-                <p class="fs30 mb10">问房”的相关回答仅为该答主在房地产等领域的个人经验、意见或观点，不能被自动视为该答主供职单位/机构的意见或观点，仅供用户参考所用，亦不能被认为是其他类似性质的文件。解答内容及答主个人观点不代表“问房”平台观点，“问房”平台对解答内容的正确性不予担保，对在“问房”平台之外所进行的任何接洽行为的后果亦不予承担责任。烦请您在使用“问房”前仔细阅读并确保完全理解以上声明的全部内容，请知悉，谢谢。</p>
+                <p class="fs30 mb10">半导体”的相关回答仅为该答主在房地产等领域的个人经验、意见或观点，不能被自动视为该答主供职单位/机构的意见或观点，仅供用户参考所用，亦不能被认为是其他类似性质的文件。解答内容及答主个人观点不代表“半导体”平台观点，“半导体”平台对解答内容的正确性不予担保，对在“半导体”平台之外所进行的任何接洽行为的后果亦不予承担责任。烦请您在使用“半导体”前仔细阅读并确保完全理解以上声明的全部内容，请知悉，谢谢。</p>
             </div>
         </div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>
@@ -97,10 +94,10 @@
     <div id="scanMe" class="bg-white" style="display: none;">
         <div class="outer">
             <h3 class="fs40 fc-blue"><span>提问</span>成功!</h3>
-            <p class="scan-title fs30">关注“问房”官方公众号
+            <p class="scan-title fs30">关注“半导体”官方公众号
                 <br>第一时间收到行家的回复</p>
             <img src="../bdt/images/wenfangba.jpg?v=20170221161736" alt="">
-            <p class="scan-cheerup fs26">关注"问房吧"，可领<span class="fc-red">优惠券</span></p>
+            <p class="scan-cheerup fs26">关注"半导体"，可领<span class="fc-red">优惠券</span></p>
             <p class="scan-longtap fs32">长按，识别二维码，加关注</p>
             <a class="fs26 fc-blue" href="">不了,谢谢</a>
         </div>

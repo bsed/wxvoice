@@ -13,7 +13,18 @@ use common\widgets\tags;
         <?= $form->field($model, $v)->textArea(['rows' => '6']) ?>
     <?php elseif($v == 'member_id'):?>
         <?= $form->field($model, $v)->dropDownList($users) ?>
+    <?php elseif($v == 'circle_id'):?>
+    <?php elseif($v == 'type'):?>
+    <?php elseif($v == 'themeid'):?>
+    <?php elseif($v == 'pics'):?>
+    <?php elseif($v == 'from'):?>
+    <?php elseif($v == 'redid'):?>
+    <?php elseif($v == 'created'):?>
+        <?= $form->field($model, $v)->textInput(['value' => date("Y-m-d H:i:s", $model['created'])]) ?>
+    <?php elseif($v == 'publishtype'):?>
     <?php elseif($v == 'freetime'):?>
+        <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
+        <?php elseif($v == 'rec'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>
     <?php elseif($v == 'vip'):?>
         <?= $form->field($model, $v)->dropDownList(['0' => '否', '1' => '是']) ?>

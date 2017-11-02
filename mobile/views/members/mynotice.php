@@ -16,10 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="page__hd bg-white fc-black b-b-grey has-tab scrollhd">
             <div class="statebar">
                 <a onclick="goBack();" class="nav-act left-act"><img src="../bdt/images/nav_icon_back1.png"></a>
-                <div class="tab-btn fs30 tab-btn-two" id="noticeSwitch">
-                    <a class="bg-blue fc-white tab-on">问答消息<i class="bg-red" style="display:none;"></i></a>
-                    <a class="fc-blue">系统消息<i class="bg-red" style="display:none;"></i></a>
-                </div>
+<!--                <div class="tab-btn fs30 tab-btn-two" id="noticeSwitch">-->
+<!--                    <a class="bg-blue fc-white tab-on">问答消息<i class="bg-red" style="display:none;"></i></a>-->
+<!--                    <a class="fc-blue">系统消息<i class="bg-red" style="display:none;"></i></a>-->
+<!--                </div>-->
             </div>
         </div>
         <!--页面主体-->

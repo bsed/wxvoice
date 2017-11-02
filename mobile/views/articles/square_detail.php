@@ -124,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 </div>
                 <div id="about_us" style="display:none;">
-                    <h2 class="fs28 mt20">关注"问房吧",获取<span class="fc-red">最新内容</span></h2>
+                    <h2 class="fs28 mt20">关注"半导体",获取<span class="fc-red">最新内容</span></h2>
                     <div>
                         <img src="../bdt/images/wenfangba.jpg" alt="">
                     </div>
@@ -265,8 +265,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <h2 class="appui-helptext-hd fs32 fc-black b-b-grey">免责声明</h2>
         <div class="appui-helptext-bd fc-black456 b-b-grey">
             <div class="appui-helptext-bd-con fc-black">
-                <p class="fs30 mb20">1、“问房平台”部分文章信息来源于网络转载是出于传递更多信息之目的，并不意味着赞同其观点或证实其内容的真实性。如其他媒体、网站或个人从本网下载使用，必须保留本网注明的“稿件来源”，并自负版权等法律责任。如对稿件内容有疑议，请及时与我们联系。</p>
-                <p class="fs30 mb20">2、“问房平台”致力于提供合理、准确、完整的资讯信息，但不保证信息的合理性、准确性和完整性，且不对因信息的不合理、不准确或遗漏导致的任何损失或损害承担责任。本网站所有信息仅供参考，不做交易和服务的根据， 如自行使用本网资料发生偏差，本站概不负责，亦不负任何法律责任。</p>
+                <p class="fs30 mb20">1、“半导体平台”部分文章信息来源于网络转载是出于传递更多信息之目的，并不意味着赞同其观点或证实其内容的真实性。如其他媒体、网站或个人从本网下载使用，必须保留本网注明的“稿件来源”，并自负版权等法律责任。如对稿件内容有疑议，请及时与我们联系。</p>
+                <p class="fs30 mb20">2、“半导体平台”致力于提供合理、准确、完整的资讯信息，但不保证信息的合理性、准确性和完整性，且不对因信息的不合理、不准确或遗漏导致的任何损失或损害承担责任。本网站所有信息仅供参考，不做交易和服务的根据， 如自行使用本网资料发生偏差，本站概不负责，亦不负任何法律责任。</p>
                 <p class="fs30 mb20">3、任何由于黑客攻击、计算机病毒侵入或发作、因政府管制而造成的暂时性关闭等影响网络正常经营的不可抗力而造成的损失，本网站均得免责。由于与本网站链接的其它网站所造成之个人资料泄露及由此而导致的任何法律争议和后果，本网站均得免责。</p>
                 <p class="fs30 mb20">4、本网站如因系统维护或升级而需暂停服务时，将事先公告。若因线路及非本公司控制范围外的硬件故障或其它不可抗力而导致暂停服务，于暂停服务期间造成的一切不便与损失，本网站不负任何责任。</p>
                 <p class="fs30 mb20">5、本网站使用者因为违反本声明的规定而触犯中华人民共和国法律的，一切后果自己负责，本网站不承担任何责任。</p>
@@ -289,7 +289,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p class="fs30 mb10">2、行家通过回答他人提出的问题来获得收入。每成功回答一条，获得相应金额；</p>
                 <p class="fs30 mb10">3、行家通过回答问题被第三人付费收听来获得收入。每被付费收听一次，获得<span id="touListenFee1">0</span>元；</p>
                 <p class="fs30 mb10">4、若问答被分享，通过分享页面进入付费收听而产生的收益，分享者获得<span id="shareListenShare">0</span>元，提问者与回答者均获得<span id="shareListenQA">0</span>元；</p>
-                <!-- 		<p class="fs30 mb10">5、若问答被连续二次分享，通过连续二次分享页面进入且付费收听而产生的收益，二次分享者获得<span id="lv2ShareListenShare">0</span>元，提问者、回答者与一次分享者均获得<span id="lv2ShareListenQA">0</span>元；</p> --><p class="fs30 mb10">5、所有收入扣除<span id="qaFeeRate">0</span>作为平台佣金。账户余额大于<span id="minPayCash">0</span>元，每日21点系统自动将账户里的余额划到微信钱包内，用户也可前往“问房吧”公众号提现；</p><p class="fs30 mb10">6、备注：免费围观券收听，行家、提问者、分享者都没有收益。</p></div></div>
+                <!-- 		<p class="fs30 mb10">5、若问答被连续二次分享，通过连续二次分享页面进入且付费收听而产生的收益，二次分享者获得<span id="lv2ShareListenShare">0</span>元，提问者、回答者与一次分享者均获得<span id="lv2ShareListenQA">0</span>元；</p> --><p class="fs30 mb10">5、所有收入扣除<span id="qaFeeRate">0</span>作为平台佣金。账户余额大于<span id="minPayCash">0</span>元，每日21点系统自动将账户里的余额划到微信钱包内，用户也可前往“半导体”公众号提现；</p><p class="fs30 mb10">6、备注：免费围观券收听，行家、提问者、分享者都没有收益。</p></div></div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2></div></div>
 
 <!--大赏页面-->

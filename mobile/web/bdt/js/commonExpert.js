@@ -20,7 +20,7 @@ function commonExpertListFunction (groups,length,publishLocationId,publishLocati
 			expertMasterInfo = '<p class="appui-expert-introduce fs26 fc-black mt10">'+groups[i].masterInfo+'</p>';
 		}else{
 			if (groups[i].masterLvl>1) {
-				expertMasterInfo = '<p class="appui-expert-introduce fs26 fc-black mt10">该行家已经过“问房”官方认证，欢迎来向Ta提问。</p>'
+				expertMasterInfo = '<p class="appui-expert-introduce fs26 fc-black mt10">该行家已经过“半导体”官方认证，欢迎来向Ta提问。</p>'
 			}else{
 				// 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知
 				if (groups[i].sex==0) {

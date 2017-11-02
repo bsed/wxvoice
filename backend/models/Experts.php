@@ -37,10 +37,9 @@ class Experts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id',  'open', 'vip'], 'integer'],
+            [['member_id','open', 'vip','rec','listorder','type'], 'integer'],
             [['price'], 'number'],
-            [['honor', 'des', 'card'], 'string', 'max' => 255],
-            [['created'], 'string', 'max' => 100],
+            [['honor', 'des', 'card','created'], 'string'],
         ];
     }
 
@@ -53,16 +52,15 @@ class Experts extends \yii\db\ActiveRecord
             'id' => 'id',
             'member_id' => '会员',
             'honor' => '头衔',
-            'tags' => '领域标签',
             'des' => '简介',
             'price' => '提问价格',
-            'continue_ask' => '继续追问',
-            'freetime' => '免费规则',
             'open' => '开放计划',
             'card' => '名片',
-            'created' => '创建时间',
-            'updated' => '更新时间',
-            'vip' => '是否专家'
+            'type' => '类别',
+            'rec' => '是否推荐',
+            'listorder' => '排序',
+            'vip' => '是否专家',
+            'created' => '创建时间'
         ];
     }
 

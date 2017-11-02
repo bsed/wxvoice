@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <input id="circleName" type="text" class="circle-name-edit  fs32" placeholder="圈子名称">
                 </div>
                 <div class="circle-introduce-edit bc-grey bg-greyfa">
-                    <textarea id="textarea" class="fs34 fc-black" placeholder="圈子简介（选填）"></textarea>
+                    <textarea id="textarea" class="fs34 fc-black" placeholder="圈子简介（必填）"></textarea>
                     <span class="fs28"><i id="length" class="fc-grey666">0</i>/<i class="fc-greyabc">150</i></span>
                 </div>
             </div>
