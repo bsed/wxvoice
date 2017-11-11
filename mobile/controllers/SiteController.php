@@ -39,6 +39,13 @@ class SiteController extends BaseController
         //问题，包括语音问答
         $questionModel = new Questions();
         $questions = $questionModel->find()->where(['rec'=>1])->with('expert')->limit(3)->all();
+        //查看是否有未回答的问题
+        if($mid){
+            $counts = $questionModel->find()->where(['expert_id'=>$mid,'status'=>1])->count();
+        }else{
+            $counts = 0;
+        }
+
         //楼盘推荐
         $model = new Products();
         $recLoupan = $model->find()->asarray()->where(['rec'=>1])->limit(3)->all();
@@ -49,6 +56,7 @@ class SiteController extends BaseController
         return $this->render('index',[
             'questions'=>$questions,
             'banner'=>$banner,
+            'counts'=>$counts,
             'recLoupan'=>$recLoupan,
         ]);
     }

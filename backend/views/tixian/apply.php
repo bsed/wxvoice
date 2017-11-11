@@ -49,16 +49,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <a href="">申请时间：<?=date('Y-m-d H:i:s',$v['created'])?></a>
                                     </td>
                                     <td class="project-actions">
-                                        <a href="<?=Url::toRoute(['tixian/pay','id'=>$v['id'], 'openid'=>$v['openid'], 'price'=>$v['price']])?>" class="btn btn-white btn-sm">
-                                            <i class="fa fa-folder"></i>打款</a>
-<!--                                        <a href="--><?//=Url::toRoute(['tixian/update','id'=>$v['id']])?><!--" class="btn btn-white btn-sm">-->
-<!--                                            <i class="fa fa-folder"></i> 编辑 </a>-->
-<!--                                        <a href="--><?//=Url::toRoute(['tixian/delete','id'=>$v['id']])?><!--" class="btn btn-white btn-sm">-->
-<!--                                            <i class="fa fa-pencil"></i> 删除 </a>-->
+                                        <a href="<?=Url::toRoute(['tixian/pay','id'=>$v['id'], 'openid'=>$v['openid'], 'price'=>$v['price']])?>" class="btn btn-white btn-sm" onclick="if(confirm('确定要打款吗？')) return true;else return false;">
+                                            <i class="fa fa-folder "></i>打款</a>
                                     </td>
                                 </tr>
                             <?php endforeach;?>
-
 
                             </tbody>
                         </table>

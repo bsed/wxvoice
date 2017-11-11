@@ -85,17 +85,29 @@ $this->params['breadcrumbs'][] = $this->title;
                     <!--我创建的圈子-->
                    <?php if($MyCreated):?>
                        <?php foreach($MyCreated as $k=>$v):?>
-                           <div class="circle-item-x bg-white fc-black mt10" onclick="gotoHtml(1,<?=$v['id']?>)">
-                               <a class="circle-headpic">
-                                   <img src="<?=Yii::$app->params['public'].'/attachment'.$v['logo']?>">
-                               </a>
-                               <div class="circle-info">
-                                   <h3 class="circle-info-name fs30 fc-black"><?=$v['name']?></h3>
-                                   <p class="circle-info-canshu fs20 fc-grey999"><span>圈主:<?=$v['user']['nickname']?></span>
-                                       <span class="ml10">成员:<em><?=count($v['incircle']);?></em>人</span></p>
-                                   <p class="circle-info-introduce fs24 fc-grey666 mt5"><?=$v['des']?></p>
-                               </div>
-                           </div>
+                           <?php if($v['status'] == 1):?>
+                                   <div class="circle-item-x bg-white fc-black mt10" onclick="gotoHtml(1,<?=$v['id']?>)">
+                                       <a class="circle-headpic">
+                                           <img src="<?=Yii::$app->params['public'].'/attachment'.$v['logo']?>">
+                                       </a>
+                                       <div class="circle-info">
+                                           <h3 class="circle-info-name fs30 fc-black"><?=$v['name']?></h3>
+                                           <p class="circle-info-canshu fs20 fc-grey999"><span>圈主:<?=$v['user']['nickname']?></span>
+                                               <span class="ml10">成员:<em><?=count($v['incircle']);?></em>人</span></p>
+                                           <p class="circle-info-introduce fs24 fc-grey666 mt5"><?=$v['des']?></p>
+                                       </div>
+                                   </div>
+                               <?php else:?>
+                                   <div class="circle-item-x bg-white fc-black mt10" style="background:#f1f1f1">
+                                       <a class="circle-headpic">
+                                           <img src="<?=Yii::$app->params['public'].'/attachment'.$v['logo']?>">
+                                       </a>
+                                       <div class="circle-info">
+                                           <h3 class="circle-info-name fs30 fc-black"><?=$v['name']?></h3>
+                                           <p class="circle-info-canshu fs20 fc-grey999" style="margin-top:15px;color:red">需要1个工作日审核......</p>
+                                       </div>
+                                   </div>
+                               <?php endif;?>
                        <?php endforeach;?>
                    <?php endif;?>
 

@@ -17,14 +17,19 @@ use common\tools\htmls;
                     <i id="headPic"><img src="<?=Yii::$app->params['public'].'/attachment'.$info['user']['photo']?>"></i>
                     <h1 class="fs40" id="userName"><?=$info['user']['nickname']?>的红包</h1>
                 </div>
-
+                <?php if( ($info['pocket_nums'] - $redNums) >0):?>
                 <div class="rpo_amount_container">
                     <h2 class="fs32 fc-greyabc" id="titleId">您已经获得红包</h2>
                     <div class="rpo_money fc-black" id="rpo_money_div">
-                        <p id="totolMoney" class=""><?=$my['get_price']?></p>
+                        <p ><?=$my['get_price']?></p>
                         <span class="fs30">元</span>
                     </div>
                 </div>
+                <?php else:?>
+                    <div class="rpo_amount_container">
+                        <h2 class="fs32 fc-greyabc" >红包已经被领完</h2>
+                    </div>
+                <?php endif;?>
 
                 <div class="rpo_receive_status">
                     <span class="fs28" id="redCountStatus"><?=$info['pocket_nums']?>个红包，被领<?=$redNums?>个</span>
@@ -39,7 +44,8 @@ use common\tools\htmls;
                     <li class="packet-record-item b-b-greye6"><i class="pri-headpic mr5">
                             <img src="<?=Yii::$app->params['public'].'/attachment'.$v['user']['photo']?>"></i>
                         <span class="pri-type-time"><i class="fs28 fc-black"><?=$v['user']['nickname']?></i>
-                            <i class="fs20 fc-grey666"><?=htmls::formatTime($v['created']);?></i></span><em class="pri-quota fc-black fs24"><?=$v['get_price']?>元</em>
+                            <i class="fs20 fc-grey666"><?=htmls::formatTime($v['created']);?></i></span>
+                        <em class="pri-quota fc-black fs24"><?=$v['get_price']?>元</em>
                     </li>
                     <?php endforeach;?>
                 </ul>

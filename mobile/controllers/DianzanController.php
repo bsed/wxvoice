@@ -28,8 +28,10 @@ class DianzanController extends BaseController
      * 点赞
      */
     public function actionDianzan(){
+
         $post = Yii::$app->request->post();
-        $member_id = Yii::$app->session['member_id'];
+        require_once(dirname(dirname(__FILE__)).'/rules/ajaxrights.php');
+
         if(isset($post['article_id'])) {
             $list = Dianzan::find()->asarray()->where(['member_id' => $member_id, 'article_id' => $post['article_id']])->one();
         }else if(isset($post['question_id'])) {
@@ -64,7 +66,7 @@ class DianzanController extends BaseController
      */
     public function actionConcerns(){
         $post = Yii::$app->request->post();
-        $member_id = Yii::$app->session['member_id'];
+        require_once(dirname(dirname(__FILE__)).'/rules/ajaxrights.php');
         $model = new Concerns();
         if(!isset($_POST['type'])){
             $_POST['type'] = 'notype';
@@ -99,7 +101,7 @@ class DianzanController extends BaseController
      */
     public function actionIfconcern(){
         $post = Yii::$app->request->post();
-        $member_id = Yii::$app->session['member_id'];
+        require_once(dirname(dirname(__FILE__)).'/rules/ajaxrights.php');
         $model = new Concerns();
         if($_POST['type'] == 'themes'){
             $list = $model->find()->asarray()->where(['mid'=>$member_id,'themeid'=>$post['themeid']])->one();

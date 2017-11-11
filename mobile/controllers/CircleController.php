@@ -36,6 +36,7 @@ class CircleController extends BaseController
         $view->params['site'] = htmls::site();
         $view->params['wechat'] = htmls::wechat();
         $view->params['js'] = $this->setJs();
+
     }
     public function behaviors()
     {
@@ -59,6 +60,7 @@ class CircleController extends BaseController
         Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         //判断是否登录
         $member_id = Yii::$app->session['member_id'];
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
@@ -70,19 +72,34 @@ class CircleController extends BaseController
         $count = $model->find()->asarray()->where(['member_id'=>$member_id])->count();
         //加入的圈子
         $myCircle = CircleMembers::find()->asarray()->where(['mid'=>$member_id])->andWhere(['status'=>1])->with('circle','user','incircle')->all();
+        //我创建的圈子
+        $MyCreated = $model->find()->asarray()->where(['member_id'=>$member_id])->with('user','incircle')->orderBy('status ASC')->all();
         //所有圈子的列表
         $creatCircle = $model->find()->asarray()->where(['member_id'=>$member_id])->andWhere(['status'=>1])->with('user')->count();
 
-        //推荐圈子，除了已经关注的其他圈子, where 不等于一个数组 In, 使用hasMany 查出有多少会员
-        $filter = [];
+        //推荐圈子，除了已经关注和自己创建的其他圈子, where 不等于一个数组 In, 使用hasMany 查出有多少会员
+        $filterMy = [];
+        $filterCreated = [];
         if($myCircle){
             foreach($myCircle as $k=>$v){
-                $filter[] = $v['cid'];
+                $filterMy[] = $v['cid'];
             }
         }
-        $recCircles = $model->find()->asarray()->with('user','incircle')->where(['status'=>1])->andWhere(['not in','id',$filter])->all();
-        //我创建的圈子
-        $MyCreated = $model->find()->asarray()->where(['member_id'=>$member_id])->andWhere(['status'=>1])->with('user','incircle')->all();
+        if($MyCreated){
+            foreach($MyCreated as $k=>$v){
+                $filterCreated[] = $v['id'];
+            }
+        }
+        //END
+        $filter = array_merge($filterMy, $filterCreated);
+
+
+        $recCircles = $model->find()->asarray()
+            ->with('user','incircle')
+            ->where(['status'=>1])
+            ->andWhere(['not in','id',$filter])
+            ->all();
+
 
         return $this->render('circle_my',[
             'info'=>$info,
@@ -97,9 +114,14 @@ class CircleController extends BaseController
         //判断是否登录
         $feeuser = Yii::$app->session['feeuser'];
         $member_id = Yii::$app->session['member_id'];
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
+        }
+        if(!$feeuser){
+            Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
+            return $this->redirect('/site/index.html');
         }
         $model = new Circles();
         //判断是否是专家或群管,只有这两个身份才能创建圈子
@@ -154,6 +176,7 @@ class CircleController extends BaseController
         //判断是否登录
         Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
         $member_id = Yii::$app->session['member_id'];
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
@@ -182,16 +205,19 @@ class CircleController extends BaseController
     //查询圈子是否到期
     public function actionDeadtime(){
         $member_id = Yii::$app->session['member_id'];
-        //判断是否付费成功,查到circlemembers
-        //查找会员是否在指定的圈子中
-        $circleModel = new Circlemembers();
-        $circleCount = $circleModel->find()->asarray()->where(['mid'=>$member_id,'cid'=>$_POST['id']])->andWhere(['status'=>1])->count();
-        if(!$circleCount){
-            die(json_encode(['result'=>'paying','msg'=>'支付结果确认中,请稍候','code'=>$circleCount]));
-        }
         //判断加入圈子的类型，主要判断按年付费的是否到期
         $info =Circles::find()->asarray()->where(['id'=>$_POST['id']])->one();
-        if($info['feetype'] == 1){
+        $quanzhu = $info['member_id'];
+
+        if($info['feetype'] == 1 && $member_id !=$quanzhu){
+            //如果是付费圈子就做判断是否支付成功,圈主除外
+            $Circlemembers = Circlemembers::find()->asarray()->where(['mid'=>$member_id,'cid'=>$_POST['id']])->andWhere(['status'=>1])->one();
+            if(!empty($Circlemembers)){
+                die(json_encode(['result'=>'paying','msg'=>'支付结果确认中,请稍候','code'=>$Circlemembers['id'], 'status'=>$Circlemembers['status'] ]));
+            }else{
+                die(json_encode(['result'=>'paying','msg'=>'支付失败','code'=>0 ,'status'=>0]));
+            }
+
             $addCircleDate = Wxpayrecord::find()->where(['mid'=>$member_id,'pay_id'=>$_POST['id']])->asarray()->one();
             $addTime = $addCircleDate['created'];
             $nowTime = time();
@@ -207,13 +233,22 @@ class CircleController extends BaseController
             die(json_encode(['result'=>'notyear','msg'=>'']));
         }
 
+
     }
-    //查询是否支付成功
+    //支付失败后，删除status = 0 的记录
+    public function actionTodelete(){
+        $mid = Yii::$app->session['member_id'];
+        $cid = $_POST['id'];
+        $models = new Circlemembers();
+        $info = $models->findOne(['mid'=>$mid,'cid'=>$cid, 'status'=>0])->delete();
+        die(json_encode(['result'=>'success','msg'=>'成功']));
+    }
+    //查询是否支付成功,忘了从哪使用这个方法了
     public function actionTocommit(){
         $mid = Yii::$app->session['member_id'];
         $cid = $_POST['id'];
         $models = new Circlemembers();
-        $info = $models->find()-asarray()->where(['mid'=>$mid,'cid'=>$cid])->one();
+        $info = $models->find()-asarray()->where(['mid'=>$mid,'cid'=>$cid])->andWhere(['status'=>1])->one();
         if(!empty($info)){
             if($info['status'] == 1){
                 die(json_encode(['result'=>'success','msg'=>'支付确认成功']));
@@ -240,7 +275,12 @@ class CircleController extends BaseController
         $model->qid = $post['qid'];
         $model->price = $post['price'];
         $model->trade = isset($post['trade'])?$post['trade']:0;
-        $model->status = 0;
+        if($post['trade'] == 0){
+            $model->status = 1;
+        }else{
+            $model->status = 0;
+        }
+
         $model->created = time();
         $model->save();
         die(json_encode(['status'=>'success']));
@@ -249,6 +289,7 @@ class CircleController extends BaseController
     public function actionCircle_qanda_questions(){
         //判断是否登录
         $member_id = Yii::$app->session['member_id'];
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         if(!$member_id){
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
@@ -334,12 +375,24 @@ class CircleController extends BaseController
      * 付费加入圈子，其实免费的也可以，这里调用微信
      */
     public function actionCircle_share_detail(){
+        require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
         //判断是否登录
         $member_id = Yii::$app->session['member_id'];
-        if(!$member_id){
-            Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
-            return $this->redirect('/members/login.html');
-        }
+        $memberInfo = Members::find()->asarray()->where(['id'=>$member_id])->one();
+        //判断是否是管家
+            if(!$member_id){
+                Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
+                return $this->redirect('/members/login.html');
+            }
+            //判断是否是付费会员
+            $feeuser = Yii::$app->session['feeuser'];
+            if(!$feeuser){
+                Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
+                return $this->redirect('/circle/feeuser.html');
+            }
+
+
+
         $model = new Circlemembers();
         $info = $model->find()->asarray()->where(['cid'=>$_GET['id'],'mid'=>$member_id])->andWhere(['status'=>1])->one();
         if(($info) ){

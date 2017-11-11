@@ -436,7 +436,7 @@ body.regist-body{width:100%; height:100%; display:block; overflow:hidden; backgr
 .ui-page-active{width:100%; max-width:38.4rem; min-width:16rem; height:100%; display:block; margin-right:auto; margin-left:auto; position:relative; overflow:hidden;}
 
 /*我的收入---------20170207新增*/
-#my_wallet{width:100%; height:auto; padding:2rem 0; text-align:center; box-sizing:border-box; border-bottom:1px solid #F5F5F5;}
+#my_wallet{width:100%; height:auto; padding:1rem 0; text-align:center; box-sizing:border-box; border-bottom:1px solid #F5F5F5;}
 #my_wallet h2{font-family:"Impact"; font-size:2rem;}
 .income{display:-webkit-flex; display:flex; justify-content:center; position:relative;}
 .income li{width:50%; height:3.625rem; box-sizing:border-box; padding-top:0.8rem; text-align:center;}

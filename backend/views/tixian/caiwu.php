@@ -47,6 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td class="project-status">
                                     <span class="label label-primary">汇总
                                 </td>
+                                <td class="project-status">
+                                    
+                                </td>
                                 <td class="project-title">
                                     <span class="label label-primary">总金额：<?=$totalSum;?>
                                 </td>
@@ -71,13 +74,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <a href="">用户名：<?=$v['nickname']?></a>
                                     </td>
                                     <td class="project-title">
-                                        <a href="">总金额：<?=$total[$k];?>元</a>
+                                        <a href="">总金额：<?=($QuestionPrice[$k] + $PocketPrice[$k] + $CirclePrice[$k]) * 0.85;?>元</a>
                                     </td>
                                     <td class="project-title">
                                         <a href="">已提现：<?=$tixian[$k];?>元</a>
                                     </td>
                                     <td class="project-title">
-                                        <a href="">未提现：<?=number_format($total[$k] - $tixian[$k],2);?>元</a>
+                                        <a href="">未提现：<?=($QuestionPrice[$k] + $PocketPrice[$k] + $CirclePrice[$k]) * $bili - $tixian[$k];?>元</a>
                                     </td>
 
                                 </tr>

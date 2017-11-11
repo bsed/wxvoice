@@ -208,7 +208,7 @@ $(document).ready(function() {
 
     // reAnswerStr = request("reAnswer");
     // wxRequest1();
-    wxShare1();
+    // wxShare1();
     // getQaDetailRequest();
     // initVoice();
     getTopicStr();

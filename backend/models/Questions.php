@@ -41,7 +41,7 @@ class Questions extends \yii\db\ActiveRecord
             [['member_id', 'expert_id', 'status', 'views', 'answer_type','typeid','circle_id','open','rec','themeid','haveread','voice_time','listorder','trade'], 'integer'],
             [['question', 'voice', 'article', 'continue_ask',], 'string'],
             [['askprice'], 'number'],
-            [['created', 'asktime','article','asktime','imgs','answerimgs','from','publishtype'], 'string'],
+            [['asktime','article','asktime','imgs','answerimgs','from','publishtype'], 'string'],
         ];
     }
 
@@ -74,7 +74,7 @@ class Questions extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Members::className(), ['id' => 'member_id']);
     }
-     public function getExpert()
+    public function getExpert()
     {
         return $this->hasOne(Members::className(), ['id' => 'expert_id']);
     }

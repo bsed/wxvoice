@@ -50,9 +50,9 @@ class PocketsController extends BaseController
         $modelPockets = new Pockets();
         $info = $modelPockets->find()->with('user')->where(['id'=>$id])->asarray()->one();
         $pocketgetMoedel = new Pocketget();
-        $list = $pocketgetMoedel->find()->with('user')->where(['pocket_id'=>$id])->asarray()->all();
+        $list = $pocketgetMoedel->find()->with('user')->where(['pocket_id'=>$id])->asarray()->orderBy('created DESC')->all();
         $redNums = count($list);
-        $my = $pocketgetMoedel->find()->where(['member_id'=>$member_id])->with('user')->asarray()->one();
+        $my = $pocketgetMoedel->find()->where(['member_id'=>$member_id])->andWhere(['pocket_id'=>$id])->with('user')->asarray()->one();
         return $this->render('red_packets_open',[
             'info'=>$info,
             'list'=>$list,
@@ -118,6 +118,7 @@ class PocketsController extends BaseController
      * 领取红包
      */
     public function actionGetred(){
+        require_once(dirname(dirname(__FILE__)).'/rules/ajaxrights.php');
         if($_POST){
             $member_id = Yii::$app->session['member_id'];
             if(!$member_id){
@@ -134,7 +135,8 @@ class PocketsController extends BaseController
             $pocket = $model->find()->where(['id'=>$_POST['redid']])->asarray()->one();
             if($pocket['last_money'] != 0){
                 $reward = new Reward();
-                $redPocket = $reward->splitReward($pocket['last_money'],$pocket['last_nums'],1000);
+                //发红包逻辑
+                $redPocket = $reward->splitReward($pocket['last_money'],$pocket['last_nums'],100);
                 $member_id = Yii::$app->session['member_id'];
                 $pocketgetModel = new Pocketget();
                 $pocketgetModel->member_id = $member_id;
@@ -163,6 +165,7 @@ class PocketsController extends BaseController
        $member_id = Yii::$app->session['member_id'];
        //获得发红包人的id
        $info = Pockets::find()->asarray()->where(['id'=>$_POST['redid']])->one();
+
        $model = new Concerns();
        $find = $model->find()->asarray()->where(['mid'=>$member_id,'to_mid'=>$info['member_id']])->one();
        if($find){

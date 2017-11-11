@@ -27,7 +27,7 @@ $(document).ready(function() {
 		monitorCount();
 	});
 	// 获取专家类型yanli
-    gotoProfessAjax(currentIndex);
+    gotoProfessAjax(0);
     //页面滚动
     $('.page__bd').scroll(function(){
         if (flag==0){
@@ -107,15 +107,19 @@ function gotoProfessList(index){
         start = 0;
         $('#profCho').html("");
 	}
-console.log(index);
 
 	// 激活标签了，就进行ajax请求
-	$("#typeCho li").removeClass("active_type");
-	$("#oLi" + index).addClass('active_type');
+
+if( $("#oLi" + index).hasClass('active_type') == false){
     gotoProfessAjax(index);
+}
+
 }
 //筛选专家
 function gotoProfessAjax(index){
+    $("#typeCho li").removeClass("active_type");
+    $("#oLi" + index).addClass('active_type');
+
 	if(index == -1){
 		index = currentIndex;
 	}
@@ -166,10 +170,9 @@ function listExperters(result){
 			'onclick="askQuestionRequest('+result.list[i].user.id+','+result.list[i].price+',\''+result.list[i].user.nickname+'\',2);">' +
 		    '<div class="appui-expert-name-title fs30 fc-black"><p class="appui-expert-name fwb">'+result.list[i].user.nickname+'</p>' +
 			'</div>' +
-			'<p class="appui-expert-introduce fs26 fc-black mt10">'+result.list[i].user.slogan+'</p>' +
+			'<p class="appui-expert-introduce fs26 fc-black mt10">'+result.list[i].des+'</p>' +
 			'</div></div>' +
-			'<div class="appui-expert-statistic fs26 fc-black mt15" style="margin-top:0.2rem">' +
-			'</div></div>';
+			'</div>';
     }
     $('#profCho').append(list);
     showMessage(result);

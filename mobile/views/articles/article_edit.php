@@ -24,8 +24,8 @@
                     <textarea class="article-title fc-black fs34" id="titleInput" name="short-article-title" rows="2" placeholder="请输入标题"></textarea>
                 </div>
                 <div class="clear"></div>
-                <div class="edit-content" style="height: 485px;">
-                    <div class="edit-content-container" style="height: 385px;">
+                <div class="edit-content">
+                    <div class="edit-content-container">
                         <div class="article-edit-module fc-grey678 fs30" id="edit-mark" contenteditable="true" onkeyup="setStartAndEnd(this)"
                              onmouseup="setStartAndEnd(this)" onfocus="setStartAndEnd(this)">请输入正文</div>
                     </div>
@@ -34,9 +34,9 @@
                             <a class="edit-insert-pic" id="edit-insert-pic">
                                 <input id="filehidden" accept="image/*" class="filehidden" type="file" name="filehidden">
                             </a>
-                            <a class="edit-insert-video" id="edit-insert-video">
-                                <input id="filehiddenVideo" class="filehidden" type="file" name="filehiddenVideo">
-                            </a>
+<!--                            <a class="edit-insert-video" id="edit-insert-video">-->
+<!--                                <input id="filehiddenVideo" class="filehidden" type="file" name="filehiddenVideo">-->
+<!--                            </a>-->
                         </div>
                     </div>
 

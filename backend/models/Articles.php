@@ -36,7 +36,7 @@ class Articles extends \yii\db\ActiveRecord
             [['member_id', 'title'], 'required'],
             [['member_id','circle_id','counts','dianzan','type','themeid','voice_time','redid','rec','listorder'], 'integer'],
             [['content', 'pics', 'summary','from','publishtype'], 'string'],
-            [['title', 'created'], 'string', 'max' => 100],
+            [['title'], 'string', 'max' => 100],
             [['voices', 'videos'], 'string'],
         ];
     }

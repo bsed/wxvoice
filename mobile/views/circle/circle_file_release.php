@@ -1,8 +1,7 @@
 <link type="text/css" rel="stylesheet" href="../bdt/css/editfile.min.css" />
 <script type="text/javascript" src="../bdt/js/exif.js"></script>
 <script type="text/javascript" src="../bdt/js/file_release.js"></script>
-<script type="text/javascript" src="../bdt/js/tag_library.js"></script>
-
+<script type="text/javascript" src="../bdt/js/editor_cursor_position.js"></script>
 <body class="bg-white">
 <div id="container" class="container message-edit-container">
     <div id="page">
@@ -10,7 +9,7 @@
         <!-- 编辑页面 start -->
         <div class="edit_box">
             <!--头部信息 start-->
-            <div class="page__hd page__hd-edit fc-white bg-white bc-grey">
+            <div class="page__hd page__hd-edit fc-white bg-white bc-grey" style="position:fixed">
                 <div class="file-header-title">
                     <div id="back-btn" class="left fs32">取消</div>
                     <div class="center fs40">发帖</div>
@@ -23,15 +22,62 @@
             <div class="page_bd">
                 <!--占位空间-->
                 <div class="top-space1"></div>
-                <div class="edit-module bg-white" style="height: 100%;">
-                    <div class="message-content fc-grey678 fs30" style="height: 100%;">
-                        <!--短消息标题-->
-                        <!--<input class="message-title fs34 b-b-greyf1" id="message_title" contenteditable="true" placeholder="请输入标题（可为空）" autofocus/>-->
-                        <!--短消息正文-->
-                        <textarea class="message-text fs34" contenteditable="true" id="edit-mark" maxlength="1000" placeholder="请输入您想分享的内容"></textarea>
+                <div class="edit-module bg-white bc-greyf8 autoheight">
+                    <div class="edit-title bc-greyf8 mt5">
+                        <textarea class="article-title fc-black fs34" id="message_title" name="short-article-title" rows="2" placeholder="请输入标题"></textarea>
                     </div>
-                </div>
+                    <div class="clear"></div>
+                    <div class="edit-content" >
+                        <div class="edit-content-container">
+                            <div class="article-edit-module fc-grey678 fs30" id="edit-mark"  placeholder="请输入您想分享的内容" contenteditable="true" onkeyup="setStartAndEnd(this)" onmouseup="setStartAndEnd(this)" onfocus="setStartAndEnd(this)"></div>
+                        </div>
+                    </div>
+                    <script>
+                        //短文编辑页面-计算正文区域高度
+                        var hEdit =  $(window).height() - 50 ;
+                        $('.article-edit-container .edit-content').height(hEdit);
+                        var hEditCon = hEdit-50;
+                        $('.edit-content-container').height(hEditCon);
+                        $("#edit-mark").blur(function(){
 
+                                var hEdits =  $(window).height() - 50;
+                                     var hEditCons = hEdits-50;
+                                $('.article-edit-container .edit-content').height(hEdits);
+                                $('.edit-content-container').height(hEditCons);
+                                $('.autoheight').css('margin-top','100px');
+
+                        });
+
+
+                        function setStartAndEnd(obj){
+                            var el = $("#edit-mark");
+                            selection = window.getSelection();
+                            anchorNode = selection.anchorNode;
+                            focusNode = selection.focusNode;
+                            selectStart = selection.anchorOffset;
+                            selectEnd = selection.focusOffset;
+                        }
+                    </script>
+                </div>
+<!--                <div class="edit-module bg-white" style="height:100%;">-->
+<!--                    <div class="message-content fc-grey678 fs30" style="height:100%;">-->
+<!--                        <!--短消息标题-->
+<!--                        <input class="message-title fs34 b-b-greyf1" id="message_title" contenteditable="true" placeholder="请输入标题（必填）" autofocus/>-->
+<!--                        <!--短消息正文-->
+<!--                        <div class="edit-content-container">-->
+<!--                            <div style="padding-top:20px;" class="article-edit-module fc-grey678 fs30" id="edit-mark"  onkeyup="onfoucstexts(this)" onmouseup="onfoucstexts(this)" oninput="onfoucstexts(this)" onchange="onfoucstexts(this)" contenteditable="true"  placeholder="请输入您想分享的内容"></div>-->
+<!--                        </div>-->
+                        <style>
+                            #edit-mark:empty::before {
+                                content: attr(placeholder);
+                            }
+                        </style>
+<!--                    </div>-->
+<!--                </div>-->
+            <script>
+
+
+            </script>
                 <div class="upload-file">
                     <div class="select-view"></div>
                     <div class="nav-type file-box">
@@ -150,14 +196,15 @@
         <div class="clear"></div>
         <div class="appui-recommend-module-bd mt5">
             <div class="clear"></div>
-            <h4 class="fs28 fc-grey666 mt10">请输入标题(可选)，能提高阅读量哦！</h4>
-            <textarea class="bc-grey fs32 fc-black456 mt10 mb10" id="summaryInput"   placeholder="请输入标题(可选)，能提高阅读量哦！" contenteditable="true" maxlength="40"></textarea>
+            <h4 class="fs28 fc-grey666 mt10 ">请输入标题(可选)，能提高阅读量哦！</h4>
+            <textarea class="bc-grey fs32 fc-black456 mt10 mb10 addtitle" id="summaryInput"   placeholder="请输入标题(可选)，能提高阅读量哦！" contenteditable="true" maxlength="40"></textarea>
+
         </div>
         <div class="appui-open-publish" id="appuiOpenPublish" style="display:none;">
 				<span class="mr5" style="margin-left: 0.8rem;">
 					<i class="bg-white"></i>
 				</span>
-            <p class="fs28 fc-grey666">公开发布（允许转发到圈外）</p>
+            <p class="fs28 fc-grey666">公开发布</p>
         </div>
         <div class="appui-recommend-module-fd mt5 mb10">
          <?php if($_GET['from'] != 'circle'):?>

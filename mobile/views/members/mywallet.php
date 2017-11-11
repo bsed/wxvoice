@@ -13,21 +13,42 @@ $this->params['breadcrumbs'][] = $this->title;
         <!--页面导航栏-->
         <div class="page__hd bg-white b-b-grey fc-black">
             <div class="statebar">
-                <a class="nav-act left-act" onclick="goBack();"><img src="../bdt/images/nav_icon_back1.png"></a>
+                <a class="nav-act left-act" onclick="goBack();">
+                    <img src="../bdt/images/nav_icon_back1.png"></a>
                 <h2 class="fs34">收入</h2>
             </div>
         </div>
         <div class="page__bd">
             <div class="top-space4"></div>
+
             <div class="bg-white" id="my_wallet">
                 <p class="fs28 fc-grey999">总金额(元)</p>
-                <h2 class="fc-navy"><?=$total;?></h2>
-            </div>
-            <div class="bg-white" id="my_wallet">
-                <p class="fs28 fc-grey999">未提现(元)</p>
-                <h2 class="fc-navy wei"><?=$total - $tixian;?></h2>
+                <h2 class="fc-navy wei" data-sales="<?=$total * $bili;?>"><?=$total;?></h2>
                 <a class="get-cash fs28 fc-white bg-red can">提现</a>
             </div>
+<!--            <div class="bg-white" id="my_wallet">-->
+<!--                <p class="fs28 fc-grey999">待提现(元)</p>-->
+<!--                <h2 class="fc-navy wei">--><?//=$daitixianjine;?><!--</h2>-->
+<!--                <a class="get-cash fs28 fc-white bg-red can">提现</a>-->
+<!--            </div>-->
+
+<!--            <ul class="bg-white income" >-->
+<!--                <i></i>-->
+<!--                <li>-->
+<!--                    <h3 class="fc-red fs30">提现审核金额</h3>-->
+<!--                    <p class="fc-grey999 fs28">--><?//=$shenheTixian;?><!--</p>-->
+<!--                </li>-->
+<!---->
+<!--                <li>-->
+<!--                    <h3 class="fc-red fs30">已结算金额</h3>-->
+<!--                    <p class="fc-grey999 fs28">--><?//=$tixian;?><!--</p>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <h3 class="fc-red fs30">总收入</h3>-->
+<!--                    <p class="fc-grey999 fs28">--><?//=$tixian;?><!--</p>-->
+<!--                </li>-->
+<!--                <i></i>-->
+<!--            </ul>-->
             <ul class="bg-white income" id="income">
                 <i></i>
                 <li>
@@ -44,7 +65,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 </li>
                 <i></i>
             </ul>
-            <p class="cash-tips fs28 fc-blue">提示：每天最多能提现2000元，另外，根据微信规则，低于1元不提供提现功能。</p>
+            <p class="cash-tips fs28 fc-red">
+                提示：
+                最低提现额度为10元，每天最多能提现2000元。
+                申请提现后，7个工作日内到账 ，平台将收取<?=$fencheng;?>%金额作为服务费。</p>
+            <p class="cash-tips fs28 fc-red"></p>
 
         </div>
 
@@ -91,4 +116,84 @@ $this->params['breadcrumbs'][] = $this->title;
         });
     });
 </script>
+<?php if($daitixianjine >= 10):?>
+<script>
+    $(document).ready(function() {
+        var price = $('.wei').data('sales');
+        if(price < 10.00){
+            $('.can').text('不能提现');
+            $(".can").click(function(){
+                dataLoadedError("最低提现额度为10元");
+            });
+            return false;
+        }else{
+            $('.can').text('可提现');
+        }
+        $(".can").click(function(){
+            friendTipsTixian("平台将扣除15%的佣金，7个工作日内到账","放弃","提现",price);
+        });
+
+    });
+    function friendTipsTixian(dialogContent,operateAssistText,operateMainText,price){
+        var dialogStr =		'<div class="js_dialog toastDialogSure" id="iosDialog1" >' ;
+        dialogStr +=		'<div class="appui-mask"></div>' ;
+        dialogStr +=		'<div class="appui-dialog">' ;
+        dialogStr +=			'<div class="appui-dialog__hd fs34 fc-blue"><strong class="appui-dialog__title">温馨提示</strong></div>' ;
+        dialogStr +=			'<div class="appui-dialog__bd fs30 fc-black456">' + dialogContent + '</div>' ;
+        dialogStr +=			'<div class="appui-dialog__ft fs30">' ;
+        dialogStr +=				'<a id="tipsCancleID" class="appui-dialog__btn appui-dialog__btn_default fc-greyabc" onclick="backFunctionTixian()">' + operateAssistText + '</a>' ;
+        dialogStr +=				'<a href="javascript:;" id="tipsSaveID" onclick="saveFunctionTixian('+price+')"  class="appui-dialog__btn appui-dialog__btn_primary fc-blue" >' + operateMainText + '</a>' ;
+        dialogStr +=			'</div>' ;
+        dialogStr +=		'</div>' ;
+        dialogStr +=	'</div>' ;
+        $("body").append(dialogStr);
+    }
+    function backFunctionTixian(){
+        window.location.reload();
+    }
+    function saveFunctionTixian(price){
+        tixian(price);
+    }
+    function tixian(price){
+        dataLoading("申请提交中...");
+        var csrf = $('input[name="csrf"]').val();
+        $.ajax({
+            type: "POST",
+            url: "/members/tixian.html",
+            data: {
+                price:price,
+                _csrf:csrf,
+            },
+            dataType: "json",
+            success: function(data){
+                if(data.result == "success"){
+                    dataLoadedSuccess("提交成功");
+
+                    window.location.href = '/members/index.html'
+                }
+            }
+        });
+    }
+</script>
+    <?php else:?>
+    <script>
+        $(document).ready(function() {
+            var price = $('.wei').text();
+
+            if(price < 10.00){
+                $('.can').text('不能提现');
+                $(".can").click(function(){
+                    dataLoadedError("最低提现额度为10元");
+
+                });
+                return false;
+            }else{
+                $('.can').text('可提现');
+            }
+
+
+
+        });
+    </script>
+<?php endif;?>
 </body>

@@ -40,7 +40,6 @@
                 </div>
             </div>
             <div class="qanda-questions">
-                <!-------------问题输入---------------------->
                 <div class="qnada-q-data bg-white mt10 " id="questions" >
                     <div class="qnada-q-data-limit">
                         <span class="appui_cell__switch appui_cell__switch-on"><i class="bg-white"></i></span>
@@ -65,9 +64,7 @@
                             <?php else:?>
                                 <em id="askPrice" price="<?=$info['price']*100;?>" coupon="0" class="fc-red fs32">￥<?=$info['price']?></em>
                             <?php endif;?>
-                                <!--<i class="bg-orange"></i>-->
 							</span>
-                            <!--<span class="ml10 fs28">可使用优惠券</span>-->
                     </p>
                     <a id="askBtn" class="qnada-q-data-askbtn bg-orange fc-white fs30">向Ta提问</a>
                     <p class="ask_tips fs24 fc-orange mt15">查看问答细则及责任声明</p>

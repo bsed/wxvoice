@@ -42,7 +42,7 @@ function joinQz(){
     // dataLoading("数据加载中...");
     var price =$('#toPayjoinPrice').attr('data-price') * 100;
     if(price == 0){
-        addCircle();
+        addCircle(0);
 	}else{
         //这里要唤起微信支付
         var csrf = $('input[name="csrf"]').val();
@@ -101,6 +101,9 @@ function addCircle(trade){
             '_csrf':csrf},
         success: function(result) {
             clearToastDialog();
+            if(trade == 0){
+                window.location.href = "/circle/circle_page.html?id="+id;
+            }
 
         }
     });

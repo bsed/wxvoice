@@ -90,24 +90,31 @@ class MembersController extends BaseController
         //我的收入
         //查看专家的id ，主要用于问答的统计
         $expert = Experts::find()->where(['member_id'=>$member_id])->asarray()->one();
-        if($expert){
+        if(!empty($expert)){
             //回答收入
             $questionModel = new Questions();
-            $QuestionPrice = $questionModel->find()->asarray()->where(['expert_id'=>$expert['id']])->sum('askprice');
+            $QuestionPrice = $questionModel
+                ->find()->asarray()
+                ->where(['expert_id'=>$member_id,'status'=>2])
+                ->sum('askprice');
         }else{
             $QuestionPrice = "0.00";
         }
         //红包收入
         $PocketgetModel = new Pocketget();
-        $PocketPrice = $PocketgetModel->find()->where(['member_id'=>$member_id])->sum('get_price');
+        $PocketPrices = $PocketgetModel->find()->where(['member_id'=>$member_id])->sum('get_price');
+        $PocketPrice = $PocketPrices?$PocketPrices:'0.00';
         //圈子收入，从加入的圈子中计算
         $CircleModel = new Circlemembers();
-        $CirclePrice = $CircleModel->find()->asarray()->where(['qid'=>$member_id])->sum('price');
+        $CirclePrice = $CircleModel->find()->asarray()->where(['qid'=>$member_id,'status'=>1])->sum('price');
         if(!$CirclePrice){
             $CirclePrice = '0.00';
         }
-        //总的收入等于回答收入+红包收入+圈子收入
-        $total = $QuestionPrice + $PocketPrice + $CirclePrice;
+        //总的收入等于回答收入+红包收入+圈子收入 乘以分成
+        $site = htmls::site();
+        $totals = $QuestionPrice + $PocketPrice + $CirclePrice;
+        $total = number_format($totals * $site['quanzifencheng'], 2);
+
 
         $model = new Concerns();
         //我关注的 查找mid
@@ -284,74 +291,39 @@ class MembersController extends BaseController
     /*
      * 请求数据看 是否是付费的会员
      */
-//    public function actionIsfeeuser(){
-//        if($_POST){
-//            $member_id = Yii::$app->session['member_id'];
-//            if($member_id){
-//                $wxMember = Members::find()->asarray()
-//                    ->where(['id'=>$member_id])
-//                    ->with([
-//                        'feeuser' => function ($query){
-//                            $query->where(['pay_type'=>'feeuser'])->orderBy('created DESC');
-//                        }
-//                    ])->one();
-//                if($wxMember['vip'] == 1){//作为专家可以具有会员的权限
-//                    Yii::$app->session['feeuser'] = 1;
-//                    die(json_encode(['result'=>'success']));
-//                }
-//
-//                    if(!empty($wxMember['feeuser'])) {//不为空。联合查询支付表,找到最新的支付记录，判断是否过期
-//                        if ($wxMember['feeuser'][0]['status'] == 1) {
-//                            //查看加入时间
-//                            $addTime = $wxMember['feeuser'][0]['created'];
-//                            if (time() - $addTime > 365 * 24 * 3600) {
-//                                Yii::$app->session['feeuser'] = 0;
-//                                die(json_encode(['result' => 'error']));
-//                            } else {
-//                                Yii::$app->session['feeuser'] = 1;
-//                                die(json_encode(['result' => 'success']));
-//                            }
-//
-//                        } else {
-//                            Yii::$app->session['feeuser'] = 0;
-//                            die(json_encode(['result' => 'error']));
-//                        }
-//                    }else{//如果为空，则需要
-//                        Yii::$app->session['feeuser'] = 0;
-//                        die(json_encode(['result' => 'error']));
-//                    }
-//
-//
-//                }
-//        }
-//    }
     public function actionIsfeeuser(){
         if($_POST){
             $mid = Yii::$app->session['member_id'];
-            $info = Members::find()->asarray()->where(['id'=>$mid])->one();
-            //START
-            if(!$info['honnoruser']){
-                if(!empty($info)){
-                    $time = time() - $info['feetime'];
-                    if($info['feeuser'] == 1 && $time < 365 * 24 * 3600){
-                        Yii::$app->session['feeuser'] = 1;
-                        die(json_encode(['result' => 'success']));
-                    }elseif($info['vip'] == 1){
-                        Yii::$app->session['feeuser'] = 1;
-                        die(json_encode(['result' => 'success']));
-                    }else{
-                        Yii::$app->session['feeuser'] = 0;
-                        die(json_encode(['result' => 'error']));
-                    }
-                }else{
-                    Yii::$app->session['feeuser'] = 0;
-                    die(json_encode(['result' => 'error']));
-                }
-            }else{//系统指定的会员
-                Yii::$app->session['feeuser'] = 1;
-                die(json_encode(['result' => 'success']));
+            if(!$mid){//强制登录
+                Yii::$app->session['feeuser'] = 0;
+                die(json_encode(['result' => 'tologin']));
             }
-            //END
+            $info = Members::find()->asarray()->where(['id'=>$mid])->one();
+            if(!empty($info)){
+                //START
+                        $time = time() - $info['feetime'];
+                        if($info['feeuser'] == 1 && $time < 365 * 24 * 3600){
+                            Yii::$app->session['feeuser'] = 1;
+                            die(json_encode(['result' => 'success']));
+                        }elseif($info['vip'] == 1){//专家
+                            Yii::$app->session['feeuser'] = 1;
+                            die(json_encode(['result' => 'success']));
+                        }elseif($info['isguanjia'] == 1){//管家
+                            Yii::$app->session['feeuser'] = 1;
+                            die(json_encode(['result' => 'success']));
+                        }elseif($info['honnoruser'] == 1){//系统设置会员
+                            Yii::$app->session['feeuser'] = 1;
+                            die(json_encode(['result' => 'success']));
+                        }else{//其余不是会员
+                            Yii::$app->session['feeuser'] = 0;
+                            die(json_encode(['result' => 'error']));
+                        }
+
+                //END
+            }else{
+                Yii::$app->session['feeuser'] = 0;
+                die(json_encode(['result' => 'error']));
+            }
 
         }
     }
@@ -509,47 +481,105 @@ class MembersController extends BaseController
             Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
             return $this->redirect('/members/login.html');
         }
-        //查看专家的id ，主要用于问答的统计
-        $expert = Experts::find()->where(['member_id'=>$member_id])->asarray()->one();
-        if($expert){
-            //回答收入
-            $questionModel = new Questions();
-            $QuestionPrice = $questionModel->find()->asarray()->where(['expert_id'=>$expert['id']])->sum('askprice');
-            if(!$QuestionPrice){
-                $QuestionPrice = "0.00";
-            }
-        }else{
-            $QuestionPrice = "0.00";
-        }
-        //红包收入
-        $PocketgetModel = new Pocketget();
-        $PocketPrice = $PocketgetModel->find()->where(['member_id'=>$member_id])->sum('get_price');
-        if(!$PocketPrice){
-            $PocketPrice = '0.00';
-        }
-        //圈子收入，从加入的圈子中计算
-        $CircleModel = new Circlemembers();
-        $CirclePrice = $CircleModel->find()->asarray()->where(['qid'=>$member_id])->sum('price');
-        if(!$CirclePrice){
-            $CirclePrice = '0.00';
-        }else{
-            $CirclePrice = $CirclePrice * $site['quanzifencheng'];
-        }
+        //查询提现表中，此用户的申请记录的最新时间，如果没有证明从未提现过，收入就是按照所有的计算，如果有记录，只选择大于最新提现的时间的记录
+        $findTixianForNewMethod = Tixian::find()->asarray()->where(['mid'=>$member_id])->orderBy('created DESC')->all();
+         if($findTixianForNewMethod){
+             $tixianLastTime = $findTixianForNewMethod[0]['created'];
+             //统计大于最新的提现时间
+                 $expert = Experts::find()->where(['member_id'=>$member_id])->asarray()->one();
+                 if($expert){//回答收入
+                     $questionModel = new Questions();
+                     $QuestionPrice = $questionModel->find()->asarray()
+                         ->where(['expert_id'=>$member_id])
+                         ->andWhere(['status'=>2])
+                         ->andWhere(['>','created',$tixianLastTime])
+                         ->sum('askprice');
+                     if(!$QuestionPrice){
+                         $QuestionPrice = "0.00";
+                     }
+                 }else{
+                     $QuestionPrice = "0.00";
+                 }
+                 //红包收入
+                 $PocketgetModel = new Pocketget();
+                 $PocketPrice = $PocketgetModel->find()
+                     ->where(['member_id'=>$member_id])
+                     ->andWhere(['>','created',$tixianLastTime])
+                     ->sum('get_price');
+                 if(!$PocketPrice){
+                     $PocketPrice = '0.00';
+                 }
+                 //圈子收入，从加入的圈子中计算
+                 $CircleModel = new Circlemembers();
+                 $CirclePrice = $CircleModel->find()->asarray()
+                     ->where(['qid'=>$member_id])
+                     ->andWhere(['status'=>1])
+                     ->andWhere(['>','created',$tixianLastTime])
+                     ->sum('price');
+                 if(!$CirclePrice){
+                     $CirclePrice = '0.00';
+                 }else{
+                     $CirclePrice = $CirclePrice;
+                 }
+             //统计大于最新的提现时间END
+         }else{
+             $expert = Experts::find()->where(['member_id'=>$member_id])->asarray()->one();
+             if($expert){//回答收入
+                 $questionModel = new Questions();
+                 $QuestionPrice = $questionModel->find()->asarray()
+                     ->where(['expert_id'=>$member_id])
+                     ->andWhere(['status'=>2])
+                     ->sum('askprice');
+                 if(!$QuestionPrice){
+                     $QuestionPrice = "0.00";
+                 }
+             }else{
+                 $QuestionPrice = "0.00";
+             }
+             //红包收入
+             $PocketgetModel = new Pocketget();
+             $PocketPrice = $PocketgetModel->find()->where(['member_id'=>$member_id])->sum('get_price');
+             if(!$PocketPrice){
+                 $PocketPrice = '0.00';
+             }
+             //圈子收入，从加入的圈子中计算
+             $CircleModel = new Circlemembers();
+             $CirclePrice = $CircleModel->find()->asarray()->where(['qid'=>$member_id])->andWhere(['status'=>1])->sum('price');
+             if(!$CirclePrice){
+                 $CirclePrice = '0.00';
+             }else{
+                 $CirclePrice = $CirclePrice;
+             }
+         }
+
 
         //总的收入等于回答收入+红包收入+圈子收入
         $total = $QuestionPrice + $PocketPrice + $CirclePrice;
-        //提现的金额
-        $tixian = Tixian::find()->where(['mid'=>$member_id])->sum('price');
-        //提现记录
-        $tixianRecord = Tixian::find()->where(['mid'=>$member_id])->all();
+        $totalAfter = $total * $site['quanzifencheng'];
+        //已提现成功的金额
+        $tixians = Tixian::find()->where(['mid'=>$member_id])->andWhere(['status'=>1])->sum('price');
+        $tixian = $tixians?$tixians:0;
+        //已申请未审核通过金额
+        $shenheTixians = Tixian::find()->where(['mid'=>$member_id])->andWhere(['status'=>0])->sum('price');
+        $shenheTixian  = $shenheTixians?$shenheTixians:0;
+        //待提现金额,总金额*百分比 - （已提现 + 未审核）
+        $daitixianjine = number_format($totalAfter - ($tixian + $shenheTixian),2);
 
+
+        //提现记录
+        $tixianRecord = Tixian::find()->where(['mid'=>$member_id])->andWhere(['status'=>1])->all();
+        $fencheng =  (1 - $site['quanzifencheng']) * 100;
         return $this->render('mywallet',[
             "QuestionPrice"=>$QuestionPrice,
             "PocketPrice"=>$PocketPrice,
             "CirclePrice"=>$CirclePrice,
-            "total"=>$total,
-            "tixian"=>$tixian,
+            "total"=>number_format($total,2),
+            "tixian"=>number_format($tixian,2),
+            "fencheng"=>$fencheng,
+            "shenheTixian"=>number_format($shenheTixian,2),
+            "daitixianjine"=>number_format($daitixianjine,2),
             "tixianRecord"=>$tixianRecord,
+            "bili"=>$site['quanzifencheng']
         ]);
     }
     public function actionTixian(){
@@ -617,9 +647,15 @@ class MembersController extends BaseController
         $expert = Experts::find()->asarray()->where(['member_id'=>$mid])->one();
         $model = new Questions();
         //我的回答,
-        $answer = $model->find()->asarray()->where(['expert_id'=>$expert['member_id']])->with('user')->orderBy('created DESC')->all();
+        $answer = $model->find()->asarray()
+            ->where(['expert_id'=>$expert['member_id']])
+            ->andWhere(['>','status',0])
+            ->with('user')->orderBy('created DESC')->all();
         //我的提问
-        $ask = $model->find()->asarray()->where(['member_id'=>$mid])->with('user')->orderBy('created DESC')->all();
+        $ask = $model->find()->asarray()
+            ->where(['member_id'=>$mid])
+            ->andWhere(['>','status',0])
+            ->with('user')->orderBy('created DESC')->all();
         //我的收听
         return $this->render('myhomepage',[
             'answer'=>$answer,

@@ -24,7 +24,7 @@ class Circles extends \yii\db\ActiveRecord
         return [
             [['member_id','feetype','status'], 'integer'],
             [['joinprice'], 'number'],
-            [['name', 'logo', 'created','des'], 'string'],
+            [['name', 'logo', 'des'], 'string'],
         ];
     }
 

@@ -34,7 +34,7 @@ $(window).load(function(){
 		removeClientSession("articleResult");
 	}
 	//查看全文
-    if ( $('#div_height').height() >= 800 ) {
+    if ( $('#div_heights').height() >= 300 ) {
         $('.show-all').show();
         $('.show-all').click(function(){
             $('.article-detail').css('max-height','none');
@@ -106,7 +106,7 @@ function detail(){
         dataType: "json",
         success: function(data){
             if(data.result == 'success'){
-               $('#div_height').html(data.info.content);
+               $('#div_heights').html(data.info.content);
                if(data.info.pics){
 					   var img = "";
 					   var arrayimgs = JSON.parse(data.info.pics);

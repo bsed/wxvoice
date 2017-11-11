@@ -23,11 +23,19 @@ use common\tools\htmls;
                 <div class="search-module noleftbtn bg-grey " id="searchID">
                     <span><img src="../bdt/images/search.png"></span>
                     <em class="bg-blue"></em>
-                    <input type="text" class="fc-blue fs28" placeholder="搜索行家、圈子、问答..." disabled="disabled">
+                    <input type="text" class="fc-blue fs28" placeholder="搜索专家、圈子、问答..." disabled="disabled">
                 </div>
                 <a class="right-icon">
                     <img src="../bdt/images/notice1.png">
-                    <span class="fs24 fc-white nums"></span>
+                    <?php if($counts):?>
+                            <?php if($counts > 99):?>
+                           <span class="fs24 fc-white nums bg-red">...</span>
+                            <?php else:?>
+                            <span class="fs24 fc-white nums bg-red"><?=$counts;?></span>
+                            <?php endif;?>
+                    <?php else:?>
+                        <span class="fs24 fc-white nums"></span>
+                    <?php endif;?>
                 </a>
             </div>
         </div>
@@ -58,13 +66,13 @@ use common\tools\htmls;
                     <img src="../bdt/images/index_circle.jpg"><span>密友圈</span>
                 </a>
                 <a href="<?=Url::toRoute(['expert/found_expert'])?>" class="fc-black">
-                    <img src="../bdt/images/index_expert.jpg"><span>行家</span>
+                    <img src="../bdt/images/index_expert.jpg"><span>问专家</span>
                 </a>
                 <a href="/articles/square.html" class="fc-black">
                     <img src="../bdt/images/index_loupan.jpg"><span>论坛</span>
                 </a>
                 <a href="<?=$this->params['site']['zhaopinurl'];?>" class="fc-black">
-                    <img src="../bdt/images/index_topic.jpg"><span>招聘</span>
+                    <img src="../bdt/images/index_topic.jpg"><span>微招聘</span>
                 </a>
             </div>
 

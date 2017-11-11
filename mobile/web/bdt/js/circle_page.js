@@ -97,12 +97,36 @@ $(document).ready(function() {
         };
     });
 //到期日期
-//     deadTime();
+//对于圈子去判断是付费还是免费
+    yanzheng();
+
+
+});
+//防止多次验证 ，如果状态返回成功就不再请求
+function yanzheng(){
+    var csrf = $('input[name="csrf"]').val();
+    $.ajax({
+        type: "post",
+        url: '/circle/deadtime.html',
+        dataType: "json",
+        async: true,
+        data: {
+            'id':request('id'),
+            "_csrf":csrf,
+        },
+        success: function(data) {
+            if(data.status != 1){
+                isFeeQuanzi();
+            }
+        }
+    });
+}
+//对收费圈子进行判断
+function isFeeQuanzi(){
     deadTime();
     var start = setInterval(function(){  deadTime(); }, 2000);
     setTimeout(function(){  delay(start); }, 5000);
-
-});
+}
 //取消执行
 function delay(start){
     clearInterval(start);
@@ -125,26 +149,46 @@ function deadTime(){
             if(data.result == 'dead'){
                 dataLoading(data.msg);
             }else if(data.result == 'paying'){
-                if(data.code == 1){
-                    // dataLoading('支付返回结果确认成功');
-                    clearToastDialog();
-                }else{
-                    if(num > 3){
-                        alert('支付失败请联系管理员');
-                        window.location.href = '/site/index.html';
+                if(data.status != 1){
+                    if(num == 1){
+                        dataLoading('支付返回结果确认中3秒');
+                    }else if(num == 2){
+                        dataLoading('支付返回结果确认中2秒');
+                    }else if(num == 3){
+                        if(data.status == 0){
+                            clearToastDialog();
+                            dataLoading('支付失败请重新支付');
+                            delFailStatus();
+                        }
+
                     }
-
                 }
-
             }else{
                 clearToastDialog();
             }
         }
     });
 }
+//delete
+function delFailStatus(){
+    var csrf = $('input[name="csrf"]').val();
+    $.ajax({
+        type: "post",
+        url: '/circle/todelete.html',
+        dataType: "json",
+        async: true,
+        data: {
+            'id':request('id'),
+            "_csrf":csrf,
+        },
+        success: function(data) {
+            window.location.href = '/circle/circle_share_detail.html?id='+request('id');
+        }
+    });
+}
 //查看全部的圈内信息
 //1.
-//请求楼市百态数据-即发现的数据
+//发现的数据
 function getCircleList(){
     var csrf = $('input[name="csrf"]').val();
     var start = pernum * (currentPage -1);
@@ -257,36 +301,57 @@ function circleList(result){
         }
         if(result.data.list[i].user) {
             //判断红包
-            if (result.data.list[i].redid != 0) {
-                if(result.data.list[i].pockets.give_type == 1){
-                    var type = '给粉丝';
-                }else{
-                    var type = '给新手';
+            if(result.data.list[i].redid != 0){
+                if(result.data.list[i].pockets && result.data.list[i].pockets.status == 1) {
+                    if (result.data.list[i].pockets.give_type == 1) {
+                        var type = '给粉丝';
+                    } else {
+                        var type = '给新手';
+                    }
+                    //查看
+                    var articles = '<p class="text-style fs32 fc-black456 face_tag mb5">' + result.data.list[i].title + '</p>' +
+                        '<div class="redpacket-show mt5 mb5" onclick="gotoRedPocketDetailHtml(' + result.data.list[i].redid + ', this);" id="redPacket">' +
+                        '<img src="../bdt/images/hongbao_details.png"><p class="fs30 fc-black">' + result.data.list[i].user.nickname + type + '发的红包</p>' +
+                        '<a class="' + getPocket + '">领红包</a></div>';
+                    var contents = '<div class="module-content mt10" >' + articles + '</div>';
+
                 }
-                var articles = '<p class="text-style fs32 fc-black456 face_tag mb5">' + result.data.list[i].title + '</p>' +
-                    '<div class="redpacket-show mt5 mb5" onclick="gotoRedPocketDetailHtml(' + result.data.list[i].redid + ', this);" id="redPacket">' +
-                    '<img src="../bdt/images/hongbao_details.png"><p class="fs30 fc-black">' + result.data.list[i].user.nickname + type +'发的红包</p>' +
-                    '<a class="' + getPocket + '">领红包</a></div>';
-                var contents = '<div class="module-content mt10" >' + articles + '</div>';
-            } else if (result.data.list[i].redid == 0) {
-                var articles = '<h4 class="f-l-height fs30 find-text fwb mb5">' + result.data.list[i].content + '</h4>' +
-                    '<p class="text-style fs28 fc-black face_tag mb10">' +
-                    '<a class="fc-blue"></a>' + detailType + '</p>' +
-                    '<div class="pic-layout message-pic-1-style mb5"><i>' + pics + '</i></div>';
-                var contents = '<div class="module-content mt10" onclick=gotoArticDetailHtml(' + result.data.list[i].id + ',\'' + from + '\',\'' + publishtype + '\');>' + articles + '</div>';
+            }else if(result.data.list[i].redid == 0){
+                if(result.data.list[i].publishtype == 'article'){
+                    var articles = '<h4 class="f-l-height fs30 find-text fwb mb5" onclick=gotoArticDetailHtml('+result.data.list[i].id+',\''+from+'\',\''+publishtype+'\');>'+result.data.list[i].title+'</h4>' +
+                        '<p class="text-style fs28 fc-black face_tag mb10">' +
+                        '<a class="fc-blue"></a>'+$(result.data.list[i].content).text()+'</p>' +
+                        '<div class="pic-layout message-pic-1-style mb5">' +
+                        '<i>'+pics+'</i>' +
+                        '</div>';
+                }else{
+                    var articles = '<h4 class="f-l-height fs30 find-text fwb mb5" onclick=gotoArticDetailHtml('+result.data.list[i].id+',\''+from+'\',\''+publishtype+'\');>'+result.data.list[i].title+'</h4>' +
+                        '<p class="text-style fs28 fc-black face_tag mb10">' +
+                        '<a class="fc-blue"></a>'+detailType+'</p>' +
+                        '<div class="pic-layout message-pic-1-style mb5">' +
+                        '<i>'+pics+'</i>' +
+                        '</div>';
+                }
+                var contents = '<div class="module-content mt10" >'+articles+'</div>';
             }
-            // onclick="gotoUser_pageHtml('+result.data.list[i].user.id+');"
-            list += '<div class="f-f-module mb10 bg-white"><div class="find-container"><div class="find-header"><div class="f-h-left">' +
-                '<a onclick="gotoUser_pageHtml(' + result.data.list[i].user.id + ');"><img src="' + result.file + result.data.list[i].user.photo + '"><i>' +
-                '<img src="../bdt/images/v2.png"></i></a><div class="f-h-middle">' +
-                '<span class="fs30 fc-blue operate" onclick="gotoUser_pageHtml(' + result.data.list[i].user.id + ');">' + result.data.list[i].user.nickname + '<em class="fc-greyabc"></em></span>' +
-                '</div></div><div class="f-h-right"></div></div>' + contents + '<div class="time-statistic fs22" id="bottom_1_' + result.data.list[i].id + '">' +
-                '<span class="fc-greyabc mr10"><i>' + getDateDiff(result.data.list[i].created) + '</i></span>' +
-                '<span class="fc-greyabc"><i>' + result.data.list[i].counts + '</i>阅读</span>' +
-                '<span class="fc-red"></span><div class="statistic">' +
-                '<a class="like fc-greyabc ' + onFcRed + '" onclick="dianzanClick(' + result.data.list[i].id + ',1,' + result.mid + ')" id="dianzan' + result.data.list[i].id + '">' + dianzan + '</a>' +
-                '<a class="comment ml10 fc-greyabc" id="pinglun_' + result.data.list[i].id + '" onclick="pubcommentClick(' + result.data.list[i].id + ',' + result.data.list[i].id + ',1)">' + comment + '</a>' +
-                '</div></div></div></div>';
+            //判断是否是专家
+            if(result.data.list[i].user.vip == 1){
+                var vip = '<i><img src="../bdt/images/v2.png"></i>';
+            }else{
+                var vip = '';
+            }
+            if(result.data.list[i].user){
+                list += '<div class="f-f-module mb10 bg-white"><div class="find-container"><div class="find-header"><div class="f-h-left">' +
+                    '<a onclick=""><img src="' + result.file + result.data.list[i].user.photo + '">' +vip+ '</a><div class="f-h-middle">' +
+                    '<span class="fs30 fc-blue operate" onclick="">' + result.data.list[i].user.nickname + '<em class="fc-greyabc"></em></span>' +
+                    '</div></div><div class="f-h-right"></div></div>' + contents + '<div class="time-statistic fs22" id="bottom_1_' + result.data.list[i].id + '">' +
+                    '<span class="fc-greyabc mr10"><i>' + getDateDiff(result.data.list[i].created) + '</i></span>' +
+                    '<span class="fc-greyabc"><i>' + result.data.list[i].counts + '</i>阅读</span>' +
+                    '<span class="fc-red"></span><div class="statistic">' +
+                    '<a class="like fc-greyabc ' + onFcRed + '" onclick="dianzanClick(' + result.data.list[i].id + ',1,' + result.mid + ')" id="dianzan' + result.data.list[i].id + '">' + dianzan + '</a>' +
+                    '<a class="comment ml10 fc-greyabc" id="pinglun_' + result.data.list[i].id + '" onclick="pubcommentClick(' + result.data.list[i].id + ',' + result.data.list[i].id + ',1)">' + comment + '</a>' +
+                    '</div></div></div></div>';
+            }
         }
 
     }
@@ -318,54 +383,7 @@ function downloadMoreData() {
     currentPage++;
     getCircleList();
 }
-function gotoRedPocketDetailHtml(id){
-    var csrf = $('input[name="csrf"]').val();
-    $.ajax({
-        type: "post",
-        url: '/pockets/getred.html',
-        dataType: "json",
-        async: true,
-        data: {
-            'redid':id,
-            "_csrf":csrf,
-        },
-        success: function(result) {
-            clearToastDialog();
-            if (result.result == "success") {
-                //抢到红包的自动成为粉丝
-                changeFans(id);
 
-            } else if(result.msg == 'login') {
-                dataLoadedError(result.message);
-                window.location.href="/members/login.html?from=square";
-            }else{
-                dataLoadedError(result.message);
-            }
-        }
-    });
-
-}
-//抢到红包的自动成为粉丝
-function changeFans(id){
-    var csrf = $('input[name="csrf"]').val();
-    $.ajax({
-        type: "post",
-        url: '/pockets/changefans.html',
-        dataType: "json",
-        async: true,
-        data: {
-            "redid":id,
-            "_csrf":csrf
-        },
-        success: function(result) {
-            clearToastDialog();
-            if (result.result == "success") {
-                //抢到红包的自动成为粉丝
-                window.location.href="/pockets/red_packets_open.html?id="+id;
-            }
-        }
-    });
-}
 
 
 

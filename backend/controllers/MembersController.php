@@ -109,7 +109,6 @@ class MembersController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->created = time();
         $post = Yii::$app->request->post();
         if ($model->load($post)) {
             $model->photo = $post["filename"]['imgpath_0'];
@@ -118,6 +117,7 @@ class MembersController extends BaseController
             }else{
                 $model->tags = '';
             }
+            $model->created = strtotime($post['Members']['created']);
             $model->save();
             return $this->redirect(['update', 'id' => $model->id]);
         } else {

@@ -46,7 +46,7 @@ use common\tools\htmls;
                                 <h3 class="appui-expert-name fs30 fc-black"><?=$v['nickname']?></h3>
                                 <p class="appui-expert-introduce fs24 fc-grey666 mt5"><?=$v['slogan']?></p>
                                 <div class="appui-expert-tags fs18 mt5 fc-greyabc">
-                                        <span style="display:block">530个动态</span>
+                                        <span style="display:block"></span>
                                 </div>
                             </div>
                     </div>
@@ -101,29 +101,42 @@ use common\tools\htmls;
                 </h3>
                 <div class="search-resault-list bg-grey fs28 fc-black456 qandaList">
                     <?php foreach($ask as $k=>$v):?>
-                    <div class="appui-qanda-module mb10" >
-                        <div class="appui-qanda-question" onclick="goQADetailHtml(<?=$v['id']?>)"><?=$v['question']?></div>
-                        <div class="appui-qanda-answer"><div class="appui-qanda-expertphoto" >
-                                <img src="<?=Yii::$app->params['public'].'/attachment'.$v['expert']['photo']?>">
-                                <i class="appui-userlevel bc-white">
-                                    <img src="../bdt/images/v2.png"></i></div>
-                            <div class="appui-qanda-answerstyle voice free" id="a_play_0_<?=$v['id']?>" onclick="playAudioQaClickFunction(<?=$v['id']?>,1,1,'a_play_0_<?=$v['id']?>');">
-                                <i></i>
-                                <span class="appui_qanda-voice-wave">
-						<em class="wave1"></em><em class="wave2"></em>
-						<em class="wave3"></em></span>
-                                <em class="tips">免费收听</em>
-                                <span class="appui_qanda-voice-wait" style="display:none;"></span></div>
-                            <em class="appui-qanda-answer-time"><?=$v['voice_time']?>"</em></div>
-                        <div class="appui-qanda-expertinfo"><div class="appui-qanda-expertinfo">
-                                <div class="time-statistic fs22" id="bottom_1_80">
-                                    <span class="fc-greyabc mr10 "><i><?=htmls::formatTime($v['created']);?></i></span>
-                                    <span class="fc-greyabc"><i><?=$v['views']?></i>阅读</span>
-                                    <span class="fc-red"></span><div class="statistic">
-                                        <a class="like fc-greyabc <?php if(htmls::dianzan($v['id'])):?>on fc-red<?php endif;?>" onclick="dianzanClick(<?=$v['id']?>,1,<?=$mid;?>)" id="dianzan<?=$v['id']?>"><?=count($v['dianzan'])?></a>
-                                        <a class="comment ml10 fc-greyabc" id="pinglun_<?=$v['id']?>"><?=count($v['comment'])?></a>
-                                    </div></div></div></div>
-                    </div>
+                        <div class="appui-qanda-module mb10" >
+                            <div class="appui-qanda-question" onclick="goQADetailHtml(<?=$v['id']?>)"><?=$v['question']?></div>
+                            <?php if($v['voice']):?>
+                            <div class="appui-qanda-answer">
+                                <div class="appui-qanda-expertphoto" >
+                                    <img src="<?=Yii::$app->params['public'].'/attachment'.$v['expert']['photo']?>">
+                                    <i class="appui-userlevel bc-white">
+                                        <img src="../bdt/images/v2.png"></i></div>
+                                <div class="appui-qanda-answerstyle voice free" id="a_play_0_<?=$v['id']?>" onclick="playAudioQaClickFunction(<?=$v['id']?>,1,1,'a_play_0_<?=$v['id']?>');">
+                                    <i></i>
+                                    <span class="appui_qanda-voice-wave">
+                                        <em class="wave1"></em>
+                                        <em class="wave2"></em>
+                                        <em class="wave3"></em>
+                                    </span>
+                                    <em class="tips">免费收听</em>
+                                </div>
+
+                                <em class="appui-qanda-answer-time"><?=$v['voice_time']?>"</em>
+                            </div>
+                                <?php else:?>
+                                <div class="appui-qanda-answerstyle pictext free"><i></i><span class="appui-qanda-answerstyle-wave"></span><em class="tips">点击阅读</em></div>
+                            <?php endif;?>
+
+                            <div class="appui-qanda-expertinfo">
+                                <div class="appui-qanda-expertinfo">
+                                    <div class="time-statistic fs22" id="bottom_1_80">
+                                        <span class="fc-greyabc mr10 "><i><?=htmls::formatTime($v['created']);?></i></span>
+                                        <span class="fc-greyabc"><i><?=$v['views']?></i>阅读</span>
+                                        <span class="fc-red"></span><div class="statistic">
+                                            <a class="like fc-greyabc <?php if(htmls::dianzan($v['id'])):?>on fc-red<?php endif;?>" onclick="dianzanClick(<?=$v['id']?>,1,<?=$mid;?>)" id="dianzan<?=$v['id']?>"><?=count($v['dianzan'])?></a>
+                                            <a class="comment ml10 fc-greyabc" id="pinglun_<?=$v['id']?>"><?=count($v['comment'])?></a>
+                                        </div></div></div>
+                            </div>
+
+                        </div>
                     <?php endforeach;?>
 
                 </div>

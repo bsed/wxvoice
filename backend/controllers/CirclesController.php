@@ -102,13 +102,12 @@ class CirclesController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->created = time();
         $post = Yii::$app->request->post();
         if ($model->load($post)) {
             //$model->tags = json_encode($post['tags']);
             //同时更新members表中的vip字段
             $circles = Circles::updateAll(['status' => $post['Circles']["status"]], 'id ='.$id);
-
+            $model -> created = strtotime($post['Circles']['created']);
             //同时更新members表中的vip字段END
             $model->save();
             return $this->redirect(['update', 'id' => $model->id]);

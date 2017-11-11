@@ -36,8 +36,10 @@ use common\widgets\Alert;
     <?=Html::cssFile('@web/css/animate.min.css')?>
     <?=Html::cssFile('@web/css/style.min862f.css')?>
     <?=Html::cssFile('@web/css/site.css')?>
+    <?=Html::cssFile('@web/css/plugins/sweetalert/sweetalert.css')?>
 
     <?=Html::jsFile('@web/js/jquery.min.js')?>
+    <?=Html::jsFile('@web/js/plugins/sweetalert/sweetalert.min.js')?>
 
     <?php $this->head() ?>
 </head>

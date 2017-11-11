@@ -102,13 +102,12 @@ class ExpertsController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->created = time();
         $post = Yii::$app->request->post();
         if ($model->load($post)) {
         //$model->tags = json_encode($post['tags']);
          //同时更新members表中的vip字段
             $member = Members::updateAll(['vip' => $post['Experts']["vip"]], 'id ='.$post['Experts']["member_id"]);
-
+            $model -> created = strtotime($post['Experts']['created']);
          //同时更新members表中的vip字段END
             $model->save();
             return $this->redirect(['update', 'id' => $model->id]);

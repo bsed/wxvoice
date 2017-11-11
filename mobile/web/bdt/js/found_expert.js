@@ -273,11 +273,11 @@ function judgeIndex1(index,id,name,num){
     line = 1;
     labelCommon(index,id,name);
     needToMove(index,num,id,name);
-    if(index>=5){
-        $("#smallNav div:first span").eq(5).remove();
+    if(index>=15){
+        $("#smallNav div:first span").eq(15).remove();
         $("#smallNav div:first p").append('<span class="fs28 fc-grey666 active" onclick=\"judgeIndex1('+index+','+id+',\''+name+'\',2)\">'+name+'</span>');
         $("#smallNav div:first span").removeClass('active');
-        $("#smallNav div:first span").eq(5).addClass('active');
+        $("#smallNav div:first span").eq(15).addClass('active');
     }
     $("#smallNav div:last span").removeClass('active');
     $("#openTheNav p:last span").removeClass('active');
@@ -289,10 +289,10 @@ function judgeIndex(index,id,name,num){
     labelCommon(index,id,name);
     labelPosWhere(index);
     needToMove(index,num,id,name);
-    $("#smallNav div:first span").eq(5).remove();
+    $("#smallNav div:first span").eq(15).remove();
     $("#smallNav div:first p").append('<span class="fs28 fc-grey666 active" onclick=\"judgeIndex('+index+','+id+',\''+name+'\',2)\">'+name+'</span>');
     $("#smallNav div:first span").removeClass('active');
-    $("#smallNav div:first span").eq(5).addClass('active');
+    $("#smallNav div:first span").eq(15).addClass('active');
     $("#openTheNav p:first span").removeClass('active');
 }
 //点击展开的标签后定位固定标签位置以及展开标签中选中的标签

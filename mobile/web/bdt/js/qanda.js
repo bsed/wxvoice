@@ -201,8 +201,6 @@ function labelCommon(index,id,name) {
     windowTop = 0;
     firstBool = 1;
     currentPage = 1;
-    // 根据index值进行ajax请求yanli
-    // getQuestionList(index);
     configQAList(index);
 }
 
@@ -212,11 +210,11 @@ function judgeIndex1(index,id,name,num){
     qaline = 1;
     labelCommon(index,id,name);
     needToMove(index,num,id,name);
-    if(index>=5){
-        $("#smallNav div:first span").eq(5).remove();
+    if(index>=15){
+        $("#smallNav div:first span").eq(15).remove();
         $("#smallNav div:first p").append('<span class="fs28 fc-grey666 active" onclick=\"judgeIndex1('+index+','+id+',\''+name+'\',2)\">'+name+'</span>');
         $("#smallNav div:first span").removeClass('active');
-        $("#smallNav div:first span").eq(5).addClass('active');
+        $("#smallNav div:first span").eq(15).addClass('active');
     }
     $("#smallNav div:last span").removeClass('active');
     $("#openTheNav p:last span").removeClass('active');
@@ -226,12 +224,11 @@ function judgeIndex1(index,id,name,num){
 function judgeIndex(index,id,name,num){
     qaline = 2;
     labelCommon(index,id,name);
-    //labelPosWhere(index);
     needToMove(index,num,id,name);
-	$("#smallNav div:first span").eq(5).remove();
+	$("#smallNav div:first span").eq(15).remove();
 	$("#smallNav div:first p").append('<span class="fs28 fc-grey666 active" onclick=\"judgeIndex('+index+','+id+',\''+name+'\',2)\">'+name+'</span>');
     $("#smallNav div:first span").removeClass('active');
-    $("#smallNav div:first span").eq(5).addClass('active');
+    $("#smallNav div:first span").eq(15).addClass('active');
     $("#openTheNav p:first span").removeClass('active');
 }
 
@@ -336,7 +333,7 @@ function QuestionList(result,typeid){
         }
         //是语音还是文字
         if(result.data[i].voice){
-            answerContent = '<div class="appui-qanda-answer" onclick="questionDetail('+result.data[i].id+')">' +
+            answerContent = '<div class="appui-qanda-answer">' +
                             '<div class="appui-qanda-expertphoto">'+
                             '<img src="'+result.file+result.data[i].expert.photo+'"><i class="appui-userlevel bc-white">' +
                             '<img src="../bdt/images/v2.png"></i></div><div class="appui-qanda-answerstyle voice free" id="a_play_0_'+result.data[i].id+'" ' +
@@ -374,7 +371,6 @@ function questionDetail(id){
 //各种结果的提示用语，单独写成一个方法
 function showMessage(result){
     var autoLoad = 0;
-    console.log(result.page.pages > result.page.currentPage);
     if (result.page.pages > result.page.currentPage) {
         if (flag=-1) {
             flag = 0;

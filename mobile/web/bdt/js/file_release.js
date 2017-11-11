@@ -3,6 +3,7 @@ var isAndroid = userAgentInfo.indexOf('Android') > -1 || userAgentInfo.indexOf('
 var isiOS = !!userAgentInfo.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 var appuiOpenPublish = 0;
 var updateId = 0;
+var editStatus = 0;
 // app方法集合
 var app = {
     appImgLength: 9,
@@ -1360,11 +1361,12 @@ $(function(){
         }
     });
 
-    if($(window).width() < '375'){
-        $("#edit-mark").css("height", "3.25rem");
-    }else if($(window).width() > '375'){
-        $("#edit-mark").css("height", "8.05rem");
-    }
+    // if($(window).width() < '375'){
+    //     $("#edit-mark").css("height", "3.25rem");
+    // }else if($(window).width() > '375'){
+    //     $("#edit-mark").css("height", "8.05rem");
+    // }
+
 
     // ios处理
     if(isiOS){
@@ -1413,8 +1415,18 @@ $(function(){
     });
 
     $("#issueBtn").click(function(){
+        var titles = $('#message_title').val();
+        $('.addtitle').val(titles);
+
         var editNode = document.getElementById("edit-mark");
-        if(trim(editNode.value.replace(/[\r\n]/g,""))=="" && $(".select-view > figure").length == 0 && $(".select-view > .file-item").length == 0 && $("#voice-box").length == 0 && !(typeof appCurRecordSeconds != 'undefined' && appCurRecordSeconds > 0) && h5_Voice.recordPercentArray.length == 0 && h5_Voice.recordPercent == 0){
+        var texts = $('#edit-mark').text();
+        // if( $(".select-view > figure").length == 0 && $(".select-view > .file-item").length == 0 && $("#voice-box").length == 0 && !(typeof appCurRecordSeconds != 'undefined' && appCurRecordSeconds > 0) && h5_Voice.recordPercentArray.length == 0 && h5_Voice.recordPercent == 0){
+        var title = $('#message_title').val();
+        if(title == ''){
+            dataLoadedError("请输入标题");
+            return false;
+        }
+        if(texts == ''){
             dataLoadedError("请输入要分享的内容");
             return false;
         }
@@ -1469,6 +1481,35 @@ function showVoiceIcon(type){
     }
     $(".active_icon").hide();
 }
+
+// $('#edit-mark').css('padding-top','60px');
+//
+// //选中文本框后 yanli
+// function onfoucstexts(){
+//     var texts = $('#edit-mark').text();
+//     if(texts == ''){
+//         $('#edit-mark').css('padding-top','60px');
+//     }else{
+//         var w = $(document.body).height();
+//         var height = $("#edit-mark").text().length;
+//         if(height > 500){
+//             $('#edit-mark').css('padding-top','60px');
+//         }else{
+//             $('#edit-mark').css('padding-top','60px');
+//         }
+//
+//     }
+// }
+//短文编辑页面-计算正文区域高度
+var hEdit =  $(window).height() - 100 ;
+$('.article-edit-container .edit-content').height(hEdit);
+var hEditCon = hEdit-50;
+$('.edit-content-container').height(hEditCon);
+$(window).resize(function(e) {
+    var hEdit =  $(window).height() - 100 ;
+    $('.article-edit-container .edit-content').height(hEdit);
+    $('.edit-content-container').height(hEditCon);
+});
 
 // 生成文件列表
 function createFileList(data){
@@ -1617,7 +1658,9 @@ function saveFunction(){
 function issueContent(){
     dataLoading("发布中,请勿操作...");
 
-    var content = $.trim($("#edit-mark").val());
+    var title = $.trim($("#message_title").val());
+    // var title = $.trim($("#edit-mark").text());
+    var content = $.trim($("#edit-mark").text());
     var type = $('.publishcolor').data('type');
     var summary = getTextFromHtml(trim($("#summaryInput").val()));
     var csrf = $('input[name="csrf"]').val();
@@ -1641,7 +1684,7 @@ function issueContent(){
             (function(){
                 $.ajax({
                     data: {
-                        'title':content,
+                        'title':title,
                         'summary':summary,
                         'content':content,
                         'type':type,
@@ -1676,7 +1719,7 @@ function issueContent(){
         (function(){
             $.ajax({
                 data: {
-                    'title':content,
+                    'title':title,
                     'summary':summary,
                     'content':content,
                     'type':type,
@@ -1745,8 +1788,6 @@ function issueContent(){
             });
         })();
     }else{
-        // alert(7);
-        // 没有任何附件
         issueSubmit();
     }
 }
@@ -1763,8 +1804,14 @@ function issueSubmit(fileId, state, imgArr,wxImg){
         return false;
     }
     var headerTxt = $.trim($("#message_title").val());
-    var contentTxt = $.trim($("#edit-mark").val());
-    var content = $.trim($("#edit-mark").val());
+    // var headerTxt = $.trim($("#edit-mark").text());
+    var contentTxt = $.trim($("#edit-mark").text());
+    var content = $.trim($("#edit-mark").text());
+    if(headerTxt == ''){
+        clearToastDialog();
+        dataLoadedError("标题不能为空。");
+        return false;
+    }
     if(request('from') == 'circle'){
         var type = 0;
     }else{
@@ -1777,7 +1824,7 @@ function issueSubmit(fileId, state, imgArr,wxImg){
         url: '/articles/article_data.html',
         dataType: "json",
         data: {
-            "title":summary,
+            "title":headerTxt,
             "pics": imgArr,
             "videos": '',
             "type": type,
@@ -1864,6 +1911,11 @@ function FileReleaseRequestQzShow(qzId){
                      });*/
                     $("#issueBtn").unbind().click(function(){
                         var editNode = document.getElementById("edit-mark");
+                        var title = $('#message_title').val();
+                        if(title == ''){
+                            dataLoadedError("请输入标题");
+                            return false;
+                        }
                         if(trim(editNode.value.replace(/[\r\n]/g,""))=="" && $(".select-view > figure").length == 0 && $(".select-view > .file-item").length == 0 && $("#voice-box").length == 0 && !(typeof appCurRecordSeconds != 'undefined' && appCurRecordSeconds > 0) && h5_Voice.recordPercentArray.length == 0 && h5_Voice.recordPercent == 0){
                             dataLoadedError("请输入要分享的内容");
                             return false;
@@ -1918,3 +1970,23 @@ function retreatState(){
         historyUtils.back();
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

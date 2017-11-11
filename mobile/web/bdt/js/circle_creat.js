@@ -69,7 +69,6 @@ function loadEvent(){
 	//永久有效
 	$("#everId").click(function(e){
 		feeType = 2;
-		console.log(feeType);
 	});
 
 
@@ -89,8 +88,8 @@ function loadEvent(){
 			amount = $('#amount1').val();
 		}
 
-		if (!reg.test(amount)||amount<20||amount>3000) {
-			dataLoadedError("请输入一个20-3000的正整数！");
+		if (!reg.test(amount)||amount<10||amount>2000) {
+			dataLoadedError("请输入一个10-2000的正整数！");
     	}else{
     		$('#circleContainer1').show().animate({'left':'0'},'300');
     	}
@@ -244,7 +243,7 @@ function createQzRequestFuntion(){
         return;
 	}
     var csrf = $('input[name="csrf"]').val();
-	dataLoading("数据加载中...");
+	// dataLoading("数据加载中...");
 	$.ajax({
 		url: '/circle/circle_creat.html',
 		type: 'post',
@@ -262,7 +261,8 @@ function createQzRequestFuntion(){
 		success: function(result){
 			clearToastDialog();
 			if (result.result == "success") {
-				window.location.replace("circle_page.html?id="+result.id+"&from=create");
+                alert("圈子需要1个工作日审核...");
+                setTimeout(function(){ window.location.replace("circle_my.html"); }, 1000);
 			}else{
 				dataLoadedError(result.message);
 			}

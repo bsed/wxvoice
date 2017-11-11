@@ -39,7 +39,7 @@ class Experts extends \yii\db\ActiveRecord
         return [
             [['member_id','open', 'vip','rec','listorder','type'], 'integer'],
             [['price'], 'number'],
-            [['honor', 'des', 'card','created'], 'string'],
+            [['honor', 'des', 'card'], 'string'],
         ];
     }
 

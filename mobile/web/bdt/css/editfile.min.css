@@ -81,7 +81,7 @@ textarea::-webkit-input-placeholder{color:rgba(0,0,0,0.5);}
 .message-edit-module{width:100%; height:auto; display:block; overflow:hidden; overflow-y:auto; border:none; line-height:1rem;/* text-indent:1.5rem; */text-align:justify;}
 /*短消息-文字布局*/
 .message-title{width:94%; height:2.5rem; display:block; overflow:hidden; overflow-y:auto; line-height:1rem; padding:0.25rem; margin:0.25rem 3%; box-sizing:border-box;}
-.message-text{width:94%; height:4.5rem; display:block; overflow:hidden; overflow-y:auto; line-height:1rem; padding:0.25rem; margin:0.25rem 3%; box-sizing:border-box; border: none}
+.message-text{width:94%;  display:block; overflow:hidden; overflow-y:auto; line-height:1rem; padding:0.25rem; margin:0.25rem 3%; box-sizing:border-box; border: none}
 /*短消息-文字中的表情*/	
 .message-text img{width:1.1rem; height:1.1rem; display:inline-block; vertical-align:middle;}
 /*短消息-图片布局*/
@@ -205,7 +205,8 @@ textarea::-webkit-input-placeholder{color:rgba(0,0,0,0.5);}
 .file-header-title .center{-moz-box-flex:1;-webkit-box-flex:1;box-flex:1}
 .file-header-title .right{width:3rem}
 .bg-white,.upload-file{background:#fff}
-.upload-file{position:absolute;bottom:0;width:100%}
+.upload-file{position:fixed;bottom:0;width:100%}
+/*.upload-file{position:absolute;bottom:0;width:100%}*/
 .upload-file .nav-type{width:100%;border-top:2px solid #fafafa;justify-content:space-between;position: relative;}
 .upload-file .nav-type .nav-item{width:25%;height:2rem;background-position:center;background-size:auto 50%;background-repeat:no-repeat}
 .upload-file .nav-type .off{opacity:.3}

@@ -6,6 +6,11 @@
 <script type="text/javascript" src="../bdt/js/picPop.js"></script>
 <script type="text/javascript" src="../bdt/js/answer_record.js"></script>
 <body class=" bg-greyfa">
+<style>
+    .answerimg img {
+        margin:5px;
+    }
+</style>
 <div id="container" class="container">
     <div id="page">
         <!--页面导航栏-->
@@ -16,9 +21,7 @@
             </div>
         </div>
         <div class="page__bd scrollbd">
-            <!--------------- 占位空间 ---------------->
             <div class="top-space1"></div>
-            <!-------------录音回答页面------------------------>
             <div class="qanda-record">
                 <div class="topicqanda-detail bg-white">
                     <div class="asker-price-status bg-white">
@@ -33,25 +36,24 @@
                                     <?php endif;?>
                                     <em style="display: none;" class="bg-black" id="price_line_id"></em></span>
                                 <span style="display: none;" class="coupon" id="price_coupon_id">
-                                    <img src="images/coupon_icon.png"></span>
+                                    </span>
                             </div>
                             <span class="status fs20 fc-grey666"  id="expired_text_id"></span>
                         </div>
                     </div>
                     <div class="topicqanda-summary show-text hide-text mt5">
-                        <p class="fs28 fc-black"><?=$info['question']?></p>
-                        <style>
-                            .answerimg img {
-                                margin:5px;
-                            }
-                        </style>
-                        <?php if($pics):?>
-                            <?php foreach($pics as $k=>$v):?>
-                        <p class="fs28 fc-black answerimg"><img src="<?=Yii::$app->params['public'].'/attachment'.$v?>"></p>
+                        <p class="fs28 fc-black text-height">
+                                <?=$info['question']?>
+                                <?php if($pics):?>
+                                <?php foreach($pics as $k=>$v):?>
+                                    <p class="fs28 fc-black answerimg"><img src="<?=Yii::$app->params['public'].'/attachment'.$v?>"></p>
                                 <?php endforeach;?>
-                        <?php endif;?>
-                        <span class="more-text fs24 fc-blue"><i>更多</i>
-                            <img src="../bdt/images/moretext.png"></span></div>
+                            <?php endif;?>
+                        </p>
+
+
+<!--<span class="more-text fs24 fc-blue"><i>更多</i><img src="../bdt/images/moretext.png"></span>-->
+                    </div>
                 </div>
                 <!--选择回答方式-->
                 <?php if($info['status'] == 1):?>

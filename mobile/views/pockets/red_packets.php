@@ -15,12 +15,12 @@
         <div class="page__bd redpacketbg">
             <div class="red_packets">
                 <div class="rp_button" style="margin-top: 320px;">
-                    <a onclick="gotoRed_packets_fightluckHtml(1)" class="fs36">给粉丝发红包</a>
-                    <a onclick="gotoRed_packets_fightluckHtml(2)" class="fs36">给新人发红包</a>
+                    <a onclick="gotoRed_packets_fightluckHtml(1)" class="fs36">在社区发红包</a>
+                    <a onclick="" class="fs36"></a>
                 </div>
                 <div class="rp_introduce">
                     <p class="fs28">给你的粉丝，发一些红包互动吧</p>
-                    <p class="check-packet fs24" onclick="gotoRed_packets_recordHtml()">查看红包记录</p>
+                    <p class="check-packet fs24"></p>
                 </div>
             </div>
 
@@ -38,17 +38,6 @@
         <div class="appui-helptext-bd fc-black456 b-b-grey">
             <div class="appui-helptext-bd-con fc-black">
                 <p class="fs30 mb10 fwb">1、如何领取红包？</p>
-                <p class="fs30 mb20">点击广场中的红包Card，进入红包领取页，红包领取成功。</p>
-                <p class="fs30 mb10 fwb">2、没有领取完的红包怎么处理？</p>
-                <p class="fs30 mb20">红包自生成当天起，有效期为7天，如果超过7天未被成功领取的金额，将原路退回；已被好友领取成功的红包金额将无法退回。</p>
-                <p class="fs30 mb10 fwb">3、发送红包的限额是多少？</p>
-                <p class="fs30 mb10">拼手气红包：一次最多可以包200个子红包，所包的红包总上限金额为2000元。</p>
-                <p class="fs30 mb20">定额红包：单个红包的金额最大为200元，最多200个小红包，总金额不得超过2000元。</p>
-                <p class="fs30 mb10 fwb">4、什么是粉丝红包？</p>
-                <p class="fs30 mb20">粉丝红包：选择粉丝红包后，领取红包的用户都会成为红包发放者的粉丝。</p>
-                <p class="fs30 mb10 fwb">5、什么是新手红包？</p>
-                <p class="fs30 mb30">新手红包主要适用于尚未领取过新手红包的用户且首次授权微信平台登录的时间不超过72小时。</p>
-                <p class="fs30 mb10 fwb">发红包规则最终解释权归杭州麦粒网络科技有限公司所有。</p>
             </div>
         </div>
         <h2 class="appui-helptext-fd fs32 fc-orange">知道了</h2>

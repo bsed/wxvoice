@@ -7,7 +7,7 @@ use yii\data\Pagination;
 class Reward
 {
     public $rewardMoney;        #红包金额、单位元
-    public $rewardNum;                  #红包数量
+    public $rewardNum;          #红包数量
     public $scatter;            #分散度值1-10000
     public $rewardArray;        #红包结果集
 

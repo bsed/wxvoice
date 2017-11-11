@@ -124,6 +124,8 @@ function sendRedPacketFunction(index){
     var r = /^\d+(\.\d+)?$/ ; //非零的浮点数：
 	// var reg = /^[0-9]*[1-9][0-9]*$/; //正整数
     var regExp = /^[1-9]\d*$/;
+    var minPrice = redMoney / redCount;
+
 	if (!regExp.exec(redCount)) {
 		dataLoadedError("请输入正确的红包个数！");
         return;
@@ -138,6 +140,10 @@ function sendRedPacketFunction(index){
 		dataLoadedError("您输入的红包金额应该在0-200之间");
         return;
 	}
+    if(minPrice < 0.01){
+        dataLoadedError("请检查红包个数, 最低为0.01元！");
+        return;
+    }
 
 	if (index==0) {
 		// totleMoney =  parseFloat(redMoney)*100;

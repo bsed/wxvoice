@@ -101,8 +101,9 @@ class QuestionsController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $post = Yii::$app->request->post();
         if ($model->load(Yii::$app->request->post())) {
+            $model -> created = strtotime($post['Questions']['created']);
             $model->save();
             return $this->redirect(['update', 'id' => $model->id]);
         } else {

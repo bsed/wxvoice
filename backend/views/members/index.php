@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td class="project-completion">
                                         <?php if(!empty($v['wxpayrecord'])):?>
                                             <?php if($v['wxpayrecord'][0]['status'] == 1):?>
-                                      <span class="label label-defaul">会员有效期：<?=date('Y-m-d H:i:s',$v['wxpayrecord'][0]['created'])?>至<?=date('Y-m-d',strtotime('+1 year'));?></span>
+                                      <span class="label label-defaul">会员有效期：<?=date('Y-m-d H:i:s',$v['wxpayrecord'][0]['created'])?>至<?=date('Y-m-d H:i:s',$v['wxpayrecord'][0]['created'] + 3600*24*365)?></span>
                                                 <?php endif;?>
                                         <?php endif;?>
                                     </td>

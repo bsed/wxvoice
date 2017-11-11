@@ -915,7 +915,6 @@ function createAutoSummary(textContent){
 //发布文章
 function submitContent(textContent,title,summary,type){
 	dataLoading("正在发布中...");
-
     var title = title;
     var content = textContent;
     var csrf = $('input[name="csrf"]').val();

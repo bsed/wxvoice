@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="top-space1"></div>
             <div class="article-detal-module bg-white">
                 <div class="article-detail-con" style="">
-                    <?php if(!$_GET['publishtype'] == 'fatie'):?>
+                    <?php if($_GET['publishtype'] == 'fatie'):?>
                     <h2 class="fc-black fs40 mb10" id="articleTitle"><?=$info['title']?></h2>
                     <?php endif;?>
                         <div class="author-focus-time-read bg-greyfa">
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="article-detail fs36 mt10 fc-black face_tag" id="div_id">
                     <!-- 正文-->
                         <?php if(!$info['voices']):?>
-                        <div id="div_height"></div>
+                        <div id="div_heights" style="font-size:0.65rem"><?=$info['content'];?></div>
                         <?php endif;?>
                   <?php if($_GET['publishtype'] == 'fatie'):?>
                         <?php if($images):?>

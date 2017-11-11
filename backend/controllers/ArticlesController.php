@@ -104,8 +104,10 @@ class ArticlesController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $post = Yii::$app->request->post();
+        if ($model->load(Yii::$app->request->post())) {
+            $model -> created = strtotime($post['Articles']['created']);
+            $model->save();
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [

@@ -106,20 +106,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 <ul class="amount-input b-b-red" id="amountInput">
                     <li class="amount-input-type fs32" style="display:block;" id="amountInput0">
                         <span class="fc-red">￥</span>
-                        <input type="text" class="amount fs30" id="amount0" placeholder="设置20-3000的整数">
+                        <input type="text" class="amount fs30" id="amount0" placeholder="设置10-2000的整数">
                         <span class="fc-black">/年</span>
                     </li>
-                    <li class="amount-input-type fs32" style="display:none;" id="amountInput1">
-                        <span class="fc-red">￥</span>
-                        <input type="text" class="amount fs30" id="amount1" placeholder="设置20-3000的整数">
-                        <span class="fc-black">永久</span>
-                    </li>
+<!--                    <li class="amount-input-type fs32" style="display:none;" id="amountInput1">-->
+<!--                        <span class="fc-red">￥</span>-->
+<!--                        <input type="text" class="amount fs30" id="amount1" placeholder="设置20-3000的整数">-->
+<!--                        <span class="fc-black">永久</span>-->
+<!--                    </li>-->
                 </ul>
 
-                <div class="pay-type fs28" id="payType">
-                    <a class="on" id="yearId">按年付费</a>
-                    <a id="everId">永久有效</a>
-                </div>
+<!--                <div class="pay-type fs28" id="payType">-->
+<!--                    <a class="on" id="yearId">按年付费</a>-->
+<!--                    <a id="everId">永久有效</a>-->
+<!--                </div>-->
             </div>
         </div>
     </div>

@@ -586,6 +586,7 @@ class ArticlesController extends BaseController
      * 问答播放语音
      */
     public function actionListen(){
+        require_once(dirname(dirname(__FILE__)).'/rules/ajaxrights.php');
         $member_id = Yii::$app->session['member_id'];
         $model = new Articles();
         $data = $model->find()->asarray()->where(['id'=>$_POST['qaId']])->one();

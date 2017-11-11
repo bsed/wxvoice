@@ -837,6 +837,7 @@ function friendTips2(dialogContent,operateAssistText,operateMainText,index){
 	// $("#page-pop").after(dialogStr);
 	$("body").append(dialogStr);
 }
+
 //带有输入框的提示框
 function requestFriends(dialogTitle,dialogContent,operateAssistText,operateMainText,inputTipsText){
 	var dialogStr =		'<div class="js_dialog toastDialog" id="iosDialog1" >' ;

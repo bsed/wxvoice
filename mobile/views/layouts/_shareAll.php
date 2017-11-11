@@ -11,7 +11,7 @@ use yii\helpers\Url;
             'uploadVoice','downloadVoice','chooseImage','previewImage','uploadImage','downloadImage','translateVoice','getNetworkType','openLocation','getLocation','hideOptionMenu','showOptionMenu','hideMenuItems',
             'showMenuItems','hideAllNonBaseMenuItem','showAllNonBaseMenuItem','closeWindow','scanQRCode','chooseWXPay','openProductSpecificView','addCard','chooseCard','openCard'), false);?>);
         <?php if($a == 'article_detail'  || $a == 'circle_qanda_detail'):?>
-        var title = $('input[name="title"]').val();
+            var title = $('input[name="title"]').val();
             var imgs = $('.images').attr('src');
             var imgUrl = '';
             if(imgs == undefined){
@@ -22,9 +22,14 @@ use yii\helpers\Url;
             var des = $('input[name="des"]').val();
             var link = '<?=Yii::$app->request->hostInfo;?><?=Yii::$app->request->getUrl();?>';
         <?php elseif($a == 'qanda_detail'):?>
-        var title = $('#asker_content_id').text();
+            var title = $('#asker_content_id').text();
             var imgUrl = '<?=Yii::$app->params['public'];?><?=$this->params['wechat']['shareImg'];?>';
             var des = "<?=$this->params['wechat']['shareTitle'];?>";
+            var link = '<?=Yii::$app->request->hostInfo;?><?=Yii::$app->request->getUrl();?>';
+        <?php elseif($a == 'red_packets_open'):?>
+            var title = '我在半导体社区发红包了，快来抢吧～!';
+            var imgUrl = '<?=Yii::$app->request->hostInfo;?>/bdt/images/hongbao.png';
+            var des = "<?=$this->params['wechat']['shareDesc'];?>";
             var link = '<?=Yii::$app->request->hostInfo;?><?=Yii::$app->request->getUrl();?>';
         <?php else:?>
             var title = "<?=$this->params['wechat']['shareTitle'];?>";

@@ -40,7 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <span class="label label-primary"><?=$v['users']['nickname'];?>
                                     </td>
                                     <td class="project-title">
-                                        <span class="label label-gray">支付了</span>
+                                        <?php if($v['status'] == 1):?>
+                                        <span class="label label-primary">已支付</span>
+                                        <?php else:?>
+                                            <span class="label label-gray">未支付</span>
+                                        <?php endif;?>
                                     </td>
                                     <td class="project-title">
                                         <span class="label label-primary"><?=$v['price'];?></span>

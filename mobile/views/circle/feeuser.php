@@ -6,7 +6,8 @@
         <div class="page__hd bg-white fc-balck b-b-grey scrollhd">
             <div class="statebar">
                 <a class="nav-act left-act"  href="/site/index.html">
-                    <img src="../bdt/images/gobacktoindex.png">
+<!--                    <img src="../bdt/images/gobacktoindex.png">-->
+                    <img src="../bdt/images/nav_icon_back1.png">
                 </a>
                 <h2 class="fs34" id="qzName">成为会员</h2>
             </div>

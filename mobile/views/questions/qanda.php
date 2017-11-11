@@ -30,7 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <p>
                         <span class="fs28 fc-grey666 active" onclick="judgeIndex1(0,0,'推荐',1)">推荐</span>
                         <?php foreach($type as $k=>$v):?>
-                        <span class="fs28 fc-grey666 <?php if($k==0):?><?php endif;?>" onclick="judgeIndex1(<?=$v['id'];?>,<?=$v['id'];?>,'<?=$v['name']?>',1)"><?=$v['name']?></span>
+                        <span class="fs28 fc-grey666 <?php if($k==0):?><?php endif;?>" onclick="judgeIndex1(<?=$v['id'];?>,<?=$v['id'];?>,'<?=$v['name']?>',1)">
+                            <?=$v['name']?></span>
                         <?php endforeach;?>
                     </p>
                     <img id="showMoreBtn" src="../bdt/images/nav_more.png" >

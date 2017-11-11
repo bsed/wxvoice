@@ -45,7 +45,6 @@ class QuestionsController extends BaseController
   public function actionQanda_detail($id){
       Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
       require_once(dirname(dirname(__FILE__)).'/rules/rights.php');
-      require_once(dirname(dirname(__FILE__)).'/rules/details.php');
       //END
       //未付款0 已付款1 已回答2
       $questionModel = new Questions();
@@ -54,6 +53,7 @@ class QuestionsController extends BaseController
       $pics = json_decode($question['imgs'], true);
       $memberModel = new Members();
       $user =  $memberModel->find()->asarray()->where(['id'=>$question['member_id']])->one();
+
       $expert = $memberModel->find()->asarray()->where(['id'=>$question['expert_id']])->one();
       $circlModel = new Circles();
       $circle = $circlModel->find()->asarray()->where(['member_id'=>$question['expert_id']])->one();
@@ -155,7 +155,7 @@ class QuestionsController extends BaseController
       $model = new Questions();
       $member_id = Yii::$app->session['member_id'];
       //查找对应的type
-      $expert = Experts::find()->asarray()->where(['member_id'=>$member_id])->one();
+      $expert = Experts::find()->asarray()->where(['member_id'=>$_POST['expert_id']])->one();
 
       if(!$member_id){
           Yii::$app->session['tryinto'] = Yii::$app->request->getUrl();
@@ -169,22 +169,20 @@ class QuestionsController extends BaseController
       $directory = '/questions/user'.$_POST['expert_id'].'/';
       $path = $base.$directory;
       $img = [];
-     if($_POST['pics']){
-         for($i=0;$i<$nums;$i++){
-             $img[] = $directory.$uploader->base64_images($pics[$i],$path);
+         if($_POST['pics']){
+             for($i=0;$i<$nums;$i++){
+                 $img[] = $directory.$uploader->base64_images($pics[$i],$path);
+             }
+             if(!$img){
+                 die(json_encode(['result'=>'error']));
+             }
          }
-         if(!$img){
-             die(json_encode(['result'=>'error']));
-         }
-     }
-
-
       $model->trade = $_POST['trade'];
       $model->question = $_POST['content'];
       $model->open = $_POST['openstatus'];
-      $model->expert_id = $_POST['expert_id'];
+      $model->expert_id = $_POST['expert_id'];//expert_id 就是member_id
       $model->member_id = $member_id;
-      $model->askprice = $_POST['price'];
+      $model->askprice = $_POST['price']/100;
       $model->typeid = $expert['type'];
       if($_POST['price'] == 0){
           $model->status = 1;

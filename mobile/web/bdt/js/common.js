@@ -170,8 +170,10 @@ function isFeeUser(){
         success: function(data){
             if(data.result == 'success'){
                 $.session.set('feeuser', 1);
-            }else{
+            }else if(data.result == 'error'){
                 $.session.set('feeuser', 0);
+            }else if(data.result == 'tologin'){
+                window.location.href = '/members/login.html';
             }
 
         }
@@ -300,6 +302,67 @@ function convertImgToBase64(url, callback, outputFormat){
     img.src = url;
 }
 
+//领取红包,这里要注意，圈子中也有
+function gotoRedPocketDetailHtml(id){
+    var csrf = $('input[name="csrf"]').val();
+    $.ajax({
+        type: "post",
+        url: '/pockets/getred.html',
+        dataType: "json",
+        async: true,
+        data: {
+            'redid':id,
+            "_csrf":csrf,
+        },
+        success: function(result) {
+            clearToastDialog();
+            if (result.result == "success") {
+                //抢到红包的自动成为粉丝
+                changeFans(id);
+                //跳转到
+
+            } else if(result.msg == 'login') {
+                dataLoadedError(result.message);
+                window.location.href="/members/login.html?from=square";
+            }else if(result.result == 'notmember'){
+                dataLoadedError('请登录!');
+                setTimeout(function(){  window.location.href="/members/login.html"; }, 2000);
+            }else if(result.result == 'notfeeuser'){
+                dataLoadedError('只有付费会员才可以领红包!');
+            }else if(result.result == 'jinyan'){
+                dataLoadedError('您已被禁言一个月，请遵守社规则!');
+            }else{
+                dataLoadedError('红包已领完');
+                setTimeout(function(){  window.location.href="/pockets/red_packets_open.html?id="+id; }, 2000);
+
+            }
+        }
+    });
+
+}
+//抢到红包的自动成为粉丝
+function changeFans(id){
+    var csrf = $('input[name="csrf"]').val();
+    $.ajax({
+        type: "post",
+        url: '/pockets/changefans.html',
+        dataType: "json",
+        async: true,
+        data: {
+            "redid":id,
+            "_csrf":csrf
+        },
+        success: function(result) {
+            clearToastDialog();
+            if (result.result == "success") {
+                //抢到红包的自动成为粉丝
+                setTimeout(function(){  window.location.href="/pockets/red_packets_open.html?id="+id; }, 2000);
+            }else{
+                setTimeout(function(){  window.location.href="/pockets/red_packets_open.html?id="+id; }, 2000);
+            }
+        }
+    });
+}
 // function getDateDiff(time){
 //     //将PHP的时间戳转成js的时间戳
 //     dateTimeStamp = new Date(parseInt(time) * 1000);

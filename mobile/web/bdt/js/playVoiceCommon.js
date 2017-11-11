@@ -195,7 +195,7 @@ function initAllPlayVoiceState(){
 function playAudioQaClickFunction(id, type, listenType, objId, allowPauseBool) {
     //怎么判断是否是付费会员
     var m = $.session.get('feeuser');
-    if(!m){
+    if(m == 0){
         window.location.href="/circle/feeuser.html";
         return false;
     }

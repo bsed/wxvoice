@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <!--好友信息-->
                     <div class="u-i-moudele-bottom bg-white fs30">
-                        <a href="mywallet.html"><i id="moneyCount" class="fc-black"><?=$total - $tixian;?></i><i class="fc-grey678">收入</i></a>
+                        <a href="mywallet.html"><i id="moneyCount" class="fc-black"><?=$total;?></i><i class="fc-grey678">收入</i></a>
                         <a class="bc-grey" href="/members/myrelations.html#1"><i id="focusCount" class="fc-black"><?=$concern;?></i><i class="fc-grey678">关注</i></a>
                         <a href="/members/myrelations.html#2"><i id="fansCount" class="fc-black"><?=$fans;?></i><i class="fc-grey678">粉丝</i></a>
                     </div>
@@ -126,26 +126,34 @@ $this->params['breadcrumbs'][] = $this->title;
                                 dataLoadedSuccess("请等待审核");
                             }
                         </script>
-                    <?php if($user['honnoruser'] != 1):?>
-                         <?php if($feeusers):?>
-                             <a class="function-btn bc-grey fc-black" href="#">
-                                 <img class="btn-img" src="../bdt/images/circle_grey.png">
-                                 <span class="fs30">会员有效期:  <?=date('Y-m-d',$feeuser['created']);?>至<?=date('Y-m-d',strtotime('+1 year'));?></span>
-                             </a>
-                         <?php endif;?>
-                         <?php if(!$feeusers):?>
-                             <a class="function-btn bc-grey fc-black" href="/circle/feeuser.html">
-                                 <img class="btn-img" src="../bdt/images/icon08.png">
-                                 <span class="fs30">我的会员</span>
-                                 <img class="btn-arrow" src="../bdt/images/icon06.png">
-                             </a>
-                         <?php endif;?>
-                     <?php else:?>
-                        <a class="function-btn bc-grey fc-black" href="/circle/feeuser.html">
-                            <img class="btn-img" src="../bdt/images/icon08.png">
-                            <span class="fs30">荣誉会员</span>
-                            <img class="btn-arrow" src="../bdt/images/icon06.png">
-                        </a>
+                       <?php if($user['isguanjia'] != 1):?>
+                            <?php if($user['honnoruser'] != 1):?>
+                                 <?php if($feeusers):?>
+                                     <a class="function-btn bc-grey fc-black" href="#">
+                                         <img class="btn-img" src="../bdt/images/circle_grey.png">
+                                         <span class="fs30">会员有效期:  <?=date('Y-m-d',$feeuser['created']);?>至<?=date('Y-m-d',$feeuser['created']+ 3600*24*365);?></span>
+                                     </a>
+                                 <?php endif;?>
+                                 <?php if(!$feeusers):?>
+                                     <a class="function-btn bc-grey fc-black" href="/circle/feeuser.html">
+                                         <img class="btn-img" src="../bdt/images/icon08.png">
+                                         <span class="fs30">我的会员</span>
+                                         <img class="btn-arrow" src="../bdt/images/icon06.png">
+                                     </a>
+                                 <?php endif;?>
+                             <?php else:?>
+                                <a class="function-btn bc-grey fc-black" href="/circle/feeuser.html">
+                                    <img class="btn-img" src="../bdt/images/icon08.png">
+                                    <span class="fs30">荣誉会员</span>
+                                    <img class="btn-arrow" src="../bdt/images/icon06.png">
+                                </a>
+                             <?php endif;?>
+                           <?php else:?>
+                           <a class="function-btn bc-grey fc-black" href="/circle/feeuser.html">
+                               <img class="btn-img" src="../bdt/images/icon08.png">
+                               <span class="fs30">群管</span>
+                               <img class="btn-arrow" src="../bdt/images/icon06.png">
+                           </a>
                      <?php endif;?>
 
 <!--                        <a class="function-btn bc-grey fc-black" id="usercenterPubBtn" style="display:block;">-->
